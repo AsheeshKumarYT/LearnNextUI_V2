@@ -15,7 +15,7 @@ The documents describe **behaviour, not implementation**: there is no code, API,
 | [Module inventory](module-inventory.md) | Every module, page, tab, Settings master and placeholder menu item, with its status and PRD, plus the user roles |
 | [Shared requirements](shared-requirements.md) | Behaviour common to all modules (SH-001 to SH-013): roles, validation timing, toasts, dialogs, lists, states, formats, phone layout |
 | [PRD template and conventions](prd-template.md) | The 16-section structure, ID formats, status labels and priority levels used by every PRD |
-| [Open questions](open-questions.md) | 14 cross-cutting business decisions and all 235 module-level open questions (232 open, 3 resolved) |
+| [Open questions](open-questions.md) | 14 cross-cutting business decisions and all 235 module-level open questions (231 open, 4 resolved) |
 | [Coverage report](coverage-report.md) | Final audit: counts, per-module coverage, cross-module inconsistencies, missing rules and messages |
 
 ## Module PRDs

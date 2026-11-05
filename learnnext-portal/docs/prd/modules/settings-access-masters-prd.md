@@ -314,7 +314,7 @@ Toasts follow SH-005.
 | App shell sidebar ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) | The demo menu mirrors the sidebar (Dashboard … Reports, Finance with six sub-menus, plus Support desk); "System pages" (Dev only) is not in the master | Any menu change | None: the sidebar is fixed | BR-ACC-010, OQ-ACC-001, OQ-SHELL-012 |
 | All pages (SH-002) | Role permissions should restrict pages and actions | Save permissions | None: not enforced | BR-ACC-016, OQ-ACC-002 |
 | Authentication ([authentication-prd.md](authentication-prd.md)) | Sign-in should determine the user's role | Sign in | No role is assigned | SH-002 |
-| Profile ([profile-prd.md](profile-prd.md)) | "Access level" shows "Training Partner" | — | Not linked to these roles | OQ-PROF-011 |
+| Profile ([profile-prd.md](profile-prd.md)) | "Access level" shows the portal role in use (Training Partner / Super Admin) | — | Not linked to these roles | OQ-PROF-011 |
 | Manage Content ([manage-content-prd.md](manage-content-prd.md)) | Manage Content offers View, Add, Edit, Delete, Export | — | The page has no export or delete; not enforced | OQ-CNT-018 |
 | Facilitators ([facilitators-prd.md](facilitators-prd.md)) | Facilitators offers Approve (KYC) | — | Not enforced | OQ-FAC-014 |
 | Support desk ([support-desk-prd.md](support-desk-prd.md)) | Support desk offers View, Edit, Export; the Support Executive role has View and Edit | — | Not enforced | OQ-SUP-012 |

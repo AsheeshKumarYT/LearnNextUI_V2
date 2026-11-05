@@ -74,7 +74,7 @@ No role-specific restrictions apply on this page (SH-002).
 | **Change cover** (bottom-right of the cover) | Change the cover | Click | Opens "Choose a cover" (5.3) | On phones only the palette icon shows (label "Change cover") | Cover picker open |
 | Profile picture (in a slowly turning colour ring) | Show and change the picture | Click | If a picture is set: opens the large view (5.4). If no picture: opens the avatar picker directly (5.5) | Accessible label "View profile picture" or "Add profile picture". Without a picture, initials are shown. A picture that fails to load falls back to initials | Dialog open |
 | Name | Identity | View | The user's full name as the page heading | Updates as soon as Personal details are saved | — |
-| Role pill | Access level | View | Shows the role (demo: "Training Partner") with a shield icon | Read-only | — |
+| Role pill | Access level | View | Shows the role the user is currently continuing as ("Training Partner" or "Super Admin") with a shield icon | Read-only | — |
 | Designation · Department line | Job context | View | Shows designation and department. If empty: "Add your designation" / "Add your department" | Both fields are required in Personal details, so the fallback normally appears only for incomplete data | — |
 | **Change avatar** | Change the picture | Click | Opens the avatar picker (5.5) | — | Picker open |
 | Contact strip: **Email** | Show and use the email | View, click, copy | Shows the email as a link that opens a new email; a copy button copies it | Copy button label "Copy email", then "Copied" with a tick for 1.5 seconds. On larger screens the button appears on hover or keyboard focus | Email copied |
@@ -164,7 +164,7 @@ No role-specific restrictions apply on this page (SH-002).
 |---|---|---|---|---|---|
 | Card header | Explain the section | View | "Account" with "Managed by your organisation." | Read-only | — |
 | **Employee ID** | Staff identifier | View, copy | Shows the ID (demo: "LN-0142") with a copy button ("Copy employee ID", then "Copied" for about 1.6 s) | Not editable | ID copied |
-| **Access level** | Role | View | Shows the role (demo: "Training Partner"). It is the account's stored role, not the role picked at "Continue as" | Not editable here; not linked to the Roles & Access master (SH-002, OQ-PROF-011) | — |
+| **Access level** | Role | View | Shows the portal role picked at "Continue as" for this visit ("Training Partner" or "Super Admin"); it changes after Switch role (changed 2026-11-05, resolves OQ-SA-015) | Not editable here; not linked to the Roles & Access master (SH-002, OQ-PROF-011) | — |
 | **Last sign-in** | Recent access | View | Relative time (SH-012), for example "42m ago"; older than a week shows a date | In the current build this is a fixed demo value and does not reflect the real sign-in time [Partially Implemented] (OQ-PROF-008) | — |
 | Missing value | Robustness | — | "—" (SH-012) | — | — |
 
@@ -383,7 +383,7 @@ My activity is the only listing. It is a timeline, not a table, and does not use
 | Client, facilitator, content, settings and support pages ([clients-prd.md](clients-prd.md), [facilitators-prd.md](facilitators-prd.md), [manage-content-prd.md](manage-content-prd.md), [settings-hub-prd.md](settings-hub-prd.md), [support-desk-prd.md](support-desk-prd.md)) | New records, edits and support replies are attributed to the signed-in user's current name | Create or edit a record after a name change | New attribution uses the new name; earlier records keep the name used at the time [Inferred] | OQ-PROF-015 |
 | [Client detail](client-detail-prd.md) | The client Activity tab uses the same timeline with client-specific types | — | Same filter, summary and paging behaviour | 5.10 |
 | [System pages](system-pages-prd.md) | Not-found and other full-screen pages reuse the animated cover artwork and show the user's picture and name with a link to My Profile; Session expired shows the user's picture and name | Open a system page while signed in | Current picture and name shown | BR-PROF-011 |
-| [Settings: access masters](settings-access-masters-prd.md) | Access level shown here is not derived from Roles & Access | — | Shows "Training Partner" regardless, even when signed in as Super Admin | SH-002, OQ-PROF-011 |
+| [Settings: access masters](settings-access-masters-prd.md) | Access level shown here is not derived from Roles & Access | — | Shows the portal role in use (Training Partner / Super Admin), not a Roles & Access role | SH-002, OQ-PROF-011 |
 
 ## 13. Acceptance Criteria
 
@@ -538,7 +538,7 @@ My activity is the only listing. It is a timeline, not a table, and does not use
 | OQ-PROF-008 | Account: Last sign-in | Fixed demo value, not the actual last sign-in | Misleading security information | Confirm it should show the real previous sign-in (time, device, location) | Open |
 | OQ-PROF-009 | Personal details | No unsaved-changes warning when leaving the page | Edits lost silently | Confirm whether the leave guard (SH-006) should apply | Open |
 | OQ-PROF-010 | Security | 90-day rotation is advisory only | Policy enforcement | Confirm whether expiry should force a change at sign-in | Open |
-| OQ-PROF-011 | Account: Access level, Employee ID | Values are fixed; not linked to Roles & Access; who maintains them is undefined | Role shown may not match permissions | Define the source and owner of these facts | Open |
+| OQ-PROF-011 | Account: Access level, Employee ID | Employee ID is fixed; Access level follows the portal role in use (since 2026-11-05) but is not linked to Roles & Access; who maintains them is undefined | Role shown may not match permissions | Define the source and owner of these facts | Open |
 | OQ-PROF-012 | Change password dialog | Backdrop click does not close it (differs from SH-006) | Consistency | Confirm intended (protects the flow from accidental closing) | Open |
 | OQ-PROF-013 | Banner, Account | Copy gives no feedback when the clipboard is blocked | User may think it copied | Define a fallback message | Open |
 | OQ-PROF-014 | Personal details: About | "Shown to your team" but the bio is not displayed anywhere, including on this page outside the form | Purpose unclear | Confirm where the bio appears | Open |

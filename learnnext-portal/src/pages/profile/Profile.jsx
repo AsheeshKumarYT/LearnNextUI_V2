@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { PORTAL_ROLES } from '@/config/roles';
 import { Activity, ShieldCheck, UserRound } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsMobile } from '@/hooks/useMediaQuery';
@@ -31,7 +32,10 @@ const TABS = [
  * The hero replaces PageHeader. Saves go through profileApi and refresh the signed-in user everywhere (sidebar, header).
  */
 export default function Profile() {
-  const { user, updateUser } = useAuth();
+  const { user: account, role, updateUser } = useAuth();
+  // The role shown (hero badge + Access level) is the one this visit continues as — e.g. Super Admin in the Super Admin
+  // portal — not the fixed label stored on the account
+  const user = useMemo(() => (account ? { ...account, role: PORTAL_ROLES[role]?.label ?? account.role } : account), [account, role]);
   const toast = useToast();
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [passwordOpen, setPasswordOpen] = useState(false);

@@ -17,7 +17,7 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | Business rules documented | 382 |
 | Acceptance criteria written | 289 |
 | QA test scenarios written | 641 |
-| Module open questions | 235 (232 open, 3 resolved) |
+| Module open questions | 235 (231 open, 4 resolved) |
 | Cross-cutting open questions | 14 |
 | PRDs with every checklist item complete | 0 (each PRD has 1–5 items that are incomplete because of open questions, not missing documentation) |
 
@@ -48,7 +48,7 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | [Super Admin](modules/super-admin-prd.md) | Partially Implemented (demo data; CRM fetching, portal access, email update and inactive-status settings are stored only) | 34 | 30 | 69 | 16 | 4 |
 | **Total** | | **382** | **289** | **641** | **235** | **54** |
 
-Counts are the requirement rows in each PRD (My Profile includes the sub-numbered rows BR-PROF-014 ×2 and TC-PROF-019a / 019b). The open-question count includes three resolved questions (OQ-AUTH-013, OQ-CLI-018, OQ-SET-004).
+Counts are the requirement rows in each PRD (My Profile includes the sub-numbered rows BR-PROF-014 ×2 and TC-PROF-019a / 019b). The open-question count includes four resolved questions (OQ-AUTH-013, OQ-CLI-018, OQ-SET-004, OQ-SA-015).
 
 ### Fully implemented vs. partially implemented
 
@@ -77,7 +77,7 @@ The review compared the shared workflows, fields, messages and rules across all 
 | X-10 | Support desk pill counts follow the current search, while other lists' pills show totals. Clicking a selected pill does not clear it there. | Support Desk vs. SH-008 | OQ-SUP-014 |
 | X-11 | The meaning of Active / Inactive status differs between clients, training partners and finance records; the Super Admin's "can't sign in" promise is not enforced. | Clients, Client Details, Finance masters, Super Admin | OQ-GEN-010, OQ-SA-002 |
 | X-12 | Roles & Access shows actions (Export, Approve) for pages that have no such action. | Roles & Access vs. Clients, Manage Content, Support Desk | OQ-ACC-007, OQ-CNT-018, OQ-SUP-012 |
-| X-13 | My Profile shows the login's fixed access level ("Training Partner" for the demo login) even inside the Super Admin portal. | My Profile vs. Super Admin | OQ-SA-015, OQ-PROF-011 |
+| X-13 | ~~My Profile shows the login's fixed access level even inside the Super Admin portal.~~ **Resolved 2026-11-05:** My Profile now shows the portal role in use. | My Profile vs. Super Admin | OQ-SA-015 (Resolved), OQ-PROF-011 |
 | X-14 | The Super Admin's status pills stay visible on phones, whereas other lists hide their summary pills on phones. | Super Admin (Manage Clients, Sub clients) vs. SH-013 | OQ-SA-014, OQ-SHELL-015 |
 | X-15 | For a Super Admin, system pages still offer **Back to dashboard** and list Dashboard, All Clients and Projects, although each of them opens Manage Clients. | System Pages vs. Super Admin | OQ-SYS-011 |
 | X-16 | **Sign out** on the role picker and the coming-soon screen ends the session at once, with no confirmation and no "You have been signed out" toast, unlike **Log out** in the user menu. | Authentication | OQ-AUTH-017 |

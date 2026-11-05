@@ -400,7 +400,7 @@ Identical to PRD-CLI 7.8 and 7.10. The form always behaves as a **company** (the
 | Status changed in both places | Edit form and Settings tab | The last save wins | — | OQ-SA-009 |
 | Inactive partner | Status inactive | Listed and searchable; status shown as Inactive. Nothing else changes (its team can still sign in) | — | OQ-SA-002 |
 | Clients added in the Training Partner portal | Same browser tab | They appear as sub clients of one of the demo partners and raise the counts [Inferred] | — | SH-001, OQ-SA-003 |
-| Profile "Access level" | My Profile while in Super Admin | Shows the account's role text ("Training Partner" for the demo login), not "Super Admin" [Inferred] | — | OQ-SA-015 |
+| Profile "Access level" | My Profile while in Super Admin | Shows "Super Admin" (the role chosen at "Continue as") in the banner badge and Access level | — | OQ-SA-015 (Resolved) |
 | Reload | Any reload | Added / edited partners and settings revert to demo data (SH-001) | — | Re-enter |
 | Browser Back / reload / Log out with unsaved form | — | No warning; changes lost (SH-006) | — | — |
 
@@ -671,7 +671,7 @@ Identical to PRD-CLI 7.8 and 7.10. The form always behaves as a **company** (the
 | OQ-SA-012 | Add client form | The Super Admin form has no Special Economic Zone question, presets Industry to "Education & Training", and uses fixed type / industry / location lists | Billing and tax data may be incomplete; lists may differ from the Settings masters | Confirm the fields needed for invoicing training partners and the source of the lists | Open |
 | OQ-SA-013 | Client code | The next TPR code is the highest existing + 1, shown before saving; behaviour beyond TPR999 and with simultaneous adds is undefined | Code collisions | Define the code scheme and when it is assigned | Open |
 | OQ-SA-014 | Phone layout | Status pills stay visible on phones here, unlike SH-013 | Inconsistency with other lists | Confirm this exception (no filter drawer) is intended | Open |
-| OQ-SA-015 | My Profile | The profile shows the account's role text ("Training Partner" for the demo login) while in the Super Admin portal | Confusing identity | Decide whether the profile should show the chosen portal role | Open |
+| OQ-SA-015 | My Profile | The profile shows the account's role text ("Training Partner" for the demo login) while in the Super Admin portal | Confusing identity | Resolved 2026-11-05: My Profile now shows the chosen portal role ("Super Admin" here) | Resolved |
 | OQ-SA-016 | Terminology and contact person | Screens call training partners "clients" ("Add client", "Client details"); the contact person's relationship to the partner's portal logins is undefined | Users may confuse partners with sub clients; account set-up unclear | Confirm the wording and whether the contact person becomes the partner's first portal user | Open |
 
 ## 16. PRD Completeness Checklist

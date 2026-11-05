@@ -7,7 +7,7 @@ This document collects every unresolved requirement found while writing the Lear
 
 Almost every question has the status **Open**; three module questions (OQ-AUTH-013, OQ-CLI-018, OQ-SET-004) are **Resolved** and keep their row with the decision. Once a question is answered, update the module PRD and change its status here to **Resolved**, recording the decision.
 
-**Totals:** 235 module questions across 17 PRDs (232 open, 3 resolved), plus 14 cross-cutting questions.
+**Totals:** 235 module questions across 17 PRDs (231 open, 4 resolved), plus 14 cross-cutting questions.
 
 ---
 
@@ -118,7 +118,7 @@ Source: [profile-prd.md](modules/profile-prd.md), section 15. 16 questions.
 | OQ-PROF-008 | Account: Last sign-in | Fixed demo value, not the actual last sign-in | Misleading security information | Confirm it should show the real previous sign-in (time, device, location) | Open |
 | OQ-PROF-009 | Personal details | No unsaved-changes warning when leaving the page | Edits lost silently | Confirm whether the leave guard (SH-006) should apply | Open |
 | OQ-PROF-010 | Security | 90-day rotation is advisory only | Policy enforcement | Confirm whether expiry should force a change at sign-in | Open |
-| OQ-PROF-011 | Account: Access level, Employee ID | Values are fixed; not linked to Roles & Access; who maintains them is undefined | Role shown may not match permissions | Define the source and owner of these facts | Open |
+| OQ-PROF-011 | Account: Access level, Employee ID | Employee ID is fixed; Access level follows the portal role in use (since 2026-11-05) but is not linked to Roles & Access; who maintains them is undefined | Role shown may not match permissions | Define the source and owner of these facts | Open |
 | OQ-PROF-012 | Change password dialog | Backdrop click does not close it (differs from SH-006) | Consistency | Confirm intended (protects the flow from accidental closing) | Open |
 | OQ-PROF-013 | Banner, Account | Copy gives no feedback when the clipboard is blocked | User may think it copied | Define a fallback message | Open |
 | OQ-PROF-014 | Personal details: About | "Shown to your team" but the bio is not displayed anywhere, including on this page outside the form | Purpose unclear | Confirm where the bio appears | Open |
@@ -385,6 +385,6 @@ Source: [super-admin-prd.md](modules/super-admin-prd.md), section 15. 16 questio
 | OQ-SA-012 | Add client form | The Super Admin form has no Special Economic Zone question, presets Industry to "Education & Training", and uses fixed type / industry / location lists | Billing and tax data may be incomplete; lists may differ from the Settings masters | Confirm the fields needed for invoicing training partners and the source of the lists | Open |
 | OQ-SA-013 | Client code | The next TPR code is the highest existing + 1, shown before saving; behaviour beyond TPR999 and with simultaneous adds is undefined | Code collisions | Define the code scheme and when it is assigned | Open |
 | OQ-SA-014 | Phone layout | Status pills stay visible on phones here, unlike SH-013 | Inconsistency with other lists | Confirm this exception (no filter drawer) is intended | Open |
-| OQ-SA-015 | My Profile | The profile shows the account's role text ("Training Partner" for the demo login) while in the Super Admin portal | Confusing identity | Decide whether the profile should show the chosen portal role | Open |
+| OQ-SA-015 | My Profile | The profile shows the account's role text ("Training Partner" for the demo login) while in the Super Admin portal | Confusing identity | Resolved 2026-11-05: My Profile now shows the chosen portal role ("Super Admin" here) | Resolved |
 | OQ-SA-016 | Terminology and contact person | Screens call training partners "clients" ("Add client", "Client details"); the contact person's relationship to the partner's portal logins is undefined | Users may confuse partners with sub clients; account set-up unclear | Confirm the wording and whether the contact person becomes the partner's first portal user | Open |
 
