@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>LearnNext Admin — UI/UX Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Public Sans', 'Segoe UI', sans-serif; color: #1C252E; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-feature-settings: 'tnum' 1; }
+  .slide { width: 1280px; height: 720px; position: relative; overflow: hidden; background: #FFFFFF; page-break-after: always; break-after: page; }
+  .slide:last-child { page-break-after: auto; break-after: auto; }
+  .dark { background: #0B1A2E; color: #fff; }
+  .soft { background: #F4F7FB; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* Header / footer chrome on content slides */
+  .hdr { position: absolute; top: 34px; left: 56px; right: 56px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #5E6B7A; z-index: 2; }
+  .hdr .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #1C252E; letter-spacing: -0.01em; }
+  .dark .hdr, .dark .hdr .brand { color: rgba(255,255,255,.75); }
+  .hdr .sec { display: flex; gap: 22px; font-weight: 600; }
+  .hdr .sec b { color: #2A69B2; }
+  .foot { position: absolute; bottom: 28px; left: 56px; right: 56px; display: flex; justify-content: space-between; font-size: 11px; color: #8A96A3; z-index: 2; }
+  .dark .foot { color: rgba(255,255,255,.4); }
+  .rule { position: absolute; top: 64px; left: 56px; right: 56px; height: 1px; background: #E6EAF0; }
+
+  h1, h2, h3, p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2A69B2; }
+  .title { font-size: 44px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
+  .lead { font-size: 15px; line-height: 1.6; color: #46525F; }
+  .small { font-size: 12px; color: #5E6B7A; line-height: 1.5; }
+
+  /* Soft blurred colour blobs (the visual signature) */
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+
+  .card { background: #fff; border: 1px solid #E6EAF0; border-radius: 14px; box-shadow: 0 10px 30px -18px rgba(30,58,120,.35); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 16px; border-radius: 8px; font-size: 13px; font-weight: 700; }
+  .grid { display: grid; }
+</style>
+</head>
+<body>
+
+<!-- ========================================================= 1. COVER -->
+<section class="slide dark">
+  <div class="blob" style="width:620px;height:620px;right:-140px;top:-220px;background:#2A69B2;opacity:.75"></div>
+  <div class="blob" style="width:460px;height:460px;right:240px;bottom:-260px;background:#8E33FF;opacity:.45"></div>
+  <div class="blob" style="width:360px;height:360px;right:-80px;bottom:-120px;background:#00B8D9;opacity:.45"></div>
+  <!-- dotted texture -->
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent,#000 70%)"></div>
+  <!-- concentric rings -->
+  <svg style="position:absolute;right:120px;top:150px" width="420" height="420" viewBox="0 0 420 420" fill="none" stroke="rgba(255,255,255,.18)">
+    <circle cx="210" cy="210" r="90"/><circle cx="210" cy="210" r="140" stroke-dasharray="3 7"/><circle cx="210" cy="210" r="200"/>
+    <circle cx="300" cy="210" r="7" fill="#fff" stroke="none"/><circle cx="210" cy="70" r="5" fill="#7FF3E3" stroke="none"/>
+  </svg>
+
+  <div style="position:absolute;left:72px;top:64px;display:flex;align-items:center;gap:14px">
+    <svg width="44" height="44" viewBox="0 0 32 32"><defs><linearGradient id="lm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A7BD0"/><stop offset="1" stop-color="#1D4E86"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lm)"/><path d="M10.5 8.5v15h11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8.5l5.5 4.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/></svg>
+    <div><div style="font-size:20px;font-weight:700;letter-spacing:-.02em">LearnNext</div><div style="font-size:12px;color:rgba(255,255,255,.55)">Admin console</div></div>
+  </div>
+
+  <div style="position:absolute;left:72px;top:230px">
+    <div class="eyebrow" style="color:#7FF3E3">Design system · v1.0</div>
+    <h1 style="font-size:104px;font-weight:900;letter-spacing:-.055em;line-height:.92;margin-top:18px">UI/UX<br/>Guidelines</h1>
+    <p style="margin-top:26px;font-size:17px;color:rgba(255,255,255,.7);max-width:460px;line-height:1.55">How every LearnNext Admin screen looks and behaves — colour, type, layout, components, motion and states.</p>
+  </div>
+  <div style="position:absolute;left:72px;bottom:52px;display:flex;gap:36px;font-size:12px;color:rgba(255,255,255,.55)">
+    <span>October 2026</span><span>Prepared by Atul Kumar</span>
+  </div>
+</section>
+
+<!-- ========================================================= 2. CONTENTS -->
+<section class="slide">
+  <div class="blob" style="width:520px;height:520px;left:-220px;bottom:-280px;background:#2A69B2;opacity:.28"></div>
+  <div class="blob" style="width:360px;height:360px;left:120px;bottom:-240px;background:#00B8D9;opacity:.22"></div>
+  <div style="position:absolute;left:72px;top:96px;width:420px">
+    <div class="eyebrow">LearnNext Admin</div>
+    <h2 class="title" style="font-size:64px;margin-top:14px">Contents</h2>
+    <p class="lead" style="margin-top:22px">These guidelines define how every LearnNext Admin screen looks and behaves. Follow them for all new modules so the product stays consistent.</p>
+  </div>
+  <div style="position:absolute;left:600px;right:72px;top:96px;display:grid;grid-template-columns:1fr 1fr;column-gap:48px">
+    <!-- each row: number · title · page -->
+    <div style="display:flex;flex-direction:column">
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">01</span><span style="font-size:19px;font-weight:700;flex:1">Principles</span><span class="small">03</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">02</span><span style="font-size:19px;font-weight:700;flex:1">Colour</span><span class="small">04</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">03</span><span style="font-size:19px;font-weight:700;flex:1">Typography</span><span class="small">06</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">04</span><span style="font-size:19px;font-weight:700;flex:1">Layout &amp; spacing</span><span class="small">08</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">05</span><span style="font-size:19px;font-weight:700;flex:1">App shell</span><span class="small">09</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">06</span><span style="font-size:19px;font-weight:700;flex:1">Components</span><span class="small">10</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">07</span><span style="font-size:19px;font-weight:700;flex:1">Charts &amp; dashboards</span><span class="small">11</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">08</span><span style="font-size:19px;font-weight:700;flex:1">Motion</span><span class="small">12</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">09</span><span style="font-size:19px;font-weight:700;flex:1">States &amp; system pages</span><span class="small">13</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid #E6EAF0"><span class="mono" style="color:#2A69B2;font-size:13px">10</span><span style="font-size:19px;font-weight:700;flex:1">Accessibility &amp; writing</span><span class="small">15</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>02</span></div>
+</section>
+
+<!-- ========================================================= 3. PRINCIPLES -->
+<section class="slide">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>01</b> Principles</span></div></div>
+  <div class="rule"></div>
+  <!-- left: section mark with blurred stripes -->
+  <div style="position:absolute;left:56px;top:110px;width:400px">
+    <div class="title" style="font-size:72px"><span style="color:#2A69B2">01</span><br/>Principles</div>
+    <p class="lead" style="margin-top:20px;max-width:330px">Five rules settle every design decision. When two options both look fine, the one that serves these better wins.</p>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:520px;height:220px;overflow:hidden">
+    <div style="position:absolute;left:-40px;bottom:-60px;width:600px;height:200px;border-radius:200px;border:28px solid #2A69B2;filter:blur(1px);opacity:.9"></div>
+    <div style="position:absolute;left:30px;bottom:-110px;width:600px;height:200px;border-radius:200px;border:28px solid #00B8D9;opacity:.75"></div>
+    <div class="blob" style="width:420px;height:200px;left:60px;bottom:-60px;background:#8E33FF;opacity:.35"></div>
+  </div>
+  <!-- right: five principle cards -->
+  <div style="position:absolute;left:560px;right:56px;top:104px;display:flex;flex-direction:column;gap:12px">
+    <div class="card" style="display:flex;gap:18px;align-items:center;padding:18px 22px"><span class="mono" style="font-size:22px;color:#2A69B2;width:36px">01</span><div><div style="font-size:18px;font-weight:700">Calm over loud</div><div class="small" style="font-size:13px;margin-top:2px">Colour and motion carry meaning, never decoration.</div></div></div>
+    <div class="card" style="display:flex;gap:18px;align-items:center;padding:18px 22px"><span class="mono" style="font-size:22px;color:#00A3C2;width:36px">02</span><div><div style="font-size:18px;font-weight:700">Clear at a glance</div><div class="small" style="font-size:13px;margin-top:2px">The key number or action reads in under three seconds.</div></div></div>
+    <div class="card" style="display:flex;gap:18px;align-items:center;padding:18px 22px"><span class="mono" style="font-size:22px;color:#8E33FF;width:36px">03</span><div><div style="font-size:18px;font-weight:700">Consistent</div><div class="small" style="font-size:13px;margin-top:2px">One component per pattern; light and dark look like one product.</div></div></div>
+    <div class="card" style="display:flex;gap:18px;align-items:center;padding:18px 22px"><span class="mono" style="font-size:22px;color:#E69500;width:36px">04</span><div><div style="font-size:18px;font-weight:700">No dead ends</div><div class="small" style="font-size:13px;margin-top:2px">Every state offers a next step.</div></div></div>
+    <div class="card" style="display:flex;gap:18px;align-items:center;padding:18px 22px"><span class="mono" style="font-size:22px;color:#118D57;width:36px">05</span><div><div style="font-size:18px;font-weight:700">Accessible</div><div class="small" style="font-size:13px;margin-top:2px">WCAG 2.1 AA is the minimum.</div></div></div>
+  </div>
+  <!-- Left label omitted here: the decorative stripes own the bottom-left corner -->
+  <div class="foot"><span></span><span>03</span></div>
+</section>
+
+<!-- ========================================================= 4. COLOUR — BRAND + TOKENS -->
+<section class="slide">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>02</b> Colour</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px;width:520px">
+    <div class="title"><span style="color:#2A69B2">02</span> Colour</div>
+    <p class="lead" style="margin-top:12px">All colours are named tokens — never raw hex in screens — so light and dark themes stay in sync.</p>
+  </div>
+  <!-- brand swatch -->
+  <div style="position:absolute;left:56px;top:230px;width:330px;height:430px;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#4C8AD6,#2A69B2 45%,#1D4E86);color:#fff;padding:26px">
+    <div class="blob" style="width:260px;height:260px;right:-90px;top:-90px;background:#00B8D9;opacity:.45"></div>
+    <div style="position:relative;font-size:13px;font-weight:600;opacity:.8">Brand</div>
+    <div style="position:relative;font-size:34px;font-weight:800;letter-spacing:-.03em;margin-top:6px">LearnNext Blue</div>
+    <div style="position:absolute;left:26px;bottom:26px;right:26px">
+      <div class="mono" style="font-size:22px">#2A69B2</div>
+      <div style="font-size:12px;opacity:.75;margin-top:6px">Dark theme · #3A7BD0</div>
+      <div style="font-size:12px;opacity:.75;margin-top:2px">Buttons, active menu, links, focus</div>
+    </div>
+  </div>
+  <!-- token grid: light / dark split swatches -->
+  <div style="position:absolute;left:410px;right:56px;top:230px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    <!-- helper pattern repeated -->
+    <div><div style="height:110px;border-radius:14px;overflow:hidden;display:flex;border:1px solid #E6EAF0"><div style="flex:1;background:#2A69B2"></div><div style="flex:1;background:#3A7BD0"></div></div><div style="font-size:14px;font-weight:700;margin-top:10px">Primary</div><div class="small mono" style="font-size:11px">#2A69B2 · #3A7BD0</div></div>
+    <div><div style="height:110px;border-radius:14px;overflow:hidden;display:flex;border:1px solid #E6EAF0"><div style="flex:1;background:#EEF2F7"></div><div style="flex:1;background:#11161C"></div></div><div style="font-size:14px;font-weight:700;margin-top:10px">Background</div><div class="small mono" style="font-size:11px">#EEF2F7 · #11161C</div></div>
+    <div><div style="height:110px;border-radius:14px;overflow:hidden;display:flex;border:1px solid #E6EAF0"><div style="flex:1;background:#FFFFFF"></div><div style="flex:1;background:#1C252E"></div></div><div style="font-size:14px;font-weight:700;margin-top:10px">Surface</div><div class="small mono" style="font-size:11px">#FFFFFF · #1C252E</div></div>
+    <div><div style="height:110px;border-radius:14px;overflow:hidden;display:flex;border:1px solid #E6EAF0"><div style="flex:1;background:#1C252E"></div><div style="flex:1;background:#FFFFFF"></div></div><div style="font-size:14px;font-weight:700;margin-top:10px">Text</div><div class="small mono" style="font-size:11px">#1C252E · #FFFFFF</div></div>
+    <div><div style="height:110px;border-radius:14px;overflow:hidden;display:flex;border:1px solid #E6EAF0"><div style="flex:1;background:#46525F"></div><div style="flex:1;background:#B4C0CC"></div></div><div style="font-size:14px;font-weight:700;margin-top:10px">Text secondary</div><div class="small mono" style="font-size:11px">#46525F · #B4C0CC</div></div>
+    <div><div style="height:110px;border-radius:14px;overflow:hidden;display:flex;border:1px solid #E6EAF0"><div style="flex:1;background:#5E6B7A"></div><div style="flex:1;background:#95A3B2"></div></div><div style="font-size:14px;font-weight:700;margin-top:10px">Text muted</div><div class="small mono" style="font-size:11px">#5E6B7A · #95A3B2</div></div>
+  </div>
+  <div style="position:absolute;left:410px;bottom:56px;display:flex;gap:18px;align-items:center" class="small">
+    <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:14px;border-radius:4px;background:#EEF2F7;border:1px solid #DFE3E8"></span>Left half = light theme</span>
+    <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:14px;border-radius:4px;background:#11161C"></span>Right half = dark theme</span>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>04</span></div>
+</section>
+
+<!-- ========================================================= 5. COLOUR — STATUS, CHARTS, SURFACE -->
+<section class="slide soft">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>02</b> Colour</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title" style="font-size:34px">Status, charts &amp; surfaces</div></div>
+
+  <!-- status -->
+  <div style="position:absolute;left:56px;top:160px;width:560px">
+    <div class="eyebrow" style="color:#5E6B7A">Status — always with a word or icon</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px">
+      <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:12px;background:#118D57"></div><div><div style="font-weight:700">Success</div><div class="mono small">#118D57</div><span class="chip" style="background:rgba(34,197,94,.16);color:#118D57;margin-top:6px"><span class="dot" style="background:#22C55E"></span>Completed</span></div></div>
+      <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:12px;background:#B76E00"></div><div><div style="font-weight:700">Warning</div><div class="mono small">#B76E00</div><span class="chip" style="background:rgba(255,171,0,.16);color:#B76E00;margin-top:6px"><span class="dot" style="background:#FFAB00"></span>Pending</span></div></div>
+      <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:12px;background:#B71D18"></div><div><div style="font-weight:700">Danger</div><div class="mono small">#B71D18</div><span class="chip" style="background:rgba(255,86,48,.16);color:#B71D18;margin-top:6px"><span class="dot" style="background:#FF5630"></span>Overdue</span></div></div>
+      <div class="card" style="padding:16px;display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:12px;background:#006C9C"></div><div><div style="font-weight:700">Info</div><div class="mono small">#006C9C</div><span class="chip" style="background:rgba(0,184,217,.16);color:#006C9C;margin-top:6px"><span class="dot" style="background:#00B8D9"></span>Scheduled</span></div></div>
+    </div>
+  </div>
+
+  <!-- chart palette -->
+  <div style="position:absolute;left:660px;top:160px;width:564px">
+    <div class="eyebrow" style="color:#5E6B7A">Chart palette — always in this order</div>
+    <div class="card" style="margin-top:14px;padding:22px 26px;display:flex;align-items:flex-end;gap:22px;height:220px">
+      <div style="flex:1;text-align:center"><div style="height:150px;background:#2A69B2;border-radius:8px 8px 3px 3px"></div><div class="mono small" style="margin-top:8px">1 · Blue</div></div>
+      <div style="flex:1;text-align:center"><div style="height:118px;background:#00B8D9;border-radius:8px 8px 3px 3px"></div><div class="mono small" style="margin-top:8px">2 · Cyan</div></div>
+      <div style="flex:1;text-align:center"><div style="height:92px;background:#FFAB00;border-radius:8px 8px 3px 3px"></div><div class="mono small" style="margin-top:8px">3 · Amber</div></div>
+      <div style="flex:1;text-align:center"><div style="height:70px;background:#8E33FF;border-radius:8px 8px 3px 3px"></div><div class="mono small" style="margin-top:8px">4 · Violet</div></div>
+      <div style="flex:1;text-align:center"><div style="height:46px;background:#FF5630;border-radius:8px 8px 3px 3px"></div><div class="mono small" style="margin-top:8px">5 · Coral</div></div>
+    </div>
+  </div>
+
+  <!-- glass surface sample -->
+  <div style="position:absolute;left:56px;right:56px;bottom:60px;height:160px;border-radius:18px;overflow:hidden;background:#EEF2F7">
+    <div class="blob" style="width:380px;height:300px;left:40px;top:-120px;background:#2A69B2;opacity:.35"></div>
+    <div class="blob" style="width:340px;height:260px;right:120px;top:-60px;background:#00B8D9;opacity:.3"></div>
+    <div class="blob" style="width:300px;height:240px;left:520px;bottom:-160px;background:#8E33FF;opacity:.22"></div>
+    <div style="position:absolute;left:40px;top:28px;width:360px;height:104px;border-radius:14px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 1px rgba(15,23,42,.06),0 14px 32px -12px rgba(30,58,120,.3);padding:18px 20px">
+      <div style="font-weight:700">Frosted glass card</div><div class="small" style="margin-top:4px">Translucent white · soft blur · hairline edge · soft blue-tinted shadow</div>
+    </div>
+    <div style="position:absolute;left:440px;top:46px;right:40px" class="lead">Cards sit on a lightly tinted canvas with soft colour glows behind. The glass picks up those colours, which keeps the interface light without flat white boxes.</div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>05</span></div>
+</section>
+
+<!-- ========================================================= 6. TYPOGRAPHY — SPECIMEN -->
+<section class="slide">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>03</b> Typography</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">03</span> Type</div></div>
+  <!-- big Aa with gradient glow -->
+  <div style="position:absolute;left:30px;top:150px;width:560px;height:520px">
+    <div class="blob" style="width:360px;height:360px;left:170px;top:120px;background:#2A69B2;opacity:.55"></div>
+    <div class="blob" style="width:260px;height:260px;left:320px;top:240px;background:#00B8D9;opacity:.5"></div>
+    <div class="blob" style="width:220px;height:220px;left:120px;top:300px;background:#8E33FF;opacity:.35"></div>
+    <div style="position:relative;font-size:400px;font-weight:600;letter-spacing:-.06em;line-height:1;margin-top:20px;margin-left:26px">Aa</div>
+  </div>
+  <!-- specimen -->
+  <div style="position:absolute;left:660px;right:56px;top:120px">
+    <div style="font-size:64px;font-weight:700;letter-spacing:-.04em">Public Sans</div>
+    <div class="small" style="margin-top:4px">Google Fonts · falls back to the system font (Segoe UI, San Francisco, Roboto)</div>
+    <div style="margin-top:28px;font-size:30px;font-weight:600;letter-spacing:.01em;line-height:1.3">ABCDEFGHIJKLM<br/>NOPQRSTUVWXYZ</div>
+    <div style="margin-top:8px;font-size:30px;font-weight:400;line-height:1.3;color:#46525F">abcdefghijklm<br/>nopqrstuvwxyz</div>
+    <div style="margin-top:8px;font-size:30px;font-weight:500;color:#5E6B7A">0123456789 ₹ % &amp; @</div>
+    <div style="margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div class="card" style="padding:14px"><div style="font-size:28px;font-weight:400">Aa</div><div class="small">Regular 400</div></div>
+      <div class="card" style="padding:14px"><div style="font-size:28px;font-weight:500">Aa</div><div class="small">Medium 500</div></div>
+      <div class="card" style="padding:14px"><div style="font-size:28px;font-weight:600">Aa</div><div class="small">Semibold 600</div></div>
+      <div class="card" style="padding:14px"><div style="font-size:28px;font-weight:700">Aa</div><div class="small">Bold 700</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>06</span></div>
+</section>
+
+<!-- ========================================================= 7. TYPE SCALE -->
+<section class="slide soft">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>03</b> Typography</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title" style="font-size:34px">Type scale</div><p class="lead" style="margin-top:6px">Sentence case everywhere. Numbers use tabular (equal-width) figures so columns line up.</p></div>
+  <div class="card" style="position:absolute;left:56px;right:56px;top:200px;padding:6px 32px">
+    <div style="display:grid;grid-template-columns:180px 1fr 200px;align-items:center;padding:20px 0;border-bottom:1px solid #EDEFF2"><span class="eyebrow" style="color:#5E6B7A">Page title</span><span style="font-size:24px;font-weight:700">Good afternoon, Atul</span><span class="mono small" style="text-align:right">22–24 px · Bold</span></div>
+    <div style="display:grid;grid-template-columns:180px 1fr 200px;align-items:center;padding:20px 0;border-bottom:1px solid #EDEFF2"><span class="eyebrow" style="color:#5E6B7A">KPI value</span><span style="font-size:32px;font-weight:700;letter-spacing:-.02em">₹1.67 Cr</span><span class="mono small" style="text-align:right">26–34 px · Bold</span></div>
+    <div style="display:grid;grid-template-columns:180px 1fr 200px;align-items:center;padding:20px 0;border-bottom:1px solid #EDEFF2"><span class="eyebrow" style="color:#5E6B7A">Card title</span><span style="font-size:17px;font-weight:600">Program schedule</span><span class="mono small" style="text-align:right">17 px · Semibold</span></div>
+    <div style="display:grid;grid-template-columns:180px 1fr 200px;align-items:center;padding:20px 0;border-bottom:1px solid #EDEFF2"><span class="eyebrow" style="color:#5E6B7A">Body</span><span style="font-size:14px;color:#46525F">Track learner progress and coordinate facilitators from one calm place.</span><span class="mono small" style="text-align:right">13–14 px · Regular</span></div>
+    <div style="display:grid;grid-template-columns:180px 1fr 200px;align-items:center;padding:20px 0"><span class="eyebrow" style="color:#5E6B7A">Caption</span><span style="font-size:12px;font-weight:500;color:#5E6B7A">Updated 42m ago · 9 upcoming sessions</span><span class="mono small" style="text-align:right">11–12 px · Medium</span></div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>07</span></div>
+</section>
+
+<!-- ========================================================= 8. LAYOUT & SPACING -->
+<section class="slide">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>04</b> Layout &amp; spacing</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">04</span> Layout &amp; spacing</div></div>
+
+  <!-- spacing scale -->
+  <div style="position:absolute;left:56px;top:190px;width:560px">
+    <div class="eyebrow" style="color:#5E6B7A">Spacing — multiples of 4 px</div>
+    <div style="display:flex;align-items:flex-end;gap:22px;margin-top:20px">
+      <div style="text-align:center"><div style="width:8px;height:8px;background:#2A69B2;border-radius:2px;margin:0 auto"></div><div class="mono small" style="margin-top:10px">8</div></div>
+      <div style="text-align:center"><div style="width:12px;height:12px;background:#2A69B2;border-radius:2px;margin:0 auto;opacity:.92"></div><div class="mono small" style="margin-top:10px">12</div></div>
+      <div style="text-align:center"><div style="width:16px;height:16px;background:#2A69B2;border-radius:3px;margin:0 auto;opacity:.84"></div><div class="mono small" style="margin-top:10px">16</div></div>
+      <div style="text-align:center"><div style="width:24px;height:24px;background:#2A69B2;border-radius:4px;margin:0 auto;opacity:.76"></div><div class="mono small" style="margin-top:10px">24</div></div>
+      <div style="text-align:center"><div style="width:32px;height:32px;background:#2A69B2;border-radius:5px;margin:0 auto;opacity:.68"></div><div class="mono small" style="margin-top:10px">32</div></div>
+    </div>
+    <p class="small" style="margin-top:14px;font-size:13px">Sections sit 24 px apart; related items 8–12 px.</p>
+
+    <div class="eyebrow" style="color:#5E6B7A;margin-top:36px">Corner radius</div>
+    <div style="display:flex;gap:22px;margin-top:16px;align-items:flex-end">
+      <div><div style="width:120px;height:40px;border-radius:8px;background:#2A69B2"></div><div class="small" style="margin-top:8px"><b>8 px</b> · buttons, inputs</div></div>
+      <div><div style="width:150px;height:96px;border-radius:12px;border:1px solid #DFE3E8;background:#F9FAFB"></div><div class="small" style="margin-top:8px"><b>12 px</b> · cards</div></div>
+      <div><div style="width:170px;height:120px;border-radius:16px;border:1px solid #DFE3E8;background:#fff;box-shadow:0 18px 36px -18px rgba(30,58,120,.4)"></div><div class="small" style="margin-top:8px"><b>16 px</b> · dialogs, banners</div></div>
+    </div>
+  </div>
+
+  <!-- breakpoints -->
+  <div style="position:absolute;left:670px;right:56px;top:190px">
+    <div class="eyebrow" style="color:#5E6B7A">Responsive — no sideways scrolling at any size</div>
+    <div style="margin-top:22px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:16px"><div style="width:44px;height:66px;border:2px solid #2A69B2;border-radius:8px;display:flex;flex-direction:column;gap:4px;padding:6px"><span style="height:6px;background:#2A69B2;border-radius:2px"></span><span style="height:6px;background:#DCE6F3;border-radius:2px"></span><span style="height:6px;background:#DCE6F3;border-radius:2px"></span></div><div><div style="font-weight:700">Under 640 px</div><div class="small">One column · sidebar becomes a drawer</div></div></div>
+      <div style="display:flex;align-items:center;gap:16px"><div style="width:84px;height:62px;border:2px solid #00A3C2;border-radius:8px;display:flex;gap:4px;padding:5px"><span style="width:8px;background:#00B8D9;border-radius:2px"></span><span style="flex:1;background:#D5F2F8;border-radius:2px"></span><span style="flex:1;background:#D5F2F8;border-radius:2px"></span></div><div><div style="font-weight:700">640 px and up</div><div class="small">Two columns · icon-rail sidebar</div></div></div>
+      <div style="display:flex;align-items:center;gap:16px"><div style="width:110px;height:68px;border:2px solid #8E33FF;border-radius:8px;display:flex;gap:4px;padding:5px"><span style="width:22px;background:#B98CFF;border-radius:2px"></span><span style="flex:1;background:#EFE6FF;border-radius:2px"></span><span style="flex:1;background:#EFE6FF;border-radius:2px"></span></div><div><div style="font-weight:700">1024 px and up</div><div class="small">Full sidebar · paired cards</div></div></div>
+      <div style="display:flex;align-items:center;gap:16px"><div style="width:140px;height:72px;border:2px solid #E69500;border-radius:8px;display:flex;gap:3px;padding:5px"><span style="width:24px;background:#FFC85C;border-radius:2px"></span><span style="flex:8;background:#FFF1D2;border-radius:2px"></span><span style="flex:4;background:#FFF1D2;border-radius:2px"></span></div><div><div style="font-weight:700">1440 px and up</div><div class="small">12-column grid · uneven spans (8 + 4)</div></div></div>
+    </div>
+    <div style="margin-top:22px;position:relative;height:30px">
+      <div style="position:absolute;left:0;right:0;top:10px;height:6px;border-radius:3px;background:linear-gradient(90deg,#2A69B2,#00B8D9,#8E33FF,#FFAB00)"></div>
+      <span class="mono small" style="position:absolute;left:0;top:-8px">320</span><span class="mono small" style="position:absolute;left:28%;top:-8px">640</span><span class="mono small" style="position:absolute;left:55%;top:-8px">1024</span><span class="mono small" style="position:absolute;left:80%;top:-8px">1440</span><span class="mono small" style="position:absolute;right:0;top:-8px">1600 max</span>
+    </div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>08</span></div>
+</section>
+
+<!-- ========================================================= 9. APP SHELL -->
+<section class="slide soft">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>05</b> App shell</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">05</span> App shell</div><p class="lead" style="margin-top:6px">Every signed-in page uses the same frame: sidebar, header and content.</p></div>
+
+  <!-- wireframe -->
+  <div style="position:absolute;left:56px;top:200px;width:720px;height:460px;border-radius:16px;background:#EEF2F7;border:1px solid #DFE3E8;overflow:hidden;display:flex;box-shadow:0 30px 60px -30px rgba(30,58,120,.35)">
+    <div style="width:180px;background:rgba(255,255,255,.75);border-right:1px solid #E6EAF0;padding:16px 12px;display:flex;flex-direction:column;gap:6px;font-size:11px">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:12px;margin-bottom:10px"><span style="width:20px;height:20px;border-radius:6px;background:#2A69B2"></span>LearnNext</div>
+      <div style="background:rgba(42,105,178,.1);color:#23599A;font-weight:700;border-radius:8px;padding:7px 8px;display:flex;gap:8px;align-items:center"><span style="width:14px;height:14px;border-radius:4px;background:#2A69B2"></span>Dashboard</div>
+      <div style="padding:6px 8px;color:#46525F">All Clients</div><div style="padding:6px 8px;color:#46525F">Projects</div>
+      <div style="padding:6px 8px;color:#46525F">Finance ▾</div>
+      <div style="padding:2px 8px 2px 22px;color:#8A96A3;border-left:1px solid #DFE3E8;margin-left:12px">All Invoices</div>
+      <div style="padding:2px 8px 2px 22px;color:#8A96A3;border-left:1px solid #DFE3E8;margin-left:12px">Credit Note · Debit Note</div>
+      <div style="padding:6px 8px;color:#46525F">Manage Content</div><div style="padding:6px 8px;color:#46525F">Facilitators</div><div style="padding:6px 8px;color:#46525F">Reports</div>
+      <div style="margin-top:auto;border:1px solid #E6EAF0;border-radius:10px;padding:8px;background:#fff;display:flex;gap:8px;align-items:center"><span style="width:22px;height:22px;border-radius:50%;background:#C9D6E8"></span><span><b>Atul Kumar</b><br/><span style="color:#8A96A3">Admin</span></span></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div style="height:48px;background:rgba(255,255,255,.75);border-bottom:1px solid #E6EAF0;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:11px"><b>Finance › All Invoices</b><span style="display:flex;gap:8px;align-items:center"><span style="border:1px solid #DFE3E8;border-radius:8px;padding:5px 10px;color:#8A96A3;background:#fff">Search · Ctrl K</span><span style="width:22px;height:22px;border-radius:50%;background:#C9D6E8"></span></span></div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:10px;flex:1">
+        <div style="height:34px;border-radius:10px;background:#fff;border:1px solid #E6EAF0"></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"><div style="height:62px;border-radius:12px;background:linear-gradient(135deg,rgba(42,105,178,.14),#fff 60%);border:1px solid #E6EAF0"></div><div style="height:62px;border-radius:12px;background:linear-gradient(135deg,rgba(0,184,217,.16),#fff 60%);border:1px solid #E6EAF0"></div><div style="height:62px;border-radius:12px;background:linear-gradient(135deg,rgba(142,51,255,.12),#fff 60%);border:1px solid #E6EAF0"></div><div style="height:62px;border-radius:12px;background:linear-gradient(135deg,rgba(255,171,0,.18),#fff 60%);border:1px solid #E6EAF0"></div></div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;flex:1"><div style="border-radius:12px;background:#fff;border:1px solid #E6EAF0"></div><div style="border-radius:12px;background:#fff;border:1px solid #E6EAF0"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1"><div style="border-radius:12px;background:#fff;border:1px solid #E6EAF0"></div><div style="border-radius:12px;background:#fff;border:1px solid #E6EAF0"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- rules -->
+  <div style="position:absolute;left:810px;right:56px;top:200px;display:flex;flex-direction:column;gap:14px">
+    <div class="card" style="padding:16px 18px"><div style="font-weight:700">Sidebar</div><div class="small" style="margin-top:4px">One flat menu; Finance is the only sub-menu. Active item = soft blue row with a solid icon tile. Icon rail on desktop, drawer on phones.</div></div>
+    <div class="card" style="padding:16px 18px"><div style="font-weight:700">Header</div><div class="small" style="margin-top:4px">Page name (with parent for sub-pages), then search (Ctrl/⌘ K), notifications, theme and user menu.</div></div>
+    <div class="card" style="padding:16px 18px"><div style="font-weight:700">New modules</div><div class="small" style="margin-top:4px">Added through the navigation config, which also sets the breadcrumb and tab title.</div></div>
+    <div class="card" style="padding:16px 18px"><div style="font-weight:700">Log out</div><div class="small" style="margin-top:4px">Always asks for confirmation.</div></div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>09</span></div>
+</section>
+
+<!-- ========================================================= 10. COMPONENTS -->
+<section class="slide">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>06</b> Components</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">06</span> Components</div><p class="lead" style="margin-top:6px">Build every screen from the shared library. Missing an option? Extend the component — never create a look-alike.</p></div>
+
+  <div style="position:absolute;left:56px;top:210px;width:700px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <!-- buttons -->
+    <div class="card" style="padding:18px;grid-column:span 2">
+      <div class="eyebrow" style="color:#5E6B7A">Buttons — one primary per area</div>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <span class="btn" style="background:#2A69B2;color:#fff">Save changes</span>
+        <span class="btn" style="background:#fff;border:1px solid #DFE3E8">Cancel</span>
+        <span class="btn" style="background:rgba(42,105,178,.08);color:#23599A">Soft</span>
+        <span class="btn" style="color:#46525F">Ghost</span>
+        <span class="btn" style="background:#B71D18;color:#fff">Delete</span>
+        <span class="btn" style="width:36px;padding:0;border:1px solid #DFE3E8;background:#fff">⋯</span>
+      </div>
+    </div>
+    <!-- input -->
+    <div class="card" style="padding:18px">
+      <div class="eyebrow" style="color:#5E6B7A">Form field</div>
+      <div style="font-size:12px;font-weight:600;margin-top:12px">Email address <span style="color:#B71D18">*</span></div>
+      <div style="margin-top:6px;height:38px;border-radius:8px;border:1px solid #2A69B2;box-shadow:0 0 0 3px rgba(42,105,178,.25);display:flex;align-items:center;padding:0 12px;font-size:13px">atul@learnnext.io</div>
+      <div style="font-size:12px;font-weight:600;margin-top:12px">Mobile number</div>
+      <div style="margin-top:6px;height:38px;border-radius:8px;border:1px solid #B71D18;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#8A96A3">98200</div>
+      <div style="font-size:11px;color:#B71D18;margin-top:5px">Enter a valid mobile number</div>
+    </div>
+    <!-- KPI tile + badges -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card" style="padding:16px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(142,51,255,.1),#fff 55%)">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:28px;height:28px;border-radius:9px;background:rgba(142,51,255,.12);color:#8E33FF;display:inline-flex;align-items:center;justify-content:center;font-weight:800">₹</span><span style="font-size:12px;font-weight:600;color:#46525F">Billing</span></div>
+        <div style="font-size:26px;font-weight:800;margin-top:6px">₹1.67 Cr</div>
+        <div class="small"><span class="dot" style="background:#8E33FF;margin-right:4px"></span>42% collected</div>
+        <svg style="position:absolute;right:0;bottom:0" width="120" height="44" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="kv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E33FF" stop-opacity=".25"/><stop offset="1" stop-color="#8E33FF" stop-opacity="0"/></linearGradient></defs><path d="M0 36 C15 36 15 30 30 30 S45 33 60 26 S80 20 90 16 S110 8 120 4 L120 44 L0 44Z" fill="url(#kv)"/><path d="M0 36 C15 36 15 30 30 30 S45 33 60 26 S80 20 90 16 S110 8 120 4" fill="none" stroke="#8E33FF" stroke-width="1.6"/></svg>
+      </div>
+      <div class="card" style="padding:16px">
+        <div class="eyebrow" style="color:#5E6B7A">Badges — one shared status map</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <span class="chip" style="background:rgba(34,197,94,.16);color:#118D57">Approved</span>
+          <span class="chip" style="background:rgba(255,171,0,.16);color:#B76E00">Pending</span>
+          <span class="chip" style="background:rgba(255,86,48,.16);color:#B71D18">Rejected</span>
+          <span class="chip" style="background:rgba(42,105,178,.1);color:#23599A">Draft</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- rules table -->
+  <div class="card" style="position:absolute;left:790px;right:56px;top:210px;padding:6px 20px">
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">Button</b><span class="small">Destructive actions are red and confirmed</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">Icon button</b><span class="small">Always has a label (tooltip + screen reader)</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">Form field</b><span class="small">Label on top; errors after leaving the field or on submit</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">Inputs</b><span class="small">Same height, border and focus ring for every type</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">Card</b><span class="small">Optional header: icon, title, description, badge, action</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">KPI tile</b><span class="small">Soft tint, icon, value, caption; max four per row</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #EDEFF2"><b style="width:94px;font-size:12px">Table</b><span class="small">Search, filters, pagination; columns hide by priority</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0"><b style="width:94px;font-size:12px">Overlays</b><span class="small">Modal (bottom sheet on phones), drawer, popover; Esc closes</span></div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>10</span></div>
+</section>
+
+<!-- ========================================================= 11. CHARTS & DASHBOARDS -->
+<section class="slide soft">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>07</b> Charts &amp; dashboards</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">07</span> Charts &amp; dashboards</div><p class="lead" style="margin-top:6px">One question per chart, stated in its title. Exact values on hover.</p></div>
+
+  <div style="position:absolute;left:56px;right:56px;top:210px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+    <div class="card" style="padding:18px"><div style="font-weight:700">Trend</div><div class="small">Line / area</div>
+      <svg width="100%" height="120" viewBox="0 0 220 120" preserveAspectRatio="none" style="margin-top:12px"><defs><linearGradient id="ca" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A69B2" stop-opacity=".25"/><stop offset="1" stop-color="#2A69B2" stop-opacity="0"/></linearGradient></defs><path d="M0 96 C25 96 25 80 50 80 S80 88 105 66 S150 50 170 40 S205 22 220 16 L220 120 L0 120Z" fill="url(#ca)"/><path d="M0 96 C25 96 25 80 50 80 S80 88 105 66 S150 50 170 40 S205 22 220 16" fill="none" stroke="#2A69B2" stroke-width="2.5"/></svg></div>
+    <div class="card" style="padding:18px"><div style="font-weight:700">Compare items</div><div class="small">Horizontal bars</div>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:center;gap:8px"><span class="small" style="width:56px">Hindalco</span><span style="height:12px;width:90%;border-radius:6px;background:#2A69B2"></span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="small" style="width:56px">Titan</span><span style="height:12px;width:68%;border-radius:6px;background:#2A69B2;opacity:.8"></span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="small" style="width:56px">Infosys</span><span style="height:12px;width:52%;border-radius:6px;background:#2A69B2;opacity:.6"></span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="small" style="width:56px">Wipro</span><span style="height:12px;width:34%;border-radius:6px;background:#2A69B2;opacity:.45"></span></div>
+      </div></div>
+    <div class="card" style="padding:18px"><div style="font-weight:700">Parts of a whole</div><div class="small">Donut, up to 5 parts</div>
+      <svg width="120" height="120" viewBox="0 0 42 42" style="margin:10px auto 0;display:block;transform:rotate(-90deg)">
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#2A69B2" stroke-width="5" stroke-dasharray="40 60"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#00B8D9" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="-41"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#FFAB00" stroke-width="5" stroke-dasharray="18 82" stroke-dashoffset="-67"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#8E33FF" stroke-width="5" stroke-dasharray="12 88" stroke-dashoffset="-86"/>
+      </svg></div>
+    <div class="card" style="padding:18px"><div style="font-weight:700">Single ratio</div><div class="small">Progress ring</div>
+      <div style="position:relative;width:120px;height:120px;margin:10px auto 0">
+        <svg width="120" height="120" viewBox="0 0 42 42" style="transform:rotate(-90deg)"><circle cx="21" cy="21" r="16" fill="none" stroke="#EEF1F4" stroke-width="5"/><circle cx="21" cy="21" r="16" fill="none" stroke="#22C55E" stroke-width="5" stroke-linecap="round" stroke-dasharray="57.3 100.5"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800">57%</div>
+      </div></div>
+  </div>
+
+  <div style="position:absolute;left:56px;right:56px;bottom:62px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    <div class="card" style="padding:18px"><div class="eyebrow" style="color:#5E6B7A">Period</div><div style="display:flex;gap:4px;margin-top:10px;background:#F4F6F8;border:1px solid #EDEFF2;border-radius:10px;padding:3px;width:fit-content;font-size:12px"><span style="padding:6px 10px;color:#5E6B7A">This month</span><span style="padding:6px 10px;background:#fff;border-radius:8px;font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.1)">Last month</span><span style="padding:6px 10px;color:#5E6B7A">Quarter</span></div><div class="small" style="margin-top:10px">One switch per dashboard; each card shows its period chip.</div></div>
+    <div class="card" style="padding:18px"><div class="eyebrow" style="color:#5E6B7A">Money</div><div style="font-size:30px;font-weight:800;margin-top:6px">₹4.8 L · ₹1.67 Cr</div><div class="small" style="margin-top:6px">Rupees with compact units; exact amount on hover.</div></div>
+    <div class="card" style="padding:18px"><div class="eyebrow" style="color:#5E6B7A">Collected vs due</div><div style="display:flex;gap:3px;margin-top:16px;height:8px"><span style="flex:42;background:#22C55E;border-radius:4px"></span><span style="flex:58;background:#FF5630;border-radius:4px;opacity:.85"></span></div><div class="small" style="margin-top:12px"><b style="color:#118D57">₹70.1 L</b> collected · <b style="color:#B71D18">₹96.7 L</b> due</div></div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>11</span></div>
+</section>
+
+<!-- ========================================================= 12. MOTION -->
+<section class="slide dark">
+  <div class="blob" style="width:520px;height:520px;right:-160px;top:-200px;background:#2A69B2;opacity:.55"></div>
+  <div class="blob" style="width:380px;height:380px;left:-120px;bottom:-220px;background:#8E33FF;opacity:.35"></div>
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b style="color:#7FF3E3">08</b> Motion</span></div></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title" style="color:#fff"><span style="color:#7FF3E3">08</span> Motion</div><p style="margin-top:8px;font-size:15px;color:rgba(255,255,255,.7)">Motion explains what changed. Short, soft, never in the way.</p></div>
+
+  <!-- timeline: bars to scale (0–1200 ms) -->
+  <div style="position:absolute;left:56px;right:56px;top:220px">
+    <div style="position:relative;margin-left:230px;height:20px;font-size:11px;color:rgba(255,255,255,.45)" class="mono">
+      <span style="position:absolute;left:0">0</span><span style="position:absolute;left:25%">300 ms</span><span style="position:absolute;left:50%">600 ms</span><span style="position:absolute;left:75%">900 ms</span><span style="position:absolute;right:0">1200 ms</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;margin-top:12px">
+      <div style="display:flex;align-items:center"><div style="width:230px"><div style="font-weight:700">Hover &amp; press</div><div style="font-size:12px;color:rgba(255,255,255,.55)">Colour change only — no lifting</div></div><div style="flex:1;position:relative;height:16px;background:rgba(255,255,255,.06);border-radius:8px"><div style="position:absolute;left:0;width:12.5%;height:100%;border-radius:8px;background:#7FF3E3"></div><span class="mono" style="position:absolute;left:14%;top:-1px;font-size:12px;color:#7FF3E3">150</span></div></div>
+      <div style="display:flex;align-items:center"><div style="width:230px"><div style="font-weight:700">Popovers, dialogs, toasts</div><div style="font-size:12px;color:rgba(255,255,255,.55)">Fade or slide</div></div><div style="flex:1;position:relative;height:16px;background:rgba(255,255,255,.06);border-radius:8px"><div style="position:absolute;left:13.3%;width:6.7%;height:100%;border-radius:8px;background:#5B98E0"></div><div style="position:absolute;left:0;width:13.3%;height:100%;border-radius:8px;background:rgba(91,152,224,.35)"></div><span class="mono" style="position:absolute;left:21.5%;top:-1px;font-size:12px;color:#8DBBF0">160–240</span></div></div>
+      <div style="display:flex;align-items:center"><div style="width:230px"><div style="font-weight:700">Page entrance</div><div style="font-size:12px;color:rgba(255,255,255,.55)">Cards rise in, staggered</div></div><div style="flex:1;position:relative;height:16px"><div style="position:absolute;left:0;width:58%;height:16px;border-radius:8px;background:linear-gradient(90deg,#8E33FF,#B98CFF)"></div><div style="position:absolute;left:6.5%;top:0;width:58%;height:16px;border-radius:8px;background:rgba(185,140,255,.25)"></div><span class="mono" style="position:absolute;left:67%;top:-1px;font-size:12px;color:#D4B5FF">700 + stagger</span></div></div>
+      <div style="display:flex;align-items:center"><div style="width:230px"><div style="font-weight:700">Data reveal</div><div style="font-size:12px;color:rgba(255,255,255,.55)">Bars grow, numbers count up once</div></div><div style="flex:1;position:relative;height:16px;background:rgba(255,255,255,.06);border-radius:8px"><div style="position:absolute;left:0;width:100%;height:100%;border-radius:8px;background:linear-gradient(90deg,#FFAB00,#FFD36B)"></div></div></div>
+      <div style="display:flex;align-items:center"><div style="width:230px"><div style="font-weight:700">Decoration</div><div style="font-size:12px;color:rgba(255,255,255,.55)">At most one gentle loop per area</div></div><div style="flex:1;position:relative;height:16px;border-radius:8px;background:repeating-linear-gradient(90deg,rgba(127,243,227,.35) 0 40px,rgba(127,243,227,.08) 40px 80px)"></div></div>
+    </div>
+    <div style="margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-size:13px;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05)">All decorative motion stops when “reduce motion” is on.</div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>12</span></div>
+</section>
+
+<!-- ========================================================= 13. STATES & FEEDBACK -->
+<section class="slide soft">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>09</b> States &amp; feedback</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">09</span> States &amp; feedback</div><p class="lead" style="margin-top:6px">Every view designs loading, empty, error and ready up front. Never browser alerts.</p></div>
+  <div style="position:absolute;left:56px;right:56px;top:210px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    <div class="card" style="padding:18px;height:200px"><div class="eyebrow" style="color:#5E6B7A">Loading</div>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px"><div style="height:14px;width:60%;border-radius:6px;background:#EEF1F4"></div><div style="height:30px;width:40%;border-radius:8px;background:#EEF1F4"></div><div style="height:12px;width:80%;border-radius:6px;background:#EEF1F4"></div><div style="height:12px;width:70%;border-radius:6px;background:#EEF1F4"></div></div>
+      <div class="small" style="margin-top:14px">Skeleton shaped like the content.</div></div>
+    <div class="card" style="padding:18px;height:200px;text-align:center"><div class="eyebrow" style="color:#5E6B7A;text-align:left">Empty</div>
+      <div style="width:40px;height:40px;border-radius:12px;border:1px solid #E6EAF0;margin:12px auto 0;display:flex;align-items:center;justify-content:center;color:#2A69B2;font-size:18px;box-shadow:0 8px 16px -8px rgba(30,58,120,.4)">▢</div>
+      <div style="font-weight:700;margin-top:10px;font-size:14px">No activity in this view</div><div class="small">Try a different date range.</div>
+      <span class="btn" style="height:28px;font-size:12px;margin-top:10px;background:rgba(42,105,178,.08);color:#23599A">Show all activity</span></div>
+    <div class="card" style="padding:18px;height:200px"><div class="eyebrow" style="color:#5E6B7A">Error</div>
+      <div style="margin-top:16px;border:1px solid rgba(183,29,24,.25);background:rgba(255,86,48,.1);border-radius:12px;padding:14px"><div style="font-weight:700;font-size:13px;color:#B71D18">Couldn’t load the dashboard</div><div class="small" style="margin-top:2px">Check your connection and try again.</div><span class="btn" style="height:28px;font-size:12px;margin-top:10px;background:#fff;border:1px solid #DFE3E8">Retry</span></div></div>
+    <div class="card" style="padding:18px;height:200px;position:relative"><div class="eyebrow" style="color:#5E6B7A">Success</div>
+      <div style="position:absolute;right:18px;bottom:22px;left:18px;border-radius:12px;background:#fff;border:1px solid #E6EAF0;box-shadow:0 18px 36px -14px rgba(30,58,120,.45);padding:12px 14px;display:flex;gap:10px;align-items:center"><span style="width:22px;height:22px;border-radius:50%;background:#22C55E;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px">✓</span><div><div style="font-weight:700;font-size:13px">Profile updated</div><div class="small">Closes itself after 4 s</div></div></div></div>
+    <div class="card" style="padding:18px;height:200px;position:relative;overflow:hidden"><div class="eyebrow" style="color:#5E6B7A">Unsaved changes</div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:rgba(42,105,178,.08);border-top:1px solid rgba(42,105,178,.2);padding:14px 18px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;font-weight:700;color:#23599A">● You have unsaved changes</span><span style="display:flex;gap:6px"><span class="btn" style="height:28px;font-size:12px;color:#46525F">Discard</span><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Save</span></span></div></div>
+    <div class="card" style="padding:18px;height:200px;background:linear-gradient(180deg,rgba(16,24,40,.06),rgba(16,24,40,.12))"><div class="eyebrow" style="color:#5E6B7A">Risky action</div>
+      <div style="margin:14px auto 0;width:90%;border-radius:14px;background:#fff;box-shadow:0 24px 40px -18px rgba(16,24,40,.5);padding:14px"><div style="font-weight:700;font-size:14px">Log out of LearnNext?</div><div class="small">You’ll need to sign in again.</div><div style="display:flex;justify-content:flex-end;gap:6px;margin-top:10px"><span class="btn" style="height:28px;font-size:12px;border:1px solid #DFE3E8">Cancel</span><span class="btn" style="height:28px;font-size:12px;background:#B71D18;color:#fff">Log out</span></div></div></div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>13</span></div>
+</section>
+
+<!-- ========================================================= 14. SYSTEM PAGES -->
+<section class="slide">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>09</b> System pages</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title" style="font-size:34px">System pages</div><p class="lead" style="margin-top:6px">One calm style: deep navy, a soft glow, one simple illustration, a short message and a way back.</p></div>
+  <div style="position:absolute;left:56px;right:56px;top:200px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    <!-- tile helper: navy card with tone glow -->
+    <div style="height:212px;border-radius:16px;background:#070A1C;position:relative;overflow:hidden;color:#fff;padding:20px"><div style="position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(139,92,246,.4),transparent 70%)"></div><div style="position:relative;font-size:56px;font-weight:900;letter-spacing:-.04em;text-shadow:0 3px 0 #8175CC">404</div><div style="position:relative;font-weight:700;margin-top:6px">Page not found</div><div style="position:relative;font-size:12px;color:rgba(255,255,255,.6)">Unknown address</div><span style="position:absolute;left:20px;bottom:18px"><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Back to dashboard</span></span></div>
+    <div style="height:212px;border-radius:16px;background:#070A1C;position:relative;overflow:hidden;color:#fff;padding:20px"><div style="position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(244,114,182,.35),transparent 70%)"></div><div style="position:relative;font-size:44px;font-weight:900;letter-spacing:-.03em;margin-top:6px">Crash</div><div style="position:relative;font-weight:700;margin-top:10px">Page crash</div><div style="position:relative;font-size:12px;color:rgba(255,255,255,.6)">A screen fails to load</div><span style="position:absolute;left:20px;bottom:18px"><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Reload page</span></span></div>
+    <div style="height:212px;border-radius:16px;background:#070A1C;position:relative;overflow:hidden;color:#fff;padding:20px"><div style="position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(139,92,246,.35),transparent 70%)"></div><div style="position:relative;font-size:56px;font-weight:900;letter-spacing:-.04em;text-shadow:0 3px 0 #8175CC">500</div><div style="position:relative;font-weight:700;margin-top:6px">Server error</div><div style="position:relative;font-size:12px;color:rgba(255,255,255,.6)">Something failed on our side</div><span style="position:absolute;left:20px;bottom:18px"><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Try again</span></span></div>
+    <div style="height:212px;border-radius:16px;background:#070A1C;position:relative;overflow:hidden;color:#fff;padding:20px"><div style="position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(251,191,36,.3),transparent 70%)"></div><div style="position:relative;font-size:56px;font-weight:900;letter-spacing:-.04em;text-shadow:0 3px 0 #8175CC">503</div><div style="position:relative;font-weight:700;margin-top:6px">Maintenance</div><div style="position:relative;font-size:12px;color:rgba(255,255,255,.6)">Back in about 15 minutes</div><span style="position:absolute;left:20px;bottom:18px"><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Check again</span></span></div>
+    <div style="height:212px;border-radius:16px;background:#070A1C;position:relative;overflow:hidden;color:#fff;padding:20px"><div style="position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(45,212,191,.3),transparent 70%)"></div><svg style="position:relative" width="64" height="56" viewBox="0 0 120 100"><path d="M23 51 A52 52 0 0 1 97 51" fill="none" stroke="#CFE3FF" stroke-width="9" stroke-linecap="round" opacity=".5"/><path d="M35 63 A35 35 0 0 1 85 63" fill="none" stroke="#CFE3FF" stroke-width="9" stroke-linecap="round" opacity=".75"/><path d="M47 75 A18 18 0 0 1 73 75" fill="none" stroke="#CFE3FF" stroke-width="9" stroke-linecap="round"/><circle cx="60" cy="88" r="7" fill="#fff"/><path d="M24 14 L96 96" stroke="#FF6B8A" stroke-width="8" stroke-linecap="round"/></svg><div style="position:relative;font-weight:700;margin-top:4px">No internet</div><div style="position:relative;font-size:12px;color:rgba(255,255,255,.6)">Recovers automatically</div><span style="position:absolute;left:20px;bottom:18px"><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Try again</span></span></div>
+    <div style="height:212px;border-radius:16px;background:#070A1C;position:relative;overflow:hidden;color:#fff;padding:20px"><div style="position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(99,102,241,.4),transparent 70%)"></div><svg style="position:relative" width="56" height="56" viewBox="0 0 120 120"><path d="M70 14 A 46 46 0 1 0 106 78 A 36 36 0 1 1 70 14 Z" fill="#FFD98A"/></svg><span style="position:absolute;left:84px;top:22px;font-weight:900;color:rgba(255,255,255,.8)">z z</span><div style="position:relative;font-weight:700;margin-top:4px">Session expired</div><div style="position:relative;font-size:12px;color:rgba(255,255,255,.6)">Signed out after inactivity</div><span style="position:absolute;left:20px;bottom:18px"><span class="btn" style="height:28px;font-size:12px;background:#2A69B2;color:#fff">Sign in again</span></span></div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>14</span></div>
+</section>
+
+<!-- ========================================================= 15. ACCESSIBILITY & WRITING -->
+<section class="slide soft">
+  <div class="hdr"><div class="brand">LearnNext</div><div class="sec"><span><b>10</b> Accessibility &amp; writing</span></div></div>
+  <div class="rule"></div>
+  <div style="position:absolute;left:56px;top:96px"><div class="title"><span style="color:#2A69B2">10</span> Accessibility &amp; writing</div></div>
+
+  <!-- contrast samples -->
+  <div style="position:absolute;left:56px;top:180px;width:560px">
+    <div class="eyebrow" style="color:#5E6B7A">Contrast — at least 4.5:1 for text</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px">
+      <div class="card" style="padding:14px;text-align:center"><div style="font-size:30px;font-weight:700;color:#1C252E">Aa</div><div class="mono small">15.6 : 1</div></div>
+      <div class="card" style="padding:14px;text-align:center"><div style="font-size:30px;font-weight:700;color:#46525F">Aa</div><div class="mono small">8.0 : 1</div></div>
+      <div class="card" style="padding:14px;text-align:center"><div style="font-size:30px;font-weight:700;color:#5E6B7A">Aa</div><div class="mono small">5.4 : 1</div></div>
+      <div style="padding:14px;text-align:center;border-radius:14px;background:#2A69B2;color:#fff"><div style="font-size:30px;font-weight:700">Aa</div><div class="mono" style="font-size:12px;opacity:.85">5.6 : 1</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+      <div class="card" style="padding:16px"><div style="font-weight:700;font-size:13px">Keyboard &amp; focus</div><span class="btn" style="margin-top:10px;border:1px solid #2A69B2;box-shadow:0 0 0 3px rgba(42,105,178,.3);background:#fff">Focused button</span><div class="small" style="margin-top:8px">Everything works by keyboard; Esc closes overlays.</div></div>
+      <div class="card" style="padding:16px"><div style="font-weight:700;font-size:13px">Labels &amp; targets</div><div style="display:flex;align-items:center;gap:10px;margin-top:10px"><span style="width:32px;height:32px;border-radius:8px;border:1px dashed #2A69B2;display:inline-flex;align-items:center;justify-content:center">⚙</span><span class="small">32 px minimum tap target; icon buttons carry a label.</span></div><div class="small" style="margin-top:8px">Colour never carries meaning alone.</div></div>
+    </div>
+  </div>
+
+  <!-- writing do/don't -->
+  <div style="position:absolute;left:660px;right:56px;top:180px">
+    <div class="eyebrow" style="color:#5E6B7A">Writing — plain, short, specific</div>
+    <div class="card" style="margin-top:14px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:1fr 1fr;font-size:12px;font-weight:700"><div style="padding:10px 16px;background:rgba(34,197,94,.12);color:#118D57">✓ Do</div><div style="padding:10px 16px;background:rgba(255,86,48,.1);color:#B71D18">✕ Don’t</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;font-size:13px;border-top:1px solid #EDEFF2"><div style="padding:12px 16px">Save changes</div><div style="padding:12px 16px;color:#5E6B7A">Submit</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;font-size:13px;border-top:1px solid #EDEFF2"><div style="padding:12px 16px">Enter a valid mobile number</div><div style="padding:12px 16px;color:#5E6B7A">Invalid input</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;font-size:13px;border-top:1px solid #EDEFF2"><div style="padding:12px 16px">Log out of LearnNext?</div><div style="padding:12px 16px;color:#5E6B7A">Are you sure?</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;font-size:13px;border-top:1px solid #EDEFF2"><div style="padding:12px 16px">₹4.8 L collected</div><div style="padding:12px 16px;color:#5E6B7A">Amount: 480000.00</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px">
+      <div class="card" style="padding:14px"><div class="small">Dates</div><div style="font-weight:700;margin-top:2px">12 Oct 2026</div></div>
+      <div class="card" style="padding:14px"><div class="small">Times</div><div style="font-weight:700;margin-top:2px">4:20 PM</div></div>
+      <div class="card" style="padding:14px"><div class="small">Recent</div><div style="font-weight:700;margin-top:2px">42m ago</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>LearnNext Admin · UI/UX Guidelines</span><span>15</span></div>
+</section>
+
+<!-- ========================================================= 16. BACK COVER -->
+<section class="slide dark">
+  <div class="blob" style="width:640px;height:640px;left:320px;top:40px;background:#2A69B2;opacity:.5"></div>
+  <div class="blob" style="width:420px;height:420px;left:640px;top:220px;background:#00B8D9;opacity:.35"></div>
+  <div class="blob" style="width:380px;height:380px;left:200px;top:300px;background:#8E33FF;opacity:.3"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1px);background-size:22px 22px"></div>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+    <svg width="64" height="64" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#2A69B2"/><path d="M10.5 8.5v15h11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8.5l5.5 4.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/></svg>
+    <h2 style="font-size:64px;font-weight:900;letter-spacing:-.045em;margin-top:28px;line-height:1">Calm. Clear. Consistent.</h2>
+    <p style="margin-top:18px;font-size:16px;color:rgba(255,255,255,.65)">LearnNext Admin · UI/UX Guidelines · v1.0</p>
+  </div>
+  <div style="position:absolute;left:56px;right:56px;bottom:32px;display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.4)"><span>© 2026 LearnNext</span><span>16</span></div>
+</section>
+
+<script>
+  // Review helpers (ignored when printing): ?sheet = all slides as a 4×4 contact sheet · ?s=N = only slide N
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    if (q.has('s')) {
+      var n = parseInt(q.get('s'), 10) - 1;
+      slides.forEach(function (el, i) { if (i !== n) el.style.display = 'none'; });
+    } else if (q.has('sheet')) {
+      document.body.style.cssText = 'display:grid;grid-template-columns:repeat(4,320px);gap:0;background:#ccc;width:1280px';
+      slides.forEach(function (el) {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'width:320px;height:180px;overflow:hidden;outline:1px solid #999';
+        el.parentNode.insertBefore(wrap, el);
+        wrap.appendChild(el);
+        el.style.transform = 'scale(.25)';
+        el.style.transformOrigin = '0 0';
+      });
+    }
+  })();
+</script>
+</body>
+</html>

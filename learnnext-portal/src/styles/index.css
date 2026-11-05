@@ -1,0 +1,652 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   LearnNext design tokens
+   ------------------------------------------------------------------
+   Raw values live in CSS variables (--ln-*) so light/dark can swap
+   them. The @theme block maps them to Tailwind utilities, e.g.
+   bg-surface, text-text-secondary, border-border, bg-primary-soft,
+   rounded-card, shadow-card. Never hardcode #2a69b2 in components.
+   ------------------------------------------------------------------ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+/* Screens tall enough for extra sidebar content (e.g. the help card) */
+@custom-variant tall (@media (min-height: 860px));
+/* Short screens (e.g. small phones): the sign-in hero trims itself so the page still fits without scrolling */
+@custom-variant short (@media (max-height: 760px));
+/* The app top bar's current height, for anything that pins below it: h-14 / sm:h-16, and 0 while it has slid away
+   (the Header sets data-header-hidden on <html> as you scroll down). Sticky panels use top: calc(var(--app-header-h) + …). */
+:root {
+  --app-header-h: 3.5rem;
+}
+@media (min-width: 40rem) {
+  :root {
+    --app-header-h: 4rem;
+  }
+}
+:root[data-header-hidden] {
+  --app-header-h: 0px;
+}
+
+/* Clickable table rows: hover styles that switch off while the pointer is on a row action (e.g. the edit button, marked data-row-action) */
+@custom-variant row-hover (&:is(:where(.group):hover:not(:has([data-row-action]:hover)) *));
+@custom-variant row-self-hover (&:hover:not(:has([data-row-action]:hover)));
+
+:root {
+  --ln-primary: #2a69b2;
+  --ln-primary-hover: #225a9a;
+  --ln-primary-active: #1d4e86;
+  --ln-primary-soft: rgb(42 105 178 / 0.08);
+  --ln-primary-soft-hover: rgb(42 105 178 / 0.16);
+  --ln-primary-fg: #ffffff;
+  --ln-primary-text: #23599a; /* brand-colored text on neutral surfaces */
+  --ln-primary-shadow: rgb(42 105 178 / 0.24);
+
+  --ln-background: #eef2f7;
+  /* Background color blobs (what the glass blurs) — kept soft so chrome and content read as one surface */
+  --ln-blob-1: rgb(42 105 178 / 0.12);
+  --ln-blob-2: rgb(99 102 241 / 0.05);
+  --ln-blob-3: rgb(0 184 217 / 0.08);
+  --ln-blob-4: rgb(42 105 178 / 0.06);
+  --ln-blob-5: transparent;
+  /* Soft brand wash across the top of the page (light mode atmosphere) */
+  --ln-page-wash: rgb(42 105 178 / 0.05);
+  /* Frosted glass surfaces */
+  --ln-glass: rgb(255 255 255 / 0.58);
+  --ln-glass-strong: rgb(246 248 251 / 0.78); /* chrome (sidebar/header): a lighter tint of the page, not stark white */
+  --ln-glass-saturate: 110%;
+  --ln-glass-border: rgb(255 255 255 / 0.95);
+  --ln-glass-highlight: rgb(255 255 255 / 0.9);
+  --ln-glass-edge: rgb(15 23 42 / 0.06); /* faint outer outline so white edges stay defined */
+  --ln-glass-shadow: rgb(30 58 120 / 0.2); /* blue-tinted lift */
+  --ln-surface: #ffffff;
+  --ln-surface-secondary: #f9fafb;
+  --ln-surface-sunken: #f4f6f8;
+  --ln-elevated: #ffffff;
+  --ln-sidebar: #ffffff;
+
+  --ln-text: #1c252e;
+  /* WCAG AA (≥ 4.5:1): secondary ≥ 5.2:1 even on tinted KPI cards; muted ≥ 5:1 on cards / sunken panels */
+  --ln-text-secondary: #46525f;
+  --ln-text-muted: #5e6b7a;
+  --ln-border: #edeff2;
+  --ln-border-strong: #dfe3e8;
+  /* Form controls (inputs, selects, pickers) */
+  --ln-control: #ffffff;
+  --ln-control-border: #edeff2;
+  --ln-control-border-hover: #dfe3e8;
+
+  --ln-success: #118d57;
+  --ln-success-soft: rgb(34 197 94 / 0.16);
+  --ln-warning: #b76e00;
+  --ln-warning-soft: rgb(255 171 0 / 0.16);
+  --ln-danger: #b71d18;
+  --ln-danger-hover: #93140f;
+  --ln-danger-soft: rgb(255 86 48 / 0.16);
+  --ln-info: #006c9c;
+  --ln-info-soft: rgb(0 184 217 / 0.16);
+  --ln-focus: rgb(42 105 178 / 0.55); /* clearly visible focus ring */
+
+  /* Bright "main" status colors — bars, dots, tinted cards (the tokens above are tuned for text) */
+  --ln-success-main: #22c55e;
+  --ln-warning-main: #ffab00;
+  --ln-danger-main: #ff5630;
+  --ln-info-main: #00b8d9;
+
+  --ln-chart-1: #2a69b2;
+  --ln-chart-2: #00b8d9;
+  --ln-chart-3: #ffab00;
+  --ln-chart-4: #8e33ff;
+  --ln-chart-5: #ff5630;
+  --ln-chart-grid: #eef1f4;
+
+  --ln-shadow-color: 145 158 171;
+  --ln-backdrop: rgb(16 24 40 / 0.45);
+  /* Deep navy brand surface (sign-in panel, dashboard hero) — same in both themes */
+  --ln-brand-navy: #0b1a2e;
+  color-scheme: light;
+}
+
+.dark {
+  --ln-primary: #3a7bd0;
+  --ln-primary-hover: #4889da;
+  --ln-primary-active: #326dba;
+  --ln-primary-soft: rgb(74 138 214 / 0.14);
+  --ln-primary-soft-hover: rgb(74 138 214 / 0.22);
+  --ln-primary-fg: #ffffff;
+  --ln-primary-text: #8dbbf0;
+  --ln-primary-shadow: rgb(58 123 208 / 0.32);
+
+  --ln-background: #11161c;
+  --ln-blob-1: rgb(58 123 208 / 0.22);
+  --ln-blob-2: rgb(142 51 255 / 0.12);
+  --ln-blob-3: rgb(0 184 217 / 0.1);
+  --ln-blob-4: rgb(255 86 48 / 0.05);
+  --ln-blob-5: transparent;
+  --ln-page-wash: transparent;
+  --ln-glass: rgb(28 37 46 / 0.58);
+  --ln-glass-strong: rgb(20 26 33 / 0.72);
+  --ln-glass-saturate: 180%;
+  --ln-glass-border: rgb(255 255 255 / 0.08);
+  --ln-glass-highlight: rgb(255 255 255 / 0.05);
+  --ln-glass-edge: rgb(0 0 0 / 0.15);
+  --ln-glass-shadow: rgb(0 0 0 / 0.22);
+  --ln-surface: #1c252e;
+  --ln-surface-secondary: #212b36;
+  --ln-surface-sunken: #28323d;
+  --ln-elevated: #212b36;
+  --ln-sidebar: #141a21;
+
+  --ln-text: #ffffff;
+  /* WCAG AA (≥ 4.5:1): secondary ≥ 6:1 on tinted KPI cards; muted ≥ 5:1 on cards / sunken panels */
+  --ln-text-secondary: #b4c0cc;
+  --ln-text-muted: #95a3b2;
+  --ln-border: rgb(145 158 171 / 0.12);
+  --ln-border-strong: rgb(145 158 171 / 0.24);
+  /* Recessed fill + clearer edge so fields stand out on dark cards */
+  --ln-control: #141a21;
+  --ln-control-border: rgb(145 158 171 / 0.3);
+  --ln-control-border-hover: rgb(145 158 171 / 0.48);
+
+  --ln-success: #77ed8b;
+  --ln-success-soft: rgb(34 197 94 / 0.16);
+  --ln-warning: #ffd666;
+  --ln-warning-soft: rgb(255 171 0 / 0.16);
+  --ln-danger: #ffac82;
+  --ln-danger-hover: #ffc4a6;
+  --ln-danger-soft: rgb(255 86 48 / 0.16);
+  --ln-info: #61f3f3;
+  --ln-info-soft: rgb(0 184 217 / 0.16);
+  --ln-focus: rgb(93 152 223 / 0.7); /* clearly visible focus ring */
+
+  --ln-success-main: #22c55e;
+  --ln-warning-main: #ffab00;
+  --ln-danger-main: #ff5630;
+  --ln-info-main: #00b8d9;
+
+  --ln-chart-1: #5b98e0;
+  --ln-chart-2: #00b8d9;
+  --ln-chart-3: #ffab00;
+  --ln-chart-4: #a259ff;
+  --ln-chart-5: #ff7a52;
+  --ln-chart-grid: rgb(145 158 171 / 0.14);
+
+  --ln-shadow-color: 0 0 0;
+  --ln-backdrop: rgb(2 4 8 / 0.65);
+  color-scheme: dark;
+}
+
+@theme {
+  /* Wide desktop (1440px) — e.g. the dashboard's 12-column layout. Sorted with the default breakpoints. */
+  --breakpoint-wide: 90rem;
+}
+
+@theme inline {
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  --color-primary: var(--ln-primary);
+  --color-primary-hover: var(--ln-primary-hover);
+  --color-primary-active: var(--ln-primary-active);
+  --color-primary-soft: var(--ln-primary-soft);
+  --color-primary-soft-hover: var(--ln-primary-soft-hover);
+  --color-primary-fg: var(--ln-primary-fg);
+  --color-primary-text: var(--ln-primary-text);
+
+  --color-background: var(--ln-background);
+  --color-surface: var(--ln-surface);
+  --color-surface-secondary: var(--ln-surface-secondary);
+  --color-surface-sunken: var(--ln-surface-sunken);
+  --color-elevated: var(--ln-elevated);
+  --color-sidebar: var(--ln-sidebar);
+
+  --color-text: var(--ln-text);
+  --color-text-secondary: var(--ln-text-secondary);
+  --color-text-muted: var(--ln-text-muted);
+  --color-border: var(--ln-border);
+  --color-border-strong: var(--ln-border-strong);
+  --color-control: var(--ln-control);
+  --color-control-border: var(--ln-control-border);
+  --color-control-border-hover: var(--ln-control-border-hover);
+
+  --color-success: var(--ln-success);
+  --color-success-soft: var(--ln-success-soft);
+  --color-warning: var(--ln-warning);
+  --color-warning-soft: var(--ln-warning-soft);
+  --color-danger: var(--ln-danger);
+  --color-danger-hover: var(--ln-danger-hover);
+  --color-danger-soft: var(--ln-danger-soft);
+  --color-info: var(--ln-info);
+  --color-info-soft: var(--ln-info-soft);
+  --color-focus: var(--ln-focus);
+  --color-glass-border: var(--ln-glass-border);
+  --color-brand-navy: var(--ln-brand-navy);
+  --color-success-main: var(--ln-success-main);
+  --color-warning-main: var(--ln-warning-main);
+  --color-danger-main: var(--ln-danger-main);
+  --color-info-main: var(--ln-info-main);
+
+  --color-chart-1: var(--ln-chart-1);
+  --color-chart-2: var(--ln-chart-2);
+  --color-chart-3: var(--ln-chart-3);
+  --color-chart-4: var(--ln-chart-4);
+  --color-chart-5: var(--ln-chart-5);
+  --color-chart-grid: var(--ln-chart-grid);
+
+  /* Radius scale: controls (inputs/buttons), cards, popovers */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-pop: 12px;
+
+  /* Elevation — soft, borderless "Minimal" style shadows */
+  --shadow-xs: 0 1px 2px rgb(var(--ln-shadow-color) / 0.16);
+  --shadow-card: inset 0 1px 0 0 var(--ln-glass-highlight), 0 0 0 1px var(--ln-glass-edge), 0 14px 32px -12px var(--ln-glass-shadow);
+  --shadow-raised: 0 0 2px 0 rgb(var(--ln-shadow-color) / 0.24), 0 16px 32px -4px rgb(var(--ln-shadow-color) / 0.2);
+  --shadow-pop: 0 0 2px 0 rgb(var(--ln-shadow-color) / 0.24), -20px 20px 40px -4px rgb(var(--ln-shadow-color) / 0.24);
+  --shadow-modal: -40px 40px 80px -8px rgb(var(--ln-shadow-color) / 0.24);
+
+  /* Motion */
+  --animate-fade-in: ln-fade-in 160ms ease-out;
+  --animate-scale-in: ln-scale-in 160ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-slide-up: ln-slide-up 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  /* Toasts (picked from previews: "Pop + timer line"): rise in with a soft bounce, the icon tile pops, a line drains */
+  --animate-toast-in: ln-toast-in 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  --animate-toast-drop: ln-toast-drop 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  --animate-toast-pop: ln-toast-pop 480ms 140ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+  --animate-slide-in-left: ln-slide-in-left 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-slide-in-right: ln-slide-in-right 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-slide-in-bottom: ln-slide-in-bottom 240ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-page: ln-page 220ms ease-out;
+  --animate-shimmer: ln-shimmer 1.6s ease-in-out infinite;
+  /* Slow ambient drift for decorative shapes — always pair with motion-safe: */
+  --animate-drift-a: ln-drift-a 16s ease-in-out infinite;
+  --animate-drift-b: ln-drift-b 20s ease-in-out infinite;
+  --animate-drift-c: ln-drift-c 14s ease-in-out infinite;
+  /* Auth page: staggered entrance (set animation-delay per item) + ambient loops (pair loops with motion-safe:) */
+  --animate-rise: ln-rise 700ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  --animate-bar: ln-bar 900ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  --animate-breathe: ln-breathe 9s ease-in-out infinite;
+  /* Data viz: bars grow from the left (pair with origin-left + an animation-delay for stagger) */
+  --animate-grow-x: ln-grow-x 900ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  /* Profile cover: twinkling sparkles + endlessly flowing waves (element is 200% wide; pair with motion-safe:) */
+  --animate-twinkle: ln-twinkle 3.2s ease-in-out infinite;
+  --animate-wave: ln-wave 28s linear infinite;
+  --animate-wave-slow: ln-wave 46s linear infinite reverse;
+  --animate-float: ln-float 7s ease-in-out infinite;
+  /* Profile cover scenes (always pair with motion-safe:) */
+  --animate-shoot: ln-shoot 7s ease-in infinite;
+  --animate-bubble: ln-bubble 9s ease-in infinite;
+  --animate-rays: ln-rays 9s ease-in-out infinite alternate;
+  --animate-grid-flow: ln-grid-flow 1.6s linear infinite;
+  --animate-sun: ln-sun 6s ease-in-out infinite;
+  --animate-hue: ln-hue 16s ease-in-out infinite alternate;
+  --animate-firefly: ln-firefly 11s ease-in-out infinite;
+  --animate-glow: ln-glow 2.6s ease-in-out infinite;
+  --animate-lantern: ln-lantern 18s linear infinite;
+  --animate-flicker: ln-flicker 1.8s ease-in-out infinite;
+  --animate-bob: ln-bob 4s ease-in-out infinite;
+  --animate-shimmer-x: ln-shimmer-x 5s ease-in-out infinite;
+  --animate-window: ln-window 9s steps(1, end) infinite;
+  --animate-blink: ln-blink 1.6s steps(1, end) infinite;
+  --animate-fly: ln-fly 26s linear infinite;
+  /* 404 page */
+  --animate-astronaut: ln-astronaut 14s ease-in-out infinite;
+  /* System pages */
+  --animate-zzz: ln-zzz 3.6s ease-out infinite;
+  --animate-signal: ln-signal 1.8s ease-in-out infinite;
+  /* Dashed outline whose dashes slowly travel round (e.g. the Add element slot); one cycle = one dash + gap (10px) */
+  --animate-dash-flow: ln-dash-flow 1.6s linear infinite;}
+
+@keyframes ln-dash-flow { to { stroke-dashoffset: -10; } }
+
+/* Wi-Fi bar searching for signal (opacity only, so the shape keeps its size) */
+@keyframes ln-signal {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+/* Sleepy "z" floating up and fading */
+@keyframes ln-zzz {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(18px, -46px) scale(1.15); opacity: 0; }
+}
+
+/* Astronaut drifting and slowly tumbling in zero-g */
+@keyframes ln-astronaut {
+  0%, 100% { transform: translate(0, 0) rotate(-10deg); }
+  25% { transform: translate(10px, -16px) rotate(4deg); }
+  50% { transform: translate(-6px, -26px) rotate(14deg); }
+  75% { transform: translate(-14px, -8px) rotate(0deg); }
+}
+
+/* City window switching off and on again */
+@keyframes ln-window {
+  0%, 55%, 100% { opacity: 1; }
+  56%, 88% { opacity: 0.12; }
+}
+/* Aircraft / antenna light: short flash */
+@keyframes ln-blink {
+  0%, 100% { opacity: 1; }
+  12% { opacity: 0.15; }
+}
+/* Plane crossing the cover from left to right */
+@keyframes ln-fly {
+  from { left: -6%; }
+  to { left: 106%; }
+}
+
+/* Lantern rises from the lake to above the cover, swaying gently */
+@keyframes ln-lantern {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  8% { opacity: 1; }
+  30% { transform: translate(8px, -70px) scale(0.92); }
+  60% { transform: translate(-6px, -150px) scale(0.8); }
+  85% { opacity: 0.9; }
+  100% { transform: translate(6px, -240px) scale(0.66); opacity: 0; }
+}
+@keyframes ln-flicker {
+  0%, 100% { opacity: 1; }
+  40% { opacity: 0.78; }
+  60% { opacity: 0.95; }
+  75% { opacity: 0.82; }
+}
+@keyframes ln-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-2px) rotate(2deg); }
+}
+@keyframes ln-shimmer-x {
+  0%, 100% { transform: scaleX(0.6); opacity: 0.25; }
+  50% { transform: scaleX(1); opacity: 0.7; }
+}
+
+@keyframes ln-firefly {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(22px, -16px); }
+  50% { transform: translate(-8px, -30px); }
+  75% { transform: translate(-24px, -8px); }
+}
+@keyframes ln-glow {
+  0%, 100% { opacity: 0.2; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ln-shoot {
+  0% { transform: translate(0, 0) rotate(-28deg); opacity: 0; }
+  3% { opacity: 1; }
+  14% { transform: translate(-420px, 225px) rotate(-28deg); opacity: 0; }
+  100% { transform: translate(-420px, 225px) rotate(-28deg); opacity: 0; }
+}
+@keyframes ln-bubble {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  15% { opacity: 0.9; }
+  50% { transform: translate(10px, -110px) scale(1); }
+  100% { transform: translate(-6px, -230px) scale(1.1); opacity: 0; }
+}
+@keyframes ln-rays {
+  0% { transform: rotate(var(--ln-ray, 0deg)) scaleY(1); opacity: 0.35; }
+  100% { transform: rotate(calc(var(--ln-ray, 0deg) + 7deg)) scaleY(1.1); opacity: 0.8; }
+}
+@keyframes ln-grid-flow { from { background-position: 0 0; } to { background-position: 0 40px; } }
+@keyframes ln-sun {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 28px rgb(255 111 145 / 0.55)); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 48px rgb(255 150 90 / 0.8)); }
+}
+@keyframes ln-hue { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(50deg); } }
+
+@keyframes ln-twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+@keyframes ln-wave { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes ln-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ln-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ln-scale-in { from { opacity: 0; transform: scale(0.96) translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes ln-slide-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes ln-toast-in { 0% { opacity: 0; transform: translateY(18px) scale(0.96); } 60% { opacity: 1; transform: translateY(-3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+/* Phones: the same soft bounce, dropping down from the top */
+@keyframes ln-toast-drop { 0% { opacity: 0; transform: translateY(-18px) scale(0.96); } 60% { opacity: 1; transform: translateY(3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+@keyframes ln-toast-pop { 0% { transform: scale(0.3) rotate(-30deg); } 60% { transform: scale(1.15) rotate(0); } 100% { transform: none; } }
+/* The toast's time line: drains from full width (its duration is set inline from the toast's own duration) */
+@keyframes ln-toast-drain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes ln-slide-in-left { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes ln-slide-in-right { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes ln-slide-in-bottom { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes ln-page { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes ln-shimmer { 0% { opacity: 1; } 50% { opacity: 0.55; } 100% { opacity: 1; } }
+@keyframes ln-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes ln-bar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+/* An endless sideways glide for a row whose items are listed twice (sign-in page marquee) */
+@keyframes ln-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* Portfolio illustrations: a gentle up-and-down float */
+@keyframes pf-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes ln-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* ProgressCircle fill-in: animates from an empty ring (--ln-ring-from = circumference) to its inline offset */
+@keyframes ln-ring-fill { from { stroke-dashoffset: var(--ln-ring-from); } }
+@keyframes ln-breathe {
+  0%, 100% { transform: scale(0.92); opacity: 0.75; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+@keyframes ln-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 30px) scale(1.08); }
+  66% { transform: translate(-15px, 55px) scale(0.94); }
+}
+@keyframes ln-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(-60px, -25px) scale(1.1); }
+  65% { transform: translate(-110px, 10px) scale(0.92); }
+}
+@keyframes ln-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(70px, -20px) scale(1.15); }
+  75% { transform: translate(30px, 25px) scale(0.9); }
+}
+
+/* ------------------------------------------------------------------
+   Global defaults
+   z-index scale: header 30 · sidebar 40 · overlays 80 · popovers 85 · toasts 90 · tooltips 100
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background font-sans text-sm text-text antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    min-height: 100dvh;
+  }
+  ::selection {
+    background: var(--ln-primary-soft-hover);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ln-primary);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+  input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+}
+
+/* Thin, theme-aware scrollbars (in the base layer so utilities like scrollbar-none can override them) */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ln-border-strong) transparent;
+  }
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-thumb {
+    background: var(--ln-border-strong);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-track { background: transparent; }
+
+  /*
+    The page's own scrollbar (inner scrolling areas keep the thin one above): the same plain slim pill, just a
+    neutral grey dark enough to see on the page background; a step darker on hover.
+    Chromium ignores ::-webkit-scrollbar styles when scrollbar-width/-color are set, so they're reset to auto here.
+  */
+  html {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+  html::-webkit-scrollbar { width: 10px; }
+  html::-webkit-scrollbar-thumb {
+    min-height: 40px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ln-text-muted) 45%, transparent) content-box;
+  }
+  html::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--ln-text-muted) 70%, transparent) content-box;
+  }
+  /* Browsers without ::-webkit-scrollbar (Firefox) */
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in srgb, var(--ln-text-muted) 50%, transparent) transparent;
+    }
+  }
+}
+
+/* Reusable focus ring for custom controls */
+@utility focus-ring {
+  outline: none;
+  &:focus-visible {
+    box-shadow: 0 0 0 3px var(--ln-focus);
+    border-color: var(--ln-primary);
+  }
+}
+
+/* Subtle dotted texture used on brand/auth surfaces */
+@utility bg-grid {
+  background-image: radial-gradient(rgb(255 255 255 / 0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Fine dot texture that fades out toward the edges (auth form side) */
+@utility bg-dots-fade {
+  background-image: radial-gradient(color-mix(in srgb, var(--ln-primary) 32%, transparent) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, #000 25%, transparent 80%);
+  mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, #000 25%, transparent 80%);
+}
+
+/* App page background: tinted base + soft color blobs (fixed, doesn't scroll) — the glass surfaces blur this */
+@utility bg-page {
+  background-color: var(--ln-background);
+  background-image:
+    linear-gradient(180deg, var(--ln-page-wash) 0, transparent 26rem),
+    radial-gradient(42rem 30rem at 88% -6%, var(--ln-blob-1), transparent 70%),
+    radial-gradient(34rem 28rem at 8% 32%, var(--ln-blob-2), transparent 70%),
+    radial-gradient(38rem 30rem at 96% 88%, var(--ln-blob-3), transparent 70%),
+    radial-gradient(30rem 24rem at 38% 108%, var(--ln-blob-4), transparent 70%),
+    radial-gradient(32rem 26rem at 52% 40%, var(--ln-blob-5), transparent 70%);
+  background-attachment: fixed;
+}
+
+/* Frosted glass surface (cards, tables, panels). Pair with `border border-glass-border`. */
+@utility glass {
+  background-color: var(--ln-glass);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+}
+
+/* Denser glass for chrome that content scrolls under (sidebar, header) */
+@utility glass-strong {
+  background-color: var(--ln-glass-strong);
+  -webkit-backdrop-filter: blur(22px) saturate(var(--ln-glass-saturate));
+  backdrop-filter: blur(22px) saturate(var(--ln-glass-saturate));
+}
+
+/* Chat thread background: soft dotted texture */
+@utility bg-chat {
+  background-color: color-mix(in srgb, var(--ln-surface-secondary) 45%, transparent);
+  background-image: radial-gradient(var(--ln-border-strong) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Dark welcome banner (same in light + dark themes) with a soft brand glow */
+@utility bg-banner {
+  background-color: #1c252e;
+  background-image:
+    radial-gradient(28rem 18rem at 85% 30%, rgb(42 105 178 / 0.4), transparent 70%),
+    radial-gradient(20rem 14rem at 10% 110%, rgb(0 184 217 / 0.16), transparent 70%);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Phones: big page panels (list containers, the onboarding box, detail-tab cards) lose their frame and sit straight on
+   the page, so phones don't show boxes inside boxes. Opt in with .ln-flat-mobile; desktop is unchanged. */
+@media (max-width: 639.98px) {
+  .ln-flat-mobile {
+    border-color: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    /* reach the page edge: the panel's own inner padding then lines up with the page padding (no double inset) */
+    margin-inline: -0.75rem;
+  }
+  /* A Card's corner tint wash goes with the frame */
+  .ln-flat-mobile > .ln-card-tint { display: none; }
+  /* Stacked cards sit 12px apart on phones (the page-edge spacing) — 20–24px between cards read as too airy */
+  :is(.gap-4, .gap-5, .gap-6, .gap-8):is(:has(> .ln-card), :has(> * > .ln-card)) { row-gap: 0.75rem; }
+  :is(.space-y-4, .space-y-5, .space-y-6, .space-y-8):has(> .ln-card) > :not(:last-child) { margin-block-end: 0.75rem; }
+}
+
+/* Smooth scrolling on phones / small tablets. Three things made every scroll frame expensive there:
+   1. the page background is `fixed`, so the browser repaints the whole gradient field on each frame;
+   2. every glass card blurs what's behind it — and behind it is that moving background, so each visible card re-blurs
+      on every frame;
+   3. the header and bottom tab bar blur the content sliding under them.
+   Below md: the background scrolls with the page, cards are near-solid without the live blur, and only the top bar
+   keeps a blur (the bottom tab bar is near-opaque). It looks the same at a glance (the blur over soft gradients was
+   barely visible) and scrolling stays fluid. Desktop keeps the full glass. */
+@media (max-width: 767.98px) {
+  .bg-page { background-attachment: scroll; }
+  .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    /* Without the blur, the see-through glass (58%) let the blue page background tint every card ("so bluish") —
+       near-solid surface instead, so cards read white / clean like they do with the blur on desktop */
+    background-color: color-mix(in srgb, var(--ln-surface) 90%, transparent);
+  }
+  /* The top bar keeps its frosted blur on phones (asked for: content showing through un-blurred looked messy). One
+     blurred bar is cheap now that the cards and page background no longer blur / stay fixed */
+  .glass-strong {
+    -webkit-backdrop-filter: blur(18px) saturate(var(--ln-glass-saturate));
+    backdrop-filter: blur(18px) saturate(var(--ln-glass-saturate));
+    background-color: color-mix(in srgb, var(--ln-glass-strong) 85%, var(--ln-background));
+  }
+}
+
+/* Freeze animated decoration (e.g. the profile cover scenes) — every scene animating at once made the cover picker lag.
+   .ln-anim-paused: always frozen. .ln-thumb: frozen until hovered / focused, or picked (.ln-thumb-on). */
+.ln-anim-paused,
+.ln-anim-paused *,
+.ln-thumb:not(.ln-thumb-on):not(:hover):not(:focus-visible) * {
+  animation-play-state: paused !important;
+}
