@@ -1,8 +1,10 @@
 # Shared Requirements
 
-These are the behaviours that apply across the whole LearnNext Admin application. Module PRDs refer to them by ID (`SH-NNN`) rather than repeating them. Where a module behaves differently from a shared requirement, its PRD says so explicitly. The module's behaviour takes precedence.
+These are the behaviours that apply across the whole LearnNext Portal application. Module PRDs refer to them by ID (`SH-NNN`) rather than repeating them. Where a module behaves differently from a shared requirement, its PRD says so explicitly. The module's behaviour takes precedence.
 
 Statuses use the labels defined in the [PRD template](prd-template.md).
+
+**Last updated:** 2026-11-05 — SH-002 and SH-003 describe roles (one login, several roles; role picker; Training Partner and Super Admin portals; page limits per role); SH-005 describes the current toast design, position and "after the next page loads" timing; SH-001 lists the remembered role choice; the portal role formerly called "Admin" is now "Training Partner".
 
 ---
 
@@ -12,25 +14,33 @@ Statuses use the labels defined in the [PRD template](prd-template.md).
 |---|---|---|
 | Data source | The current build runs on built-in demo data. Every list, form and dashboard shows demo records. | Implemented |
 | Persistence | Records you create, edit or delete stay changed while the browser tab is open. Reloading the page restores the original demo data. | Implemented |
-| Preferences that survive a reload | The following are remembered in the browser: the signed-in session (when "Remember me" is ticked), the theme (light/dark), whether the sidebar is collapsed, profile details, the Settings pins and recently opened masters, and some view choices (client Projects view, client SPOCs view, Manage Content view). | Implemented |
+| Preferences that survive a reload | The following are remembered in the browser: the signed-in session and its chosen role (when "Keep me signed in" is ticked; otherwise for the tab only), the role choice when "Remember my choice on this device" is ticked (per login, also after signing out), the theme (light/dark), whether the sidebar is collapsed, profile details, the Settings pins and recently opened masters, and some view choices (client Projects view, client SPOCs view, Manage Content view). | Implemented |
 | Simulated response time | Saves and loads take a short, realistic moment. During that time, loading indicators and disabled buttons apply (SH-007). | Implemented |
 | QA note | Tests that rely on a created record must run in the same tab without reloading. | Implemented |
 | Production behaviour | Once a real back end is connected, data should persist across sessions and users. | Requires Confirmation |
 
 ## SH-002: Who uses the application
 
-LearnNext Admin is the internal back-office for the LearnNext learning platform. Its users are LearnNext staff, referred to as **Admin users** in the module PRDs.
+LearnNext Portal is one application for every role on the LearnNext learning platform. Each role has its own portal (menu, pages and shell) inside it.
 
-- Every page is available to any signed-in Admin user. The current build does **not** hide or block pages or actions by role. **Status:** Implemented.
-- The **Roles & Access** master ([settings-access-masters-prd.md](modules/settings-access-masters-prd.md)) lets an Admin define what each admin role may see and do. Those permissions are stored but **not yet enforced** anywhere in the application. **Status:** Partially Implemented.
-- Facilitators, client SPOCs and participants appear as *records* in this application, not as users of it. **Status:** Implemented.
+| Item | Requirement | Status |
+|---|---|---|
+| Roles | **Training Partner** — runs clients, programs, facilitators, support and settings (most module PRDs describe this portal; its users are called *Training Partners*). **Super Admin** — manages the platform's clients (training partners) in its own reduced portal ([PRD-SA](modules/super-admin-prd.md)). **Facilitator**, **Participant** and **Client SPOC** — defined, but their portals are not built ("coming soon"). | Partially Implemented |
+| Several roles per login | One email and password can hold several roles (the demo account: Training Partner, Super Admin, Facilitator, Participant). After sign-in such a login chooses a role on "Continue as" (or uses the choice remembered on the device) and can change it later with **Switch role** in the user menu ([authentication-prd.md](modules/authentication-prd.md)). | Implemented |
+| Pages per role | Training Partner: every Training Partner page. Super Admin: Manage Clients pages and My Profile only; any other address opens Manage Clients. Coming-soon roles: only the "on its way" screen. | Implemented |
+| Within the Training Partner portal | Every Training Partner page and action is available to every Training Partner; the portal does **not** hide or block pages or actions by internal staff role. | Implemented |
+| Roles & Access master | The **Roles & Access** master ([settings-access-masters-prd.md](modules/settings-access-masters-prd.md)) lets a Training Partner define what each staff role may see and do. Those permissions are stored but **not yet enforced** anywhere in the application. They are separate from the portal roles above. | Partially Implemented |
+| Records | In the Training Partner portal, facilitators, client SPOCs and participants appear as *records*; they cannot sign in to their own portals yet. | Implemented |
 
 ## SH-003: Sign-in requirement
 
 | Rule | Behaviour | Status |
 |---|---|---|
-| Protected pages | Every admin page requires a signed-in session. Opening one while signed out redirects to **Sign in** (`/login`). | Implemented |
-| Signed-in user on auth pages | A signed-in user who opens Sign in, Forgot password, Reset password or Reset success is sent into the application instead. | Implemented |
+| Protected pages | Every portal page requires a signed-in session. Opening one while signed out redirects to **Sign in** (`/login`); the page is remembered and opened after sign-in when the chosen role may open it. | Implemented |
+| Role required | A login with several roles must choose one ("Continue as") before any portal page opens; until then portal pages redirect to the role picker. A login with one role, or with a role remembered on the device, skips the picker. | Implemented |
+| Role limits | A page the chosen role may not open redirects to that role's home (Super Admin → Manage Clients). A role whose portal is not built sees the "on its way" screen. | Implemented |
+| Landing | Training Partner: the requested page, otherwise the Dashboard. Super Admin: Manage Clients (for a remembered Super Admin choice see OQ-AUTH-016). After **Switch role**: always the chosen role's home. | Implemented |
+| Signed-in user on auth pages | A signed-in user who opens Sign in, Forgot password, Reset password or Reset success is sent into the application instead (the role picker if no role is chosen yet). | Implemented |
 | Session expiry | A dedicated "Session expired" page exists. Automatic expiry and the timeout length are not defined. | Requires Confirmation |
 
 See [authentication-prd.md](modules/authentication-prd.md).
@@ -65,10 +75,17 @@ This is the standard behaviour for forms. Module PRDs note any form that differs
 | Item | Behaviour | Status |
 |---|---|---|
 | Purpose | Short confirmation or error messages after an action ("Client saved", "Couldn't save…"). | Implemented |
-| Types | Success, error, warning, info and neutral. | Implemented |
-| Duration | Each toast closes automatically after **4 seconds** unless the module sets otherwise. The user can also close it. | Implemented |
+| Types | Success, error, warning, info and neutral, each with its own icon and soft colour: success a green tick, error a red cross, warning an amber triangle, info a blue "i", neutral a grey bell. | Implemented |
+| Look | A white card (dark card in the dark theme) with a thin border, rounded corners and a soft shadow: the variant's icon in a small soft-coloured tile on the left, a bold title, an optional one- or two-line description, an optional action link, and a close (×) button ("Dismiss notification") on the right. Same design on phones and desktop. | Implemented |
+| Motion | The toast rises in with a soft bounce (on phones it drops in from the top) and its icon tile pops in. On closing it fades and slides away (off to the right on larger screens, upwards on phones). | Implemented |
+| Duration and time line | Each toast closes automatically after **4 seconds** unless the module sets otherwise. A thin line in the variant's colour along the bottom of the card drains from full to empty over that time. A toast set to stay (for example "New version available") has no line and stays until closed or acted on. | Implemented |
+| Pause | Pointing at a toast, or moving keyboard focus into it, pauses both the timer and the line; moving away carries on from where it stopped. | Implemented |
+| Closing | The × button closes the toast at once. Choosing the action link runs the action and closes the toast. | Implemented |
 | Stacking | At most **4** toasts are visible. A new one pushes out the oldest. | Implemented |
-| Actions | Some toasts carry an action button (for example "Undo" or "View"). Module PRDs list them. | Implemented |
+| Actions | Some toasts carry an action link (for example "Undo", "View" or "Reload"). Module PRDs list them. | Implemented |
+| Position | Desktop and tablets: stacked in the bottom-right corner. Small tablets that still show the bottom tab bar (640–767 px): bottom-right, lifted above the tab bar. Phones (below 640 px): at the top, centred, just under the header — so a toast never lands on the tab bar, an open bottom sheet or bottom buttons; on pages without the portal header (Sign in, the role picker, the full-screen system pages) at the top edge. | Implemented |
+| After the next page loads | A toast sent just before moving to another page waits until that page has finished loading (no skeletons or loading indicators left), then appears a moment later — never over a loading screen. If the page takes longer, it appears anyway after about 6 seconds. Used for "Welcome back, <first name>" (after sign-in or choosing a role), "You have been signed out" (once Sign in is showing), "Client added" and "Changes saved" (client form), and "KYC approved" / "Sent back for changes" (Verify KYC). | Implemented |
+| Accessibility | Error toasts are announced to screen readers straight away; other toasts are announced politely. For users who prefer reduced motion the bounce, pop and slide are not animated. | Implemented |
 
 ## SH-006: Dialogs, modals and drawers
 
@@ -79,7 +96,7 @@ This is the standard behaviour for forms. Module PRDs note any form that differs
 | Focus | Keyboard focus stays inside the open dialog. In confirmation dialogs, focus starts on **Cancel**. | Implemented |
 | Destructive confirmation | Delete-type actions ask for confirmation in a dialog with **Cancel** and a red confirm button that names the action ("Delete", "Remove"). | Implemented |
 | Phones | Modals and confirmation dialogs open as bottom sheets on small screens. | Implemented |
-| Unsaved changes | Four pages (Add client, Edit client, Program content, Verify KYC) ask whether to discard changes when the user leaves through the sidebar, breadcrumbs, search or user menu. Browser Back, page reload, Log out and the expanded Support desk card are not intercepted (OQ-GEN-006). | Partially Implemented |
+| Unsaved changes | Four pages (Add client, Edit client, Program content, Verify KYC) ask whether to discard changes when the user leaves through the sidebar, breadcrumbs, search, the phone tab bar and "More" sheet, or the user menu (My Profile, Settings, Switch role). Browser Back, page reload, Log out and the expanded Support desk card are not intercepted (OQ-GEN-006). | Partially Implemented |
 | Known deviation: backdrop | Many form modals (SPOC, program, element, menu, finance masters, Change password) do not close on a backdrop click (OQ-GEN-007). Module PRDs state the behaviour of each dialog. | Requires Confirmation |
 
 ## SH-007: Loading, empty and error states
@@ -111,7 +128,7 @@ All list pages follow the **All Clients** pattern.
 
 ## SH-009: Navigation and page titles
 
-- The header breadcrumb shows the page name. Admin pages have no separate title block.
+- The header breadcrumb shows the page name. Portal pages have no separate title block. Page names follow the chosen role's portal (for example the Super Admin's "Manage Clients").
 - Each page sets the browser tab title.
 - Menu items for pages that are not built yet open a "Nothing here yet" placeholder (see [app-shell-navigation-prd.md](modules/app-shell-navigation-prd.md)).
 
@@ -123,7 +140,7 @@ All list pages follow the **All Clients** pattern.
 | Supported widths | 320 px phones up to wide desktops. The page never scrolls sideways. | Implemented |
 | Sidebar | Below 768 px: a bottom tab bar (Home, Clients, Facilitators, Content, More) with the full menu in a slide-out drawer opened by **More**. Medium screens show an icon rail whose edge handle opens the full sidebar over the page; large screens show the full sidebar (see [app-shell-navigation-prd.md](modules/app-shell-navigation-prd.md) 5.14). | Implemented |
 | Installable app | The application can be installed to a phone's home screen (and on desktop Chrome / Edge), opens full screen, starts instantly and loads offline; new versions apply when the user taps **Reload** (see [app-shell-navigation-prd.md](modules/app-shell-navigation-prd.md) 5.15). | Implemented |
-| Keyboard | Every control is reachable by keyboard and shows a visible focus ring. Icon-only buttons have a tooltip and an accessible label. | Implemented |
+| Keyboard | Every control is reachable by keyboard and shows a visible focus ring, which is never cut off by the edge of its panel (including search and filter fields on phones). Icon-only buttons have a tooltip and an accessible label. | Implemented |
 
 ## SH-011: Names and duplicates in masters
 

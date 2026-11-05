@@ -7,18 +7,18 @@
 | PRD title | Dashboard PRD |
 | Module name | Dashboard |
 | Document ID | PRD-DASH |
-| Version | 1.2 |
+| Version | 1.3 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Implemented (all figures are demo data; see SH-001) |
-| Last updated | 2026-11-03 (v1.1: phone layout; v1.2: swipeable key-number row, no greeting on phones) |
+| Last updated | 2026-11-05 (v1.3: naming: LearnNext Portal; "Training Partner" replaces "Admin"; Training Partner portal home) · 2026-11-03 (v1.1: phone layout; v1.2: swipeable key-number row, no greeting on phones) |
 | Phone layout (v1.2) | Cards 12 px apart on phones; the **Home** tab of the bottom tab bar opens the Dashboard. No date / "Good afternoon, <name>" greeting on phones — the page opens on the period dropdown and refresh. The four key-number cards (Programs, Next 10 days, Billing, To approve) are one **swipeable row**: each card ~80% wide so the next one peeks in, snapping card by card, a soft fade on the right edge until the last card, no drop shadow (the thin card edge stays), and four dots underneath (current = wider blue dot; tap a dot to jump to that card). Desktop keeps the greeting and the 2 / 4-column grid. See SH-013, PRD-SHELL 5.14. |
 | Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [authentication-prd.md](authentication-prd.md), [profile-prd.md](profile-prd.md), [clients-prd.md](clients-prd.md), [manage-content-prd.md](manage-content-prd.md), [facilitators-prd.md](facilitators-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The Dashboard is the landing page of LearnNext Admin. It is the first page an Admin user sees after signing in and the page the application opens when the address is just the site root.
+The Dashboard is the landing page of LearnNext Portal. It is the home page of the Training Partner portal: the first page a Training Partner user sees after signing in (and, for an account with several roles, after picking **Training Partner** at "Continue as"), and the page the portal opens when the address is just the site root. The Super Admin portal has no Dashboard; it starts on Manage Clients ([super-admin-prd.md](super-admin-prd.md)).
 
-Its objective is to give an Admin user a calm, one-screen answer to four questions:
+Its objective is to give a Training Partner user a calm, one-screen answer to four questions:
 
 1. **How are programs going?** How many programs exist in the chosen period, how many are completed, and how many are waiting for approval.
 2. **What is coming up?** Which program sessions run in the next 10 days and whether anything is live today.
@@ -31,22 +31,22 @@ The page is read-only. It has no forms and does not change any record. It offers
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Dashboard header | Greets the user, shows today's date and holds the reporting-period switch and Refresh. | Admin user | Change reporting period; Refresh | [profile-prd.md](profile-prd.md) (first name shown in the greeting) |
-| KPI strip (4 cards) | The four headline numbers: Programs, Next 10 days, Billing, To approve. | Admin user | Read; follow **Review queue** link | Projects (placeholder, see [app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
-| Program schedule card | Timeline of program sessions in the next 10 days plus a "live today" line. | Admin user | Show all / Show less | — |
-| Program status card | Completion ring and the split of programs by status, plus the approval queue summary. | Admin user | Read | — |
-| Billing by entity card | Donut of invoiced amount per billing entity, plus collection status. | Admin user | Hover for full amounts | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) (entities) |
-| Top clients card | The five clients with the highest lifetime billing and how concentrated billing is. | Admin user | Hover for full amounts | [clients-prd.md](clients-prd.md) |
-| Partner network card | Count of onboarded partners split into trainers, channel partners and coaches. | Admin user | Read | [facilitators-prd.md](facilitators-prd.md) |
-| Partner agreements card | Agreement status split and agreements expiring in the next 90 days. | Admin user | Read | — |
-| Leaderboard card | Top 5 trainers, coaches or partners by points. | Admin user | Switch Trainers / Coaches / Partners | [facilitators-prd.md](facilitators-prd.md) |
-| Usage ranking card | Top 5 most- or least-used brands or programs in the period. | Admin user | Switch Brands / Programs and Most used / Least used | [manage-content-prd.md](manage-content-prd.md) |
+| Dashboard header | Greets the user, shows today's date and holds the reporting-period switch and Refresh. | Training Partner user | Change reporting period; Refresh | [profile-prd.md](profile-prd.md) (first name shown in the greeting) |
+| KPI strip (4 cards) | The four headline numbers: Programs, Next 10 days, Billing, To approve. | Training Partner user | Read; follow **Review queue** link | Projects (placeholder, see [app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
+| Program schedule card | Timeline of program sessions in the next 10 days plus a "live today" line. | Training Partner user | Show all / Show less | — |
+| Program status card | Completion ring and the split of programs by status, plus the approval queue summary. | Training Partner user | Read | — |
+| Billing by entity card | Donut of invoiced amount per billing entity, plus collection status. | Training Partner user | Hover for full amounts | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) (entities) |
+| Top clients card | The five clients with the highest lifetime billing and how concentrated billing is. | Training Partner user | Hover for full amounts | [clients-prd.md](clients-prd.md) |
+| Partner network card | Count of onboarded partners split into trainers, channel partners and coaches. | Training Partner user | Read | [facilitators-prd.md](facilitators-prd.md) |
+| Partner agreements card | Agreement status split and agreements expiring in the next 90 days. | Training Partner user | Read | — |
+| Leaderboard card | Top 5 trainers, coaches or partners by points. | Training Partner user | Switch Trainers / Coaches / Partners | [facilitators-prd.md](facilitators-prd.md) |
+| Usage ranking card | Top 5 most- or least-used brands or programs in the period. | Training Partner user | Switch Brands / Programs and Most used / Least used | [manage-content-prd.md](manage-content-prd.md) |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any role) | Full access to the Dashboard (SH-002, SH-003). Reached from the sidebar item **Dashboard**, from the site root, and automatically after sign-in. | View all cards; change the reporting period; refresh; switch card views; open the Review queue link. | No role-based hiding of cards or figures is applied, including billing figures (SH-002). Whether finance figures should be restricted by role is open (OQ-DASH-011). |
+| Training Partner user (any role) | Full access to the Dashboard (SH-002, SH-003). Reached from the sidebar item **Dashboard**, from the site root, and automatically after sign-in. | View all cards; change the reporting period; refresh; switch card views; open the Review queue link. | No role-based hiding of cards or figures is applied, including billing figures (SH-002). Whether finance figures should be restricted by role is open (OQ-DASH-011). |
 | Signed-out visitor | No access. Redirected to Sign in (SH-003). | — | — |
 
 ## 5. Page Functionality and Behavior
@@ -287,7 +287,7 @@ The Dashboard has no data-entry forms. Its controls are view selectors.
 ## 13. Acceptance Criteria
 
 **AC-DASH-001: Default view**
-- Given a signed-in Admin user
+- Given a signed-in Training Partner user
 - When they open the Dashboard
 - Then the period switch shows **Last month**
 - And the Programs card shows 68 with "39 of 68 completed" and 57%
@@ -405,7 +405,7 @@ The Dashboard has no data-entry forms. Its controls are view selectors.
 | OQ-DASH-008 | All cards | No card links to detail (client, partner, agreement, program). | Users cannot act on what they see. | Confirm whether drill-down links are required. *Proposed:* link Top clients rows to Client details. | Open |
 | OQ-DASH-009 | Refresh / period change | A failure after figures were shown leaves old figures with no message. | User may trust stale numbers. | *Proposed:* show an error toast "Couldn’t refresh the dashboard". | Open |
 | OQ-DASH-010 | Live today | What makes a program "live today" (any session today, or a session in progress now) is not defined. | Drives the live indicator. | Define "live". | Open |
-| OQ-DASH-011 | Access | Billing figures are visible to every admin role. | Finance data may be sensitive. | Confirm role restrictions once Roles & Access is enforced. | Open |
+| OQ-DASH-011 | Access | Billing figures are visible to every role. | Finance data may be sensitive. | Confirm role restrictions once Roles & Access is enforced. | Open |
 | OQ-DASH-012 | Partner agreements | Whether expiring agreements are included in Active, and whether Pending signature agreements can expire, is not stated. | Totals may double count. | Confirm bucket rules. | Open |
 | OQ-DASH-013 | Top clients, Leaderboard, Usage ranking | No empty-state message is defined when these lists have no data. | New installations would show blank cards. | *Proposed:* "No data for this period yet." | Open |
 

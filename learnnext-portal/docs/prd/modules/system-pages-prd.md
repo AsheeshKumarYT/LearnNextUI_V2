@@ -7,63 +7,66 @@
 | PRD title | System Pages PRD |
 | Module name | System Pages (full-screen error and status pages, and the "System pages" preview gallery) |
 | Document ID | PRD-SYS |
-| Version | 1.0 |
+| Version | 1.1 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (Not found, Page crash and Offline appear automatically; Server error, Service unavailable and Session expired exist and can be opened by address, but nothing in the application sends the user to them; the gallery and preview mode work) |
-| Last updated | 2026-10-29 |
-| Related modules/pages | [Authentication](authentication-prd.md), [App shell and navigation](app-shell-navigation-prd.md), [Dashboard](dashboard-prd.md), [Profile](profile-prd.md), [All Clients](clients-prd.md), [Shared requirements](../shared-requirements.md) |
+| Last updated | 2026-11-05 (v1.1: every system page fits the screen and never scrolls — the illustration shrinks, or steps aside on very short screens; the main button is solid white on the dark background; the "Preview mode" pill and **Back to gallery** link were removed from previews; the account chip shows the avatar in a round chip; logo reads "LearnNext"; behaviour per role (Super Admin) added; "Admin" renamed "Training Partner") |
+| Related modules/pages | [Authentication](authentication-prd.md), [App shell and navigation](app-shell-navigation-prd.md), [Dashboard](dashboard-prd.md), [Profile](profile-prd.md), [All Clients](clients-prd.md), [Super Admin portal (PRD-SA)](super-admin-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-System pages are the screens an Admin user sees when something prevents a normal page from showing: the address does not exist, a screen fails while being displayed, the server fails, the service is down for maintenance, the device loses its connection, or the sign-in session has ended.
+System pages are the screens a user of LearnNext Portal sees when something prevents a normal page from showing: the address does not exist, a screen fails while being displayed, the server fails, the service is down for maintenance, the device loses its connection, or the sign-in session has ended.
 
 Their objective is to:
 
-- replace a blank or broken screen with a calm, branded explanation of what happened;
+- replace a blank or broken screen with a calm, branded explanation of what happened, always fitting the screen without scrolling;
 - reassure the user that their work is safe where that is true;
 - always offer at least one clear way forward (reload, try again, go back, return to the Dashboard, sign in again);
 - recover automatically where possible (Offline returns to the page once the connection is back; Page crash clears as soon as the user moves to another address).
 
-The module also includes a development aid, the **System pages** gallery in the sidebar's "Dev only" section, which shows every system page as a live miniature and opens each one in a safe preview mode, so that designers, developers and QA can review them without causing the real condition.
+The module also includes a development aid, the **System pages** gallery in the Training Partner sidebar's "Dev only" section, which shows every system page as a live miniature and opens each one in a safe preview mode, so that designers, developers and QA can review them without causing the real condition.
 
 ## 3. Module and Page Overview
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Common system-page frame | One consistent full-screen layout for every system page | Admin user or visitor | Logo (go home), account chip (My Profile) or **Sign in** | All system pages |
-| Not found (404) | Explain that an address does not exist | Admin user or visitor | **Back to dashboard** / **Go to sign in**, **Go back**, popular destinations | [Dashboard](dashboard-prd.md), [Authentication](authentication-prd.md) |
-| Page crash | Replace a screen that failed while being displayed | Admin user or visitor | **Reload page**, **Back to dashboard**, **Technical details**, copy details | Any page |
-| Server error (500) | Explain a server failure | Admin user | **Try again**, **Back to dashboard**, **Contact support** | [Dashboard](dashboard-prd.md) |
-| Service unavailable (503, maintenance) | Explain planned maintenance or a temporary outage | Admin user | **Check again** | — |
-| Offline | Cover the application while the device has no connection; confirm when it returns | Admin user or visitor | **Try again**, **Continue** | Any page |
-| Session expired | Ask the user to sign in again after the session ends | Admin user | **Sign in again** | [Authentication](authentication-prd.md) |
-| System pages gallery (Dev only) | Show all six system pages as live miniatures | Admin user (developers, designers, QA) | Open a page preview in a new tab | [App shell and navigation](app-shell-navigation-prd.md) |
-| Preview mode | Show a real system page without its real consequences | Admin user (developers, designers, QA) | **Back to gallery**, safe simulated actions | System pages gallery |
+| Common system-page frame | One consistent full-screen layout for every system page | Signed-in user or visitor | Logo (go home), account chip (My Profile) or **Sign in** | All system pages |
+| Not found (404) | Explain that an address does not exist | Signed-in user or visitor | **Back to dashboard** / **Go to sign in**, **Go back**, popular destinations | [Dashboard](dashboard-prd.md), [Authentication](authentication-prd.md) |
+| Page crash | Replace a screen that failed while being displayed | Signed-in user or visitor | **Reload page**, **Back to dashboard**, **Technical details**, copy details | Any page |
+| Server error (500) | Explain a server failure | Signed-in user | **Try again**, **Back to dashboard**, **Contact support** | [Dashboard](dashboard-prd.md) |
+| Service unavailable (503, maintenance) | Explain planned maintenance or a temporary outage | Signed-in user | **Check again** | — |
+| Offline | Cover the application while the device has no connection; confirm when it returns | Signed-in user or visitor | **Try again**, **Continue** | Any page |
+| Session expired | Ask the user to sign in again after the session ends | Signed-in user | **Sign in again** | [Authentication](authentication-prd.md) |
+| System pages gallery (Dev only) | Show all six system pages as live miniatures | Training Partner (developers, designers, QA) | Open a page preview in a new tab | [App shell and navigation](app-shell-navigation-prd.md) |
+| Preview mode | Show a real system page without its real consequences | Training Partner (developers, designers, QA) | Safe simulated actions; close the tab to return | System pages gallery |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (signed in) | Every system page, the gallery and every preview | Every action in this PRD | None (SH-002). The gallery is shown to every signed-in user in every build (OQ-SHELL-010) |
+| Training Partner | Every system page, the gallery and every preview | Every action in this PRD | None (SH-002). The gallery is shown to every Training Partner in every build (OQ-SHELL-010) |
+| Super Admin | Not found, Page crash, Server error, Service unavailable, Offline and Session expired | Same actions; **Back to dashboard**, the logo and the Dashboard / All Clients / Projects destinations all end at Manage Clients (BR-SYS-020) | The gallery and every preview address redirect to Manage Clients (BR-AUTH-021) |
+| Signed in, no role chosen yet | The same six system pages | Links into the application end at the role picker | The gallery and previews redirect to the role picker |
 | Visitor (not signed in) | Not found, Page crash, Server error, Service unavailable, Offline and Session expired | Same actions; links that lead into the application end at **Sign in** (SH-003) | The gallery and every preview address redirect to **Sign in** |
-| Facilitators, client SPOCs, participants | None | None | They are records, not users (SH-002) |
+| Facilitator, Participant, Client SPOC | The same six system pages | Links into the application end at the coming-soon screen | Their portals are not built (SH-002) |
 
 ## 5. Page Functionality and Behavior
 
 ### 5.1 Common system-page frame
 
-Every system page in 5.2 to 5.7 uses this frame. It is shown full screen, outside the admin shell: there is no sidebar, header breadcrumb, search or shell footer.
+Every system page in 5.2 to 5.7 uses this frame. It is shown full screen, outside the portal shell: there is no sidebar, header breadcrumb, search or shell footer.
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
+| Fit to the screen (v1.1) | Never make the user scroll an error page | View on any screen size | The page is exactly the height of the screen and never scrolls: top bar at the top, footer at the bottom, the content centred between them. When the room is short (small phones, landscape, the crash page's **Technical details** opened) the illustration shrinks to fit, from its top centre; if even a very small illustration would not fit, it steps aside (hidden) so the text and buttons always fit. The layout re-fits when the window is resized or the content changes; on short screens the spacing also tightens | BR-SYS-018 | Whole page visible without scrolling |
 | Background | Calm, branded backdrop | View | Deep navy background with one soft coloured glow and a few still stars. Glow colour per page: Not found and Server error violet, Page crash rose, Service unavailable amber, Offline teal, Session expired indigo | Always dark, whatever theme the user chose (BR-SYS-002) | — |
-| Logo | Brand and a way home | Click | LearnNext logo with the subtitle "Admin console". Opens the **Dashboard** when signed in, **Sign in** when signed out | BR-SYS-003 | Home page opens |
-| Account chip | Show who is signed in | Click | Avatar and the user's name (name hidden on phones). Opens **My Profile** | Signed in only. Hidden on Session expired (BR-SYS-004) | My Profile opens |
+| Logo | Brand and a way home | Click | White LearnNext logo (wordmark "LearnNext", no subtitle). Opens the role's home when signed in (Dashboard for a Training Partner, Manage Clients for a Super Admin, the role picker if no role is chosen yet) and **Sign in** when signed out | BR-SYS-003, BR-SYS-020 | Home page opens |
+| Account chip | Show who is signed in | Click | A round, frosted chip with the user's avatar (photo, or initials) and their name. On phones only the avatar shows, centred in an even ring. Opens **My Profile** | Signed in only. Hidden on Session expired (BR-SYS-004) | My Profile opens |
 | **Sign in** button | Let a signed-out visitor sign in | Click | Opens the Sign in page | Signed out only. Hidden on Session expired | Sign in opens |
-| Illustration | Visual cue for the problem | View | A large illustration per page (see each page). Decorative: hidden from screen readers; numerals such as "404" are read out as the number | Animations stop for users who prefer reduced motion | — |
+| Illustration | Visual cue for the problem | View | A large illustration per page (see each page). Decorative: hidden from screen readers; numerals such as "404" are read out as the number | Animations stop for users who prefer reduced motion. Shrinks or hides to fit (see "Fit to the screen") | — |
 | Eyebrow | Short category label | View | Small upper-case label above the title (for example "UNEXPECTED ERROR"). Not on Not found | — | — |
 | Title and description | Explain what happened | View | Large title and one or two sentences, centred | Quoted per page below | — |
-| Actions | Offer a way forward | Click | One or two large buttons per page | Quoted per page below | — |
+| Actions | Offer a way forward | Click | One or two large buttons per page. The main button is solid white with dark navy text; a second button is a quiet outlined button with white text | Quoted per page below (BR-SYS-019) | — |
 | Extra panel | Supporting detail | View | Per page: address, popular destinations, technical details, reference, maintenance progress, tips, or "Last signed in as" | — | — |
 | Footer | Ownership | View | "© <current year> LearnNext" | Year follows the device clock | — |
 | Browser tab title | Identify the tab | — | "<Page name> · LearnNext" (names per page below) | BR-SYS-005 | — |
@@ -76,24 +79,24 @@ Every system page in 5.2 to 5.7 uses this frame. It is shown full screen, outsid
 | When it appears | Catch every unknown address | Open an address the application does not recognise | Shown for any address that matches no page, whether signed in or out, for example "/notifications" or "/preview/unknown" | BR-SYS-006. Addresses that look like a record (for example a client, program, facilitator or Settings master) open that module's page instead; see the module PRDs. "/" opens the Dashboard (Sign in when signed out) | Not found page |
 | Illustration | Show "404" | View | "4", a ringed planet in place of the "0", and "4"; a small astronaut drifts beside the numerals | Astronaut hidden on phones | — |
 | Text | Explain | View | Title "Lost in space"; description "The page you’re looking for drifted off the map — it may have moved, or the link is mistyped." | No eyebrow | — |
-| **Back to dashboard** | Return to the application | Click | Opens the Dashboard | Signed in only | Dashboard |
+| **Back to dashboard** | Return to the application | Click | Opens the Dashboard (Super Admin: Manage Clients, BR-SYS-020) | Signed in only | Dashboard |
 | **Go to sign in** | Lead a visitor to sign in | Click | Opens Sign in | Signed out only (replaces **Back to dashboard**) | Sign in |
 | **Go back** | Return to the previous page | Click | Goes back one step in the browser history | Shown only when the browser tab has a previous page in its history (BR-SYS-007). Hidden in a freshly opened tab | Previous page |
 | Requested address | Show what was mistyped | View | The address that was opened (path only) in a small rounded chip; very long addresses are cut off with "…" | Always | — |
-| Popular destinations | Quick ways back in | Click a link | Links **Dashboard**, **All Clients**, **Projects** and **My Profile**, each with its icon; an arrow appears on hover | Signed in only. **Projects** opens the "Nothing here yet" placeholder ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) | Chosen page opens |
+| Popular destinations | Quick ways back in | Click a link | Links **Dashboard**, **All Clients**, **Projects** and **My Profile**, each with its icon; an arrow appears on hover | Signed in only. **Projects** opens the "Nothing here yet" placeholder ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)). The same four links show for every role; for a Super Admin, Dashboard, All Clients and Projects all open Manage Clients (OQ-SYS-011) | Chosen page opens |
 | Tab title | — | — | "Page not found · LearnNext" | — | — |
 
 ### 5.3 Page crash
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| When it appears | Replace a blank or broken screen | Any page fails while it is being displayed (including when part of the page cannot be downloaded) | The whole screen, including the admin shell, is replaced by the crash page | BR-SYS-008. Applies to every page: admin pages, auth pages and other system pages. Failures inside button actions or background loads are handled by each module, not by this page | Crash page |
+| When it appears | Replace a blank or broken screen | Any page fails while it is being displayed (including when part of the page cannot be downloaded) | The whole screen, including the portal shell, is replaced by the crash page | BR-SYS-008. Applies to every page: portal pages, auth pages and other system pages. Failures inside button actions or background loads are handled by each module, not by this page | Crash page |
 | Illustration | Show a broken screen | View | A tilted glass browser window with a crack through it, gently floating | — | — |
 | Text | Explain and reassure | View | Eyebrow "Unexpected error"; title "This page crashed"; description "Something went wrong while showing this screen. Your data is safe — reloading usually fixes it." | "Your data is safe" is a fixed statement (OQ-SYS-006) | — |
 | **Reload page** | Retry | Click | Reloads the current address in the browser | With demo data, a reload restores the original demo records (SH-001) | Page loads again |
 | **Back to dashboard** | Leave the broken page | Click | Opens the Dashboard; the crash page clears | Signed out: ends at Sign in (SH-003) | Dashboard |
 | Automatic recovery | Recover without reloading | Move to any other address (browser Back, logo, account chip, buttons) | The crash page disappears and the new page is shown | BR-SYS-009 | New page |
-| **Technical details** | Help support diagnose the problem | Click | Expands or collapses a panel showing the error's name and message and up to three lines of where it happened. A chevron rotates | Collapsed by default. Long details scroll inside the panel | Details shown / hidden |
+| **Technical details** | Help support diagnose the problem | Click | Expands or collapses a panel showing the error's name and message and up to three lines of where it happened. A chevron rotates | Collapsed by default. Long details scroll inside the panel (a shorter panel on short screens); opening it may shrink or hide the illustration so the page still fits (BR-SYS-018) | Details shown / hidden |
 | Copy details | Share the details | Click the copy icon (label "Copy error details") | Copies the details to the clipboard; the icon turns into a green tick and the label becomes "Copied" for about 1.5 seconds | If the browser blocks the clipboard, nothing happens and no message is shown (OQ-SYS-007) | Details copied |
 | Reporting | Inform the team | — | The error is written to the browser's developer console only. It is not sent to any reporting service | OQ-SYS-006 | — |
 | Tab title | — | — | "Something went wrong · LearnNext" | — | — |
@@ -146,28 +149,28 @@ Every system page in 5.2 to 5.7 uses this frame. It is shown full screen, outsid
 | Text | Explain | View | Eyebrow "Session expired"; title "Your session took a nap"; description "For your security, we signed you out after a period of inactivity. Sign in again to pick up where you left off." | The user is in fact still signed in until they click **Sign in again** (BR-SYS-013, OQ-SYS-008) | — |
 | Top bar | — | View | Logo only: the account chip and **Sign in** button are hidden | BR-SYS-004. The logo still opens the Dashboard while the session exists (OQ-SYS-008) | — |
 | "Last signed in as" | Confirm whose session ended | View | A chip with the user's avatar, "Last signed in as" and the user's name | Shown only while a signed-in user is still remembered | — |
-| **Sign in again** | Restart the session | Click | Signs the user out (the remembered session is cleared) and opens Sign in, replacing this page in the browser history. No toast is shown | BR-SYS-013. Unlike **Log out** in the user menu, there is no confirmation and no "You have been signed out" toast ([authentication-prd.md](authentication-prd.md)). After signing in, the user lands on the Dashboard, not on the page they were using (OQ-SYS-008) | Sign in page |
+| **Sign in again** | Restart the session | Click | Signs the user out (the remembered session is cleared) and opens Sign in, replacing this page in the browser history. No toast is shown | BR-SYS-013. Unlike **Log out** in the user menu, there is no confirmation and no "You have been signed out" toast ([authentication-prd.md](authentication-prd.md)). After signing in (and choosing a role, for logins with several roles), the user lands on the role's home — Dashboard or Manage Clients — not on the page they were using (OQ-SYS-008) | Sign in page |
 | Tab title | — | — | "Session expired · LearnNext" | — | — |
 
 ### 5.8 System pages gallery (Dev only)
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Opening the gallery | Review all system pages in one place | Click **System pages** under "Dev only" in the sidebar, or choose it in the search palette | Opens inside the admin shell. Breadcrumb "System pages"; tab title "System pages · LearnNext" | Signed in only (SH-003). Shown to every user (OQ-SHELL-010) | Gallery shown |
+| Opening the gallery | Review all system pages in one place | Click **System pages** under "Dev only" in the sidebar, or choose it in the search palette | Opens inside the Training Partner shell. Breadcrumb "System pages"; tab title "System pages · LearnNext" | Training Partner only (SH-003; a Super Admin is sent to Manage Clients). Shown to every Training Partner (OQ-SHELL-010). Not offered in the phone "More" sheet | Gallery shown |
 | Layout | Show every page side by side | View | Six cards: one column on phones, two from small-tablet width, three on extra-wide screens. Cards rise in one after another. No title block, toolbar or other content | — | — |
 | Card order and content | Describe each page | View | 1 "Page not found" — "A link is broken or the page doesn’t exist." — "Any unknown address". 2 "Page crash" — "A screen fails while loading — instead of a blank page." — "Automatic (error boundary)". 3 "Server error" — "The server failed to complete a request." — "API returns 500". 4 "Maintenance" — "Planned maintenance or the service is temporarily down." — "API returns 503". 5 "No internet" — "The device loses its connection." — "Automatic overlay". 6 "Session expired" — "The sign-in session ran out after inactivity." — "API returns 401" | The third line (with a lightning icon) states the intended trigger; for Server error, Maintenance and Session expired that trigger is not implemented (OQ-SYS-001) | — |
 | Window frame | Make each card read as a browser window | View | Three coloured dots and an address bar showing the preview address (for example "/preview/404") | — | — |
-| Live mini-screen | Show the real page | View | The actual page, running live and shrunk from a desktop-sized (1280 × 800) screen to the card width, without the preview pill (5.9) | Not clickable or focusable on its own; loads when it scrolls into view. Server error shows a different reference each time it loads | — |
+| Live mini-screen | Show the real page | View | The actual page in preview mode, running live and shrunk from a desktop-sized (1280 × 800) screen to the card width | Not clickable or focusable on its own; loads when it scrolls into view. Server error shows a different reference each time it loads | — |
 | Card link | Open the page in full | Click anywhere on the card, or Tab to it and press Enter | Opens the page's preview (5.9) in a new browser tab. The card's title, icon and an "open externally" icon highlight on hover; keyboard focus shows a ring around the whole card | Screen readers announce "<title> — opens in a new tab" | Preview opens in a new tab |
 
 ### 5.9 Preview mode
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Preview addresses | Open a system page safely | Click a gallery card or open the address | "/preview/404", "/preview/crash", "/preview/500", "/preview/503", "/preview/offline", "/preview/session-expired" show the real page, full screen | Signed in only; signed out redirects to Sign in. Any other "/preview/…" address shows Not found | Page shown in preview mode |
-| "Preview mode" pill | Make clear this is a preview | View | A dark translucent pill with an eye icon, "Preview mode" and a **Back to gallery** link. At the top centre on larger screens, at the bottom centre on phones | BR-SYS-014 | — |
-| **Back to gallery** | Return to the gallery | Click | Opens the System pages gallery in the same tab | — | Gallery |
-| Thumbnail view | Clean miniature | Open a preview address with "?thumb" added | Same page without the pill | Used by the gallery's mini-screens | — |
+| Preview addresses | Open a system page safely | Click a gallery card or open the address | "/preview/404", "/preview/crash", "/preview/500", "/preview/503", "/preview/offline", "/preview/session-expired" show the real page, full screen | Training Partner only; signed out redirects to Sign in, a Super Admin to Manage Clients. Any other "/preview/…" address shows Not found | Page shown in preview mode |
+| No preview marker (v1.1) | Show the page exactly as users see it | View | The preview looks identical to the real page: there is no "Preview mode" pill and no **Back to gallery** link any more. Only the safe actions below differ | BR-SYS-014 (OQ-SYS-012) | — |
+| Returning to the gallery | Go back | Close the browser tab | The gallery is still open in the original tab (previews always open in a new tab) | — | Gallery |
+| Thumbnail view | Miniature in the gallery | — | The gallery's mini-screens load the preview address with "?thumb" added; it shows the same page as the full preview | — | — |
 | Not found preview | — | — | Shows the address "/preview/404". Because previews open in a new tab, **Go back** is normally hidden. **Back to dashboard** and the popular destinations really navigate | Actions are real (BR-SYS-015) | — |
 | Page crash preview | — | — | Shows a fixed sample error in **Technical details** ("TypeError: Cannot read properties of undefined (reading 'map')" and one location line). **Reload page** reloads the preview | Actions are real | — |
 | Server error preview | — | — | **Try again** reloads the preview (new reference); **Contact support** opens a real email draft | Actions are real | — |
@@ -209,16 +212,16 @@ Every system page in 5.2 to 5.7 uses this frame. It is shown full screen, outsid
 |---|---|---|---|---|
 | 1 | Arrives at Session expired (today only by opening "/session-expired") | Shows "Your session took a nap" and "Last signed in as <name>" | BR-SYS-010 | Session expired page |
 | 2 | Clicks **Sign in again** | Clears the session and opens Sign in | BR-SYS-013 | Sign in page |
-| 3 | Signs in | See [authentication-prd.md](authentication-prd.md) | — | Dashboard |
+| 3 | Signs in (and chooses a role, if asked) | See [authentication-prd.md](authentication-prd.md) | — | The role's home (Dashboard / Manage Clients) |
 
 ### 6.5 Review system pages in the gallery
 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
 | 1 | Clicks **System pages** under "Dev only" | Opens the gallery with six live mini-screens | Signed in | Gallery |
-| 2 | Clicks a card | Opens the page's preview in a new tab with the "Preview mode" pill | BR-SYS-014 | Preview |
+| 2 | Clicks a card | Opens the page's preview in a new tab, looking exactly like the real page | BR-SYS-014 | Preview |
 | 3 | Uses the page's actions | Offline and Session expired simulate safely; other actions are real | BR-SYS-015 | — |
-| 4 | Clicks **Back to gallery** | Opens the gallery in that tab | — | Gallery |
+| 4 | Closes the preview tab | The gallery is still open in the first tab | — | Gallery |
 
 ## 7. Forms and Field-Level Specifications
 
@@ -228,9 +231,9 @@ Not applicable — system pages and the gallery contain no form fields or data e
 
 | Rule ID | Rule Name | Business Rule | When It Applies | Expected Behavior | Invalid Scenario | User Feedback |
 |---|---|---|---|---|---|---|
-| BR-SYS-001 | Full screen, outside the shell | System pages replace the whole screen; the admin shell is not shown | All system pages | No sidebar, header or shell footer | — | — |
+| BR-SYS-001 | Full screen, outside the shell | System pages replace the whole screen; the portal shell is not shown | All system pages | No sidebar, header or shell footer | — | — |
 | BR-SYS-002 | Always dark | System pages use their own dark navy look in every theme | All system pages | Light, Dark and System themes look the same here (differs from SH-010) | — | — |
-| BR-SYS-003 | Home depends on sign-in | The logo, and the Not found main button, lead to the Dashboard when signed in and to Sign in when signed out | All system pages | — | — | **Back to dashboard** / **Go to sign in** |
+| BR-SYS-003 | Home depends on sign-in | The logo, and the Not found main button, lead to the Dashboard when signed in (for other roles see BR-SYS-020) and to Sign in when signed out | All system pages | — | — | **Back to dashboard** / **Go to sign in** |
 | BR-SYS-004 | Account in the top bar | Signed in: avatar and name linking to My Profile; signed out: **Sign in**. Session expired shows neither | All system pages | — | — | — |
 | BR-SYS-005 | Tab titles | "Page not found", "Something went wrong", "Server error", "Down for maintenance", "You’re offline" / "Back online", "Session expired", each followed by " · LearnNext" | All system pages | — | — | — |
 | BR-SYS-006 | Catch-all | Any address that matches no page shows Not found, signed in or out | Unknown addresses | — | — | "Lost in space" |
@@ -241,10 +244,13 @@ Not applicable — system pages and the gallery contain no form fields or data e
 | BR-SYS-011 | Offline overlay | While the device reports no connection, the Offline page covers the screen; the page underneath is kept | Every page, signed in or out | — | — | "You’re offline" |
 | BR-SYS-012 | Back online | When the connection returns, "You’re back online" shows for about 1.8 seconds, then closes by itself; **Continue** closes it at once | After being offline | Page title restored | — | "You’re back online" |
 | BR-SYS-013 | Sign in again | **Sign in again** clears the session and opens Sign in, with no confirmation and no toast | Session expired (not in preview) | — | — | — |
-| BR-SYS-014 | Preview marker | Preview addresses show the "Preview mode" pill with **Back to gallery**, except when opened as a thumbnail ("?thumb") | Preview mode | — | — | "Preview mode" |
+| BR-SYS-014 | No preview marker (changed v1.1) | Preview addresses show the page exactly as in real use, with no "Preview mode" pill or **Back to gallery** link (both removed); users return by closing the tab | Preview mode | — | — | — |
 | BR-SYS-015 | Safe actions in preview | In preview mode, Offline simulates the reconnect and Session expired does not sign out. Actions on the other pages (reload, go to Dashboard, go back, email support) behave as in real use | Preview mode | — | — | "Preview only" toast (Session expired) |
-| BR-SYS-016 | Previews need sign-in | The gallery and every preview address require a signed-in session | Signed out | Redirect to Sign in (SH-003) | — | — |
+| BR-SYS-016 | Previews need sign-in | The gallery and every preview address require a signed-in session in the Training Partner role | Signed out; other roles | Redirect to Sign in (SH-003); Super Admin to Manage Clients; no role yet to the role picker | — | — |
 | BR-SYS-017 | Reduced motion | Floating, spinning and pulsing illustrations stop for users who prefer reduced motion | All system pages | — | — | — |
+| BR-SYS-018 | Fit to the screen | A system page is exactly one screen high and never scrolls. When space is short the illustration shrinks; when it would have to get very small it is hidden, so the text and buttons always fit | All system pages, every screen size | Re-fits on resize and when content changes (e.g. Technical details opened) | — | — |
+| BR-SYS-019 | Main button on dark | The main action on each system page is a solid white button with dark navy text; secondary actions are outlined white-text buttons | All system pages | — | — | — |
+| BR-SYS-020 | Home per role | Links into the application (logo, **Back to dashboard**, popular destinations) follow the signed-in role's page limits: a Super Admin is taken to Manage Clients for any page it may not open; a session with no role chosen goes to the role picker; a role not yet built goes to the coming-soon screen ([authentication-prd.md](authentication-prd.md)) | Signed in | — | — | — |
 
 ## 9. Success Messages and User Feedback
 
@@ -288,14 +294,17 @@ Not applicable — system pages and the gallery contain no form fields or data e
 | Server error and Maintenance while signed out | Opening the addresses | Pages show; **Back to dashboard** and the logo lead to Sign in | — | Sign in |
 | Gallery thumbnails | Opening the gallery | Each card loads a full copy of the application in miniature, which may take a moment; Server error shows a new reference each time | — | — |
 | Reduced motion | Device setting | Illustrations stay still | — | — |
-| Phones | Narrow screens | Numerals shrink; the astronaut and the account name are hidden; buttons wrap; the preview pill moves to the bottom | — | — |
+| Phones | Narrow screens | Numerals shrink; the astronaut and the account name are hidden (the account chip shows only the avatar); buttons wrap; the page still fits without scrolling | — | — |
+| Short screens | Small phones, landscape, or Technical details opened | The illustration shrinks to fit, or is hidden when it would be tiny; spacing tightens; nothing scrolls | — | — |
+| Super Admin on a system page | Signed in as Super Admin | **Back to dashboard**, the logo and the Dashboard / All Clients / Projects links all open Manage Clients; My Profile works | Same texts as for a Training Partner | OQ-SYS-011 |
 
 ## 12. Cross-Module Dependencies
 
 | Related Module/Page | Relationship | Triggering Action | Expected Impact | Relevant Rules |
 |---|---|---|---|---|
 | [Authentication](authentication-prd.md) | Session expired's **Sign in again** clears the session and opens Sign in; Not found, Server error, Maintenance, Offline and Session expired are available while signed out; the gallery and previews require sign-in | **Sign in again**; signed-out access | Session cleared; Sign in shown | SH-003, BR-SYS-013, BR-SYS-016, OQ-AUTH-002 |
-| [App shell and navigation](app-shell-navigation-prd.md) | "Dev only" **System pages** item and the search palette open the gallery; unknown addresses (for example a notifications page) show Not found; page crashes and the offline overlay replace or cover the shell | Menu click; unknown address | Gallery / Not found / Crash / Offline | BR-SHELL-017, BR-SHELL-021, OQ-SHELL-010 |
+| [App shell and navigation](app-shell-navigation-prd.md) | "Dev only" **System pages** item and the search palette open the gallery (Training Partner shell only); unknown addresses (for example a notifications page) show Not found; page crashes and the offline overlay replace or cover the shell | Menu click; unknown address | Gallery / Not found / Crash / Offline | BR-SHELL-017, BR-SHELL-021, OQ-SHELL-010 |
+| [Super Admin portal (PRD-SA)](super-admin-prd.md) | System pages appear for a Super Admin too; their links into the application end at Manage Clients; the gallery is not available | Any system page while in Super Admin | Manage Clients opens | BR-SYS-020, BR-AUTH-021 |
 | [Dashboard](dashboard-prd.md) | Default destination of **Back to dashboard** and the logo when signed in | Click | Dashboard opens | BR-SYS-003 |
 | [Profile](profile-prd.md) | Account chip and the "My Profile" destination; name and photo shown come from the profile | Click chip | My Profile opens | BR-SYS-004 |
 | [All Clients](clients-prd.md) | Popular destination on Not found | Click **All Clients** | All Clients opens | — |
@@ -358,7 +367,7 @@ Not applicable — system pages and the gallery contain no form fields or data e
 - When I click **System pages** under "Dev only"
 - Then six cards show live miniatures of Page not found, Page crash, Server error, Maintenance, No internet and Session expired, each with its address, when it appears and its trigger
 - When I click a card
-- Then its preview opens in a new tab with the "Preview mode" pill and **Back to gallery**
+- Then its preview opens in a new tab, looking exactly like the real page (no "Preview mode" pill)
 
 **AC-SYS-010: Safe preview actions**
 - Given I opened the Session expired preview
@@ -367,6 +376,23 @@ Not applicable — system pages and the gallery contain no form fields or data e
 - Given I opened the No internet preview
 - When I click **Simulate reconnect** and then **Go offline again**
 - Then the page switches to "You’re back online" and back to "You’re offline" without closing
+
+**AC-SYS-011: Fits the screen**
+- Given any system page on a 375 × 667 phone, a 1280 × 600 window or a landscape phone
+- Then the whole page — top bar, illustration (possibly smaller or hidden), text, buttons and footer — is visible and the page cannot be scrolled
+- When I open **Technical details** on Page crash on a short screen
+- Then the illustration shrinks or disappears so the details and buttons still fit
+
+**AC-SYS-012: Buttons and account chip**
+- Given I am signed in and open "/error"
+- Then **Try again** is a solid white button with dark text and **Back to dashboard** an outlined button
+- And the top-right chip shows my avatar and name, or only the avatar on a phone
+
+**AC-SYS-013: Super Admin on a system page**
+- Given I am signed in as Super Admin and open "/does-not-exist"
+- When I click **Back to dashboard**
+- Then Manage Clients opens
+- And opening "/ui-preview" or "/preview/404" also opens Manage Clients
 
 ## 14. QA Test Scenarios
 
@@ -389,14 +415,18 @@ Not applicable — system pages and the gallery contain no form fields or data e
 | TC-SYS-015 | BR-SYS-004 | Top bar per state | Signed in / out | /error | Avatar + name (name hidden on phone) / **Sign in**; logo to Dashboard / Sign in | P3 |
 | TC-SYS-016 | BR-SYS-002 | Theme independence | Light theme | /error | Dark page | P3 |
 | TC-SYS-017 | AC-SYS-009 | Gallery content | Signed in | /ui-preview | Six cards, correct texts, breadcrumb "System pages", tab "System pages · LearnNext" | P2 |
-| TC-SYS-018 | AC-SYS-009 | Card opens new tab | Gallery | Click and keyboard Enter | New tab at /preview/<key> with pill | P2 |
-| TC-SYS-019 | BR-SYS-014 | Thumb hides pill | Signed in | /preview/404?thumb | No pill | P3 |
+| TC-SYS-018 | AC-SYS-009 | Card opens new tab | Gallery | Click and keyboard Enter | New tab at /preview/<key>, no pill or Back to gallery | P2 |
+| TC-SYS-019 | BR-SYS-014 | Thumb same as preview | Signed in | /preview/404?thumb and /preview/404 | Same page, no pill on either | P3 |
 | TC-SYS-020 | AC-SYS-010 | Session expired preview | Signed in | /preview/session-expired, click | "Preview only" toast; still signed in | P1 |
 | TC-SYS-021 | AC-SYS-010 | Offline preview | Online device | /preview/offline | Offline state; Simulate reconnect / Go offline again toggle; no auto-close | P2 |
 | TC-SYS-022 | BR-SYS-016 | Previews need sign-in | Signed out | /ui-preview, /preview/500 | Redirect to Sign in | P2 |
-| TC-SYS-023 | BR-SYS-014 | Pill position | Phone 375 px / desktop | /preview/503 | Pill at bottom / top | P3 |
+| TC-SYS-023 | BR-SYS-014 | No preview pill | Phone 375 px / desktop | /preview/503 | No "Preview mode" pill at either width | P3 |
 | TC-SYS-024 | BR-SYS-017 | Reduced motion | Reduced-motion setting on | All previews | Illustrations still | P3 |
-| TC-SYS-025 | 11 | Phone layout | 320–375 px | All system pages | No sideways scroll; buttons wrap; astronaut hidden | P2 |
+| TC-SYS-025 | 11 | Phone layout | 320–375 px | All system pages | No sideways or vertical scroll; buttons wrap; astronaut hidden; avatar-only account chip | P2 |
+| TC-SYS-026 | AC-SYS-011 | Short screens fit | 375 × 560, 1280 × 600, landscape phone | All system pages; Page crash with Technical details open | No vertical scroll; illustration smaller or hidden; text and buttons fully visible | P1 |
+| TC-SYS-027 | AC-SYS-011 | Re-fit on resize | Desktop | Shrink the window height step by step on /maintenance | Illustration shrinks smoothly, then hides; page never scrolls | P3 |
+| TC-SYS-028 | AC-SYS-012 | Button styles | Any | /error, /maintenance, /session-expired, offline overlay | Main button solid white with navy text on every page; secondary outlined | P3 |
+| TC-SYS-029 | AC-SYS-013 | Super Admin links | Signed in as Super Admin | /does-not-exist → **Back to dashboard**, Projects link, logo; /ui-preview | Manage Clients each time | P2 |
 
 ## 15. Open Questions and Gaps
 
@@ -410,15 +440,17 @@ Not applicable — system pages and the gallery contain no form fields or data e
 | OQ-SYS-006 | Page crash, Server error | Crashes are only written to the browser console; "We’ve been notified" and "Your data is safe" are fixed statements | Promises not backed by reporting | Decide on error reporting and approve the wording | Open |
 | OQ-SYS-007 | Page crash | No feedback when copying fails | Users may think details were copied | *Proposed: "Couldn’t copy — select the text instead"* as an error toast | Open |
 | OQ-SYS-008 | Session expired | The page claims the user was signed out but the session stays active until **Sign in again**; the logo still opens the Dashboard; after signing in the user lands on the Dashboard, not the previous page | Inconsistent security message and lost context | Confirm the session should end when the page opens and whether to return the user to their previous page | Open |
-| OQ-SYS-009 | Gallery | The gallery and previews are shown to every signed-in user in every build (see OQ-SHELL-010); the back-online state has no card of its own | Development tools visible to business users | Confirm hiding in production and whether more states (for example back online) need cards | Open |
-| OQ-SYS-010 | All system pages | Always dark regardless of the chosen theme; footer differs from the admin footer | Consistency with SH-010 | Confirm the dark-only design is intended | Open |
+| OQ-SYS-009 | Gallery | The gallery and previews are shown to every Training Partner in every build (see OQ-SHELL-010); the back-online state has no card of its own | Development tools visible to business users | Confirm hiding in production and whether more states (for example back online) need cards | Open |
+| OQ-SYS-010 | All system pages | Always dark regardless of the chosen theme; footer differs from the portal footer | Consistency with SH-010 | Confirm the dark-only design is intended | Open |
+| OQ-SYS-011 | Not found, Page crash, Server error (Super Admin) | For a Super Admin the button still reads **Back to dashboard** and Not found still lists Dashboard, All Clients and Projects, although all of them open Manage Clients | Labels promise pages the role does not have | Confirm per-role wording and destinations (e.g. "Back to Manage Clients") | Open |
+| OQ-SYS-012 | Preview mode | Previews no longer carry any "Preview mode" marker or way back to the gallery; the page looks exactly like a real error and its actions (reload, email support, go to Dashboard) are real | Testers may mistake a preview for a real failure, and the Session expired / Offline previews behave differently from real use without saying so | Confirm that no marker is wanted, or define a subtle one | Open |
 
 ## 16. PRD Completeness Checklist
 
 - [x] Page purpose and objective: Complete
 - [x] Pages and features inventory: Complete (frame, Not found, Page crash, Server error, Maintenance, Offline, Session expired, gallery, preview mode)
 - [x] User roles and access: Complete
-- [x] Page functionality and behaviour: Complete
+- [x] Page functionality and behaviour: Complete (including fit-to-screen and per-role links, v1.1)
 - [x] User workflows: Complete
 - [x] Field-level specifications: Not applicable (no form fields on these pages)
 - [x] Minimum and maximum constraints, where known: Not applicable (no inputs)

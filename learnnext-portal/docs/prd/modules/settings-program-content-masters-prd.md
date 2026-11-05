@@ -7,10 +7,10 @@
 | PRD title | Settings – Program & Content Masters PRD |
 | Module name | Settings – Program & Content Masters (Program Category, Modules) |
 | Document ID | PRD-PRG |
-| Version | 1.0 |
+| Version | 1.1 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (Program Category is fully linked to Manage Content; the Modules master is built but not yet used by any other page — a program's own modules are managed separately, from the Projects page later) |
-| Last updated | 2026-10-29 |
+| Last updated | 2026-11-05 (v1.1: naming: LearnNext Portal; "Training Partner" replaces "Admin") |
 | Related modules/pages | [settings-hub-prd.md](settings-hub-prd.md), [manage-content-prd.md](manage-content-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
@@ -22,25 +22,25 @@ The **Program & Content** group in Settings ("How programs are grouped and phase
 
 Objectives:
 
-- Let Admin users add, rename and delete program categories, while protecting programs from losing their category.
+- Let Training Partner users add, rename and delete program categories, while protecting programs from losing their category.
 - Show how many programs use each category, and which ones.
-- Let Admin users maintain the list of journey phases and switch each one on or off.
+- Let Training Partner users maintain the list of journey phases and switch each one on or off.
 
 ## 3. Module and Page Overview
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Program Category list (Settings › Program Category) | Maintain the categories programs are grouped in | Admin user | Filter by usage pill, search, sort, paginate, see program names, add, edit, delete | Manage Content |
-| Add / Edit program category modal | Enter or rename a category | Admin user | Type a name, save, cancel | Program Category list |
-| Delete category dialogs | Confirm deletion, or explain why it is blocked | Admin user | Delete, cancel, go to Manage Content | Manage Content |
-| Modules list (Settings › Modules) | Maintain the program phases | Admin user | Filter by enabled pill, search, sort, paginate, add, edit, delete | — |
-| Add / Edit module modal | Enter a module name and its enable status | Admin user | Type a name, switch Enable status, save, cancel | Modules list |
+| Program Category list (Settings › Program Category) | Maintain the categories programs are grouped in | Training Partner user | Filter by usage pill, search, sort, paginate, see program names, add, edit, delete | Manage Content |
+| Add / Edit program category modal | Enter or rename a category | Training Partner user | Type a name, save, cancel | Program Category list |
+| Delete category dialogs | Confirm deletion, or explain why it is blocked | Training Partner user | Delete, cancel, go to Manage Content | Manage Content |
+| Modules list (Settings › Modules) | Maintain the program phases | Training Partner user | Filter by enabled pill, search, sort, paginate, add, edit, delete | — |
+| Add / Edit module modal | Enter a module name and its enable status | Training Partner user | Type a name, switch Enable status, save, cancel | Modules list |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user | Both pages (SH-002) | All actions listed in section 3 | A category used by programs cannot be deleted. Role permissions from Roles & Access are not enforced (SH-002). |
+| Training Partner user | Both pages (SH-002) | All actions listed in section 3 | A category used by programs cannot be deleted. Role permissions from Roles & Access are not enforced (SH-002). |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003) |
 
 ## 5. Page Functionality and Behavior

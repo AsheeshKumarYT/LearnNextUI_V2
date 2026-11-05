@@ -7,16 +7,16 @@
 | PRD title | My Profile PRD |
 | Module name | My Profile |
 | Document ID | PRD-PROF |
-| Version | 1.2 |
+| Version | 1.3 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (personal details, profile picture and cover are saved and remembered in this browser; the password change is a simulation with a fixed demo code that does not change the sign-in password; "My activity" records only profile and password changes made on this page) |
-| Last updated | 2026-11-03 (v1.1: phone layout; v1.2: cover picker with Static / Animated covers and a live preview, 12 static covers, slim drag-and-drop photo uploader, avatar tweaks, tabbed layout on phones) |
+| Last updated | 2026-11-05 (v1.3: naming: LearnNext Portal, "Training Partner" replaces "Admin"; page also used by Super Admin) · 2026-11-03 (v1.1: phone layout; v1.2: cover picker with Static / Animated covers and a live preview, 12 static covers, slim drag-and-drop photo uploader, avatar tweaks, tabbed layout on phones) |
 | Phone layout (v1.1–1.2) | **Tabs like Client details:** the profile banner with section tabs joined to its bottom edge — **Personal details** (the form), **Security** (Security + Account cards), **Activity** (summary + timeline, its own heading hidden) — one section at a time, the open tab kept in the address (/profile?tab=security / activity) and the tab bar pinned under the top bar while scrolling. Desktop keeps the one-page layout. Contact strip, password panel and activity summary lose their inner boxes (rows under dashed lines; the activity summary shows only the period, count and comparison — no "By type" list on phones); password key tile and the one-time-code hint hidden; shorter card sub-texts ("Your details on LearnNext.", "Password and sign-in.", "Set by your organisation.", "Your latest actions."). See SH-013. |
 | Related modules/pages | [Authentication](authentication-prd.md), [App shell and navigation](app-shell-navigation-prd.md), [Dashboard](dashboard-prd.md), [Client detail](client-detail-prd.md) (Activity tab), [System pages](system-pages-prd.md), [Settings: access masters](settings-access-masters-prd.md), [Support desk](support-desk-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-My Profile is the signed-in Admin user's own page. It lets the user:
+My Profile is the signed-in user's own page. It is the same page in the Training Partner and Super Admin portals. It lets the user:
 
 - see how they appear to colleagues (name, role, designation, department, contact details, length of membership);
 - edit their personal details (name, email address, mobile number, location, department, designation and a short "About" line);
@@ -25,7 +25,7 @@ My Profile is the signed-in Admin user's own page. It lets the user:
 - view read-only account facts managed by the organisation (employee ID, access level, last sign-in);
 - review their own recent activity in a filterable timeline.
 
-The objective is a single, calm place where an Admin keeps their identity current. Changes made here appear immediately wherever the signed-in user is shown (header user menu, Dashboard greeting, attribution of new records).
+The objective is a single, calm place where a Training Partner user keeps their identity current. Changes made here appear immediately wherever the signed-in user is shown (header user menu, Dashboard greeting, attribution of new records).
 
 In the current build all data is demo data (SH-001). Profile changes are remembered in this browser across reloads; the password change does not affect the actual sign-in password (see [authentication-prd.md](authentication-prd.md)).
 
@@ -33,24 +33,25 @@ In the current build all data is demo data (SH-001). Profile changes are remembe
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| My Profile page | Own identity, security and activity | Admin user (signed in) | Open from the header user menu (**My Profile**) | Header user menu ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
-| Profile banner | Show who the user is | Admin user | View cover, avatar, name, role, designation, department; **Change cover**; **Change avatar**; click the picture; copy email/mobile; email/call links | Cover picker, Avatar picker |
-| Cover picker ("Choose a cover") | Choose one of 12 static or 6 animated covers | Admin user | Switch **Static** / **Animated**, select a cover, **Apply cover**, **Cancel** | Profile banner |
-| Profile picture view | See the current picture large | Admin user | **Close**, **Change photo** | Avatar picker |
-| Avatar picker ("Choose your profile picture") | Choose an illustrated avatar, upload a photo or use initials | Admin user | **Avatars** tab, **Upload photo** tab, **Use initials**, **Save avatar**, **Cancel** | Profile banner, header user menu |
-| Personal details | Edit own details | Admin user | Edit fields, **Save changes**, **Discard** | Profile banner, header user menu |
-| Security | Password health and entry to the password change | Admin user | **Change password**, **Renew** | Change password dialog |
-| Change password dialog | Change the password after one-time-code verification | Admin user | Choose channel, **Send code**, enter code, **Verify code**, **Resend code**, enter new password, **Update password**, **Done** | Security, My activity |
-| Account | Read-only account facts | Admin user | Copy employee ID | [settings-access-masters-prd.md](settings-access-masters-prd.md) (roles) |
-| My activity | Own recent actions | Admin user | Filter by type and date range, **Clear**, **Show more**, **Secure your account** | Change password dialog |
+| My Profile page | Own identity, security and activity | Training Partner user (signed in) | Open from the header user menu (**My Profile**) | Header user menu ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
+| Profile banner | Show who the user is | Training Partner user | View cover, avatar, name, role, designation, department; **Change cover**; **Change avatar**; click the picture; copy email/mobile; email/call links | Cover picker, Avatar picker |
+| Cover picker ("Choose a cover") | Choose one of 12 static or 6 animated covers | Training Partner user | Switch **Static** / **Animated**, select a cover, **Apply cover**, **Cancel** | Profile banner |
+| Profile picture view | See the current picture large | Training Partner user | **Close**, **Change photo** | Avatar picker |
+| Avatar picker ("Choose your profile picture") | Choose an illustrated avatar, upload a photo or use initials | Training Partner user | **Avatars** tab, **Upload photo** tab, **Use initials**, **Save avatar**, **Cancel** | Profile banner, header user menu |
+| Personal details | Edit own details | Training Partner user | Edit fields, **Save changes**, **Discard** | Profile banner, header user menu |
+| Security | Password health and entry to the password change | Training Partner user | **Change password**, **Renew** | Change password dialog |
+| Change password dialog | Change the password after one-time-code verification | Training Partner user | Choose channel, **Send code**, enter code, **Verify code**, **Resend code**, enter new password, **Update password**, **Done** | Security, My activity |
+| Account | Read-only account facts | Training Partner user | Copy employee ID | [settings-access-masters-prd.md](settings-access-masters-prd.md) (roles) |
+| My activity | Own recent actions | Training Partner user | Filter by type and date range, **Clear**, **Show more**, **Secure your account** | Change password dialog |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (signed in) | My Profile, for their own account only (SH-002) | Edit own details, picture and cover; change own password; view own account facts and activity | Cannot edit Employee ID, Access level or Last sign-in. There is no way to open another user's profile |
+| Training Partner user (signed in) | My Profile, for their own account only (SH-002) | Edit own details, picture and cover; change own password; view own account facts and activity | Cannot edit Employee ID, Access level or Last sign-in. There is no way to open another user's profile |
+| Super Admin (signed in) | My Profile, for their own account only. It is one of the two pages the Super Admin portal opens ([super-admin-prd.md](super-admin-prd.md)) | Same as the Training Partner user | Same as the Training Partner user |
 | Visitor (not signed in) | None | None | Redirected to Sign in (SH-003) |
-| Facilitators, client SPOCs, participants | None | None | They are records, not users of this console (SH-002) |
+| Facilitator, Participant, Client SPOC roles | None | None | Their portals are not built yet: at "Continue as" these roles show "Coming soon" and cannot be picked, and an account with only such a role sees a "Coming soon" screen (SH-002) |
 
 No role-specific restrictions apply on this page (SH-002).
 
@@ -73,7 +74,7 @@ No role-specific restrictions apply on this page (SH-002).
 | **Change cover** (bottom-right of the cover) | Change the cover | Click | Opens "Choose a cover" (5.3) | On phones only the palette icon shows (label "Change cover") | Cover picker open |
 | Profile picture (in a slowly turning colour ring) | Show and change the picture | Click | If a picture is set: opens the large view (5.4). If no picture: opens the avatar picker directly (5.5) | Accessible label "View profile picture" or "Add profile picture". Without a picture, initials are shown. A picture that fails to load falls back to initials | Dialog open |
 | Name | Identity | View | The user's full name as the page heading | Updates as soon as Personal details are saved | — |
-| Role pill | Access level | View | Shows the role (demo: "Admin") with a shield icon | Read-only | — |
+| Role pill | Access level | View | Shows the role (demo: "Training Partner") with a shield icon | Read-only | — |
 | Designation · Department line | Job context | View | Shows designation and department. If empty: "Add your designation" / "Add your department" | Both fields are required in Personal details, so the fallback normally appears only for incomplete data | — |
 | **Change avatar** | Change the picture | Click | Opens the avatar picker (5.5) | — | Picker open |
 | Contact strip: **Email** | Show and use the email | View, click, copy | Shows the email as a link that opens a new email; a copy button copies it | Copy button label "Copy email", then "Copied" with a tick for 1.5 seconds. On larger screens the button appears on hover or keyboard focus | Email copied |
@@ -163,7 +164,7 @@ No role-specific restrictions apply on this page (SH-002).
 |---|---|---|---|---|---|
 | Card header | Explain the section | View | "Account" with "Managed by your organisation." | Read-only | — |
 | **Employee ID** | Staff identifier | View, copy | Shows the ID (demo: "LN-0142") with a copy button ("Copy employee ID", then "Copied" for about 1.6 s) | Not editable | ID copied |
-| **Access level** | Role | View | Shows the role (demo: "Admin") | Not editable here; not linked to the Roles & Access master (SH-002, OQ-PROF-011) | — |
+| **Access level** | Role | View | Shows the role (demo: "Training Partner"). It is the account's stored role, not the role picked at "Continue as" | Not editable here; not linked to the Roles & Access master (SH-002, OQ-PROF-011) | — |
 | **Last sign-in** | Recent access | View | Relative time (SH-012), for example "42m ago"; older than a week shows a date | In the current build this is a fixed demo value and does not reflect the real sign-in time [Partially Implemented] (OQ-PROF-008) | — |
 | Missing value | Robustness | — | "—" (SH-012) | — | — |
 
@@ -382,7 +383,7 @@ My activity is the only listing. It is a timeline, not a table, and does not use
 | Client, facilitator, content, settings and support pages ([clients-prd.md](clients-prd.md), [facilitators-prd.md](facilitators-prd.md), [manage-content-prd.md](manage-content-prd.md), [settings-hub-prd.md](settings-hub-prd.md), [support-desk-prd.md](support-desk-prd.md)) | New records, edits and support replies are attributed to the signed-in user's current name | Create or edit a record after a name change | New attribution uses the new name; earlier records keep the name used at the time [Inferred] | OQ-PROF-015 |
 | [Client detail](client-detail-prd.md) | The client Activity tab uses the same timeline with client-specific types | — | Same filter, summary and paging behaviour | 5.10 |
 | [System pages](system-pages-prd.md) | Not-found and other full-screen pages reuse the animated cover artwork and show the user's picture and name with a link to My Profile; Session expired shows the user's picture and name | Open a system page while signed in | Current picture and name shown | BR-PROF-011 |
-| [Settings: access masters](settings-access-masters-prd.md) | Access level shown here is not derived from Roles & Access | — | Shows "Admin" regardless | SH-002, OQ-PROF-011 |
+| [Settings: access masters](settings-access-masters-prd.md) | Access level shown here is not derived from Roles & Access | — | Shows "Training Partner" regardless, even when signed in as Super Admin | SH-002, OQ-PROF-011 |
 
 ## 13. Acceptance Criteria
 

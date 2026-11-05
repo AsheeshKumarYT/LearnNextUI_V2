@@ -7,10 +7,10 @@
 | PRD title | Settings – Finance Masters PRD |
 | Module name | Settings – Finance Masters (Entity, Sub-entity, SAP BP, Expense head) |
 | Document ID | PRD-FIN |
-| Version | 1.0 |
+| Version | 1.1 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Implemented (Entity, Sub-entity and Expense head can be added, edited and deleted; SAP BP is a read-only list by design). Some links to other modules are partial (section 12). |
-| Last updated | 2026-10-29 |
+| Last updated | 2026-11-05 (v1.1: naming: LearnNext Portal; "Training Partner" replaces "Admin") |
 | Related modules/pages | [settings-hub-prd.md](settings-hub-prd.md), [manage-content-prd.md](manage-content-prd.md), [facilitators-prd.md](facilitators-prd.md), [dashboard-prd.md](dashboard-prd.md), [clients-prd.md](clients-prd.md), [client-detail-prd.md](client-detail-prd.md), [settings-location-masters-prd.md](settings-location-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
@@ -36,19 +36,19 @@ All four pages open from **Settings › Finance** ("Billing entities, SAP partne
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Entity | Lists the legal entities that bill programs | Admin user | Filter by status pill, search, open Filters (status, parent, state, registration type), sort, paginate, Add entity, Edit, Delete | Sub-entity, Expense head, Manage Content, Facilitators |
-| Add / Edit entity (modal) | Capture an entity's details, registrations, documents and billing address in 3 steps | Admin user | Fill steps Details → Registration → Tax & billing, upload documents, save, discard | Entity |
-| Sub-entity | Lists the units under each entity | Admin user | Filter by status pill, search, open Filters (status, entity), sort, paginate, Add sub-entity, Edit, Delete | Entity, Expense head, Manage Content |
-| Add / Edit sub-entity (modal) | Capture the parent entity, name, optional logo and (when editing) status | Admin user | Save, discard | Sub-entity |
-| SAP BP | Shows each trainer's SAP Business Partner code per billing unit (read-only) | Admin user | Filter by mapping pill, search, open Filters (entity, mapping, missing code), sort, paginate | Facilitators (conceptually) |
-| Expense head | Lists the GL code each expense type books to, per sub-entity | Admin user | Filter by status pill, search, open Filters (status, expense head, entity, sub-entity), sort, paginate, Add expense head, Edit, Delete | Entity, Sub-entity |
-| Add / Edit expense head (modal) | Capture expense head, entity, sub-entity, GL code, comment and (when editing) status | Admin user | Save, discard | Expense head |
+| Entity | Lists the legal entities that bill programs | Training Partner user | Filter by status pill, search, open Filters (status, parent, state, registration type), sort, paginate, Add entity, Edit, Delete | Sub-entity, Expense head, Manage Content, Facilitators |
+| Add / Edit entity (modal) | Capture an entity's details, registrations, documents and billing address in 3 steps | Training Partner user | Fill steps Details → Registration → Tax & billing, upload documents, save, discard | Entity |
+| Sub-entity | Lists the units under each entity | Training Partner user | Filter by status pill, search, open Filters (status, entity), sort, paginate, Add sub-entity, Edit, Delete | Entity, Expense head, Manage Content |
+| Add / Edit sub-entity (modal) | Capture the parent entity, name, optional logo and (when editing) status | Training Partner user | Save, discard | Sub-entity |
+| SAP BP | Shows each trainer's SAP Business Partner code per billing unit (read-only) | Training Partner user | Filter by mapping pill, search, open Filters (entity, mapping, missing code), sort, paginate | Facilitators (conceptually) |
+| Expense head | Lists the GL code each expense type books to, per sub-entity | Training Partner user | Filter by status pill, search, open Filters (status, expense head, entity, sub-entity), sort, paginate, Add expense head, Edit, Delete | Entity, Sub-entity |
+| Add / Edit expense head (modal) | Capture expense head, entity, sub-entity, GL code, comment and (when editing) status | Training Partner user | Save, discard | Expense head |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in staff member) | All four pages (SH-002, SH-003) | Entity, Sub-entity, Expense head: view, search, filter, sort, paginate, add, edit, change status, delete. SAP BP: view, search, filter, sort, paginate | SAP BP codes cannot be added or changed here. An entity's invoice initial cannot be changed after it is created. Role-based limits defined in Roles & Access are not enforced (SH-002). |
+| Training Partner user (signed in and continuing as Training Partner) | All four pages (SH-002, SH-003) | Entity, Sub-entity, Expense head: view, search, filter, sort, paginate, add, edit, change status, delete. SAP BP: view, search, filter, sort, paginate | SAP BP codes cannot be added or changed here. An entity's invoice initial cannot be changed after it is created. Role-based limits defined in Roles & Access are not enforced (SH-002). |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003). |
 
 ## 5. Page Functionality and Behavior
@@ -432,24 +432,24 @@ Validation timing in these forms differs from SH-004: an error — including a "
 ## 13. Acceptance Criteria
 
 **AC-FIN-001: Add an entity in three steps**
-- Given the Admin opens **Add entity**
+- Given the user opens **Add entity**
 - When they complete Details, Registration and Tax & billing with valid values and all documents, and click **Save entity**
 - Then the toast "Entity added" — "\<name> (\<initial>)" appears, the modal closes and the entity appears as Active
 - And its invoice initial is stored in upper case
 
 **AC-FIN-002: Next checks only the current step (negative)**
 - Given the Details step is empty
-- When the Admin clicks **Next**
+- When the user clicks **Next**
 - Then "Enter the entity’s legal name", "Enter an invoice initial" and "Upload a logo" appear and the step does not change
 
 **AC-FIN-003: Duplicate invoice initial (negative)**
 - Given an entity with initial "BYLD" exists
-- When the Admin types "byld" in Invoice initial and leaves the field
+- When the user types "byld" in Invoice initial and leaves the field
 - Then the value shows "BYLD" and the error "Another entity uses this initial" appears
 
 **AC-FIN-004: Invoice initial locked on edit**
 - Given an existing entity is opened for editing
-- When the Admin views the Details step
+- When the user views the Details step
 - Then the initial is shown locked with the tooltip "Can’t be changed — issued invoices carry it"
 
 **AC-FIN-005: GSTIN must contain the PAN (negative)**
@@ -458,39 +458,39 @@ Validation timing in these forms differs from SH-004: an error — including a "
 - Then "GSTIN should contain the PAN" appears and the entity cannot be saved
 
 **AC-FIN-006: Save jumps to the first step with errors**
-- Given an entity being edited with a cleared PAN, while the Admin is on Tax & billing
+- Given an entity being edited with a cleared PAN, while the user is on Tax & billing
 - When they click **Save changes**
 - Then the Registration step opens with "Enter the PAN" and the toast "Check the highlighted fields" — "1 field needs a fix in Registration."
 
 **AC-FIN-007: Entity delete blocked by child entities (negative)**
 - Given "BYLD Group Learning Pvt Ltd" is the parent of 5 other entities
-- When the Admin clicks its bin icon
+- When the user clicks its bin icon
 - Then no dialog opens and the toast "Can’t delete this entity yet" — "5 entities sit under it — change their parent first." appears
 
 **AC-FIN-008: Entity delete blocked by sub-entities (negative)**
 - Given "Leadership Consulting India LLP" has the sub-entity "LCPL"
-- When the Admin confirms **Delete**
+- When the user confirms **Delete**
 - Then the toast "Couldn’t delete the entity" — "Sub-entities sit under this one — move or delete them first." appears and the entity remains
 
 **AC-FIN-009: Sub-entity name unique within an entity (negative)**
 - Given "BYLD Learning" exists under "BYLD Group Learning Pvt Ltd"
-- When the Admin adds " byld learning " under the same entity
+- When the user adds " byld learning " under the same entity
 - Then "This entity already has a sub-entity with this name" appears
 - And the same name under a different entity is accepted
 
 **AC-FIN-010: Sub-entity delete blocked by expense heads (negative)**
 - Given the sub-entity "LCPL" has 2 expense heads
-- When the Admin confirms its deletion
+- When the user confirms its deletion
 - Then the toast "Couldn’t delete the sub-entity" — "2 expense heads use it — move or delete them first." appears
 
 **AC-FIN-011: Expense head pair unique (negative)**
 - Given "Revenue Invoice" exists for sub-entity "Blanchard"
-- When the Admin chooses Revenue Invoice + Blanchard Research and Training India LLP + Blanchard
+- When the user chooses Revenue Invoice + Blanchard Research and Training India LLP + Blanchard
 - Then "This sub-entity already has this expense head" appears under Sub-entity
 
 **AC-FIN-012: Sub-entity follows entity**
 - Given the expense head form with an entity and sub-entity chosen
-- When the Admin changes the Entity
+- When the user changes the Entity
 - Then the Sub-entity is cleared and only the new entity's sub-entities are offered
 
 **AC-FIN-013: SAP BP is read-only and shows gaps**
@@ -501,18 +501,18 @@ Validation timing in these forms differs from SH-004: an error — including a "
 
 **AC-FIN-014: SAP BP entity filter narrows columns**
 - Given the SAP BP drawer
-- When the Admin selects only "Blanchard" and applies
+- When the user selects only "Blanchard" and applies
 - Then only the Trainer name and Blanchard columns show and the pills count mapping over Blanchard only
 
 **AC-FIN-015: Unsaved changes guard**
 - Given a finance modal with changes
-- When the Admin presses Esc or clicks **Cancel**
+- When the user presses Esc or clicks **Cancel**
 - Then a "Discard …?" dialog appears with **Keep editing** and **Discard**
 - And clicking the backdrop does not close the modal
 
 **AC-FIN-016: Inactive entity hidden from programs**
 - Given an entity is switched to Inactive and saved
-- When the Admin opens the Manage Content program form
+- When the user opens the Manage Content program form
 - Then that entity is not offered as an Entity choice
 
 ## 14. QA Test Scenarios

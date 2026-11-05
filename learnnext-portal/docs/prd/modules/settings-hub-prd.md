@@ -7,23 +7,23 @@
 | PRD title | Settings Hub PRD |
 | Module name | Settings Hub (Settings page and master pages) |
 | Document ID | PRD-SET |
-| Version | 1.1 |
+| Version | 1.2 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (15 of 18 masters have a page; 3 show a placeholder) |
-| Last updated | 2026-11-03 (v1.1: phone layout) |
+| Last updated | 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | Settings on phones: the outer two-pane card is flattened, the group tabs, the "All masters" title and the pin buttons are hidden; the filter box comes first and each group is its own card, 12 px apart, with master descriptions shown in full. Quick access (pinned / recent) is therefore not reachable on phones. See SH-013. |
 | Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md), [settings-access-masters-prd.md](settings-access-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-Settings is the single place where Admin users find and open the **masters**: the reference lists (entities, locations, job titles, program categories, roles and so on) that the rest of LearnNext Admin relies on.
+Settings is the single place where Training Partner users find and open the **masters**: the reference lists (entities, locations, job titles, program categories, roles and so on) that the rest of LearnNext Portal relies on.
 
 The Settings page aims to:
 
-- Show every master on one page, organised into 7 groups, so an Admin can scan everything without clicking through tabs.
-- Let an Admin jump straight to a group from a list on the left, and always show which group is currently in view.
-- Let an Admin find a master by typing, including common synonyms (for example "town" finds City), and open it from the keyboard.
-- Keep the masters an Admin uses most within reach (pinned masters and recently opened masters).
+- Show every master on one page, organised into 7 groups, so a Training Partner user can scan everything without clicking through tabs.
+- Let a Training Partner user jump straight to a group from a list on the left, and always show which group is currently in view.
+- Let a Training Partner user find a master by typing, including common synonyms (for example "town" finds City), and open it from the keyboard.
+- Keep the masters a Training Partner user uses most within reach (pinned masters and recently opened masters).
 - Give every master its own page address so it can be bookmarked and linked; masters that are not built yet show a clear "on the way" message instead of a broken page.
 
 This PRD covers the Settings page and the master page frame (address, breadcrumb, placeholder and "not found" handling). The contents of each built master are covered by the group PRDs listed in section 3.
@@ -32,13 +32,13 @@ This PRD covers the Settings page and the master page frame (address, breadcrumb
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Settings (`/settings`) | Lists all 18 masters in 7 groups on one page, with a group jump list, a filter, pins and recent history | Admin user | Jump to a group, filter masters, open a master, pin/unpin, clear history | Sidebar "Settings" item and user menu "Settings" ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
-| Group jump list (left pane) | Jumps to a group's section and highlights the group in view | Admin user | Click a group or Quick access | Settings |
-| Masters pane (right pane) | Shows all groups (default), Quick access, or filter results | Admin user | Open, pin, keyboard-navigate | Every master page |
-| Quick access | Pinned masters plus recently opened masters | Admin user | Open, unpin, Clear history | Settings |
-| Master page (`/settings/<master>`) | Opens one master's own page | Admin user | Work with the master (see group PRDs) | Group PRDs below |
-| Placeholder master page | Shown for masters that are not built yet | Admin user | Return to the master's group | Settings |
-| "Master doesn't exist" page | Shown for an unknown master address | Admin user | Return to Settings | Settings |
+| Settings (`/settings`) | Lists all 18 masters in 7 groups on one page, with a group jump list, a filter, pins and recent history | Training Partner user | Jump to a group, filter masters, open a master, pin/unpin, clear history | Sidebar "Settings" item and user menu "Settings" ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
+| Group jump list (left pane) | Jumps to a group's section and highlights the group in view | Training Partner user | Click a group or Quick access | Settings |
+| Masters pane (right pane) | Shows all groups (default), Quick access, or filter results | Training Partner user | Open, pin, keyboard-navigate | Every master page |
+| Quick access | Pinned masters plus recently opened masters | Training Partner user | Open, unpin, Clear history | Settings |
+| Master page (`/settings/<master>`) | Opens one master's own page | Training Partner user | Work with the master (see group PRDs) | Group PRDs below |
+| Placeholder master page | Shown for masters that are not built yet | Training Partner user | Return to the master's group | Settings |
+| "Master doesn't exist" page | Shown for an unknown master address | Training Partner user | Return to Settings | Settings |
 
 **Master inventory (all 18 masters)**
 
@@ -60,8 +60,8 @@ This PRD covers the Settings page and the master page frame (address, breadcrumb
 | 14 | Alert messages | Alert message templates | Emails and alerts sent automatically | Not Implemented (placeholder) | This PRD (section 5.5) |
 | 15 | Program & Content | Program Category | Categories programs are grouped in | Implemented | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md) |
 | 16 | Program & Content | Modules | Program phases — Pre, During, Post | Implemented | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md) |
-| 17 | Others | Menu Mapping & Access | Pages in the admin menu and their order | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
-| 18 | Others | Roles & Access | What each admin role can see and do | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
+| 17 | Others | Menu Mapping & Access | Pages in the Training Partner menu and their order | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
+| 18 | Others | Roles & Access | What each role can see and do | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
 
 Group order and counts on the page: Finance (4), Location (3), Industry & job (4), Banks (2), Alert messages (1), Program & Content (2), Others (2).
 
@@ -69,10 +69,10 @@ Group order and counts on the page: Finance (4), Location (3), Industry & job (4
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in LearnNext staff member) | Settings page and every master page | All actions in this PRD | Must be signed in (SH-003). No role-based restriction is applied (SH-002). |
+| Training Partner user (signed in and continuing as Training Partner) | Settings page and every master page | All actions in this PRD | Must be signed in (SH-003). No role-based restriction is applied (SH-002). |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003). |
 
-Pins, recent history and the dismissed pin tip are stored in the browser, so they belong to the browser rather than to the Admin user's account (SH-001).
+Pins, recent history and the dismissed pin tip are stored in the browser, so they belong to the browser rather than to the Training Partner user's account (SH-001).
 
 ## 5. Page Functionality and Behavior
 
@@ -80,7 +80,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Page frame | Hold the whole Settings experience in one card | Open Settings from the sidebar or user menu | One card with the group list on the left and the masters pane on the right. The header breadcrumb reads "Settings"; there is no title block (SH-009). | On large screens the card fills the window height and each pane scrolls on its own, so the page itself does not scroll. On smaller screens the group list becomes a sideways-scrolling row above the masters. | Admin sees all groups and masters |
+| Page frame | Hold the whole Settings experience in one card | Open Settings from the sidebar or user menu | One card with the group list on the left and the masters pane on the right. The header breadcrumb reads "Settings"; there is no title block (SH-009). | On large screens the card fills the window height and each pane scrolls on its own, so the page itself does not scroll. On smaller screens the group list becomes a sideways-scrolling row above the masters. | The user sees all groups and masters |
 | Group jump list | Move quickly to a group | Click a group (e.g. "Location") | The masters pane scrolls (smoothly) to that group's section, the section is outlined briefly (about one second) so it is obvious where the user landed, the filter is cleared, and the page address gains `#<group>` (e.g. `#location`) without a page reload. | Each entry shows the group icon, name and number of masters. | The chosen group is highlighted and in view |
 | Scroll-spy highlight | Show which group is in view | Scroll the masters pane | The highlighted group in the left list follows the section currently in view. Near the bottom, short final groups still light up one at a time. | After the user clicks a group, that group stays highlighted until the user scrolls themselves (wheel, touch, keys or scrollbar). | Left list always reflects the visible group |
 | Selected-group row on small screens | Keep the chosen group visible in the sideways row | Pick a group on a phone or tablet | The sideways row scrolls so the chosen group is visible. | Only when the row is wider than the screen | Chosen group visible |
@@ -234,7 +234,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 ## 13. Acceptance Criteria
 
 **AC-SET-001: All masters on one page**
-- Given a signed-in Admin user
+- Given a signed-in Training Partner user
 - When they open `/settings`
 - Then 7 groups are shown in the order Finance, Location, Industry & job, Banks, Alert messages, Program & Content, Others
 - And the left list shows counts 4, 3, 4, 2, 1, 2, 2
@@ -331,9 +331,9 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 |---|---|---|---|---|---|
 | OQ-SET-001 | No-match empty state | The suggestion text names "fee", "trainer" and "assessment", but none of these words match any master today. | Users following the hint get another "No matches". | Update the suggested words or add matching synonyms/masters. | Open |
 | OQ-SET-002 | Banks / Alert messages | Bank master, House bank master and Alert message templates are placeholders; their fields and rules are undefined. | Billing and automatic messages depend on them. | Provide requirements for these three masters. | Open |
-| OQ-SET-003 | Pins and history | Pins and recent history are stored per browser, not per user account. | Admins switching devices lose them; shared computers mix users. | Confirm whether they should follow the user account. | Open |
+| OQ-SET-003 | Pins and history | Pins and recent history are stored per browser, not per user account. | Training Partner users switching devices lose them; shared computers mix users. | Confirm whether they should follow the user account. | Open |
 | OQ-SET-004 | Global search | Resolved 2026-11-02: masters are searchable (name, description, group and search keywords) and open the master | — | — | Resolved |
-| OQ-SET-005 | Access control | Roles & Access permissions (including for "/settings") are not enforced (SH-002). | Any Admin can change finance masters. | Confirm who may view/edit each master. | Open |
+| OQ-SET-005 | Access control | Roles & Access permissions (including for "/settings") are not enforced (SH-002). | Any Training Partner user can change finance masters. | Confirm who may view/edit each master. | Open |
 
 ## 16. PRD Completeness Checklist
 

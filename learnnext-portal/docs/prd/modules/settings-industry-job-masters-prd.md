@@ -7,20 +7,20 @@
 | PRD title | Settings – Industry & Job Masters PRD |
 | Module name | Settings – Industry & Job Masters (Department, Designation, Role, Industry type) |
 | Document ID | PRD-PPL |
-| Version | 1.1 |
+| Version | 1.2 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (the four lists are built and read-only; the values they hold are not yet used by the client, SPOC and participant forms) |
-| Last updated | 2026-11-03 (v1.1: phone layout) |
+| Last updated | 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | The CRM sync note becomes one short line on phones: "Read-only · synced from CRM · <date>". See SH-013. |
 | Related modules/pages | [settings-hub-prd.md](settings-hub-prd.md), [clients-prd.md](clients-prd.md), [client-detail-prd.md](client-detail-prd.md), [facilitators-prd.md](facilitators-prd.md), [profile-prd.md](profile-prd.md), [settings-access-masters-prd.md](settings-access-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The Industry & job group in Settings holds the reference lists that describe clients and the people in them: **Department**, **Designation**, **Role** and **Industry type**. These lists are owned by the company's CRM portal. LearnNext Admin shows them so that Admin users can see what values exist, their approval state in the CRM, and how they relate to each other. Nothing can be added, edited or deleted here.
+The Industry & job group in Settings holds the reference lists that describe clients and the people in them: **Department**, **Designation**, **Role** and **Industry type**. These lists are owned by the company's CRM portal. LearnNext Portal shows them so that Training Partner users can see what values exist, their approval state in the CRM, and how they relate to each other. Nothing can be added, edited or deleted here.
 
 Objectives:
 
-- Give Admin users a single place to look up departments, designations, roles and industry types.
+- Give Training Partner users a single place to look up departments, designations, roles and industry types.
 - Show each value's CRM approval state (departments and designations) or enabled state (designations and roles).
 - Show how values are used: designations per department, clients per industry type.
 - Make it clear that the data comes from the CRM and is read-only, and when it was last synced.
@@ -31,16 +31,16 @@ All four pages open from **Settings › Industry & job** (see [settings-hub-prd.
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Department | Lists departments synced from the CRM, with parent department and CRM approval status | Admin user | Filter by status pill, search, open Filters (status, level, parent), sort, paginate | Designation, Settings hub |
-| Designation | Lists job titles synced from the CRM, with department, parent designation, enabled state and approval status | Admin user | Filter by status pill, search, open Filters (status, department, enabled), sort, paginate | Department, Settings hub |
-| Role | Lists roles people play in programs, synced from the CRM, with description and enabled state | Admin user | Filter by Enabled / Disabled pill, search, sort, paginate | Settings hub |
-| Industry type | Lists industries synced from the CRM, with the number of clients in each | Admin user | Filter by In use / Not in use pill, search, sort, paginate | All Clients, Settings hub |
+| Department | Lists departments synced from the CRM, with parent department and CRM approval status | Training Partner user | Filter by status pill, search, open Filters (status, level, parent), sort, paginate | Designation, Settings hub |
+| Designation | Lists job titles synced from the CRM, with department, parent designation, enabled state and approval status | Training Partner user | Filter by status pill, search, open Filters (status, department, enabled), sort, paginate | Department, Settings hub |
+| Role | Lists roles people play in programs, synced from the CRM, with description and enabled state | Training Partner user | Filter by Enabled / Disabled pill, search, sort, paginate | Settings hub |
+| Industry type | Lists industries synced from the CRM, with the number of clients in each | Training Partner user | Filter by In use / Not in use pill, search, sort, paginate | All Clients, Settings hub |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in staff member) | All four pages (SH-002, SH-003) | View, search, filter, sort and paginate | Cannot add, edit or delete any value; changes are made in the CRM portal. Role-based limits defined in Roles & Access are not enforced (SH-002). |
+| Training Partner user (signed in and continuing as Training Partner) | All four pages (SH-002, SH-003) | View, search, filter, sort and paginate | Cannot add, edit or delete any value; changes are made in the CRM portal. Role-based limits defined in Roles & Access are not enforced (SH-002). |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003). |
 
 ## 5. Page Functionality and Behavior
@@ -94,7 +94,7 @@ All four pages open from **Settings › Industry & job** (see [settings-hub-prd.
 | No Filters button | — | — | There is nothing else to filter by, so the page has no Filters drawer | — | — |
 | Phone card | Phone layout | — | Title = role; Yes/No badge; footer = description | — | — |
 
-These CRM roles (for example "HR Manager", "Trainer", "Participant") describe what people do in programs. They are **not** the admin roles managed in Roles & Access ([settings-access-masters-prd.md](settings-access-masters-prd.md)).
+These CRM roles (for example "HR Manager", "Trainer", "Participant") describe what people do in programs. They are **not** the access roles managed in Roles & Access ([settings-access-masters-prd.md](settings-access-masters-prd.md)).
 
 ### 5.5 Industry type
 
@@ -239,12 +239,12 @@ The masters have no data-entry forms. The only inputs are search boxes and filte
 | Client detail – SPOC form and Participants tab ([client-detail-prd.md](client-detail-prd.md)) [Partially Implemented] | Department and Designation choices | Adding a SPOC / viewing participants | Current build uses separate fixed department and designation lists, not these masters | BR-PPL-008, OQ-PPL-001 |
 | Facilitators ([facilitators-prd.md](facilitators-prd.md)) | Facilitator industry experience uses Industry type names | Viewing a facilitator profile | Industries shown on facilitators come from this master | — |
 | My Profile ([profile-prd.md](profile-prd.md)) | The profile "Department" choice uses a separate internal list, not this master | — | No link | OQ-PPL-001 |
-| Roles & Access ([settings-access-masters-prd.md](settings-access-masters-prd.md)) | Different concept: admin roles vs CRM roles | — | None | — |
+| Roles & Access ([settings-access-masters-prd.md](settings-access-masters-prd.md)) | Different concept: access roles vs CRM roles | — | None | — |
 
 ## 13. Acceptance Criteria
 
 **AC-PPL-001: Read-only masters**
-- Given an Admin user opens Department, Designation, Role or Industry type
+- Given a Training Partner user opens Department, Designation, Role or Industry type
 - When the page loads
 - Then there is no Add button, no edit/delete row actions and rows do not open anything
 - And the note "Synced from the CRM portal. Read-only here — \<noun> are added and edited in the CRM." is shown with "Last synced \<relative time>"

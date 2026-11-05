@@ -7,46 +7,46 @@
 | PRD title | Manage Content PRD |
 | Module name | Manage Content (program list, program details and history, add / edit program, program content page with Upload Content and Content Permissions) |
 | Document ID | PRD-CNT |
-| Version | 1.2 |
+| Version | 1.3 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented. The program list, add / edit program, history, content upload and permission setting all work, and each program shows its own modules. Gaps: programs cannot be deleted or retired; a program's modules cannot be changed yet (Projects page, later); the permissions are stored but no trainer or participant experience uses them in this application; uploaded files are only held for the browser session (SH-001). |
-| Last updated | 2026-11-03 (v1.1: phone layout; v1.2: program cards use the standard list card, 3 per row, on every width) |
-| Phone layout (v1.1) | Program content hero actions in a vertical ⋮ menu; Upload Content keeps its coloured lanes (only the outer card is flattened); Content Permissions shows one card per module with each audience on one line; the sticky save bar sits above the bottom tab bar. See SH-013. |
+| Last updated | 2026-11-05 (v1.3: naming: "Training Partner" replaces "Admin"; Upload Content on phones = one module at a time via module chips, picked chip clearly visible in dark mode) · 2026-11-03 (v1.1: phone layout; v1.2: program cards use the standard list card, 3 per row, on every width) |
+| Phone layout (v1.1) | Program content hero actions in a vertical ⋮ menu; Upload Content keeps its coloured lanes (only the outer card is flattened) and shows one module at a time, picked from a row of module chips (see 5.7); Content Permissions shows one card per module with each audience on one line; the sticky save bar sits above the bottom tab bar. See SH-013. |
 | Related modules/pages | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [settings-access-masters-prd.md](settings-access-masters-prd.md), [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [facilitators-prd.md](facilitators-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-**Manage Content** is the catalogue of the learning programs LearnNext sells. Each program has a name, a category, a logo, the entity and sub-entity it is billed under, a fee per person and an executive overview document. Each program also has its own content page, where Admin users upload what participants receive before, during and after the program, and decide what trainers and participants may do with each item.
+**Manage Content** is the catalogue of the learning programs LearnNext sells. Each program has a name, a category, a logo, the entity and sub-entity it is billed under, a fee per person and an executive overview document. Each program also has its own content page, where Training Partner users upload what participants receive before, during and after the program, and decide what trainers and participants may do with each item.
 
 Objectives:
 
-- Give Admin users one list of all programs, with search, filters and quick summary counts.
-- Let Admin users add and edit programs with complete, validated details (every program field is required).
+- Give Training Partner users one list of all programs, with search, filters and quick summary counts.
+- Let Training Partner users add and edit programs with complete, validated details (every program field is required).
 - Keep an audit trail of every change to a program and its content, visible in the program's details drawer.
-- Let Admin users organise program content into three journey stages (Pre-program, During, Post-program) as named elements holding documents, videos and links.
-- Let Admin users set, per element, whether trainers and participants can view, download, or view and download the content.
+- Let Training Partner users organise program content into three journey stages (Pre-program, During, Post-program) as named elements holding documents, videos and links.
+- Let Training Partner users set, per element, whether trainers and participants can view, download, or view and download the content.
 - Protect unsaved permission changes from being lost when the user leaves the page.
 
 ## 3. Module and Page Overview
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Manage Content list (sidebar → Manage Content) | See and find all programs | Admin user | Filter with summary pills, search, filter by category / entity, switch table / card view, sort, paginate, open details, add program, edit program, Add content | Program content page |
-| Filter programs drawer | Narrow the list by category and entity | Admin user | Pick categories and entities, Reset, apply | Manage Content list |
-| Program details drawer | See a program's details, executive overview and history of changes | Admin user | Add content, Edit program, View the executive overview, Show older changes | Program content page, Add / Edit program modal |
-| Add / Edit program modal (2 steps) | Create or change a program | Admin user | Fill in Program step and Mapping & fees step, Next, Back, Add program / Save changes, Cancel | Manage Content list, Program content page |
-| Program content page (breadcrumb "Manage Content › Program content") | Manage one program's content and permissions | Admin user | Switch tabs, Edit program, go back to All programs | Manage Content list |
-| Upload Content tab | Organise the program's content in Pre-program / During / Post-program | Admin user | Add element, open element, drag to reorder or move between stages | Add / Edit element modal, Element drawer |
-| Add / Edit element modal | Create or change an element (name, description, documents, videos, links) | Admin user | Type name and description, add / name / remove files and links, save, cancel | Upload Content tab |
-| Element drawer | See an element in full | Admin user | Move up / down / to another stage, view / play / open files, Edit element, Delete element | Add / Edit element modal |
-| Content Permissions tab | Set what trainers and participants can do with each element | Admin user | Set per stage or per element, Customise per element, Discard, Save permissions | Upload Content tab |
-| File preview | View an uploaded file full size | Admin user | Open in new tab, Download, close | Program details drawer, Element drawer, program modal |
+| Manage Content list (sidebar → Manage Content) | See and find all programs | Training Partner user | Filter with summary pills, search, filter by category / entity, switch table / card view, sort, paginate, open details, add program, edit program, Add content | Program content page |
+| Filter programs drawer | Narrow the list by category and entity | Training Partner user | Pick categories and entities, Reset, apply | Manage Content list |
+| Program details drawer | See a program's details, executive overview and history of changes | Training Partner user | Add content, Edit program, View the executive overview, Show older changes | Program content page, Add / Edit program modal |
+| Add / Edit program modal (2 steps) | Create or change a program | Training Partner user | Fill in Program step and Mapping & fees step, Next, Back, Add program / Save changes, Cancel | Manage Content list, Program content page |
+| Program content page (breadcrumb "Manage Content › Program content") | Manage one program's content and permissions | Training Partner user | Switch tabs, Edit program, go back to All programs | Manage Content list |
+| Upload Content tab | Organise the program's content in Pre-program / During / Post-program | Training Partner user | Add element, open element, drag to reorder or move between stages | Add / Edit element modal, Element drawer |
+| Add / Edit element modal | Create or change an element (name, description, documents, videos, links) | Training Partner user | Type name and description, add / name / remove files and links, save, cancel | Upload Content tab |
+| Element drawer | See an element in full | Training Partner user | Move up / down / to another stage, view / play / open files, Edit element, Delete element | Add / Edit element modal |
+| Content Permissions tab | Set what trainers and participants can do with each element | Training Partner user | Set per stage or per element, Customise per element, Discard, Save permissions | Upload Content tab |
+| File preview | View an uploaded file full size | Training Partner user | Open in new tab, Download, close | Program details drawer, Element drawer, program modal |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user | Manage Content list and every program content page (SH-002) | All actions in section 3 | Programs cannot be deleted by anyone (no delete action exists). Role permissions from Roles & Access (which lists View, Add, Edit and Export for Manage Content) are not enforced (SH-002). |
+| Training Partner user | Manage Content list and every program content page (SH-002) | All actions in section 3 | Programs cannot be deleted by anyone (no delete action exists). Role permissions from Roles & Access (which lists View, Add, Edit and Export for Manage Content) are not enforced (SH-002). |
 | Trainers and participants | None. They appear only as the audiences of Content Permissions | None in this application | The permissions set here are meant for them; where they take effect is not part of this application (OQ-CNT-011) |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003) |
 
@@ -138,7 +138,7 @@ Opened from **Add content** (list row, card or drawer). The breadcrumb is "Manag
 |---|---|---|---|---|---|
 | Section header | Context | — | "Upload Content" / "What participants get before, during and after the program." with a count pill "N elements · M files" | — | — |
 | Journey ribbon | Show stage order | — | Three joined arrows: Pre-program → During → Post-program, each with its element count | Large screens only | — |
-| Stage lanes | Hold the content | Scroll sideways (more than three modules), or use ‹ › in the section header | One lane per module of the program, in the program's order (Pre-program, During, Post-program for most programs). Up to three modules: the lanes share the width on large screens (two columns on tablets, stacked on phones). **More than three modules (large screens):** the board scrolls sideways like a kanban; lanes keep a fixed width with the next lane peeking in, the arrow ribbon scrolls with them, the edges fade where there is more to see, and ‹ "Earlier modules" / › "Later modules" buttons appear next to the element count (each disabled at its end). Dragging a card near either edge scrolls the board. Phones and tablets keep stacking the lanes. Pre / During / Post keep their own icon, colour and hint; other modules show their own hint and take violet, rose and slate in turn | A program's modules are set per program (BR-CNT-018) | — |
+| Stage lanes | Hold the content | Scroll sideways (more than three modules), or use ‹ › in the section header | One lane per module of the program, in the program's order (Pre-program, During, Post-program for most programs). Up to three modules: the lanes share the width on large screens (two columns on tablets). **More than three modules (large screens):** the board scrolls sideways like a kanban; lanes keep a fixed width with the next lane peeking in, the arrow ribbon scrolls with them, the edges fade where there is more to see, and ‹ "Earlier modules" / › "Later modules" buttons appear next to the element count (each disabled at its end). Dragging a card near either edge scrolls the board. Tablets keep the lanes in columns. **Phones (below 768 px)** show one module at a time: a row of module chips (icon, name and element count) above the lane, scrolling sideways with a soft fade when they do not fit, switches between modules. The first module is picked on opening; the picked chip takes that module's soft tint and outline, clearly visible in dark mode too, while the others stay plain. Pre / During / Post keep their own icon, colour and hint; other modules show their own hint and take violet, rose and slate in turn | A program's modules are set per program (BR-CNT-018) | — |
 | Element card | Summarise an element | Click | Shows the name (one line, full on hover), description (up to 2 lines), one chip per file kind with its count (tooltip such as "2 documents", "1 video", "1 link") and when it was last added or edited (relative time). Clicking opens the Element drawer (section 5.9) | — | Drawer opens |
 | Drag and drop | Reorder or move | Drag a card | While dragging, a line shows where it will land and the lane under the pointer is outlined. Dropping reorders within the lane or moves it to another lane. The change shows at once and is then saved | Moving to another lane shows the toast "Moved to \<stage>" with the element name and adds a history entry. Reordering within a lane shows no toast and adds no history entry. Dropping it where it was does nothing. Mouse only; the keyboard and touch alternative is the Move menu in the Element drawer | Order saved |
 | Move failure | Safety net | — | Error toast "Couldn’t move the element" with the reason; the lanes reload | — | — |
@@ -587,7 +587,7 @@ Toasts follow SH-005.
 | OQ-CNT-005 | Programs | No way to delete, archive or deactivate a program | Retired programs stay in the catalogue | Decide the lifecycle (delete / inactive) and its rules | Open |
 | OQ-CNT-006 | Program modal validation | Program name and Fees per person show "required" errors on blur, unlike SH-004 | Inconsistent validation timing | Confirm which behaviour is intended | Open |
 | OQ-CNT-007 | Entity mapping | An entity with no active sub-entity cannot be used; deleting or deactivating an entity / sub-entity used by programs is not blocked and leaves "Removed entity" / "Removed sub-entity" | Broken billing mapping | Define in-use protection and what editing shows for inactive values | Open |
-| OQ-CNT-008 | Stages | Each program has its own modules (BR-CNT-018), but there is no screen to add, rename, reorder or remove a program's modules; it will be managed from the Projects page | Admins cannot change a program's modules yet | Define the module management on the Projects page (names, order, removing a module that holds content) | Open |
+| OQ-CNT-008 | Stages | Each program has its own modules (BR-CNT-018), but there is no screen to add, rename, reorder or remove a program's modules; it will be managed from the Projects page | Training Partner users cannot change a program's modules yet | Define the module management on the Projects page (names, order, removing a module that holds content) | Open |
 | OQ-CNT-009 | Element uploader | Video menu says "MP4, MOV or WebM" but any video is accepted; no limit on items per element, elements per stage or total size | Storage cost and consistency | Confirm types and count / total limits | Open |
 | OQ-CNT-010 | Element form | No maximum length for element name, description, item names or links | Display and data quality | Define limits | Open |
 | OQ-CNT-011 | Content Permissions | Where and how the levels are enforced for trainers and participants; whether "Download only" means no in-app viewing; confirm defaults (Trainers View & download, Participants View only) | Permissions currently have no effect | Define the consuming experience and rules | Open |

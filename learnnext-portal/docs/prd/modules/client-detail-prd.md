@@ -7,23 +7,23 @@
 | PRD title | Client Details PRD |
 | Module name | Client Details |
 | Document ID | PRD-CLD |
-| Version | 1.1 |
+| Version | 1.2 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (the Invoices section and the invoice figures on Overview are placeholders) |
-| Last updated | 2026-11-03 (v1.1: phone layout) |
+| Last updated | 2026-11-05 (v1.2: naming: "Training Partner" replaces "Admin"; Super Admin access row; SPOC card edit pencil top-right on phones) · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | Hero actions (All clients, Edit client) in a vertical ⋮ menu top-right; Overview stats as a 2×2 grid without icon tiles, labels in full; Projects / Participants / SPOCs tabs are list-like (outer frame removed, one card per item, search on Projects and SPOCs, views fixed to list/cards); repeated tab headings hidden; Tax & Billing: Billing addresses card flattened with its heading hidden, Lower TDS card kept; Activity summary unboxed, showing only the period, count and comparison (no "By type" list on phones). See SH-013. |
 | Related modules/pages | [clients-prd.md](clients-prd.md) (All Clients list, Add/Edit client form), [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [profile-prd.md](profile-prd.md) (shares the activity timeline), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [../shared-requirements.md](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The Client Details page is the single place where an Admin user sees everything about one client (a company, or an individual who is trained directly). It brings together the client's profile, its training projects, the participants trained under it, its points of contact (SPOCs) and what each of them may see, its tax and billing details, its configuration, and a history of everything that happened with it.
+The Client Details page is the single place where a Training Partner user sees everything about one client (a company, or an individual who is trained directly). It brings together the client's profile, its training projects, the participants trained under it, its points of contact (SPOCs) and what each of them may see, its tax and billing details, its configuration, and a history of everything that happened with it.
 
 Objectives:
 
-- Let an Admin user understand a client at a glance (identity, status, counts) and move to any part of its record in one click.
+- Let a Training Partner user understand a client at a glance (identity, status, counts) and move to any part of its record in one click.
 - Show projects and participants in a readable, filterable way without changing them (view only).
-- Let the Admin user maintain the client's SPOCs and the projects each SPOC can see.
-- Let the Admin user change the client's status, product access and communication settings.
+- Let the Training Partner user maintain the client's SPOCs and the projects each SPOC can see.
+- Let the Training Partner user change the client's status, product access and communication settings.
 - Provide an auditable activity history for the client.
 
 Most of the page is view only. The only places that change data are the **SPOCs & Project Access** section (add and edit SPOCs) and the **Settings & Configuration** section. Editing the client's own details happens on the Edit client form ([clients-prd.md](clients-prd.md)).
@@ -32,23 +32,24 @@ Most of the page is view only. The only places that change data are the **SPOCs 
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Client details page (header card + section tabs) | Identify the client and switch between its sections | Admin user | Go back to All clients, Edit, switch section | [clients-prd.md](clients-prd.md) |
-| Overview section | Key counts plus the client's profile, contact details and addresses | Admin user | Open a section from a count, copy code or address, call, email, open website | Projects, Participants, Invoices sections |
-| Projects section | The client's training projects on a yearly timeline or in a list | Admin user | Switch view, step through years, filter, open project details | — |
-| Invoices section | Placeholder for the client's invoices | Admin user | None (not built) | — |
-| Participants section | People from the client and their learning journeys | Admin user | Search, filter, sort, page, open a learning journey | — |
-| SPOCs & Project Access section | The client's points of contact and which projects each can see | Admin user | Switch view, add SPOC, edit SPOC, open SPOC details | Projects section |
-| Tax & Billing section | GST registrations, billing addresses and Lower TDS details | Admin user | Preview certificates | [clients-prd.md](clients-prd.md) (Billing step) |
-| Settings & Configuration section | Client status, product access, portal and communication settings | Admin user | Toggle settings, Reset, Save changes | All Clients (status), Activity History |
-| Activity History section | Timeline of everything that happened with the client | Admin user | Filter by type and date range, show more | [profile-prd.md](profile-prd.md) (same timeline) |
-| Client not found state | Explains that the client cannot be found | Admin user | Go back to All clients | [clients-prd.md](clients-prd.md) |
+| Client details page (header card + section tabs) | Identify the client and switch between its sections | Training Partner user | Go back to All clients, Edit, switch section | [clients-prd.md](clients-prd.md) |
+| Overview section | Key counts plus the client's profile, contact details and addresses | Training Partner user | Open a section from a count, copy code or address, call, email, open website | Projects, Participants, Invoices sections |
+| Projects section | The client's training projects on a yearly timeline or in a list | Training Partner user | Switch view, step through years, filter, open project details | — |
+| Invoices section | Placeholder for the client's invoices | Training Partner user | None (not built) | — |
+| Participants section | People from the client and their learning journeys | Training Partner user | Search, filter, sort, page, open a learning journey | — |
+| SPOCs & Project Access section | The client's points of contact and which projects each can see | Training Partner user | Switch view, add SPOC, edit SPOC, open SPOC details | Projects section |
+| Tax & Billing section | GST registrations, billing addresses and Lower TDS details | Training Partner user | Preview certificates | [clients-prd.md](clients-prd.md) (Billing step) |
+| Settings & Configuration section | Client status, product access, portal and communication settings | Training Partner user | Toggle settings, Reset, Save changes | All Clients (status), Activity History |
+| Activity History section | Timeline of everything that happened with the client | Training Partner user | Filter by type and date range, show more | [profile-prd.md](profile-prd.md) (same timeline) |
+| Client not found state | Explains that the client cannot be found | Training Partner user | Go back to All clients | [clients-prd.md](clients-prd.md) |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in LearnNext staff member) | Full access to every section (SH-002, SH-003) | View every section, add and edit SPOCs, change settings, open Edit client | No role-based restriction is enforced in the current build (SH-002). There is no way to delete a client, a SPOC, a project or a participant on this page. |
-| Client SPOC, participant | No access (they are records here, not users) — SH-002 | N/A | N/A |
+| Training Partner user (signed in and continuing as Training Partner) | Full access to every section (SH-002, SH-003) | View every section, add and edit SPOCs, change settings, open Edit client | No role-based restriction is enforced in the current build (SH-002). There is no way to delete a client, a SPOC, a project or a participant on this page. |
+| Super Admin | Not this page. In the Super Admin portal a client address opens Super Admin's own client page for a training-partner company ([super-admin-prd.md](super-admin-prd.md)) | — | — |
+| Client SPOC, participant | No access. They are records on this page; their own portals are not built yet ("Coming soon", SH-002) | N/A | N/A |
 | Signed-out visitor | Redirected to Sign in (SH-003) | None | N/A |
 
 ## 5. Page Functionality and Behavior
@@ -151,7 +152,7 @@ Most of the page is view only. The only places that change data are the **SPOCs 
 | Access matrix | See who can see what | View / hover | One row per SPOC (avatar, name, "department · email"; hover shows email, mobile, location and "active <time> ago"). One column per project (name with status dot; hover shows "<name> · <status> · <start> – <end>"). A green tick where the SPOC can see the project (tooltip "<SPOC> can see <project>"), a small grey dot where not ("<SPOC> can't see <project>"). Neighbouring ticks join into a soft green lane. The **Access** column shows a small bar of filled seats and "All" (green) or the number | The SPOC column (and the Access column from tablet up) stays fixed while project columns scroll. Projects appear newest-created first. With no projects the Access column reads "No projects yet" | — |
 | Matrix legend | Explain symbols | View | "Can see the project", "No access", and the three project statuses | With no projects: "This client has no projects yet — access shows here once projects are set up." | — |
 | Edit pencil (matrix) | Edit a SPOC | Click "Edit <name>" | Opens the **Edit SPOC** modal | Appears on row hover/focus (always on touch screens) | Modal opens |
-| List view table | List SPOCs | Sort, page, click a row | See section 10. Row click opens the SPOC details drawer; the pencil opens Edit SPOC without opening the drawer | Cards on phones | — |
+| List view table | List SPOCs | Sort, page, click a row | See section 10. Row click opens the SPOC details drawer; the pencil opens Edit SPOC without opening the drawer | Cards on phones: the pencil sits at the top-right of each card, beside the SPOC's name | — |
 | SPOC details drawer | See one SPOC | Click a list row | **Edit** and **Close** buttons; name; "<department> · <location>" or "SPOC"; "Can see all projects" or "Can see n of T projects"; contact list **Email**, **Mobile**, **Department**, **Location**, **Last active** ("Not yet" when never); **Can see N** list (project name, dates, status; "No projects yet" when none) and **No access N** list (only when some are hidden) | **Edit** closes the drawer and opens Edit SPOC | — |
 | Remove SPOC [Not Implemented] | Remove a point of contact | — | There is no way to remove or deactivate a SPOC in the current build | OQ-CLD-001 | — |
 | Primary SPOC | — | — | All SPOCs are equal; there is no primary SPOC | — | — |
@@ -424,7 +425,7 @@ Validation timing for this form differs from SH-004: every error, including "req
 | SPOC list: **Department & location** | Role and city | Sortable by department (blanks last) | Department over city | "—" |
 | SPOC list: **Project access** | Access | Sortable by number of projects | "All projects" badge, or "n of T projects" | — |
 | SPOC list: **Last active** | Recency | Sortable; hidden below medium screens | Relative time (SH-012) | "—" |
-| SPOC list: actions | Edit / open | Pencil "Edit <name>"; arrow cue on hover | — | — |
+| SPOC list: actions | Edit / open | Pencil "Edit <name>"; arrow cue on hover. On phones the pencil sits at the top-right of each SPOC card, beside the name | — | — |
 | SPOC list: pagination | Paging | 10 per page (SH-008 default choices) | — | — |
 | Access matrix | Who sees what | Not sortable; no search or filters | See 5.6 | No SPOCs: "No SPOCs yet" |
 | Activity timeline | History | Newest first; 8 at a time | Type and date filters (7.5) | "No activity in this view" / "Try a different date range or activity type." with **Show all activity** |
@@ -468,7 +469,7 @@ Validation timing for this form differs from SH-004: every error, including "req
 ## 13. Acceptance Criteria
 
 **AC-CLD-001: Open a client**
-- Given a signed-in Admin user on All Clients
+- Given a signed-in Training Partner user on All Clients
 - When they click a client
 - Then Client details opens on Overview with the client's logo, name, code, industry, city and status
 - And the breadcrumb shows "Client details"
@@ -674,7 +675,7 @@ Validation timing for this form differs from SH-004: every error, including "req
 | OQ-CLD-001 | SPOCs | There is no way to remove or deactivate a SPOC | Ex-employees keep project access | Decide whether SPOCs can be removed or deactivated, with confirmation and activity logging | Open |
 | OQ-CLD-002 | SPOCs | Designation and address lines are captured but never displayed | Data entered cannot be checked | Decide where designation and full address appear (list, drawer, matrix tooltip) | Open |
 | OQ-CLD-003 | SPOC form | Department, Designation and Country/State/City use fixed lists, not the Settings masters | Lists can drift from master data | Confirm the source of these options | Open |
-| OQ-CLD-004 | Projects / Participants | No create, edit or archive of projects or participants on this page | Admins may expect to manage them here | Confirm where project and participant management lives | Open |
+| OQ-CLD-004 | Projects / Participants | No create, edit or archive of projects or participants on this page | Training Partner users may expect to manage them here | Confirm where project and participant management lives | Open |
 | OQ-CLD-005 | Settings | "Inactive clients … don’t appear in new schedules" is not enforced | Misleading promise | Define what inactive status blocks | Open |
 | OQ-CLD-006 | Settings | Portal access, SPOC emails, session reminders and product access are stored but have no effect | Expectations of SPOCs/participants | Confirm downstream behaviour of each switch | Open |
 | OQ-CLD-007 | Activity History | Adding or editing a SPOC is not logged; SPOC access entries are sample data | Audit trail incomplete | Decide which actions must be logged | Open |
@@ -684,7 +685,7 @@ Validation timing for this form differs from SH-004: every error, including "req
 | OQ-CLD-011 | SPOC form | Required errors show on leaving a field, unlike SH-004 | Inconsistent UX | Confirm whether to align with SH-004 | Open |
 | OQ-CLD-012 | Invoices | Invoices section and Overview invoice figures are placeholders | Billing visibility | Define invoice list, columns and actions | Open |
 | OQ-CLD-013 | SPOC modal | The modal can be closed while a save is running | User may think the save was cancelled | Confirm whether closing should be blocked while saving | Open |
-| OQ-CLD-014 | Header | No status, CRM or other quick actions in the header | Faster admin workflows | Confirm whether header actions are wanted | Open |
+| OQ-CLD-014 | Header | No status, CRM or other quick actions in the header | Faster everyday work for Training Partner users | Confirm whether header actions are wanted | Open |
 
 ## 16. PRD Completeness Checklist
 

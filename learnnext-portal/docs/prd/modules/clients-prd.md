@@ -7,23 +7,23 @@
 | PRD title | All Clients PRD |
 | Module name | All Clients (client list, Add client, Edit client) |
 | Document ID | PRD-CLI |
-| Version | 1.2 |
+| Version | 1.3 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Implemented (the CRM portal connection is simulated with demo data — SH-001) |
-| Last updated | 2026-11-03 (v1.1: phone layout; v1.2: phone card spacing matches the other lists) |
+| Last updated | 2026-11-05 (v1.3: naming: "Training Partner" replaces "Admin"; Super Admin access row; "Client added" / "Changes saved" toasts appear once All Clients has loaded) · 2026-11-03 (v1.1: phone layout; v1.2: phone card spacing matches the other lists) |
 | Phone layout (v1.1–1.2) | All Clients on phones: one card per client in the table's default order, whole card opens the client; cards 12 px apart and aligned with the search box at the page edge, the same as every other card list; summary pills not shown (the filter drawer's Status covers them); icon-only Filters / Add beside the search. See SH-008, SH-013. |
 | Related modules/pages | [client-detail-prd.md](client-detail-prd.md) (Client details page), [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [authentication-prd.md](authentication-prd.md), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [dashboard-prd.md](dashboard-prd.md), [support-desk-prd.md](support-desk-prd.md), [facilitators-prd.md](facilitators-prd.md), [../shared-requirements.md](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The All Clients module is where an Admin user finds, adds and maintains LearnNext's clients. A client is either a **company** (an organisation whose teams are trained) or an **individual** (one person who is trained and billed directly).
+The All Clients module is where a Training Partner user finds, adds and maintains LearnNext's clients. A client is either a **company** (an organisation whose teams are trained) or an **individual** (one person who is trained and billed directly).
 
 Objectives:
 
 - Give a single, searchable and filterable list of every client with its code, contact number, creator, creation date and status, and a one-click way into each client's details page.
-- Let an Admin user add a client through a short guided form (Training for → Details → Addresses → Billing) that captures everything needed to train and invoice the client, including GST registrations and Lower TDS certificates.
+- Let a Training Partner user add a client through a short guided form (Training for → Details → Addresses → Billing) that captures everything needed to train and invoice the client, including GST registrations and Lower TDS certificates.
 - For companies, avoid re-typing: picking a company from the CRM portal list fills every step of the form, and companies already on file cannot be added twice.
-- Let an Admin user correct any client's details, and change its status, through the same form (Edit client).
+- Let a Training Partner user correct any client's details, and change its status, through the same form (Edit client).
 - Protect typed work: leaving the form with unsaved changes asks for confirmation.
 
 Everything else about a single client (projects, participants, SPOCs, settings, activity) lives on the Client details page ([client-detail-prd.md](client-detail-prd.md)).
@@ -32,21 +32,22 @@ Everything else about a single client (projects, participants, SPOCs, settings, 
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| All Clients list (`/clients`) | See and find every client | Admin user | Filter by status pill, search, open Filters, sort, page, open a client, edit a client, add a client | Client details, Add client, Edit client |
-| Filter clients drawer | Narrow the list by status, creation date, creator and company details | Admin user | Choose filters, Reset, Show N clients | All Clients list |
-| Client cards (phones) | Readable list on small screens | Admin user | Open a client, edit a client, page | Client details, Edit client |
-| Add client (`/clients/new`) | Create a company or individual client in four steps | Admin user | Choose Company / Individual, pick a CRM company, fill details, addresses and billing, Save client, Cancel | All Clients list |
-| Edit client (`/clients/:id/edit`) | Change an existing client's details and status | Admin user | Open any step, edit, change status, Save changes, Cancel | All Clients list, Client details |
-| CRM portal fetch (Add client, companies) | Fill every step from the CRM portal | Admin user | Pick a company from the Company name list | Add client |
-| File preview window | View an uploaded document or logo | Admin user | Open in new tab, Download | Add / Edit client |
-| Client not found (Edit client) | Explain a bad edit link | Admin user | Go back to All clients | All Clients list |
+| All Clients list (`/clients`) | See and find every client | Training Partner user | Filter by status pill, search, open Filters, sort, page, open a client, edit a client, add a client | Client details, Add client, Edit client |
+| Filter clients drawer | Narrow the list by status, creation date, creator and company details | Training Partner user | Choose filters, Reset, Show N clients | All Clients list |
+| Client cards (phones) | Readable list on small screens | Training Partner user | Open a client, edit a client, page | Client details, Edit client |
+| Add client (`/clients/new`) | Create a company or individual client in four steps | Training Partner user | Choose Company / Individual, pick a CRM company, fill details, addresses and billing, Save client, Cancel | All Clients list |
+| Edit client (`/clients/:id/edit`) | Change an existing client's details and status | Training Partner user | Open any step, edit, change status, Save changes, Cancel | All Clients list, Client details |
+| CRM portal fetch (Add client, companies) | Fill every step from the CRM portal | Training Partner user | Pick a company from the Company name list | Add client |
+| File preview window | View an uploaded document or logo | Training Partner user | Open in new tab, Download | Add / Edit client |
+| Client not found (Edit client) | Explain a bad edit link | Training Partner user | Go back to All clients | All Clients list |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in LearnNext staff member) | Full access to the list, Add client and Edit client (SH-002, SH-003) | View, search, filter, add and edit any client, change a client's status | No role-based restriction is enforced (SH-002). There is no way to delete a client, export the list or act on several clients at once. |
-| Client SPOC, participant | No access (they are records, not users) — SH-002 | N/A | N/A |
+| Training Partner user (signed in and continuing as Training Partner) | Full access to the list, Add client and Edit client (SH-002, SH-003) | View, search, filter, add and edit any client, change a client's status | No role-based restriction is enforced (SH-002). There is no way to delete a client, export the list or act on several clients at once. |
+| Super Admin | Not these pages. In the Super Admin portal the same addresses open Super Admin's own Manage Clients list and client page, which list training-partner companies ([super-admin-prd.md](super-admin-prd.md)) | — | — |
+| Client SPOC, participant | No access. They are records on these pages; their own portals are not built yet ("Coming soon", SH-002) | N/A | N/A |
 | Signed-out visitor | Redirected to Sign in (SH-003) | None | N/A |
 
 ## 5. Page Functionality and Behavior
@@ -144,8 +145,8 @@ Everything else about a single client (projects, participants, SPOCs, settings, 
 | **Billing addresses** card (company) | One address per GST registration | Add, edit, delete | Description "Add one for each GST registration the company is billed under." Saved addresses show as cards (5.8.1); an add/edit panel collects a new one | A company must have at least one saved billing address (BR-CLI-021) | — |
 | **GST** card (individual) | Individual's GST registration | Fill | Description "Only if the participant is GST registered." GST No. and an optional GST certificate upload (7.9) | — | — |
 | **Lower TDS** card (both) | Lower TDS certificate details | Toggle and fill | Description "Only if a lower TDS certificate applies." Switch "Do you have Lower TDS details?" / "Turn on if the client has a lower TDS certificate." Switching on reveals rate, amount, section, validity dates and certificate (7.10) | Switching off hides the fields; they are no longer checked | — |
-| **Save client** (add) | Create the client | Click | Checks the Billing step, then that a company has a billing address, then saves (spinner). On success: toast "Client added" and the user returns to All Clients, where the new client is first in the default order | New clients are always **Active**; the creator is the signed-in user's name ("You" if no name) | BR-CLI-024 |
-| **Save changes** (edit) | Save edits | Click on any step | Checks every step; opens the first step with problems and shows toast "Check the highlighted fields". Then checks a company has a billing address. Then saves (spinner) and returns to All Clients with toast "Changes saved" | Always enabled, even with no changes (OQ-CLI-009) | BR-CLI-026 |
+| **Save client** (add) | Create the client | Click | Checks the Billing step, then that a company has a billing address, then saves (spinner). On success the user returns to All Clients, where the new client is first in the default order, and the toast "Client added" appears once the list has loaded (SH-005) | New clients are always **Active**; the creator is the signed-in user's name ("You" if no name) | BR-CLI-024 |
+| **Save changes** (edit) | Save edits | Click on any step | Checks every step; opens the first step with problems and shows toast "Check the highlighted fields". Then checks a company has a billing address. Then saves (spinner) and returns to All Clients; the toast "Changes saved" appears once the list has loaded (SH-005) | Always enabled, even with no changes (OQ-CLI-009) | BR-CLI-026 |
 
 #### 5.8.1 Company billing addresses
 
@@ -397,9 +398,9 @@ These countries, states and cities are a fixed list inside the form; they are no
 
 | Action/Scenario | Condition | Message Type | Message Text | When It Appears | Next User Action |
 |---|---|---|---|---|---|
-| Save client | Saved | Success toast (SH-005) | "Client added" — description "<name> (<code>)" | After save; All Clients opens | Open the new client |
+| Save client | Saved | Success toast (SH-005) | "Client added" — description "<name> (<code>)" | After save, once All Clients has loaded (SH-005) | Open the new client |
 | Save client fails | Save rejected | Error toast | "Couldn’t add the client" — description is the reason | After save attempt; form stays | Retry |
-| Save changes | Saved | Success toast | "Changes saved" — description "<name> (<code>)" | After save; All Clients opens | — |
+| Save changes | Saved | Success toast | "Changes saved" — description "<name> (<code>)" | After save, once All Clients has loaded (SH-005) | — |
 | Save changes fails | Client no longer exists | Error toast | "Couldn’t save the changes" — "This client no longer exists." | After save attempt | Return to All Clients |
 | Save changes with errors | Any step invalid | Error toast | "Check the highlighted fields" — "<Step label> needs a few fixes before saving." | On Save changes; that step opens | Fix the fields |
 | No billing address | Company with no saved billing address | Error toast | "Add a billing address" — "Save at least one billing address with its GST No." | On Save client / Save changes | Add a billing address |
@@ -474,7 +475,7 @@ These countries, states and cities are a fixed list inside the form; they are no
 ## 13. Acceptance Criteria
 
 **AC-CLI-001: View the client list**
-- Given a signed-in Admin user
+- Given a signed-in Training Partner user
 - When they open **All Clients**
 - Then the summary pills, toolbar and a table of clients sorted newest created first appear, 10 per page
 - And the breadcrumb shows "All Clients"

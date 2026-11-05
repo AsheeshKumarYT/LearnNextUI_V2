@@ -7,15 +7,15 @@
 | PRD title | App Shell and Navigation PRD |
 | Module name | App Shell and Navigation |
 | Document ID | PRD-SHELL |
-| Version | 1.4 |
+| Version | 1.5 |
 | Documentation status | Draft (derived from the current build) |
-| Module implementation status | Partially Implemented (sidebar, header, breadcrumbs, theme, user menu, footer and the unsaved-changes guard work; global search returns no records, notifications are demo items with no page of their own, the Help & Support drawer cannot be opened, and ten menu items open a placeholder) |
-| Last updated | 2026-11-03 (v1.1: bottom tab bar on phones, tablet sidebar opens over the page, no header hamburger, theme button hidden on phones, phone layout rules; v1.2: installable app (PWA) — install card, offline start, update-on-Reload; v1.3: notifications as a grouped bottom sheet on phones, every dropdown a bottom sheet on phones, frosted header / tab bar with firmer edges; v1.4 (2026-11-04): calmer menu rows in phone sheets, a tap on a sheet's dimmed area only closes the sheet, pinned search in picker sheets, sheets / dialogs / drawers stay above the on-screen keyboard) |
-| Related modules/pages | [Authentication](authentication-prd.md), [Dashboard](dashboard-prd.md), [Profile](profile-prd.md), [All Clients](clients-prd.md), [Client detail](client-detail-prd.md), [Manage Content](manage-content-prd.md), [Facilitators](facilitators-prd.md), [Support desk](support-desk-prd.md), [Settings hub](settings-hub-prd.md), [Settings: access masters](settings-access-masters-prd.md), [System pages](system-pages-prd.md), [Shared requirements](../shared-requirements.md) |
+| Module implementation status | Partially Implemented (sidebar, header, breadcrumbs, theme, user menu, footer, global search, role-based shells (Training Partner, Super Admin) and the unsaved-changes guard work; notifications are demo items with no page of their own, the Help & Support drawer cannot be opened, and ten menu items open a placeholder) |
+| Last updated | 2026-11-05 (v1.5, 2026-11-05: the shell follows the chosen role — Training Partner shell as before, Super Admin shell with only Manage Clients and My Profile; **Switch role** in the user menu for logins with several roles; **Settings** in the user menu only for roles that may open it; the line under the sidebar logo names the role; toasts sit at the top on phones; "Admin" renamed "Training Partner". Earlier, from 2026-11-03 — v1.1: bottom tab bar on phones, tablet sidebar opens over the page, no header hamburger, theme button hidden on phones, phone layout rules; v1.2: installable app (PWA) — install card, offline start, update-on-Reload; v1.3: notifications as a grouped bottom sheet on phones, every dropdown a bottom sheet on phones, frosted header / tab bar with firmer edges; v1.4 (2026-11-04): calmer menu rows in phone sheets, a tap on a sheet's dimmed area only closes the sheet, pinned search in picker sheets, sheets / dialogs / drawers stay above the on-screen keyboard) |
+| Related modules/pages | [Authentication](authentication-prd.md), [Dashboard](dashboard-prd.md), [Profile](profile-prd.md), [All Clients](clients-prd.md), [Client detail](client-detail-prd.md), [Manage Content](manage-content-prd.md), [Facilitators](facilitators-prd.md), [Support desk](support-desk-prd.md), [Settings hub](settings-hub-prd.md), [Settings: access masters](settings-access-masters-prd.md), [System pages](system-pages-prd.md), [Super Admin portal (PRD-SA)](super-admin-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The app shell is the frame that surrounds every signed-in page of LearnNext Admin. It gives an Admin user:
+The app shell is the frame that surrounds every signed-in page of LearnNext Portal. Its menu, page names, search sources and extras follow the role the user chose at sign-in ([authentication-prd.md](authentication-prd.md)): this PRD describes the Training Partner shell in full and the Super Admin shell's differences (5.16; the Super Admin pages themselves are in [PRD-SA](super-admin-prd.md)). It gives a Training Partner:
 
 - a single, consistent menu to reach every module, on phones, tablets and desktops;
 - a header that names the current page (breadcrumb) and holds search, notifications, theme and the user menu;
@@ -23,37 +23,40 @@ The app shell is the frame that surrounds every signed-in page of LearnNext Admi
 - protection against losing unsaved work when leaving certain pages through the shell;
 - a clear placeholder for menu items whose pages are not built yet.
 
-The objective is that an Admin user can always tell where they are, reach any page in one or two clicks, and never lose half-finished work by accident. Sign-in, sign-out and session rules are owned by [authentication-prd.md](authentication-prd.md) and are only referenced here.
+The objective is that a user can always tell where they are (and in which role), reach any page in one or two clicks, and never lose half-finished work by accident. Sign-in, sign-out and session rules are owned by [authentication-prd.md](authentication-prd.md) and are only referenced here.
 
 ## 3. Module and Page Overview
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Sidebar (full, icon rail, mobile drawer) | Main menu to every module | Admin user | Open a page, expand **Finance**, collapse/expand the sidebar (tablets: open the full sidebar over the page), open **Support desk** | Every admin page |
-| Bottom tab bar (phones and small tablets) | App-style quick access to the main pages | Admin user | **Home**, **Clients**, **Facilitators**, **Content**, **More** (opens the full menu drawer) | Dashboard, All Clients, Facilitators, Manage Content |
-| "Dev only" menu section | Keep development aids apart from admin features | Admin user (developers, QA) | Open **System pages** | [system-pages-prd.md](system-pages-prd.md) |
-| Support desk card | Show how many support requests wait for an answer and open the Support desk | Admin user | Click the card | [support-desk-prd.md](support-desk-prd.md) |
-| Header | Page name and global tools | Admin user | Breadcrumb links, **Search…**, notifications bell, theme menu (not on phones), user menu | Every admin page |
-| Breadcrumbs | Show the current page and its parent section | Admin user | Click the parent crumb | Every admin page |
-| Global search palette | Jump to a page by keyboard; search records | Admin user | Ctrl+K / ⌘K, type, ↑ ↓, Enter, Esc | Every menu page |
-| Notifications menu | Show the latest notifications and unread count | Admin user | Open bell, click an item (mark read), **Mark all read** | — (no Notifications page exists) |
-| Theme menu | Choose Light, Dark or System theme | Admin user | Pick a theme | All pages, auth pages |
-| User menu | Signed-in identity and personal actions | Admin user | **My Profile**, **Settings**, Theme, **Log out** | [profile-prd.md](profile-prd.md), [settings-hub-prd.md](settings-hub-prd.md), [authentication-prd.md](authentication-prd.md) |
-| Footer | Copyright and status line | Admin user | View only | Every admin page |
-| Placeholder page ("Nothing here yet") | Stand-in for menu items not built yet | Admin user | View only | Projects, Finance (6 pages), Assessments, Polls & Surveys, Reports |
-| Unsaved-changes leave guard | Ask before leaving a page with unsaved work | Admin user | **Discard** / **Keep editing**, **Discard and leave** / **Stay**, **Leave** / **Stay** | Add client, Edit client, Program content, Verify KYC |
-| Keyboard shortcuts | Speed up navigation | Admin user | Ctrl+K / ⌘K, "Skip to content" | Every admin page |
-| Help & Support drawer [Not Implemented] | FAQ, contact links and shortcuts | Admin user | None — nothing in the application opens it | — |
+| Sidebar (full, icon rail, mobile drawer) | Main menu to every module | Training Partner | Open a page, expand **Finance**, collapse/expand the sidebar (tablets: open the full sidebar over the page), open **Support desk** | Every portal page |
+| Bottom tab bar (phones and small tablets) | App-style quick access to the main pages | Training Partner | **Home**, **Clients**, **Facilitators**, **Content**, **More** (opens the full menu drawer) | Dashboard, All Clients, Facilitators, Manage Content |
+| "Dev only" menu section | Keep development aids apart from portal features | Training Partner (developers, QA) | Open **System pages** | [system-pages-prd.md](system-pages-prd.md) |
+| Support desk card | Show how many support requests wait for an answer and open the Support desk | Training Partner | Click the card | [support-desk-prd.md](support-desk-prd.md) |
+| Header | Page name and global tools | Training Partner | Breadcrumb links, **Search…**, notifications bell, theme menu (not on phones), user menu | Every portal page |
+| Breadcrumbs | Show the current page and its parent section | Training Partner | Click the parent crumb | Every portal page |
+| Global search palette | Jump to a page by keyboard; search records | Training Partner | Ctrl+K / ⌘K, type, ↑ ↓, Enter, Esc | Every menu page |
+| Notifications menu | Show the latest notifications and unread count | Training Partner | Open bell, click an item (mark read), **Mark all read** | — (no Notifications page exists) |
+| Theme menu | Choose Light, Dark or System theme | Training Partner | Pick a theme | All pages, auth pages |
+| User menu | Signed-in identity and personal actions | Training Partner, Super Admin | **My Profile**, **Settings** (roles that may open it), **Switch role** (logins with several roles), Theme, **Log out** | [profile-prd.md](profile-prd.md), [settings-hub-prd.md](settings-hub-prd.md), [authentication-prd.md](authentication-prd.md) |
+| Super Admin shell (added v1.5) | The same frame with only the Super Admin's pages | Super Admin | **Manage Clients**, My Profile (user menu), search, theme, **Switch role**, **Log out** | [PRD-SA](super-admin-prd.md) |
+| Footer | Copyright and status line | Training Partner | View only | Every portal page |
+| Placeholder page ("Nothing here yet") | Stand-in for menu items not built yet | Training Partner | View only | Projects, Finance (6 pages), Assessments, Polls & Surveys, Reports |
+| Unsaved-changes leave guard | Ask before leaving a page with unsaved work | Training Partner | **Discard** / **Keep editing**, **Discard and leave** / **Stay**, **Leave** / **Stay** | Add client, Edit client, Program content, Verify KYC |
+| Keyboard shortcuts | Speed up navigation | Training Partner | Ctrl+K / ⌘K, "Skip to content" | Every portal page |
+| Help & Support drawer [Not Implemented] | FAQ, contact links and shortcuts | Training Partner | None — nothing in the application opens it | — |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (signed in) | The shell appears on every admin page (SH-002) | Every action in this PRD | None. The full menu, including the "Dev only" section, is shown to every signed-in user |
-| Visitor (not signed in) | None | None | Every admin page redirects to Sign in (SH-003); the shell is never shown |
-| Facilitators, client SPOCs, participants | None | None | They are records, not users (SH-002) |
+| Training Partner (signed in) | The Training Partner shell appears on every Training Partner page (SH-002) | Every action in this PRD | None. The full menu, including the "Dev only" section, is shown to every Training Partner |
+| Super Admin (signed in) | The Super Admin shell (5.16) on Manage Clients pages and My Profile | Navigate, search, theme, My Profile, Switch role, Log out | No Training Partner menu items, notifications, Settings, Support desk card or Dev only section; other addresses redirect to Manage Clients (BR-AUTH-021) |
+| Signed in, no role chosen / role not ready | None | — | The shell is not shown: the role picker or the coming-soon screen appears instead ([authentication-prd.md](authentication-prd.md)) |
+| Visitor (not signed in) | None | None | Every portal page redirects to Sign in (SH-003); the shell is never shown |
+| Facilitator, Participant, Client SPOC | None | None | Their portals are not built (coming soon). In the Training Partner portal they appear as records (SH-002) |
 
-Roles and menu permissions defined in [Settings: access masters](settings-access-masters-prd.md) (Roles & Access, Menu Mapping & Access) are **not** applied to the sidebar, search or header (SH-002, OQ-SHELL-012).
+Within the Training Partner shell, roles and menu permissions defined in [Settings: access masters](settings-access-masters-prd.md) (Roles & Access, Menu Mapping & Access) are **not** applied to the sidebar, search or header (SH-002, OQ-SHELL-012). The portal role chosen at sign-in decides which shell is shown (BR-SHELL-028).
 
 ## 5. Page Functionality and Behavior
 
@@ -61,7 +64,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Shell frame | Consistent frame for every page | Open any admin page | Sidebar on the left (on phones and small tablets: a bottom tab bar plus a menu drawer), header at the top, page content in the middle, footer at the bottom | BR-SHELL-003, BR-SHELL-022 | Page shown inside the shell |
+| Shell frame | Consistent frame for every page | Open any portal page | Sidebar on the left (on phones and small tablets: a bottom tab bar plus a menu drawer), header at the top, page content in the middle, footer at the bottom | BR-SHELL-003, BR-SHELL-022 | Page shown inside the shell |
 | "Skip to content" link | Keyboard and screen-reader users skip the menu | Press Tab once after the page loads | A "Skip to content" link appears at the top left; activating it moves focus to the page content | Hidden until focused | Focus in the main content |
 | Page change | Fresh start on every page | Open another page | The page fades in, the window scrolls to the top, the mobile drawer closes and the browser tab title updates | BR-SHELL-008, BR-SHELL-019 | New page shown at its top |
 | Page loading | Show progress while a page loads | Open a page for the first time | A full-page loading indicator shows until the page is ready (SH-007) | — | Page shown |
@@ -72,7 +75,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Logo | Brand | View | Full sidebar: LearnNext mark with wordmark and the subtitle "Admin". Icon rail: the mark only | Not a link | — |
+| Logo | Brand and current role | View | Full sidebar: LearnNext mark with the wordmark and, under it, the chosen role's name ("Training Partner" or "Super Admin"). Icon rail: the mark only | Not a link | — |
 | Menu items (in order) | Reach each module | Click an item | **Dashboard**, **All Clients**, **Projects**, **Finance** (group), **Manage Content**, **Facilitators**, **Assessments**, **Polls & Surveys**, **Settings**, **Reports**. Each item has an icon and a label and opens its page | BR-SHELL-001; items whose pages are not built open the placeholder (5.10, BR-SHELL-002) | Page opens |
 | Active item | Show where the user is | — | The current item is highlighted (tinted row, solid brand icon tile, bold label). It also stays highlighted on the item's sub-pages, for example **All Clients** on Add client, Client details and Edit client; **Manage Content** on Program content; **Facilitators** on Verify KYC; **Settings** on any Settings master | BR-SHELL-005 | — |
 | Hover | Show what will open | Point at an item | A soft blue tint across the whole row and a blue icon; nothing pops up or moves (no tile behind the icon, no sliding label) | Not on the current item | — |
@@ -123,10 +126,10 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
 | Open | Start a search or jump | Ctrl+K / ⌘K, **Search…** box or search icon | Opens a centred palette near the top of the screen with focus in the search box. The shortcut toggles: pressing it again closes the palette | BR-SHELL-009 | Palette open |
-| Search box | Enter a query | Type | Placeholder "Search courses, students, instructors, messages…". See 7.1 | Search starts after a short pause in typing (about 0.15 s) | — |
+| Search box | Enter a query | Type | Placeholder "Search clients, programs, facilitators, tickets, settings…". See 7.1 | Search starts after a short pause in typing (about 0.15 s) | — |
 | "Jump to" list (empty search box) | Quick page access | View, ↑ ↓, Enter or click | Lists every menu page under the heading "JUMP TO", in menu order: Dashboard, All Clients, Projects, All Invoices, Credit Note, Debit Note, E-Invoice, Trainer Invoice, Invoice Approvals, Manage Content, Facilitators, Assessments, Polls & Surveys, Settings, Reports, System pages | Includes placeholder pages and the Dev only item; excludes My Profile, Support desk and individual Settings masters (OQ-SHELL-002) | Chosen page opens; palette closes |
-| Record results (typed search) [Not Implemented] | Find records across modules | Type a query | While searching, a spinner replaces the clear button. In the current build no module is registered for search, so every query ends with the "no results" view | BR-SHELL-010 (OQ-SHELL-001). Page names are not matched while typing either | — |
-| No results view | Explain an empty search | Type any text | Icon, "No results for “<query>”" and "Try a course title, a person’s name or an email." | Shown once the search has finished | User edits or clears the query |
+| Record results (typed search) | Find pages and records across modules | Type a query | While searching, a spinner replaces the clear button. Results are grouped — Pages (menu pages plus My Profile, Support desk, Add client), Clients, Programs, Facilitators, Support tickets, Settings — best matches first, up to 4 per group; a group with more shows "+N more — keep typing to narrow". Each result has a title and a second line and opens its record (a client's details, a program's content, a facilitator — Verify KYC when a KYC is waiting for approval, otherwise the Facilitators list searched to them — a ticket on the Support desk, a Settings master) | BR-SHELL-010. Only results the current role may open are listed (Super Admin: 5.16) | Chosen record opens; palette closes |
+| No results view | Explain an empty search | Type text that matches nothing | Icon, "No results for “<query>”" and "Try a client or program name, a person’s name or email, a ticket number or a setting." | Shown once the search has finished | User edits or clears the query |
 | **Clear search** (×) | Empty the box | Click | Clears the query and returns to the "Jump to" list | Shown when the box has text and no search is running | — |
 | Esc hint | Remind how to close | View | "Esc" key cap at the right of an empty search box | Hidden on phones | — |
 | Keyboard | Operate without a mouse | ↑ / ↓, Enter, Esc | ↑ ↓ move the highlight (it stops at the first and last entry), Enter opens the highlighted entry, Esc closes the palette. Moving the mouse over an entry highlights it | The highlighted entry shows an arrow | — |
@@ -147,7 +150,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Empty state | No notifications | Open the bell with no items | "No notifications" and "We’ll let you know when something needs your attention." | Also shows for a moment while notifications are first loading (11) | — |
 | Close | Leave the menu | Esc, click outside, or the bell again | Menu closes | — | — |
 | Notifications page [Not Implemented] | Full history | — | No Notifications page exists and there is no "View all" link. Opening a notifications address shows the full-screen not-found page | OQ-SHELL-003 | — |
-| Data | Content of the list | — | Six demo notifications, three of them unread (SH-001). Read changes last until the page is reloaded | Content refers to courses, enrolments and instructors, not to LearnNext Admin's clients, programs and facilitators (OQ-SHELL-004) | — |
+| Data | Content of the list | — | Six demo notifications, three of them unread (SH-001). Read changes last until the page is reloaded | Content refers to courses, enrolments and instructors, not to the Training Partner portal's clients, programs and facilitators (OQ-SHELL-004) | — |
 
 ### 5.8 Theme menu
 
@@ -163,9 +166,10 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Trigger | Show who is signed in | View / click | Avatar (photo, or initials when there is no photo); the first name on extra-wide screens; a chevron from small-tablet width up | Label "Open user menu" | Menu open |
 | Identity header | Confirm the account | View | Avatar, full name (for the demo account "Atul Kumar") and email ("admin@learnnext.io") | Reflects changes made in [My Profile](profile-prd.md) | — |
 | **My Profile** | Open the profile | Click | Opens My Profile | Guarded pages ask first (5.11) | Profile page |
-| **Settings** | Open Settings | Click | Opens the Settings hub | Guarded pages ask first (5.11) | Settings page |
+| **Settings** | Open Settings | Click | Opens the Settings hub | Shown only to roles that may open Settings: Training Partner yes, Super Admin no (BR-SHELL-030). Guarded pages ask first (5.11) | Settings page |
+| **Switch role** (added v1.5) | Move to another of the login's roles | Click | Returns to the "Continue as" role picker; after choosing, the chosen role's own home opens (Dashboard or Manage Clients), not the current page. A remembered role choice is forgotten. See [authentication-prd.md](authentication-prd.md) 5.11 | Shown only when the login holds several roles (BR-SHELL-031). Guarded pages ask first (5.11) | Role picker |
 | "THEME" section | Change theme here too | Click **Light**, **Dark** or **System** | Same as the header theme menu (5.8); the current choice is ticked | BR-SHELL-016 | Theme applied |
-| **Log out** | Sign out | Click | Opens the "Log out of LearnNext?" confirmation; see [authentication-prd.md](authentication-prd.md) §5.8 | The only Log out entry point in the application. It does not check for unsaved changes [Partially Implemented] (OQ-SHELL-008) | Dialog shown |
+| **Log out** | Sign out | Click | Opens the "Log out of LearnNext?" confirmation; see [authentication-prd.md](authentication-prd.md) §5.8 | The only Log out entry point inside a portal (the role picker and coming-soon screen have their own **Sign out**). It does not check for unsaved changes [Partially Implemented] (OQ-SHELL-008) | Dialog shown |
 | Keyboard | Operate without a mouse | Open with Enter/Space | Focus moves to the first item; ↑ ↓ move between items (wrapping), Home/End jump to first/last, Esc closes and returns focus to the trigger | Same for the theme menu | — |
 
 ### 5.10 Placeholder page ("Nothing here yet")
@@ -189,7 +193,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
 | Guarded pages | Prevent accidental loss of work | Leave the page through the shell with unsaved changes | Four pages ask first: **Add client**, **Edit client**, **Program content** (unsaved permission changes) and **Verify KYC** (at least one section marked). Every other page lets the user leave without asking | BR-SHELL-014, SH-006 | Dialog shown |
-| Shell exits that ask | Cover the usual ways out | Click a sidebar item, a Finance flyout item, the rail's Support desk item, a parent breadcrumb, a search palette entry, or **My Profile** / **Settings** in the user menu | The page's dialog opens and navigation waits for the answer | — | — |
+| Shell exits that ask | Cover the usual ways out | Click a sidebar item, a Finance flyout item, the rail's Support desk item, a parent breadcrumb, a search palette entry, a bottom tab, an item in the phone "More" sheet, or **My Profile** / **Settings** / **Switch role** in the user menu | The page's dialog opens and navigation waits for the answer | — | — |
 | Shell exits that do not ask [Partially Implemented] | — | Click the full-sidebar Support desk card, choose **Log out**, or use the browser's Back/Forward buttons | The user leaves immediately and the changes are lost | OQ-SHELL-008, OQ-SHELL-009 | Changes lost |
 | Add client / Edit client dialog | Confirm discarding | — | Add: "Discard this client?" / "The details you’ve entered won’t be saved." Edit: "Discard your changes?" / "Your edits to this client won’t be saved." Buttons **Keep editing** and **Discard** (red) | See [clients-prd.md](clients-prd.md) / [client-detail-prd.md](client-detail-prd.md) | **Discard** opens the chosen page |
 | Program content dialog | Confirm discarding permission changes | — | "Discard permission changes?" / "You have <N> unsaved permission change(s). If you leave now, they won’t be saved." Buttons **Stay** and **Discard and leave** (red) | See [manage-content-prd.md](manage-content-prd.md) | **Discard and leave** opens the chosen page |
@@ -208,7 +212,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Ctrl+K / ⌘K | Open or close the search palette | Press | Toggles the palette on any admin page | Works with either Ctrl or ⌘ on any device, including while typing in a field; it replaces the browser's own Ctrl+K action (OQ-SHELL-013) | Palette open / closed |
+| Ctrl+K / ⌘K | Open or close the search palette | Press | Toggles the palette on any portal page | Works with either Ctrl or ⌘ on any device, including while typing in a field; it replaces the browser's own Ctrl+K action (OQ-SHELL-013) | Palette open / closed |
 | Other shortcuts | — | — | No other application-wide shortcuts exist. Esc closes menus, dialogs and drawers (SH-006) | — | — |
 | Help & Support drawer [Not Implemented] | Self-help, contact and shortcuts | — | A "Help & Support" drawer exists ("Answers, shortcuts and ways to reach us.", **Email support**, **Send feedback**, three FAQ items, and the "Open search" shortcut) but no button or menu item opens it | Its FAQ refers to courses and instructors (OQ-SHELL-007) | — |
 
@@ -220,18 +224,32 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Current tab | Show where the user is | — | The current tab's icon sits on a soft blue pill and its name turns blue and bold; no glow. A tab stays current on its sub-pages (e.g. **Clients** on Client details) | **More** is current while the menu drawer is open or on any page that is not one of the four tabs (e.g. Settings, Profile, Support desk) | — |
 | **More** | Reach every other page | Tap | Raises the "More" bottom sheet from the bar (5.3) — it opens from where the button is, rather than a side drawer from the opposite edge | Replaces the old header hamburger and left drawer | Sheet open |
 | Leave guard | Protect unsaved work | Tap a tab with unsaved changes | Same as the sidebar: the page's leave dialog opens (5.11) | BR-SHELL-014 | Dialog shown |
-| Page room | Nothing hidden behind the bar | Scroll to the end of a page | Pages get extra bottom space equal to the bar; sticky action bars (Verify KYC, Content Permissions) and toast messages sit just above the bar | BR-SHELL-022 | Last content and actions fully visible |
+| Page room | Nothing hidden behind the bar | Scroll to the end of a page | Pages get extra bottom space equal to the bar; sticky action bars (Verify KYC, Content Permissions) sit just above the bar. Toast messages never land on the bar: on phones they drop in at the top just under the header; on small tablets that still show the bar they sit bottom-right, lifted above it (SH-005) | BR-SHELL-022 | Last content and actions fully visible |
 | Phone layout rules | Calm, uncongested pages on phones | — | Phone-only presentation rules shared by every page (outer list panels drop their frame, 12 px between cards, status pills not shown, detail-hero ⋮ menu, card views instead of tables, shorter helper texts) are defined in [Shared requirements](../shared-requirements.md) SH-013 | Below 640 px unless stated; desktop unchanged | — |
 
 ### 5.15 Installable app (PWA, added in v1.2)
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Install | Use LearnNext like a phone app | Android / Chrome: **Install** on the card or browser menu → *Install app*. iPhone / iPad: Safari **Share** → **Add to Home Screen** | Adds a home-screen icon named "LearnNext" (LearnNext mark on brand blue). Launching it opens **Dashboard** full screen with no browser bar; on Android a brand-blue splash shows while it loads. Desktop Chrome / Edge also offer installing | BR-SHELL-025. Requires the live HTTPS site | App installed |
+| Install | Use LearnNext like a phone app | Android / Chrome: **Install** on the card or browser menu → *Install app*. iPhone / iPad: Safari **Share** → **Add to Home Screen** | Adds a home-screen icon named "LearnNext" (LearnNext mark on brand blue). Launching it opens **Dashboard** full screen with no browser bar (Super Admin: Manage Clients; Sign in or the role picker first when needed); on Android a brand-blue splash shows while it loads. Desktop Chrome / Edge also offer installing | BR-SHELL-025. Requires the live HTTPS site | App installed |
 | Home-screen shortcuts | Jump straight in | Long-press the icon (Android) | **All Clients**, **Facilitators**, **Support desk** | Android only | Page opens |
 | "Install LearnNext" card | Offer installing on phones | View; **Install** / × | A slim card above the bottom tab bar: LearnNext mark, "Install LearnNext", then "Open it from your home screen like an app." with **Install** (Android), or "Tap ⎙ Share then Add to Home Screen" (iPhone / iPad). × ("Not now") hides it | BR-SHELL-026. Phones only, signed in, never once installed; × or declining hides it for 14 days | Card shown / hidden |
 | Fast start and offline | Open instantly, even without signal | Open the app | The app's files are kept on the device, so it opens almost instantly; with no connection the screens still load and the offline screen ([system-pages-prd.md](system-pages-prd.md)) covers anything that needs the network. Fonts and people's photos are kept too | BR-SHELL-025. Data is still demo data (SH-001); working with data offline is not part of this | — |
 | Update notice | Move to a new version safely | Tap **Reload** | After a new version is published, a lasting toast: "New version available" — "Reload to get the latest LearnNext." with **Reload**. The new version only takes over when Reload is tapped | BR-SHELL-027. Checked when the app opens and hourly while it stays open; applies to every page including Sign in | New version loaded |
+
+### 5.16 Super Admin shell (added v1.5)
+
+The Super Admin uses the same frame (sidebar / icon rail, header, bottom tab bar on phones, footer, search palette, theme, user menu, leave guard) with only its own content. Its pages (Manage Clients, Add / Edit client, Client details) are described in [PRD-SA](super-admin-prd.md).
+
+| Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
+|---|---|---|---|---|---|
+| Sidebar | Super Admin menu | Click | One item: **Manage Clients**. The logo line reads "Super Admin". No Finance group, no "Dev only" section and no Support desk card | BR-SHELL-029 | Manage Clients opens |
+| Breadcrumbs and tab titles | Page name | View | "Manage Clients"; "Manage Clients › Add client", "Manage Clients › Edit client", "Manage Clients › Client details"; "My Profile". Tab titles follow as "<page> · LearnNext" | BR-SHELL-007, BR-SHELL-008 | — |
+| Header | Global tools | View | Search, theme menu and user menu as in 5.4; **no notifications bell** | BR-SHELL-029 | — |
+| User menu | Personal actions | Click | **My Profile**, **Switch role**, the Theme options and **Log out**. No **Settings** | BR-SHELL-030, BR-SHELL-031 | — |
+| Search palette | Jump and find | Ctrl+K / ⌘K | "Jump to" lists **Manage Clients** only. Typed search covers the Super Admin's pages (Manage Clients, Add client, My Profile) and its clients (by name, code, mobile, city or contact name); a client result opens its Client details | BR-SHELL-010 | Page / record opens |
+| Bottom tab bar (phones) | App-style navigation | Tap | Two tabs: **Clients** (Manage Clients) and **More**. **More** opens the sheet with only the user's photo, name, "Super Admin · View profile" and × — no module tiles, no Support tile and no Finance group | BR-SHELL-022, BR-SHELL-029 | — |
+| Other addresses | Keep the Super Admin on its pages | Open the Dashboard, Settings, Facilitators, Support desk, System pages or a placeholder page address | Redirects to Manage Clients without a message | BR-AUTH-021 | Manage Clients |
 
 ## 6. User Workflow
 
@@ -251,7 +269,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 |---|---|---|---|---|
 | 1 | Presses Ctrl+K / ⌘K (or clicks **Search…**) | Opens the palette with the "Jump to" list and focus in the box | BR-SHELL-009 | Palette open |
 | 2 | Uses ↑ ↓ or the mouse to pick a page, presses Enter or clicks | Closes the palette, checks the leave guard, opens the page | BR-SHELL-014 | Page shown |
-| 3 | (Alternative) Types text | After a short pause shows a spinner, then "No results for “<query>”" | No searchable sources (OQ-SHELL-001) | User clears the query or presses Esc |
+| 3 | (Alternative) Types text, then picks a result | After a short pause shows a spinner, then grouped results (or "No results for “<query>”"); picking a result closes the palette, checks the leave guard and opens the record | BR-SHELL-010 | Record shown |
 
 ### 6.3 Review notifications
 
@@ -274,7 +292,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
 | 1 | Makes changes on Add client, Edit client, Program content or Verify KYC | — | — | Page has unsaved work |
-| 2 | Clicks a sidebar item, parent breadcrumb, search entry, **My Profile** or **Settings** | Opens the page's leave dialog (5.11) | BR-SHELL-014 | Dialog shown |
+| 2 | Clicks a sidebar item, parent breadcrumb, search entry, **My Profile**, **Settings** or **Switch role** | Opens the page's leave dialog (5.11) | BR-SHELL-014 | Dialog shown |
 | 3a | Chooses **Keep editing** / **Stay** (or Esc, backdrop) | Closes the dialog | — | User stays; changes kept |
 | 3b | Chooses **Discard** / **Discard and leave** / **Leave** | Drops the changes and opens the chosen page | — | Chosen page shown |
 
@@ -291,7 +309,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 
 | Field Name | Input Type | Purpose | Required/Optional | Min Length/Value | Max Length/Value | Accepted Format/Values | Default Value | Validation Rules | Conditional Behavior | Error Message |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Search LearnNext | Text box (placeholder "Search courses, students, instructors, messages…") | Search records or filter the jump list | Optional | 1 non-space character starts a search; empty or spaces-only shows the "Jump to" list | Requires Confirmation | Any text; matching ignores letter case and surrounding spaces | Empty (cleared every time the palette closes) | None | Shows the spinner while searching, the **Clear search** (×) button when it has text, the "Esc" hint when empty | N/A — empty results show "No results for “<query>”" (9) |
+| Search LearnNext | Text box (placeholder "Search clients, programs, facilitators, tickets, settings…") | Search records or filter the jump list | Optional | 1 non-space character starts a search; empty or spaces-only shows the "Jump to" list | Requires Confirmation | Any text; matching ignores letter case and surrounding spaces | Empty (cleared every time the palette closes) | None | Shows the spinner while searching, the **Clear search** (×) button when it has text, the "Esc" hint when empty | N/A — empty results show "No results for “<query>”" (9) |
 | Clear search (×) | Icon button | Empty the search box | Optional | N/A | N/A | N/A | Hidden | None | Visible only when the box has text and no search is running | N/A |
 
 ### 7.2 Sidebar controls
@@ -319,20 +337,20 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 
 | Rule ID | Rule Name | Business Rule | When It Applies | Expected Behavior | Invalid Scenario | User Feedback |
 |---|---|---|---|---|---|---|
-| BR-SHELL-001 | One menu everywhere | The same menu defines the sidebar, mobile drawer, icon rail, breadcrumbs, browser tab titles and the search palette's "Jump to" list | Always | A page added to the menu appears in all of them | — | — |
+| BR-SHELL-001 | One menu everywhere | Within a role, the same menu defines the sidebar, mobile drawer, icon rail, breadcrumbs, browser tab titles and the search palette's "Jump to" list | Always | A page added to a role's menu appears in all of them | — | — |
 | BR-SHELL-002 | Placeholder for unbuilt pages | Menu items without a built page open "Nothing here yet". Today: Projects, the six Finance pages, Assessments, Polls & Surveys, Reports | Opening those items | Placeholder card with the page name | — | "Nothing here yet" / "The <page> page hasn’t been built yet." |
 | BR-SHELL-003 | Layout by width | Phones and small tablets: bottom tab bar + drawer; medium screens: icon rail (opens over the page); large screens: full sidebar (collapsible) | Always | — | — | — |
 | BR-SHELL-004 | Remembered collapse | The collapse choice is kept across reloads and applies only on large screens | Large screens | — | — | — |
 | BR-SHELL-005 | Active item | The menu item for the current page, or for the section a sub-page belongs to, is highlighted. My Profile has no menu item, so nothing is highlighted there | Every page change | — | — | — |
 | BR-SHELL-006 | Finance auto-open | The Finance group opens when one of its pages is current (including when reached via search) | Full sidebar | — | — | — |
 | BR-SHELL-007 | Breadcrumb content | One crumb for top-level pages; "Section › Page" for sub-pages; the section crumb links to the section (Finance → All Invoices) | Every page | — | — | — |
-| BR-SHELL-008 | Tab title | "<Page name> · LearnNext" | Every admin page | — | — | — |
-| BR-SHELL-009 | Search shortcut | Ctrl+K or ⌘K opens the palette, or closes it if open | Any admin page | — | — | — |
-| BR-SHELL-010 | Record search [Partially Implemented] | Typed text is matched, ignoring case, against each searchable module, showing up to 4 results per module group. No module is registered as searchable, so no results are ever returned | Typing in the palette | Spinner, then "no results" | Any query | "No results for “<query>”" / "Try a course title, a person’s name or an email." |
+| BR-SHELL-008 | Tab title | "<Page name> · LearnNext" | Every portal page | — | — | — |
+| BR-SHELL-009 | Search shortcut | Ctrl+K or ⌘K opens the palette, or closes it if open | Any portal page | — | — | — |
+| BR-SHELL-010 | Record search | Typed text is matched, ignoring case, against each searchable source of the current role (Training Partner: pages, clients, programs, facilitators, support tickets, Settings masters). Matches at the start of a field rank first, then at the start of a word, then anywhere; up to 4 results per group with "+N more" | Typing in the palette | Spinner, then grouped results or "no results" | Text matching nothing | "No results for “<query>”" / "Try a client or program name, a person’s name or email, a ticket number or a setting." |
 | BR-SHELL-011 | Search reset | The query is cleared whenever the palette closes | Closing the palette | Next opening shows "Jump to" | — | — |
 | BR-SHELL-012 | Unread count | The bell badge shows the number of unread notifications; the menu shows the first five items of the list | Always | Badge hidden at 0 | — | "<N> unread" / "You’re all caught up" |
 | BR-SHELL-013 | Marking read | Clicking an item marks it read; **Mark all read** marks every item read | Notifications menu | — | — | Badge and header line update |
-| BR-SHELL-014 | Leave guard | Add client, Edit client, Program content and Verify KYC ask before leaving through sidebar items, breadcrumbs, search entries and the user menu's My Profile / Settings | Unsaved changes present | Navigation waits for the user's answer | Support desk card, Log out and browser Back/Forward bypass the guard [Partially Implemented] | Page-specific dialog (5.11) |
+| BR-SHELL-014 | Leave guard | Add client, Edit client, Program content and Verify KYC ask before leaving through sidebar items, breadcrumbs, search entries, bottom tabs, the phone "More" sheet and the user menu's My Profile / Settings / Switch role | Unsaved changes present | Navigation waits for the user's answer | Support desk card, Log out and browser Back/Forward bypass the guard [Partially Implemented] | Page-specific dialog (5.11) |
 | BR-SHELL-015 | Log out confirmation | Log out always asks for confirmation | User menu | See BR-AUTH-008 in [authentication-prd.md](authentication-prd.md) | — | "Log out of LearnNext?" |
 | BR-SHELL-016 | Theme choice | Light, Dark or System; default System; remembered | Theme menus | Applied immediately | — | Tick on the current choice |
 | BR-SHELL-017 | Dev only section | Development aids are listed apart, at the bottom of the menu, under "Dev only" | Always | Shown to every user [Requires Confirmation] (OQ-SHELL-010) | — | — |
@@ -342,9 +360,13 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | BR-SHELL-022 | Bottom tab bar | Below 768 px a bottom tab bar (Home, Clients, Facilitators, Content, More) replaces the header hamburger; **More** opens the menu drawer; pages and sticky bars keep clear of it | Phones and small tablets | Current tab = soft blue pill behind the icon, blue name | — | — |
 | BR-SHELL-023 | Tablet sidebar | Between 768 and 1024 px the sidebar is an icon rail; its edge handle opens the full sidebar over the page with a dimmed backdrop, without moving the page | Tablets | Not remembered; closes on outside tap, the handle or any page change | — | "Expand sidebar" / "Collapse sidebar" |
 | BR-SHELL-024 | Theme on phones | The header theme button is hidden below 640 px; the theme is changed from the user menu's THEME section | Phones | — | — | — |
-| BR-SHELL-025 | Installable app | The application can be installed as an app (name "LearnNext Admin", short "LearnNext", opens Dashboard full screen, portrait, brand blue) and keeps its own files on the device so it opens instantly and loads offline | Live HTTPS site | — | — | — |
+| BR-SHELL-025 | Installable app | The application can be installed as an app (name and short name "LearnNext", opens Dashboard full screen — each role's home after sign-in — portrait, brand blue) and keeps its own files on the device so it opens instantly and loads offline | Live HTTPS site | — | — | — |
 | BR-SHELL-026 | Install card | Shown on phones to signed-in users who have not installed the app; Android gets an **Install** button, iPhone / iPad the Share → Add to Home Screen hint; × or declining hides it for 14 days | Phones | Never on desktop or inside the installed app | — | "Install LearnNext" |
 | BR-SHELL-027 | Update on request | A newly published version waits until the user taps **Reload** in the update toast; checked at start and hourly | Every page | Never swapped in mid-task | — | "New version available" / "Reload to get the latest LearnNext." |
+| BR-SHELL-028 | Shell follows the role | The chosen role decides the shell's menu, logo line, phone tabs, "More" tiles, page names, search sources, notifications bell and sidebar card. Training Partner: everything in this PRD. Super Admin: 5.16. Other roles have no shell yet | Every signed-in page | — | — | — |
+| BR-SHELL-029 | Super Admin shell | Menu = **Manage Clients** only (plus My Profile in the user menu); no notifications bell, no Support desk card, no Dev only section, no "More" tiles; phone tabs **Clients** and **More** | Super Admin | Details in [PRD-SA](super-admin-prd.md) | — | — |
+| BR-SHELL-030 | Settings in the user menu | **Settings** appears in the user menu only for roles that may open the Settings pages (Training Partner yes, Super Admin no) | User menu | — | — | — |
+| BR-SHELL-031 | Switch role entry | **Switch role** appears in the user menu only when the login holds more than one role; it respects the leave guard (BR-SHELL-014) and then follows BR-AUTH-023 | User menu | — | — | — |
 | BR-SHELL-021 | Notifications page [Not Implemented] | A full notifications history page is implied but does not exist | — | — | Opening a notifications address | Full-screen not-found page ([system-pages-prd.md](system-pages-prd.md)) |
 
 ## 9. Success Messages and User Feedback
@@ -352,7 +374,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Action/Scenario | Condition | Message Type | Message Text | When It Appears | Next User Action |
 |---|---|---|---|---|---|
 | Open a placeholder page | Item not built | Empty-state card | "Nothing here yet" / "The <page name> page hasn’t been built yet." | On opening | Choose another page |
-| Search with no matches | Any typed query (current build) | Inline empty state | "No results for “<query>”" / "Try a course title, a person’s name or an email." | After the search finishes | Clear the query, use "Jump to" |
+| Search with no matches | Typed text matches nothing | Inline empty state | "No results for “<query>”" / "Try a client or program name, a person’s name or email, a ticket number or a setting." | After the search finishes | Edit or clear the query, use "Jump to" |
 | Notifications with unread items | Unread > 0 | Badge + menu line | Red count on the bell; "<N> unread" | Always / on opening the menu | Open items, **Mark all read** |
 | All notifications read | Unread = 0 | Menu line | "You’re all caught up" | On opening the menu | — |
 | No notifications | List empty | Empty state | "No notifications" / "We’ll let you know when something needs your attention." | On opening the menu | — |
@@ -367,7 +389,7 @@ Roles and menu permissions defined in [Settings: access masters](settings-access
 | Element/Column | Purpose | Behavior | Available Options/Rules | Empty/Error Behavior |
 |---|---|---|---|---|
 | Search palette — "Jump to" list | Fast page access | Shown when the box is empty; 16 menu pages in menu order, each with its menu icon | Keyboard ↑ ↓ Enter, mouse click; list scrolls when taller than the palette | Never empty |
-| Search palette — record results [Not Implemented] | Find records | Grouped by module with a group heading; up to 4 results per group, each with a title and an optional second line | No modules are searchable today (OQ-SHELL-001) | "No results for “<query>”" / "Try a course title, a person’s name or an email." |
+| Search palette — record results | Find pages and records | Grouped by source with a group heading (Pages, Clients, Programs, Facilitators, Support tickets, Settings); best matches first; up to 4 results per group, each with a title and a second line, plus "+N more — keep typing to narrow" | Sources follow the current role (BR-SHELL-010); SPOCs, participants and program content are not searched (OQ-SHELL-001) | "No results for “<query>”" / "Try a client or program name, a person’s name or email, a ticket number or a setting." |
 | Notifications menu list | Latest notifications | First five items in list order, each with icon, title, one-line text, relative time and unread dot | Click marks read; **Mark all read** | "No notifications" / "We’ll let you know when something needs your attention." |
 | Sidebar menu | Module list | Fixed order (5.2); Finance group expandable | No search or filter within the menu | N/A |
 
@@ -377,7 +399,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 
 | Scenario | When It Occurs | Expected Page Behavior | User-Facing Message | Recovery/Next Step |
 |---|---|---|---|---|
-| Searching for a page by name | User types "Clients" in the palette | No match, because typed text is not compared with page names | "No results for “Clients”" | Clear the box and use "Jump to" (OQ-SHELL-001) |
+| Searching for a page by name | User types "Clients" in the palette | "All Clients" (and "Add client") appear under Pages, with any client records matching the text under Clients | — | Pick the page |
 | Enter with no entries | User presses Enter on an empty results view | Nothing happens | — | Edit the query |
 | Notifications still loading | Bell opened immediately after sign-in or reload | Briefly shows the empty state until the list arrives (about 0.2 s) | "No notifications" | Reopen the menu |
 | More than five notifications | List longer than five | Only the first five are visible; the sixth demo item can never be seen | — | OQ-SHELL-003 |
@@ -397,7 +419,8 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 
 | Related Module/Page | Relationship | Triggering Action | Expected Impact | Relevant Rules |
 |---|---|---|---|---|
-| [Authentication](authentication-prd.md) | The shell appears only after sign-in; Log out lives in the user menu and uses the confirmation dialog defined there | Sign in; **Log out** | Shell shown / user returned to Sign in | SH-003, BR-SHELL-015, BR-AUTH-008 |
+| [Authentication](authentication-prd.md) | The shell appears only after sign-in and a role choice; Log out and Switch role live in the user menu and follow the rules defined there | Sign in; **Log out**; **Switch role** | Shell shown / user returned to Sign in / role picker | SH-003, BR-SHELL-015, BR-AUTH-008, BR-AUTH-023 |
+| [Super Admin portal (PRD-SA)](super-admin-prd.md) | The Super Admin's pages run inside the Super Admin shell (5.16) | **Continue as Super Admin** | Manage Clients shown in the reduced shell | BR-SHELL-028, BR-SHELL-029 |
 | [Dashboard](dashboard-prd.md) | First menu item and default landing page | Click **Dashboard** | Dashboard opens | BR-SHELL-001 |
 | [Profile](profile-prd.md) | Opened from the user menu; profile edits update the user menu's name, email and photo | **My Profile**; save profile | Header shows new details | BR-SHELL-014 |
 | [All Clients](clients-prd.md), [Client detail](client-detail-prd.md) | Add client and Edit client register the leave guard; their breadcrumbs sit under All Clients | Leave with unsaved changes | "Discard this client?" / "Discard your changes?" | BR-SHELL-014 |
@@ -405,7 +428,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 | [Facilitators](facilitators-prd.md) | Verify KYC registers the leave guard once a section is marked | Leave mid-verification | "Leave without finishing?" | BR-SHELL-014 |
 | [Support desk](support-desk-prd.md) | The sidebar card shows the waiting count from the same tickets and opens the page | Answer tickets; click the card | Count updates; Support desk opens | BR-SHELL-018 |
 | [Settings hub](settings-hub-prd.md) | Opened from the menu and the user menu; master names drive breadcrumbs and tab titles | Open a master | "Settings › <master>" | BR-SHELL-007 |
-| [Settings: access masters](settings-access-masters-prd.md) | Roles & Access and Menu Mapping & Access describe menu permissions that the sidebar does not apply | — | Every user sees the full menu | SH-002, OQ-SHELL-012 |
+| [Settings: access masters](settings-access-masters-prd.md) | Roles & Access and Menu Mapping & Access describe menu permissions that the sidebar does not apply | — | Every Training Partner sees the full Training Partner menu | SH-002, OQ-SHELL-012 |
 | [System pages](system-pages-prd.md) | "Dev only" **System pages** item opens the gallery; unknown addresses show the not-found page | Click **System pages** | Gallery opens | BR-SHELL-017 |
 | Unbuilt modules (Projects, Finance, Assessments, Polls & Surveys, Reports) | Menu items open the placeholder | Click the item | "Nothing here yet" | BR-SHELL-002, SH-009 |
 | [Shared requirements](../shared-requirements.md) | Theme, responsive layout, dialogs, navigation titles | — | — | SH-001, SH-006, SH-009, SH-010 |
@@ -442,7 +465,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 - Then the drawer closes and Facilitators opens with its name in the header
 
 **AC-SHELL-006: Search palette jump**
-- Given I am on any admin page
+- Given I am on any portal page
 - When I press Ctrl+K (⌘K on Mac)
 - Then the palette opens with focus in the box and the "Jump to" list
 - When I press ↓ twice and Enter
@@ -451,7 +474,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 **AC-SHELL-007: Search with text (current build)**
 - Given the palette is open
 - When I type "Acme"
-- Then a spinner shows briefly, followed by "No results for “Acme”" and "Try a course title, a person’s name or an email."
+- Then a spinner shows briefly, followed by the matching groups, or "No results for “Acme”" and "Try a client or program name, a person’s name or email, a ticket number or a setting." when nothing matches
 - When I click **Clear search**
 - Then the "Jump to" list returns
 
@@ -470,11 +493,12 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 - Then the dark theme is applied and **Dark** is ticked in both the header menu and the user menu
 
 **AC-SHELL-010: User menu**
-- Given I am signed in as the demo account
+- Given I am signed in with the demo account as Training Partner
 - When I open the user menu
-- Then I see "Atul Kumar" and "admin@learnnext.io", **My Profile**, **Settings**, the Theme options and **Log out**
+- Then I see "Atul Kumar" and "admin@learnnext.io", **My Profile**, **Settings**, **Switch role**, the Theme options and **Log out**
 - When I choose **Log out**
 - Then "Log out of LearnNext?" opens (see AC-AUTH-012)
+- And for a login with only one role, **Switch role** is not shown
 
 **AC-SHELL-011: Leave guard**
 - Given I have typed a client name on Add client
@@ -499,7 +523,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 
 **AC-SHELL-014: Bottom tab bar (phones)**
 - Given I am signed in on a phone (375 px wide)
-- When any admin page opens
+- When any portal page opens
 - Then a bottom bar shows **Home**, **Clients**, **Facilitators**, **Content** and **More**, and the header has no hamburger or theme button
 - When I tap **Clients**
 - Then All Clients opens and **Clients** shows its icon on a soft blue pill with a blue name
@@ -522,6 +546,22 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 - Given a new version has been published while the app is open
 - Then "New version available" appears, and the new version loads only when I tap **Reload**
 
+**AC-SHELL-017: Super Admin shell**
+- Given I continued as Super Admin
+- Then the sidebar shows only **Manage Clients**, the logo line reads "Super Admin", and there is no notifications bell, Support desk card or "Dev only" section
+- When I open the user menu
+- Then I see **My Profile**, **Switch role**, Theme and **Log out**, but no **Settings**
+- When I press Ctrl+K
+- Then "Jump to" lists only Manage Clients
+- And on a phone the tab bar shows **Clients** and **More**, and **More** holds only my profile
+
+**AC-SHELL-018: Switch role from the user menu**
+- Given I am signed in as Training Partner on Facilitators
+- When I choose **Switch role**
+- Then the "Continue as" picker opens
+- When I continue as Super Admin
+- Then Manage Clients opens inside the Super Admin shell
+
 ## 14. QA Test Scenarios
 
 | Test Case ID | Related Requirement | Scenario | Preconditions | Test Data | Expected Result | Priority |
@@ -536,7 +576,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 | TC-SHELL-008 | AC-SHELL-005 | Drawer closes on navigation | 375 px | Tap **More**, tap a page | Drawer closes, page opens, scrolled to top | P1 |
 | TC-SHELL-009 | AC-SHELL-006 | Shortcut toggles palette | Any page | Ctrl+K twice | Opens then closes | P1 |
 | TC-SHELL-010 | AC-SHELL-006 | Jump list keyboard | Palette open | ↑ at first entry; ↓ past last entry | Highlight stops at both ends | P3 |
-| TC-SHELL-011 | AC-SHELL-007 | Typed search | Palette open | "Dashboard", "Acme", "   " | First two: "No results for …"; spaces only: "Jump to" list | P2 |
+| TC-SHELL-011 | AC-SHELL-007 | Typed search | Palette open | "Dashboard", "zzqx", "   " | "Dashboard" under Pages; "No results for “zzqx”"; spaces only: "Jump to" list | P2 |
 | TC-SHELL-012 | BR-SHELL-011 | Query cleared on close | Palette with text | Esc, reopen | Empty box, "Jump to" list | P3 |
 | TC-SHELL-013 | AC-SHELL-008 | Mark one read | 3 unread | Click first unread item | Badge 2, item read, menu open | P2 |
 | TC-SHELL-014 | AC-SHELL-008 | Mark all read | Unread > 0 | Click **Mark all read** | No badge, "You’re all caught up", link hidden | P2 |
@@ -571,6 +611,13 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 | TC-SHELL-043 | SH-013 | Tap on the dimmed area | 375 px; Manage Content filter drawer open with the Category picker open | Tap the dimmed area right over the drawer's × | Only the picker closes; the drawer stays open | P1 |
 | TC-SHELL-044 | SH-013 | Picker with keyboard | Phone; Category picker open | Note the keyboard stays down on open; tap the search box, scroll the list | Keyboard appears only on tapping search; the sheet sits above the keyboard; search stays under the grab handle and "0 selected · Clear" at the bottom | P1 |
 | TC-SHELL-045 | SH-013 | Dialog with keyboard | Phone; Facilitators → Add facilitator | Tap Address line 1 | The dialog fits above the keyboard, the field scrolls into view above Cancel / Send KYC; sub-text reads "We'll email them a KYC link." | P1 |
+| TC-SHELL-046 | AC-SHELL-017 | Super Admin sidebar and header | Signed in as Super Admin, ≥ 1024 px | View shell | One menu item; "Super Admin" under the logo; no bell, no Support desk card, no Dev only | P1 |
+| TC-SHELL-047 | BR-SHELL-030 | Settings only for allowed roles | Training Partner, then Super Admin | Open user menu each time | **Settings** shown / not shown | P2 |
+| TC-SHELL-048 | AC-SHELL-017 | Super Admin search | Super Admin, palette open | Empty box; type a client's name; type "Facilitators" | Jump to = Manage Clients; client result opens Client details; no Training Partner pages listed | P2 |
+| TC-SHELL-049 | BR-SHELL-029 | Super Admin on phone | 375 px, Super Admin | Tap **More** | Tabs **Clients** + **More**; sheet holds only the profile row | P3 |
+| TC-SHELL-050 | AC-SHELL-018 | Switch role menu item | Demo account (4 roles) | Open user menu; choose **Switch role** | Item present; picker opens; chosen role's home opens after Continue | P1 |
+| TC-SHELL-051 | BR-SHELL-014 | Switch role respects guard | Verify KYC with a section marked | **Switch role** | "Leave without finishing?" | P2 |
+| TC-SHELL-052 | 5.14 | Toast position by width | Trigger a toast (e.g. save a client) | 375 px; 700 px; 1280 px | Top, just under the header; bottom-right above the tab bar; bottom-right | P2 |
 
 ## 15. Open Questions and Gaps
 
@@ -579,18 +626,19 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 | OQ-SHELL-001 | Global search | Resolved 2026-11-02: the search now finds pages, clients, programs, facilitators, support tickets and Settings masters (best matches first, 4 per group with "+N more"), and each result opens its record. Still open: whether SPOCs, participants and program content should also be searchable | Coverage of the search | Confirm any further sources | Open |
 | OQ-SHELL-002 | Global search | "Jump to" lists placeholder pages and the Dev only "System pages" item, but not My Profile, Support desk or Settings masters | Users may jump to empty pages and miss real ones | Confirm which pages belong in "Jump to" | Open |
 | OQ-SHELL-003 | Notifications | No Notifications page or "View all" link; only five items are visible; items do not open the related record | Older or important notifications cannot be reached or acted on | Decide whether a Notifications page is needed and what each notification type links to | Open |
-| OQ-SHELL-004 | Notifications | Notifications are fixed demo items about courses, enrolments and instructor payouts; nothing in the application creates notifications, and read state resets on reload | Content does not match the LearnNext Admin domain | Define notification events (e.g. KYC submitted, ticket received, invoice approval), delivery, retention and read-state persistence | Open |
+| OQ-SHELL-004 | Notifications | Notifications are fixed demo items about courses, enrolments and instructor payouts; nothing in the application creates notifications, and read state resets on reload | Content does not match the Training Partner portal's domain | Define notification events (e.g. KYC submitted, ticket received, invoice approval), delivery, retention and read-state persistence | Open |
 | OQ-SHELL-005 | Notifications | Notification rows can only be clicked with a mouse; they cannot be focused or activated by keyboard (differs from SH-010) | Accessibility | Confirm rows must be keyboard operable | Open |
 | OQ-SHELL-006 | Placeholder pages | Projects, six Finance pages, Assessments, Polls & Surveys and Reports show "Nothing here yet" | Users see menu items that do nothing | Confirm scope and timing, and whether unbuilt items should be hidden until ready | Open |
 | OQ-SHELL-007 | Help & Support | A Help & Support drawer (FAQ, Email support, Send feedback, shortcuts) exists but nothing opens it; its FAQ refers to courses and instructors | Users have no in-app help | Decide whether to add a Help entry point and provide correct FAQ copy | Open |
 | OQ-SHELL-008 | Log out / leave guard | Log out does not check for unsaved changes on Add client, Edit client, Program content or Verify KYC; work is lost after confirming | Data loss | Confirm whether Log out should show the page's discard dialog first | Open |
 | OQ-SHELL-009 | Leave guard | The full-sidebar Support desk card and the browser Back/Forward buttons bypass the guard; Add client / Edit client give no warning on reload or tab close, while Program content and Verify KYC do | Inconsistent protection against data loss | Confirm that every exit, including Back and reload, should ask on all guarded pages, and which other forms need a guard | Open |
-| OQ-SHELL-010 | Dev only section | "System pages" is shown to every user in every build | Development tools visible to business users | Confirm it is hidden in production builds | Open |
+| OQ-SHELL-010 | Dev only section | "System pages" is shown to every Training Partner in every build (not to Super Admin) | Development tools visible to business users | Confirm it is hidden in production builds | Open |
 | OQ-SHELL-011 | Footer | "All systems operational · v0.1.0" is fixed text | May mislead users during an outage; version never changes | Decide whether to show live status and the real release version, or remove | Open |
-| OQ-SHELL-012 | Sidebar / access | Menu Mapping & Access and Roles & Access settings are not applied to the menu, search or header (SH-002) | All users see every module | Define per-role menu visibility and behaviour for hidden pages opened by address | Open |
+| OQ-SHELL-012 | Sidebar / access | The portal role now decides the shell (Training Partner vs Super Admin), but within the Training Partner portal the Menu Mapping & Access and Roles & Access settings are still not applied to the menu, search or header (SH-002) | Every Training Partner sees every module | Define per-role menu visibility inside the Training Partner portal and behaviour for hidden pages opened by address | Open |
 | OQ-SHELL-013 | Keyboard shortcuts | Ctrl+K / ⌘K is the only shortcut; it works while typing in fields and overrides the browser's Ctrl+K | Possible conflict with user expectations | Confirm the shortcut set and whether shortcuts should be ignored while typing | Open |
 | OQ-SHELL-014 | Notifications badge | No cap on the unread number in the badge (e.g. "9+") | Large numbers overflow the small circle | Define the display rule for large counts | Open |
 | OQ-SHELL-015 | Phone layout (SH-013) | To keep phones uncluttered some features are not available there: list summary pills, the Settings group tabs, pin buttons and Quick access (pinned / recently opened masters), and pages without a filter drawer show no counts at all | Phone users cannot pin masters or see list counts | Confirm these are acceptable on phones, or name the ones that must come back (e.g. a "Pinned" card on Settings) | Open |
+| OQ-SHELL-016 | Super Admin shell | On phones the Super Admin's **More** tab opens a sheet that holds only the profile row; there are no notifications, no Settings and no support entry for the Super Admin | A near-empty tab; unclear how a Super Admin gets help or alerts | Confirm the Super Admin's phone tabs and whether it needs notifications, settings or support | Open |
 
 ## 16. PRD Completeness Checklist
 
@@ -603,7 +651,7 @@ The shell itself has no filters, tables or pagination; list pages follow SH-008.
 - [ ] Minimum and maximum constraints, where known: Incomplete (search box maximum length not defined, see OQ-SHELL-001; badge count display, see OQ-SHELL-014)
 - [x] Validation and business rules: Complete
 - [x] Success messages and feedback: Complete
-- [ ] Search, filters, tables and listings: Incomplete (record search has no sources and no defined scope, see OQ-SHELL-001)
+- [ ] Search, filters, tables and listings: Incomplete (further search sources such as SPOCs and participants not decided, see OQ-SHELL-001)
 - [x] Empty states, errors and edge cases: Complete
 - [ ] Notifications behaviour: Incomplete (no page, events or persistence defined, see OQ-SHELL-003, OQ-SHELL-004)
 - [ ] Unsaved-changes protection: Incomplete (bypassed by Log out, Support desk card, browser Back and reload on some pages, see OQ-SHELL-008, OQ-SHELL-009)

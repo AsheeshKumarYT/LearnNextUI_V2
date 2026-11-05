@@ -7,24 +7,24 @@
 | PRD title | Settings – Access Masters PRD |
 | Module name | Settings – Access Masters (Menu Mapping & Access, Roles & Access) |
 | Document ID | PRD-ACC |
-| Version | 1.0 |
+| Version | 1.1 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (both masters can be maintained, but menu changes are not applied to the real sidebar and role permissions are not enforced anywhere) |
-| Last updated | 2026-10-29 |
+| Last updated | 2026-11-05 (v1.1: naming: the "Admin" role and menu module are now "Training Partner"; portal roles vs permission roles clarified) |
 | Related modules/pages | [settings-hub-prd.md](settings-hub-prd.md), [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [authentication-prd.md](authentication-prd.md), [profile-prd.md](profile-prd.md), [dashboard-prd.md](dashboard-prd.md), [clients-prd.md](clients-prd.md), [manage-content-prd.md](manage-content-prd.md), [facilitators-prd.md](facilitators-prd.md), [support-desk-prd.md](support-desk-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The **Others** group in Settings ("Roles, menus and access.") holds two masters that together describe the admin portal's navigation and who may use it:
+The **Others** group in Settings ("Roles, menus and access.") holds two masters that together describe the Training Partner portal's navigation and who may use it:
 
-- **Menu Mapping & Access** ("Pages in the admin menu and their order"): the list of pages in the admin menu, which parent each sits under, the page address it opens, its icon and its position (priority).
-- **Roles & Access** ("What each admin role can see and do"): for each admin role, which menu pages it may open and which actions (View, Add, Edit, Delete, Export, Approve) it may perform on each page.
+- **Menu Mapping & Access** ("Pages in the Training Partner menu and their order"): the list of pages in the Training Partner menu, which parent each sits under, the page address it opens, its icon and its position (priority).
+- **Roles & Access** ("What each role can see and do"): for each role, which menu pages it may open and which actions (View, Add, Edit, Delete, Export, Approve) it may perform on each page.
 
 Objectives:
 
-- Let Admin users maintain the admin menu as a two-level tree (top-level menus and sub-menus) with a clear, visual way to set the order.
+- Let Training Partner users maintain the Training Partner menu as a two-level tree (top-level menus and sub-menus) with a clear, visual way to set the order.
 - Prevent broken menus: unique names among siblings, unique page addresses, no deleting a menu that still has sub-menus, no nesting deeper than one level.
-- Let Admin users set each role's permissions page by page in one grid, with shortcuts to grant a whole page or a whole action at once, and protect unsaved edits.
+- Let Training Partner users set each role's permissions page by page in one grid, with shortcuts to grant a whole page or a whole action at once, and protect unsaved edits.
 - Keep Super Admin permanently at full access.
 
 **Current limitation (applies to the whole module):** neither master changes how the application behaves. The sidebar is fixed and does not read the Menu Mapping master, and the permissions saved in Roles & Access are not applied to any page, menu or action (SH-002, OQ-SHELL-012, OQ-ACC-001, OQ-ACC-002).
@@ -33,19 +33,20 @@ Objectives:
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Menu Mapping & Access list (Settings › Menu Mapping & Access) | View and maintain the admin menu as a tree table | Admin user | Filter by level pill, search, fold/unfold parents, paginate, add, edit, delete | Roles & Access, App shell sidebar (not linked) |
-| Add / Edit menu modal | Enter a menu's details and place it in the menu | Admin user | Choose module, type names and address, pick parent and icon, move the item in the priority preview, save, cancel | Menu Mapping list |
-| Icon picker | Choose the menu's icon from a searchable grid | Admin user | Search icons, pick one | Add / Edit menu modal |
-| Delete menu dialogs | Confirm deletion, or explain why it is blocked | Admin user | Delete, cancel, close | Menu Mapping list |
-| Roles & Access page (Settings › Roles & Access) | Set what each admin role can open and do | Admin user | Search roles, pick a role, search pages, tick permissions (single, whole page, whole action), discard, save | Menu Mapping & Access |
-| Switch-role discard dialog | Protect unsaved permission changes | Admin user | Keep editing, Discard | Roles & Access |
+| Menu Mapping & Access list (Settings › Menu Mapping & Access) | View and maintain the Training Partner menu as a tree table | Training Partner user | Filter by level pill, search, fold/unfold parents, paginate, add, edit, delete | Roles & Access, App shell sidebar (not linked) |
+| Add / Edit menu modal | Enter a menu's details and place it in the menu | Training Partner user | Choose module, type names and address, pick parent and icon, move the item in the priority preview, save, cancel | Menu Mapping list |
+| Icon picker | Choose the menu's icon from a searchable grid | Training Partner user | Search icons, pick one | Add / Edit menu modal |
+| Delete menu dialogs | Confirm deletion, or explain why it is blocked | Training Partner user | Delete, cancel, close | Menu Mapping list |
+| Roles & Access page (Settings › Roles & Access) | Set what each role can open and do | Training Partner user | Search roles, pick a role, search pages, tick permissions (single, whole page, whole action), discard, save | Menu Mapping & Access |
+| Switch-role discard dialog | Protect unsaved permission changes | Training Partner user | Keep editing, Discard | Roles & Access |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in LearnNext staff member) | Both pages (SH-002, SH-003) | All actions in section 3 | A menu with sub-menus cannot be deleted or moved under another menu. Super Admin's permissions cannot be changed. Roles cannot be added, renamed or deleted. The permissions defined on the Roles & Access page are not enforced, so they do not restrict this or any other page (SH-002). |
-| Admin roles defined in the master (Super Admin, Admin, Finance Manager, Program Manager, Support Executive) | Not applied | — | These roles are records only; signing in does not assign a role and no page reads the role's permissions [Partially Implemented] (OQ-ACC-002) |
+| Training Partner user (signed in and continuing as Training Partner) | Both pages (SH-002, SH-003) | All actions in section 3 | A menu with sub-menus cannot be deleted or moved under another menu. Super Admin's permissions cannot be changed. Roles cannot be added, renamed or deleted. The permissions defined on the Roles & Access page are not enforced, so they do not restrict this or any other page (SH-002). |
+| Roles defined in the master (Super Admin, Training Partner, Finance Manager, Program Manager, Support Executive) | Not applied | — | These roles are records only; no page reads a role's permissions [Partially Implemented] (OQ-ACC-002). They are separate from the portal roles a person picks at "Continue as" after signing in: continuing as Super Admin opens the Super Admin portal, which has no Settings, and does not use the "Super Admin" row of this master |
+| Super Admin portal | None. Its menu has no Settings, and opening a Settings address takes the user to Manage Clients ([super-admin-prd.md](super-admin-prd.md)) | — | — |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003) |
 
 ## 5. Page Functionality and Behavior
@@ -56,12 +57,12 @@ Objectives:
 |---|---|---|---|---|---|
 | Entry and breadcrumb | Reach the master | Open from Settings (Others group) | Header breadcrumb "Settings › Menu Mapping & Access" (SH-009). Opening it adds it to Settings "Recently opened" | See [settings-hub-prd.md](settings-hub-prd.md) | Page shown |
 | Summary pills | Count and filter by level | Click | "All menus", "Top-level", "Sub-menus" with counts. Tooltips: "Show the whole menu", "Show top-level menus only", "Show sub-menus only" | Demo data: 17 menus, 11 top-level, 6 sub-menus (SH-001) | Filtered list |
-| Search | Find a menu | Type in "Search menu, page or URL…" | Filters as the user types (short pause) on menu name, page name, page URL, parent menu name and module, case-insensitive. Typing "Finance" also lists Finance's sub-menus because their parent name matches | SH-008. Because every menu's module is "Admin", typing "admin" matches every menu | Matching rows |
+| Search | Find a menu | Type in "Search menu, page or URL…" | Filters as the user types (short pause) on menu name, page name, page URL, parent menu name and module, case-insensitive. Typing "Finance" also lists Finance's sub-menus because their parent name matches | SH-008. Because every menu's module is "Training Partner", typing "Training Partner" matches every menu | Matching rows |
 | **Add menu** button | Create a menu | Click | Opens the Add menu modal (section 5.2) | At the right end of the toolbar | Modal opens |
-| Tree table | Show the menu as it is ordered | View | Each top-level menu, in priority order, followed by its sub-menus in priority order. Sub-menus are indented under their parent with a connector line | No column sorting; order always follows the menu. Caption for assistive technology: "Admin menu" | — |
+| Tree table | Show the menu as it is ordered | View | Each top-level menu, in priority order, followed by its sub-menus in priority order. Sub-menus are indented under their parent with a connector line | No column sorting; order always follows the menu. Caption for assistive technology: "Training Partner menu" | — |
 | Fold / unfold toggle | Hide or show a parent's sub-menus | Click the chevron before a parent | Hides or shows that parent's sub-menus. Labels: "Hide \<name>’s sub-menus" / "Show \<name>’s sub-menus" | Only on top-level menus that have sub-menus, and only when no search or pill filter is active. All parents start unfolded; the folded state is forgotten when the page is left | Rows hidden / shown |
 | Menu column | Identify | — | Icon tile and menu name. A parent shows "N sub-menus" ("1 sub-menu") under its name. While a search or pill filter is active, rows are listed flat (no indent, no chevron) and each sub-menu shows "under \<Parent>" | Menus with no icon show a generic page icon | — |
-| Module column | Which portal the menu belongs to | — | Shield icon and "Admin" | Only "Admin" exists (OQ-ACC-006) | — |
+| Module column | Which portal the menu belongs to | — | Shield icon and "Training Partner" | Only "Training Partner" exists (OQ-ACC-006) | — |
 | Page name column | Page title | — | Page name, truncated when long | — | — |
 | Page URL column | Address the menu opens | Hover | Address in a code-style chip; the full address shows on hover | — | — |
 | Priority column | Position among siblings | Hover | Number in a small circle. Tooltip "Position N in the menu" (top-level) or "Position N under \<Parent>" (sub-menu) | Numbers run 1…n within each sibling group with no gaps or ties (BR-ACC-009) | — |
@@ -70,13 +71,13 @@ Objectives:
 | Phone card | Phone layout | Tap | Icon, title = menu name; subtitle "Under \<Parent> · #N" (sub-menu), "N sub-menus · #N" or "Top-level · #N" (top-level); footer = page URL; edit/delete actions. Tapping the card opens Edit | SH-008 phones | — |
 | Table settings | Paging | Choose page size | 50 rows per page by default; options 20, 50 or All rows | Differs from SH-008 (default 10, options 10/20/50). Paging counts visible rows, so a parent and its sub-menus can fall on different pages in a long menu | — |
 | Result line | Filter summary | — | While searching or filtering: "N of Total menus" with **Clear all** (SH-008) | — | — |
-| Sidebar link [Partially Implemented] | The master is meant to drive the admin menu | Add, edit, reorder or delete a menu | The change is saved in this master only. The application sidebar, the "Jump to" list in search and the routing are **not** affected | OQ-ACC-001, OQ-SHELL-012 | Sidebar unchanged |
+| Sidebar link [Partially Implemented] | The master is meant to drive the Training Partner menu | Add, edit, reorder or delete a menu | The change is saved in this master only. The application sidebar, the "Jump to" list in search and the routing are **not** affected | OQ-ACC-001, OQ-SHELL-012 | Sidebar unchanged |
 
 ### 5.2 Add / Edit menu modal
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Title and description | Context | — | Add: "Add menu" / "A page in the admin menu, and where it sits." Edit: "Edit menu" / "\<name> · \<URL>" | Large modal: fields on the left, Priority preview on the right (stacked on narrow screens); bottom sheet on phones (SH-006) | — |
+| Title and description | Context | — | Add: "Add menu" / "A page in the Training Partner menu, and where it sits." Edit: "Edit menu" / "\<name> · \<URL>" | Large modal: fields on the left, Priority preview on the right (stacked on narrow screens); bottom sheet on phones (SH-006) | — |
 | Fields | Menu details | Type / choose | Module, Menu name, Parent menu, Page name, Page URL, Icon (section 7.1). Focus starts in Menu name | — | — |
 | Page name follows Menu name | Save typing | Type a menu name | Page name copies the menu name as it is typed, until the user types in Page name themselves | In Edit, Page name keeps following only if it was the same as the menu name when the modal opened | Page name filled |
 | Parent menu lock | Keep one level of nesting | — | When editing a menu that has sub-menus, Parent menu is disabled with helper "Has sub-menus, so it stays top-level." | BR-ACC-004 | — |
@@ -101,7 +102,7 @@ Objectives:
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Delete (no sub-menus) | Confirm removal | Click bin | Dialog "Delete this menu?" / "\<name> (\<URL>) will be removed from the admin menu." with **Cancel** and red **Delete** (SH-006) | No check of whether roles have access to it (OQ-ACC-011) | On Delete: toast "Menu deleted" (description = name); the remaining siblings are renumbered; list refreshes |
+| Delete (no sub-menus) | Confirm removal | Click bin | Dialog "Delete this menu?" / "\<name> (\<URL>) will be removed from the Training Partner menu." with **Cancel** and red **Delete** (SH-006) | No check of whether roles have access to it (OQ-ACC-011) | On Delete: toast "Menu deleted" (description = name); the remaining siblings are renumbered; list refreshes |
 | Delete blocked (has sub-menus) | Explain and redirect | Click bin on a parent | Information dialog "\<name> can’t be deleted yet" / "It has N sub-menus. Move them under another menu or delete them first." ("It has 1 sub-menu. …"). Buttons **Close** and **OK**, both of which only close the dialog | No Delete button is offered | Dialog closes |
 | Delete failure | Safety net | — | If the menu gained sub-menus in the meantime: toast "Couldn’t delete the menu" with "It has N sub-menus — move or delete them first." ("It has 1 sub-menu — move or delete it first.") | — | Dialog stays open |
 
@@ -127,8 +128,8 @@ Objectives:
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
 | Entry and breadcrumb | Reach the master | Open from Settings (Others group) | Breadcrumb "Settings › Roles & Access" (SH-009). Two panes in one card: roles on the left, the selected role's permissions on the right | On phones and tablets the roles become a horizontal strip above the grid | — |
-| Roles list | Choose a role | Click a role | Heading "Roles" with the number of roles (large screens). Each role shows a role icon in the role's colour and its name; Super Admin also shows a lock ("Locked"). The selected role sits on a white pill | Five demo roles: Super Admin, Admin, Finance Manager, Program Manager, Support Executive (SH-001) | Role selected |
-| Default role | Start where editing is possible | Open the page | The first role that can be edited (**Admin**) is selected, not Super Admin | — | Admin shown |
+| Roles list | Choose a role | Click a role | Heading "Roles" with the number of roles (large screens). Each role shows a role icon in the role's colour and its name; Super Admin also shows a lock ("Locked"). The selected role sits on a white pill | Five demo roles: Super Admin, Training Partner, Finance Manager, Program Manager, Support Executive (SH-001) | Role selected |
+| Default role | Start where editing is possible | Open the page | The first role that can be edited (**Training Partner**) is selected, not Super Admin | — | Training Partner shown |
 | Role search | Find a role | Type in "Search roles…" | Filters roles by name, case-insensitive. A clear (×) button "Clear role search" appears while text is entered. No match: "No roles match “\<text>”" | The selected role stays selected and shown on the right even if the search hides it | Filtered roles |
 | Role header | Summarise the role | View | Initials tile in the role's colour, role name, description (hidden on phones), "N people" ("1 person") and "Opens X of Y pages" | Y counts pages only (a parent that only groups sub-pages, such as Finance, is not counted). X = pages with View ticked in the current, unsaved state | — |
 | Locked note | Explain Super Admin | Select Super Admin | Note: "Super Admin always has every permission on every page — it can’t be changed." Every checkbox is ticked and disabled; no save bar appears | Super Admin automatically has every available action on every page, including menus added later (BR-ACC-013) | Read-only |
@@ -145,7 +146,7 @@ Objectives:
 | Switch role with unsaved changes | Protect the draft | Click another role | Dialog "Discard your changes?" / "Your N unsaved changes to \<role> won’t be saved." ("Your 1 unsaved change …") with **Keep editing** and **Discard** | Without unsaved changes the role switches at once | Discard switches role and drops the draft |
 | Leaving the page [Partially Implemented] | — | Click a sidebar item, breadcrumb, or browser Back with unsaved changes | The page closes without asking and the draft is lost | Roles & Access is not one of the guarded pages (see [app-shell-navigation-prd.md](app-shell-navigation-prd.md), OQ-ACC-008) | Changes lost |
 | Add / edit / delete role [Not Implemented] | Manage the role list | — | No control exists to add, rename, describe, recolour or delete a role, or to assign people to a role | OQ-ACC-003 | — |
-| Enforcement [Partially Implemented] | Restrict what each role can do | Save permissions | Saved permissions are kept for the session (SH-001) but nothing in the application reads them: every Admin user still sees every page and action | SH-002, OQ-ACC-002 | No effect |
+| Enforcement [Partially Implemented] | Restrict what each role can do | Save permissions | Saved permissions are kept for the session (SH-001) but nothing in the application reads them: every Training Partner user still sees every page and action | SH-002, OQ-ACC-002 | No effect |
 
 ## 6. User Workflow
 
@@ -153,13 +154,13 @@ Objectives:
 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
-| 1 | Click **Add menu** | Modal opens; Module = "Admin"; focus in Menu name; preview shows the top-level menus with "New menu" at the end | — | — |
+| 1 | Click **Add menu** | Modal opens; Module = "Training Partner"; focus in Menu name; preview shows the top-level menus with "New menu" at the end | — | — |
 | 2 | Type "Payment Runs" | Page name fills with "Payment Runs"; preview shows the name | — | — |
 | 3 | Choose Parent menu "Finance" | Preview shows Finance with its six sub-menus; the item moves to position 7 of 7 | Only top-level menus are offered | — |
 | 4 | Type Page URL "/finance/payment-runs", choose an icon | — | URL has no spaces and is not used by another menu | — |
 | 5 | Move the item up with ↑ to position 2 | Preview shows "2 of 7" | — | — |
 | 6 | Click **Save menu** | Checks fields; saves; toast "Menu added" / "Payment Runs · /finance/payment-runs"; modal closes | All required fields filled; name unique under Finance | Payment Runs appears under Finance at position 2; the later sub-menus shift down by one |
-| 7 | Open Roles & Access | The new page appears under Finance in the grid with View, Add, Edit, Delete, Export available | — | Not ticked for Admin, Finance Manager, Program Manager or Support Executive; ticked for Super Admin. The real sidebar does **not** show it (OQ-ACC-001) |
+| 7 | Open Roles & Access | The new page appears under Finance in the grid with View, Add, Edit, Delete, Export available | — | Not ticked for Training Partner, Finance Manager, Program Manager or Support Executive; ticked for Super Admin. The real sidebar does **not** show it (OQ-ACC-001) |
 
 ### 6.2 Reorder a top-level menu
 
@@ -180,7 +181,7 @@ Objectives:
 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
-| 1 | Open Roles & Access | Admin is selected; grid shows Admin's permissions | — | — |
+| 1 | Open Roles & Access | Training Partner is selected; grid shows Training Partner's permissions | — | — |
 | 2 | Select "Support Executive" | Grid shows its permissions; header "Opens 4 of 16 pages" | No unsaved changes | — |
 | 3 | Tick Export on "Support desk" | View stays ticked; save bar "1 unsaved change to Support Executive" | — | — |
 | 4 | Click the Finance row checkbox | Every available action on all six Finance sub-pages is ticked | — | Count increases |
@@ -202,7 +203,7 @@ Validation timing in the menu modal follows SH-004: "Enter the …" and "Choose 
 
 | Field Name | Input Type | Purpose | Required/Optional | Min Length/Value | Max Length/Value | Accepted Format/Values | Default Value | Validation Rules | Conditional Behavior | Error Message |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Module | Searchable select (placeholder "Select module") | Which portal the menu belongs to | Required | N/A | N/A | "Admin" (the only option) | "Admin" (Add); saved value (Edit) | Must have a value. The field cannot be cleared, so the error cannot occur in the current build | — | "Choose the module" |
+| Module | Searchable select (placeholder "Select module") | Which portal the menu belongs to | Required | N/A | N/A | "Training Partner" (the only option) | "Training Partner" (Add); saved value (Edit) | Must have a value. The field cannot be cleared, so the error cannot occur in the current build | — | "Choose the module" |
 | Module search | Search box inside the Module list (placeholder "Search modules…") | Find a module | Optional | N/A | Requires Confirmation | Contains, case-insensitive, on the module name | Empty | None | No match: "No matches" | N/A |
 | Menu name | Text (placeholder "e.g. Facilitators") | Label shown in the menu | Required | 1 non-space character | 40 characters (typing stops at 40) | Any characters; surrounding spaces removed on save | Empty (Add); saved name (Edit) | Spaces-only counts as empty. Must be unique among its siblings (same parent, or among top-level menus), ignoring case and surrounding spaces; the menu's own name is allowed in Edit. The same name may be used under different parents | Copied into Page name while typing, until Page name is edited. Re-checked when Parent menu changes | Empty: "Enter the menu name". Duplicate under a parent: "This parent already has a menu with this name". Duplicate at top level: "There is already a top-level menu with this name" |
 | Parent menu | Searchable select, clearable (placeholder "None — top-level menu") | Place the menu under a top-level menu | Optional | N/A | N/A | Any top-level menu except the menu itself, in menu order; each option shows its icon and page URL | None (top-level) for Add; saved parent (Edit) | Sub-menus cannot be chosen as parents (one level of nesting only) | Disabled with helper "Has sub-menus, so it stays top-level." when the edited menu has sub-menus. Choosing or clearing a parent moves the item to the end of the new sibling list | N/A |
@@ -244,11 +245,11 @@ Validation timing in the menu modal follows SH-004: "Enter the …" and "Choose 
 | BR-ACC-007 | Default position | A new menu goes to the end of its sibling list unless moved | Add; parent change | Position = siblings + 1 | — | "N of M" in the preview |
 | BR-ACC-008 | No change, no save | Edit Save is disabled until something changes | Edit modal | Button disabled | — | — |
 | BR-ACC-009 | Continuous priorities | Within each sibling group positions run 1…n with no gaps or ties | Save, move to another parent, delete | Siblings renumbered; leaving a parent closes the gap it left | — | Priority column |
-| BR-ACC-010 | Menu master drives the sidebar [Partially Implemented] | The admin menu should follow this master | Any menu change | The real sidebar, search "Jump to" list and routes are fixed and ignore this master | Adding "Payment Runs" | No sidebar change (OQ-ACC-001) |
+| BR-ACC-010 | Menu master drives the sidebar [Partially Implemented] | The Training Partner menu should follow this master | Any menu change | The real sidebar, search "Jump to" list and routes are fixed and ignore this master | Adding "Payment Runs" | No sidebar change (OQ-ACC-001) |
 | BR-ACC-011 | View is the base permission | Any action on a page requires View; removing View removes everything on that page | Any checkbox change | Ticking Add/Edit/Delete/Export/Approve ticks View; clearing View clears the row | — | Checkbox states |
 | BR-ACC-012 | Actions offered per page | Each page offers only the actions that fit it, decided by its page address: Dashboard and Reports: View, Export. Settings: View, Add, Edit, Delete. Support desk: View, Edit, Export. Invoice Approvals: View, Approve, Export. Trainer Invoice and Facilitators: View, Add, Edit, Delete, Export, Approve. Any other page (including new menus): View, Add, Edit, Delete, Export. A parent with sub-pages has no actions of its own | Grid display | Other actions show a dash | — | "\<Action> isn’t available on this page". Changing a menu's address changes its actions (OQ-ACC-007) |
 | BR-ACC-013 | Super Admin locked | Super Admin always has every available action on every page and cannot be edited | Super Admin selected; save | Checkboxes disabled; new menus are included automatically | Attempt to save Super Admin (not possible from the page) | Locked note. Safety-net message "Super Admin always has full access." |
-| BR-ACC-014 | New menus start without access | A menu added in Menu Mapping appears in the grid for every role; for every role except Super Admin it starts with nothing ticked | After adding a menu | Admin must grant access explicitly | — | — (OQ-ACC-010) |
+| BR-ACC-014 | New menus start without access | A menu added in Menu Mapping appears in the grid for every role; for every role except Super Admin it starts with nothing ticked | After adding a menu | Access must be granted explicitly | — | — (OQ-ACC-010) |
 | BR-ACC-015 | Draft and explicit save | Permission changes are held as a draft until **Save changes** | Roles & Access | Save bar shows the count; Discard restores; switching role asks first | — | "N unsaved changes to \<role>" |
 | BR-ACC-016 | Permissions enforced [Partially Implemented] | Each role's permissions should limit what its users see and do | Everywhere | Not enforced; no user is linked to a role | — | None (SH-002, OQ-ACC-002) |
 | BR-ACC-017 | Fixed role list [Not Implemented] | Roles are maintained elsewhere or are fixed | Roles & Access | No add, rename or delete; the people count per role is fixed demo data | — | — (OQ-ACC-003) |
@@ -274,12 +275,12 @@ Toasts follow SH-005.
 
 | Element/Column | Purpose | Behavior | Available Options/Rules | Empty/Error Behavior |
 |---|---|---|---|---|
-| Menu tree table | The admin menu | Menu order (parents by priority, each followed by its sub-menus by priority); fold/unfold per parent; no column sorting | Columns: Menu, Module, Page name, Page URL, Priority, actions. 50 rows per page; 20/50/All | Empty master: "No menus yet" / "Add the pages the admin menu shows." + **Add menu**. No match: "No menus match" / "Try a different search." + **Clear search & filters** |
+| Menu tree table | The Training Partner menu | Menu order (parents by priority, each followed by its sub-menus by priority); fold/unfold per parent; no column sorting | Columns: Menu, Module, Page name, Page URL, Priority, actions. 50 rows per page; 20/50/All | Empty master: "No menus yet" / "Add the pages the Training Partner menu shows." + **Add menu**. No match: "No menus match" / "Try a different search." + **Clear search & filters** |
 | Menu search and pills | Narrow the list | Section 7.2; results are shown flat, sub-menus labelled "under \<Parent>" | Result line "N of Total menus" + **Clear all** (SH-008) | As above |
 | Menu list loading / failure | — | Skeletons while loading; error state with **Try again** (SH-007) | — | "Couldn’t load data" (table) / "Couldn’t load the list" (cards) |
-| Roles list | Choose a role | Seed order: Super Admin, Admin, Finance Manager, Program Manager, Support Executive | Search by name | "No roles match “\<text>”" |
+| Roles list | Choose a role | Seed order: Super Admin, Training Partner, Finance Manager, Program Manager, Support Executive | Search by name | "No roles match “\<text>”" |
 | Permission grid | Pages × actions | Menu order with sub-pages indented; sticky header row | Six action columns; dashes where an action does not apply | No match: "No pages match" / "Try a different search." (no clear button; differs from SH-007). Loading: "Loading access…". Load failure: "Couldn’t load roles" with the reason and **Try again** |
-| Header counts | Summary | "N people" and "Opens X of Y pages" | People counts in the demo: Super Admin 2, Admin 4, Finance Manager 3, Program Manager 5, Support Executive 6 | — |
+| Header counts | Summary | "N people" and "Opens X of Y pages" | People counts in the demo: Super Admin 2, Training Partner 4, Finance Manager 3, Program Manager 5, Support Executive 6 | — |
 
 ## 11. Empty States, Errors, and Edge Cases
 
@@ -313,13 +314,13 @@ Toasts follow SH-005.
 | App shell sidebar ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) | The demo menu mirrors the sidebar (Dashboard … Reports, Finance with six sub-menus, plus Support desk); "System pages" (Dev only) is not in the master | Any menu change | None: the sidebar is fixed | BR-ACC-010, OQ-ACC-001, OQ-SHELL-012 |
 | All pages (SH-002) | Role permissions should restrict pages and actions | Save permissions | None: not enforced | BR-ACC-016, OQ-ACC-002 |
 | Authentication ([authentication-prd.md](authentication-prd.md)) | Sign-in should determine the user's role | Sign in | No role is assigned | SH-002 |
-| Profile ([profile-prd.md](profile-prd.md)) | "Access level" shows "Admin" | — | Not linked to these roles | OQ-PROF-011 |
+| Profile ([profile-prd.md](profile-prd.md)) | "Access level" shows "Training Partner" | — | Not linked to these roles | OQ-PROF-011 |
 | Manage Content ([manage-content-prd.md](manage-content-prd.md)) | Manage Content offers View, Add, Edit, Delete, Export | — | The page has no export or delete; not enforced | OQ-CNT-018 |
 | Facilitators ([facilitators-prd.md](facilitators-prd.md)) | Facilitators offers Approve (KYC) | — | Not enforced | OQ-FAC-014 |
 | Support desk ([support-desk-prd.md](support-desk-prd.md)) | Support desk offers View, Edit, Export; the Support Executive role has View and Edit | — | Not enforced | OQ-SUP-012 |
 | Dashboard ([dashboard-prd.md](dashboard-prd.md)) | Dashboard offers View and Export | — | Not enforced | OQ-DASH-011 |
-| Settings hub ([settings-hub-prd.md](settings-hub-prd.md)) | Entry points in the "Others" group: "Menu Mapping & Access" ("Pages in the admin menu and their order") and "Roles & Access" ("What each admin role can see and do") | Open | Added to Recently opened | — |
-| Settings – Industry & job masters ([settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md)) | The CRM "Role" master is a different concept (job roles, not admin roles) | — | None | — |
+| Settings hub ([settings-hub-prd.md](settings-hub-prd.md)) | Entry points in the "Others" group: "Menu Mapping & Access" ("Pages in the Training Partner menu and their order") and "Roles & Access" ("What each role can see and do") | Open | Added to Recently opened | — |
+| Settings – Industry & job masters ([settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md)) | The CRM "Role" master is a different concept (job roles, not access roles) | — | None | — |
 
 ## 13. Acceptance Criteria
 
@@ -373,9 +374,9 @@ Toasts follow SH-005.
 - Then only icons with "money" in their keywords are shown with the count "N icons"
 - And typing "zzz" shows "No icons match “zzz”"
 
-**AC-ACC-010: Admin selected by default; Super Admin locked**
+**AC-ACC-010: Training Partner selected by default; Super Admin locked**
 - Given the user opens Roles & Access
-- Then Admin is selected
+- Then Training Partner is selected
 - And when the user selects Super Admin, the note "Super Admin always has every permission on every page — it can’t be changed." appears and every checkbox is ticked and disabled
 
 **AC-ACC-011: View is implied and required**
@@ -396,14 +397,14 @@ Toasts follow SH-005.
 - And **Save changes** shows "Access saved" / "Finance Manager · N changes"; **Discard** restores the saved state without a dialog
 
 **AC-ACC-014: Switch role with unsaved changes**
-- Given 2 unsaved changes on Admin
+- Given 2 unsaved changes on Training Partner
 - When the user clicks Support Executive
-- Then "Discard your changes?" / "Your 2 unsaved changes to Admin won’t be saved." appears; **Keep editing** keeps Admin; **Discard** opens Support Executive
+- Then "Discard your changes?" / "Your 2 unsaved changes to Training Partner won’t be saved." appears; **Keep editing** keeps Training Partner; **Discard** opens Support Executive
 
 **AC-ACC-015: New menu appears in Roles & Access**
 - Given a menu "Payment Runs" was added under Finance
 - When the user opens Roles & Access
-- Then "Payment Runs" is a row under Finance offering View, Add, Edit, Delete and Export, unticked for Admin and ticked for Super Admin
+- Then "Payment Runs" is a row under Finance offering View, Add, Edit, Delete and Export, unticked for Training Partner and ticked for Super Admin
 
 **AC-ACC-016: Not applied to the sidebar or pages (known gap)**
 - Given a menu was added, reordered or deleted, and a role's permissions were changed
@@ -435,14 +436,14 @@ Toasts follow SH-005.
 | TC-ACC-020 | 5.1 | Search and pills | Demo data | "finance"; Sub-menus pill | Flat rows with "under Finance"; counts 17/11/6 | P2 |
 | TC-ACC-021 | 5.1 | Fold / unfold | — | Click Finance chevron | Sub-menus hidden / shown | P3 |
 | TC-ACC-022 | 5.1 | Phone cards | 375 px | — | Cards with "Under Finance · #N"; tap opens Edit | P3 |
-| TC-ACC-023 | AC-ACC-010 | Default role and lock | — | Open page; select Super Admin | Admin selected; Super Admin read-only with note | P1 |
+| TC-ACC-023 | AC-ACC-010 | Default role and lock | — | Open page; select Super Admin | Training Partner selected; Super Admin read-only with note | P1 |
 | TC-ACC-024 | AC-ACC-011 | View implied | Support Executive | Tick Export on Dashboard; clear View | View ticked; then row cleared | P1 |
 | TC-ACC-025 | AC-ACC-012 | Column and row checkboxes | Program Manager | Approve column; Finance row | Approve only on Facilitators, Trainer Invoice, Invoice Approvals; Finance sub-pages full | P1 |
 | TC-ACC-026 | BR-ACC-012 | Unavailable actions | Any role | Hover dash on Dashboard × Edit | "Edit isn’t available on this page" | P3 |
 | TC-ACC-027 | AC-ACC-013 | Save, discard, count | Finance Manager | Two changes, toggle one back | Count 1; Save toast "Finance Manager · 1 change"; Discard restores | P1 |
 | TC-ACC-028 | AC-ACC-014 | Switch role guard | Unsaved changes | Click another role | Dialog; Keep editing / Discard work | P1 |
-| TC-ACC-029 | 5.7 | Page search | Admin | "invoice" | Finance with matching sub-pages; "zzz" → "No pages match" | P2 |
-| TC-ACC-030 | AC-ACC-015 | New menu in grid | TC-ACC-001 done, same tab | Open Roles & Access | "Calendar" row, unticked for Admin, ticked for Super Admin | P1 |
+| TC-ACC-029 | 5.7 | Page search | Training Partner | "invoice" | Finance with matching sub-pages; "zzz" → "No pages match" | P2 |
+| TC-ACC-030 | AC-ACC-015 | New menu in grid | TC-ACC-001 done, same tab | Open Roles & Access | "Calendar" row, unticked for Training Partner, ticked for Super Admin | P1 |
 | TC-ACC-031 | AC-ACC-016 | Not applied (gap) | Changes made | Look at sidebar, open pages | No change | P2 |
 | TC-ACC-032 | 11 | Leave with unsaved permissions (gap) | Unsaved changes | Click Dashboard in sidebar | Leaves without asking | P2 |
 
@@ -455,11 +456,11 @@ Toasts follow SH-005.
 | OQ-ACC-003 | Roles & Access | Roles cannot be added, renamed, described or deleted, and people cannot be assigned; counts are fixed demo data | Role list cannot evolve | Confirm where roles and memberships are maintained | Open |
 | OQ-ACC-004 | Menu – Page URL | Only spaces and duplicates are checked; trailing "/", allowed characters, external links and whether the page exists are not defined | Broken or duplicate links | Define the URL format rules | Open |
 | OQ-ACC-005 | Menu fields | Limits of 40 (Menu name), 60 (Page name) and 120 (Page URL) exist in the form only | Data quality | Confirm the limits | Open |
-| OQ-ACC-006 | Menu – Module | Only "Admin" exists; "Choose the module" can never appear | Purpose of the field unclear | Confirm which other portals will be added | Open |
-| OQ-ACC-007 | Roles – actions per page | Available actions are fixed by page address; new menus always get View, Add, Edit, Delete, Export (never Approve); changing an address changes the actions | Admins cannot configure actions per page | Decide whether actions should be set per menu in Menu Mapping | Open |
+| OQ-ACC-006 | Menu – Module | Only "Training Partner" exists; "Choose the module" can never appear | Purpose of the field unclear | Confirm which other portals will be added | Open |
+| OQ-ACC-007 | Roles – actions per page | Available actions are fixed by page address; new menus always get View, Add, Edit, Delete, Export (never Approve); changing an address changes the actions | Training Partner users cannot configure actions per page | Decide whether actions should be set per menu in Menu Mapping | Open |
 | OQ-ACC-008 | Roles & Access | Leaving the page (sidebar, breadcrumb, Back) with unsaved changes does not ask | Data loss | Confirm the page should use the shell's leave guard | Open |
 | OQ-ACC-009 | Roles – column checkbox | The column checkbox changes hidden pages while a page search is active | Unexpected bulk changes | Confirm whether it should apply only to visible rows | Open |
-| OQ-ACC-010 | Roles – new / changed menus | New menus start with no access for every editable role; a page that becomes a parent loses its own permissions from view | Admins may forget to grant access | Confirm default access for new menus and handling when a page becomes a group | Open |
+| OQ-ACC-010 | Roles – new / changed menus | New menus start with no access for every editable role; a page that becomes a parent loses its own permissions from view | Training Partner users may forget to grant access | Confirm default access for new menus and handling when a page becomes a group | Open |
 | OQ-ACC-011 | Menu – delete | Any menu without sub-menus can be deleted with no warning about roles that have access to it, including built pages such as Dashboard | Accidental removal | Define usage checks and warnings | Open |
 | OQ-ACC-012 | Menu – nesting | Only one level of sub-menus is allowed | Future menu structures | Confirm one level is the rule | Open |
 | OQ-ACC-013 | Both | Creator and creation date are recorded for menus but not shown; no history of permission changes | Audit trail | Define audit needs for menu and permission changes | Open |

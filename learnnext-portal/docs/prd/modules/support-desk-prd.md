@@ -7,24 +7,24 @@
 | PRD title | Support desk PRD |
 | Module name | Support desk |
 | Document ID | PRD-SUP |
-| Version | 1.1 |
+| Version | 1.2 |
 | Documentation status | Draft (derived from the current build) |
-| Module implementation status | Partially Implemented (the admin side — viewing, searching, filtering, replying with attachments, closing and reopening tickets — is implemented; raising tickets, the requester's own replies and any notification to the requester happen outside this application or are not defined; there are no priorities, assignment or service-level targets) |
-| Last updated | 2026-11-03 (v1.1: phone ticket cards match the other list cards; chat drawer full width on phones) |
+| Module implementation status | Partially Implemented (the Training Partner side — viewing, searching, filtering, replying with attachments, closing and reopening tickets — is implemented; raising tickets, the requester's own replies and any notification to the requester happen outside this application or are not defined; there are no priorities, assignment or service-level targets) |
+| Last updated | 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin", including reply author and filter wording) · 2026-11-03 (v1.1: phone ticket cards match the other list cards; chat drawer full width on phones) |
 | Related modules/pages | [App shell & navigation](app-shell-navigation-prd.md), [Facilitators](facilitators-prd.md), [All Clients](clients-prd.md), [Client detail](client-detail-prd.md), [Manage Content](manage-content-prd.md), [Settings – Access masters (Roles & Access, Menu Mapping)](settings-access-masters-prd.md), [Profile](profile-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-Participants (people attending client programs) and facilitators (trainers) raise support tickets when they need help — a broken link, a missing file, a payment query, a batch change. The Support desk is where LearnNext Admin users **give** that support.
+Participants (people attending client programs) and facilitators (trainers) raise support tickets when they need help — a broken link, a missing file, a payment query, a batch change. The Support desk is where LearnNext Portal users **give** that support.
 
-The Support desk lets an Admin user:
+The Support desk lets a Training Partner user:
 
 - see every ticket from participants and facilitators in one list, and how many are open, waiting for an answer, or closed;
 - find tickets quickly by searching and by filtering on who raised them, category, client company, who replied and how recently they were raised;
 - read what the requester wrote and view the files they attached;
 - reply in a chat conversation, with text and file attachments;
 - close a ticket when it is resolved, and reopen it if needed;
-- work either from a table or from a board whose lanes show what is waiting on the admin team, what is waiting on the requester, and what is done.
+- work either from a table or from a board whose lanes show what is waiting on the Training Partner team, what is waiting on the requester, and what is done.
 
 The objective is that no requester waits unnoticed: tickets where the requester spoke last are highlighted on the page and counted on the sidebar Support desk card (see [app-shell-navigation-prd.md](app-shell-navigation-prd.md), BR-SHELL-018).
 
@@ -32,20 +32,20 @@ The objective is that no requester waits unnoticed: tickets where the requester 
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Support desk page (`/support`) | One list of all participant and facilitator tickets, with summary pills, search, filters and a Table / Board switch | Admin user | Filter by status pill, search, filter, switch view, open details, open chat, close, reopen | Sidebar Support desk card (App shell) |
-| Ticket table / phone cards | List tickets with their latest activity | Admin user | Sort, page, open details, open chat, close, reopen | Ticket details, Ticket chat |
-| Ticket board | Show tickets in three lanes: Awaiting reply, Waiting on them, Closed | Admin user | Open details, open chat, drag to close or reopen | Ticket details, Ticket chat |
-| Filter tickets (drawer) | Narrow the list by who raised it, category, company, who replied and date | Admin user | Choose filters, Reset, Show N tickets | Support desk page |
-| Ticket details (modal) | Show the ticket: requester, status, description, attached files, category, date and reply state | Admin user | View files, Close ticket / Reopen ticket, Open chat | Ticket chat, File preview |
-| Ticket chat (drawer) | The full conversation, and the place to reply | Admin user | Read, reply with text and files, view files, Close ticket, Reopen ticket | File preview |
-| File preview (modal) | View an attached file full size | Admin user | Open in new tab, Download | Ticket details, Ticket chat |
-| Sidebar Support desk card | Shows how many tickets wait for an answer and opens this page | Admin user | Click the card | Documented in [app-shell-navigation-prd.md](app-shell-navigation-prd.md) |
+| Support desk page (`/support`) | One list of all participant and facilitator tickets, with summary pills, search, filters and a Table / Board switch | Training Partner user | Filter by status pill, search, filter, switch view, open details, open chat, close, reopen | Sidebar Support desk card (App shell) |
+| Ticket table / phone cards | List tickets with their latest activity | Training Partner user | Sort, page, open details, open chat, close, reopen | Ticket details, Ticket chat |
+| Ticket board | Show tickets in three lanes: Awaiting reply, Waiting on them, Closed | Training Partner user | Open details, open chat, drag to close or reopen | Ticket details, Ticket chat |
+| Filter tickets (drawer) | Narrow the list by who raised it, category, company, who replied and date | Training Partner user | Choose filters, Reset, Show N tickets | Support desk page |
+| Ticket details (modal) | Show the ticket: requester, status, description, attached files, category, date and reply state | Training Partner user | View files, Close ticket / Reopen ticket, Open chat | Ticket chat, File preview |
+| Ticket chat (drawer) | The full conversation, and the place to reply | Training Partner user | Read, reply with text and files, view files, Close ticket, Reopen ticket | File preview |
+| File preview (modal) | View an attached file full size | Training Partner user | Open in new tab, Download | Ticket details, Ticket chat |
+| Sidebar Support desk card | Shows how many tickets wait for an answer and opens this page | Training Partner user | Click the card | Documented in [app-shell-navigation-prd.md](app-shell-navigation-prd.md) |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in LearnNext staff member) | Support desk page, ticket details, ticket chat (SH-002, SH-003) | All actions in this PRD | None enforced in the current build. The Roles & Access master stores Support desk permissions (view, edit, export) and includes a "Support Executive" role ("Answers support tickets") with view and edit, but these are not applied (SH-002). |
+| Training Partner user (signed in and continuing as Training Partner) | Support desk page, ticket details, ticket chat (SH-002, SH-003) | All actions in this PRD | None enforced in the current build. The Roles & Access master stores Support desk permissions (view, edit, export) and includes a "Support Executive" role ("Answers support tickets") with view and edit, but these are not applied (SH-002). |
 | Participant | No access to this application (SH-002) | Raises tickets and replies from outside this application | Appears here only as a ticket requester ("Participant", with their client company) |
 | Facilitator | No access to this application (SH-002) | Raises tickets and replies from outside this application | Appears here only as a ticket requester ("Facilitator") |
 
@@ -96,7 +96,7 @@ The objective is that no requester waits unnoticed: tickets where the requester 
 | Raised by | Filter by requester type | Choose | Everyone / Participants / Facilitators (7.2). | Choosing **Facilitators** clears any chosen client companies and hides the Client company section | — |
 | Category | Filter by category | Pick one or more | Shows tickets in **any** of the chosen categories. | — | — |
 | Client company | Filter by participant's company | Pick one or more | Shows tickets from any of the chosen companies. | Hidden while Raised by = Facilitators. Facilitator tickets have no company, so choosing a company leaves only participant tickets. | — |
-| Replied by | Filter by who answered | Pick one or more | Shows tickets where **any** chosen admin has replied at least once; "No reply yet" shows tickets with no admin reply. | — | — |
+| Replied by | Filter by who answered | Pick one or more | Shows tickets where **any** chosen person has replied at least once; "No reply yet" shows tickets with no Training Partner reply. | — | — |
 | Raised within | Filter by age | Choose | Any time / 24 hours / 7 days / 30 days, counted back from now to the ticket's creation. | — | — |
 | Section clear links | Clear one section | Click the section's clear control | Clears that section in the draft. | Shown only while that section is set | — |
 | Reset | Clear the draft | Click | Clears all five sections in the draft. Keeps the selected summary pill and the search. | — | — |
@@ -109,8 +109,8 @@ The objective is that no requester waits unnoticed: tickets where the requester 
 | Header | Identify the ticket | Open from a row, phone card or board card | Title = the ticket subject; description = the ticket number. | Closes per SH-006 | — |
 | Requester line | Who raised it | View | Photo or initials, name, "Participant · <company>" or "Facilitator" (the requester's email appears on hover), and the status badge (Open / Closed). | — | — |
 | Description | What they reported | View | The description the requester wrote when raising the ticket, shown as a quoted block with line breaks kept. | — | — |
-| Attached files | What they sent | Click a file | Every file the requester has attached in any of their messages, as chips (image thumbnail or document icon, name, size). Clicking opens File preview (5.7). | Shown only when the requester attached files. Files sent by admins are not listed here (they are in the chat). | File preview |
-| Facts line | Category, date and reply state | View | "<category> › <sub-category>", "Raised <date>, <time>" (for example "Raised 12 Mar 2026, 9:30 AM"), then one of: "Awaiting our reply" (amber) when open and the requester spoke last; "Closed by <name> · <time ago>" when closed; otherwise "Replied by <admin names, comma-separated>". | — | — |
+| Attached files | What they sent | Click a file | Every file the requester has attached in any of their messages, as chips (image thumbnail or document icon, name, size). Clicking opens File preview (5.7). | Shown only when the requester attached files. Files sent by Training Partner users are not listed here (they are in the chat). | File preview |
+| Facts line | Category, date and reply state | View | "<category> › <sub-category>", "Raised <date>, <time>" (for example "Raised 12 Mar 2026, 9:30 AM"), then one of: "Awaiting our reply" (amber) when open and the requester spoke last; "Closed by <name> · <time ago>" when closed; otherwise "Replied by <replier names, comma-separated>". | — | — |
 | Close ticket | Resolve | Click (open tickets) | Closes immediately; toast "Ticket closed" with "<number> · <name>". The modal stays open and switches to Closed. | No confirmation (BR-SUP-013) | Status → Closed |
 | Reopen ticket | Undo a close | Click (closed tickets) | Reopens immediately. **No toast** (differs from the row and board, OQ-SUP-007). The modal stays open and switches to Open. | — | Status → Open |
 | Open chat · N | Reply | Click | Closes the details and opens Ticket chat for the same ticket. N = the number of messages in the conversation. | — | Chat drawer |
@@ -121,11 +121,11 @@ The objective is that no requester waits unnoticed: tickets where the requester 
 |---|---|---|---|---|---|
 | Header | Who the conversation is with | View | Photo or initials, requester name, "Participant · <company>" or "Facilitator". On the right: **Close ticket** (open tickets only) and × ("Close chat"). | Drawer closes with ×, Esc or the backdrop (SH-006). Closing the drawer discards any unsent text and files. | — |
 | Ticket strip | Which ticket | View | "<subject> · <ticket number>" and the status badge. | — | — |
-| Conversation | Read the thread | View, scroll | Messages oldest to newest. A date separator (for example "12 Mar 2026") appears before the first message of each day. Requester messages are on the left with their photo; admin replies on the right in brand-blue bubbles. Under each message: the time (for example "9:30 AM"); admin messages also show the replying admin's name ("Atul Kumar · 9:30 AM"). Line breaks are kept. | Opens scrolled to the newest message and follows new ones | — |
+| Conversation | Read the thread | View, scroll | Messages oldest to newest. A date separator (for example "12 Mar 2026") appears before the first message of each day. Requester messages are on the left with their photo; Training Partner replies on the right in brand-blue bubbles. Under each message: the time (for example "9:30 AM"); Training Partner messages also show the replier's name ("Atul Kumar · 9:30 AM"). Line breaks are kept. | Opens scrolled to the newest message and follows new ones | — |
 | Files in messages | See attachments | Click a file chip | Opens File preview (5.7). | Image files show a thumbnail; other files a document icon, with name and size | File preview |
 | Reply box | Write a reply | Type | Placeholder "Reply to <first name>…". **Enter** sends; **Shift + Enter** adds a new line (no hint is shown). The box grows with the text up to a limit, then scrolls. | Shown only while the ticket is Open. Fields in 7.4. | — |
 | Attach files | Add files to the reply | Click the paperclip (tooltip "Attach files (up to 5, 10 MB each)") | Opens the device file picker (multiple files allowed). Chosen files appear above the box as chips with a remove (×) button ("Remove <file name>"); clicking a chip previews it. | Limits in 7.4 and BR-SUP-008..010 | Files wait to be sent |
-| Send reply | Send | Click the send button ("Send reply") or press Enter | Adds the reply to the conversation at once with the signed-in admin's name and the current time, clears the box and files, and keeps focus in the box. **No toast.** | Disabled while there is no text (spaces only count as none) and no file. Text is trimmed. | Ticket moves from Awaiting reply to Waiting on them; sidebar waiting count drops by 1 if it was waiting (BR-SUP-012) |
+| Send reply | Send | Click the send button ("Send reply") or press Enter | Adds the reply to the conversation at once with the signed-in user's name and the current time, clears the box and files, and keeps focus in the box. **No toast.** | Disabled while there is no text (spaces only count as none) and no file. Text is trimmed. | Ticket moves from Awaiting reply to Waiting on them; sidebar waiting count drops by 1 if it was waiting (BR-SUP-012) |
 | Close ticket | Resolve from the chat | Click | Closes immediately; toast "Ticket closed" with "<number> · <name>". The reply box is replaced by the closed footer. | No confirmation. Unsent text and files are hidden, not sent (OQ-SUP-008). | Status → Closed |
 | Closed footer | Show who closed it | View | "Closed by <name> · <time ago>" and **Reopen ticket**. | Closed tickets only; no reply box | — |
 | Reopen ticket | Undo a close | Click | Reopens immediately. **No toast.** The reply box returns. | — | Status → Open |
@@ -149,13 +149,13 @@ The objective is that no requester waits unnoticed: tickets where the requester 
 | 3 | Click a row | Ticket details open | — | Description, files, "Awaiting our reply" |
 | 4 | Open an attached file | File preview opens | — | — |
 | 5 | Click **Open chat · N** | Details close; chat opens at the newest message | — | Reply box "Reply to <first name>…" |
-| 6 | Type a reply, optionally attach files, press Enter | Reply added under the admin's name | Text or at least one file; ≤ 5 files; ≤ 10 MB each | Ticket leaves the Awaiting reply count; sidebar count drops by 1 |
+| 6 | Type a reply, optionally attach files, press Enter | Reply added under the signed-in user's name | Text or at least one file; ≤ 5 files; ≤ 10 MB each | Ticket leaves the Awaiting reply count; sidebar count drops by 1 |
 
 ### 6.2 Close and reopen a ticket
 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
-| 1 | Click **Close ticket** (row icon, details, chat, or drag a card to Closed) | Closes immediately | Ticket is Open | Toast "Ticket closed"; Closed count +1; "Closed by <admin name>" recorded |
+| 1 | Click **Close ticket** (row icon, details, chat, or drag a card to Closed) | Closes immediately | Ticket is Open | Toast "Ticket closed"; Closed count +1; "Closed by <user name>" recorded |
 | 2 | Later, click **Reopen ticket** (row icon, details, chat, or drag to an open lane) | Reopens immediately | Ticket is Closed | Status Open; "Closed by" cleared; toast "Ticket reopened" only from the row or board |
 
 ### 6.3 Find a ticket
@@ -181,13 +181,13 @@ The objective is that no requester waits unnoticed: tickets where the requester 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
 | 1 | Participant or facilitator raises a ticket (outside this application) | Ticket created with number, category, sub-category, subject, description, optional files; creation time = first message | Requires Confirmation (OQ-SUP-001) | **Open · Awaiting reply** |
-| 2 | Admin replies in the chat | Reply added | Ticket Open | **Open · Waiting on them** |
+| 2 | Training Partner user replies in the chat | Reply added | Ticket Open | **Open · Waiting on them** |
 | 3 | Requester replies (outside this application) | Message added | Requires Confirmation (OQ-SUP-001) | **Open · Awaiting reply** |
-| 4 | Admin closes the ticket | Closed by = admin's name, closed time = now | Ticket Open (from either sub-state) | **Closed** |
-| 5 | Admin reopens the ticket | Closed by and closed time cleared | Ticket Closed | **Open**, sub-state from the last message (Awaiting reply if the requester spoke last, otherwise Waiting on them) |
+| 4 | Training Partner user closes the ticket | Closed by = the user's name, closed time = now | Ticket Open (from either sub-state) | **Closed** |
+| 5 | Training Partner user reopens the ticket | Closed by and closed time cleared | Ticket Closed | **Open**, sub-state from the last message (Awaiting reply if the requester spoke last, otherwise Waiting on them) |
 | 6 | Requester writes on a closed ticket (outside this application) | Not defined | Requires Confirmation (OQ-SUP-009) | — |
 
-There are only two stored statuses, **Open** and **Closed**. "Awaiting reply" and "Waiting on them" are not statuses an admin sets; they follow automatically from who sent the last message. Allowed transitions: Open → Closed (Close ticket), Closed → Open (Reopen ticket). There is no other status, no priority and no assignment (OQ-SUP-003).
+There are only two stored statuses, **Open** and **Closed**. "Awaiting reply" and "Waiting on them" are not statuses the user sets; they follow automatically from who sent the last message. Allowed transitions: Open → Closed (Close ticket), Closed → Open (Reopen ticket). There is no other status, no priority and no assignment (OQ-SUP-003).
 
 ## 7. Forms and Field-Level Specifications
 
@@ -206,7 +206,7 @@ There are only two stored statuses, **Open** and **Closed**. "Awaiting reply" an
 | Raised by | Segmented choice | Filter by requester type | Optional | N/A | N/A | Everyone, Participants, Facilitators | Everyone | None | Facilitators clears and hides Client company | N/A |
 | Category | Searchable multi-select (placeholder "Any category", search "Search categories…") | Filter by category | Optional | N/A | All options | Categories found on tickets, A–Z, each with "N tickets" | None | None | Match on any chosen category | N/A |
 | Client company | Searchable multi-select (placeholder "Any company", search "Search companies…") | Filter by participant's company | Optional | N/A | All options | Companies found on participant tickets, A–Z, each with "N tickets" | None | None | Hidden while Raised by = Facilitators | N/A |
-| Replied by | Searchable multi-select (placeholder "Anyone", search "Search admins…") | Filter by replying admin | Optional | N/A | All options | "No reply yet" first, then the names of admins who have replied, A–Z, each with "N tickets" | None | None | Match on any chosen option. A newly replying admin appears as an option. | N/A |
+| Replied by | Searchable multi-select (placeholder "Anyone", search "Search people…") | Filter by who replied | Optional | N/A | All options | "No reply yet" first, then the names of Training Partner users who have replied, A–Z, each with "N tickets" | None | None | Match on any chosen option. A newly replying user appears as an option. | N/A |
 | Raised within | Segmented choice | Filter by ticket age | Optional | N/A | N/A | Any time, 24 hours, 7 days, 30 days | Any time | None | Counted from now back to the ticket's creation time | N/A |
 
 Option counts ("N tickets") are counted across all tickets, not the current list, and always use the plural (OQ-SUP-010).
@@ -229,7 +229,7 @@ Option counts ("N tickets") are counted across all tickets, not the current list
 
 | Field Name | Input Type | Purpose | Required/Optional | Min Length/Value | Max Length/Value | Accepted Format/Values | Default Value | Validation Rules | Conditional Behavior | Error Message |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Reply message | Multi-line text (placeholder "Reply to <first name>…") | The admin's answer | Required unless at least one file is attached | 1 non-space character (when no file) | Requires Confirmation (OQ-SUP-006) | Free text; line breaks with Shift + Enter; leading and trailing spaces removed when sent | Empty | Not blank, or at least one file | Shown only while the ticket is Open. Cleared after sending, when switching ticket, or when the drawer closes. | No message: the send button stays disabled |
+| Reply message | Multi-line text (placeholder "Reply to <first name>…") | The Training Partner user's answer | Required unless at least one file is attached | 1 non-space character (when no file) | Requires Confirmation (OQ-SUP-006) | Free text; line breaks with Shift + Enter; leading and trailing spaces removed when sent | Empty | Not blank, or at least one file | Shown only while the ticket is Open. Cleared after sending, when switching ticket, or when the drawer closes. | No message: the send button stays disabled |
 | Attachments | File picker (multiple), paperclip button | Send files with the reply | Optional | 0 files | **5 files per reply**; **10 MB per file** | Picker offers images, PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, TXT and CSV. The type is not re-checked after picking (BR-SUP-010, OQ-SUP-005). | None | Each file ≤ 10 MB; total waiting files ≤ 5 | Too-large files are left out, the rest are added. If the total would exceed 5, only the first 5 are kept. Each waiting file can be previewed or removed. | Error toast "File too large" — "<file names> — up to 10 MB each."; error toast "Up to 5 files per reply" |
 
 ## 8. Validation and Business Rules
@@ -238,22 +238,22 @@ Option counts ("N tickets") are counted across all tickets, not the current list
 |---|---|---|---|---|---|---|
 | BR-SUP-001 | Two statuses | A ticket is either Open or Closed. | Always | Status badge "Open" or "Closed" | — | — |
 | BR-SUP-002 | Awaiting reply | An Open ticket whose last message is from the requester is "Awaiting reply". | Pills, Last reply column, board, details, sidebar card | Counted in the Awaiting reply pill and the sidebar card; amber "Awaiting reply · <time>" | — | — |
-| BR-SUP-003 | Waiting on them | An Open ticket whose last message is from an admin is "Waiting on them". | Board | Shown in the middle lane | — | — |
-| BR-SUP-004 | Close records who and when | Closing sets status Closed, Closed by = signed-in admin's name ("Admin" if the account has no name), and the closed time = now. | Close from row, details, chat or board | — | Closing an already closed ticket is not offered | "Ticket closed" |
+| BR-SUP-003 | Waiting on them | An Open ticket whose last message is from the Training Partner team is "Waiting on them". | Board | Shown in the middle lane | — | — |
+| BR-SUP-004 | Close records who and when | Closing sets status Closed, Closed by = signed-in user's name ("Training Partner" if the account has no name), and the closed time = now. | Close from row, details, chat or board | — | Closing an already closed ticket is not offered | "Ticket closed" |
 | BR-SUP-005 | Reopen clears closure | Reopening sets status Open and clears Closed by and the closed time. The ticket's sub-state follows its last message. | Reopen from row, details, chat or board | — | Reopening an open ticket is not offered | "Ticket reopened" (row and board only) |
 | BR-SUP-006 | Replies only on open tickets | Closed tickets show "Closed by …" and Reopen ticket instead of the reply box. | Chat | — | — | — |
 | BR-SUP-007 | Reply needs content | A reply needs non-blank text or at least one file. Text is trimmed. | Chat | Send disabled otherwise; Enter does nothing | Spaces only, no file | Send button disabled |
 | BR-SUP-008 | File count limit | At most 5 files can wait in one reply. | Attach files | Extra files dropped | 6 files picked | "Up to 5 files per reply" |
 | BR-SUP-009 | File size limit | Each file must be 10 MB or smaller. | Attach files | Oversized files left out, others kept | 12 MB file | "File too large" — "<names> — up to 10 MB each." |
 | BR-SUP-010 | Accepted file types [Partially Implemented] | Images, PDF, Word, Excel, PowerPoint, TXT and CSV are offered by the file picker; other types chosen via the picker's "all files" option are not rejected. | Attach files | — | .zip chosen | None (OQ-SUP-005) |
-| BR-SUP-011 | Reply author | A reply is recorded under the signed-in admin's name and the current time. | Send | Name shown under the bubble; added to Replied by options | — | — |
+| BR-SUP-011 | Reply author | A reply is recorded under the signed-in user's name and the current time. | Send | Name shown under the bubble; added to Replied by options | — | — |
 | BR-SUP-012 | Reply does not change status | Replying keeps the ticket Open and moves it from Awaiting reply to Waiting on them. | Send | Pill counts, board lanes and the sidebar count update at once | — | No toast |
 | BR-SUP-013 | No confirmation for close or reopen | Close and reopen happen on one click with no confirmation dialog. | All entry points | — | Accidental close | Toast only; reopen to undo |
 | BR-SUP-014 | Pill counts follow search and filters | Summary pill counts are counted within the current search and filters; the result line total is every ticket. | Support desk | — | — | — |
 | BR-SUP-015 | Shared waiting count | The sidebar Support desk card counts every Awaiting reply ticket, regardless of the page's search, filters or pill (BR-SHELL-018). | Any page | Card updates as soon as a ticket is replied to, closed or reopened | — | "<N> waiting" / "All caught up" |
 | BR-SUP-016 | Board drag rules | Open → Closed lane closes; Closed → either open lane reopens. Dragging between the two open lanes is not accepted. | Board | Accepting lanes outlined with "Drop to close" / "Drop to reopen" | Drop open card on the other open lane | Nothing happens |
 | BR-SUP-017 | Raised by and company | Facilitator tickets have no client company. Choosing Raised by = Facilitators clears the company filter. | Filter drawer | — | — | — |
-| BR-SUP-018 | Ticket creation [Not Implemented] | Admins cannot raise, edit, re-categorise or delete tickets. | — | — | — | — (OQ-SUP-001, OQ-SUP-016) |
+| BR-SUP-018 | Ticket creation [Not Implemented] | Training Partner users cannot raise, edit, re-categorise or delete tickets. | — | — | — | — (OQ-SUP-001, OQ-SUP-016) |
 | BR-SUP-019 | Priority, assignment and targets [Requires Confirmation] | Tickets have no priority, owner/assignee or response-time target. | — | — | — | — (OQ-SUP-003) |
 | BR-SUP-020 | Requester notification [Requires Confirmation] | Whether the requester is told about replies, closing or reopening is not defined. | Reply, close, reopen | — | — | — (OQ-SUP-002) |
 
@@ -264,7 +264,7 @@ Option counts ("N tickets") are counted across all tickets, not the current list
 | Close ticket | From row, details, chat or board | Success toast | "Ticket closed" — "<ticket number> · <requester name>" | Immediately | Reopen if needed |
 | Reopen ticket | From row icon or board drag | Success toast | "Ticket reopened" — "<ticket number> · <requester name>" | Immediately | — |
 | Reopen ticket | From details or chat | None | — (status badge changes; OQ-SUP-007) | — | — |
-| Send reply | Text and/or files | None (inline) | The reply appears in the conversation with "<admin name> · <time>" | Immediately | — |
+| Send reply | Text and/or files | None (inline) | The reply appears in the conversation with "<user name> · <time>" | Immediately | — |
 | Attach oversized file | Any file > 10 MB | Error toast | "File too large" — "<file names> — up to 10 MB each." | After picking | Pick a smaller file |
 | Attach too many files | More than 5 waiting | Error toast | "Up to 5 files per reply" | After picking | Remove files or send in another reply |
 | Waiting indicator | Awaiting reply count > 0 | Pulsing pill dot; amber "Awaiting reply · <time>" in Last reply; "Awaiting our reply" in details | — | Always | Answer the ticket |
@@ -281,7 +281,7 @@ Toast behaviour per SH-005. No confirmation dialogs are used in this module.
 | Ticket | Identify | Subject (truncated, full text on hover) over the ticket number and, if the requester attached files, a paperclip with their count (tooltip "Files attached"). Sortable by subject. | — | — |
 | Raised by | Who | Photo or initials, name, "Participant · <company>" or "Facilitator". Sortable by name. | — | — |
 | Category | Classification | Category only; "<category> › <sub-category>" on hover. Sortable. | — | — |
-| Last reply | Latest activity | Awaiting reply: amber "Awaiting reply · <age>" (for example "· 2h"). Otherwise "<who spoke last> · <age>" (admin name or requester name). Age: "just now", "5m", "3h", "2d", or the date after 7 days. Sortable; **default sort, newest first**. | Shows the last message by anyone, not only replies | — |
+| Last reply | Latest activity | Awaiting reply: amber "Awaiting reply · <age>" (for example "· 2h"). Otherwise "<who spoke last> · <age>" (replier name or requester name). Age: "just now", "5m", "3h", "2d", or the date after 7 days. Sortable; **default sort, newest first**. | Shows the last message by anyone, not only replies | — |
 | Created | When raised | Date (for example "12 Mar 2026"); date and time on hover. Sortable. | — | — |
 | Status | State | Status badge: Open or Closed. Sortable. | — | — |
 | Actions | Quick actions | Open chat; Close ticket (Open) or Reopen ticket (Closed). Clicking them does not open the row. | — | — |
@@ -315,7 +315,7 @@ Toast behaviour per SH-005. No confirmation dialogs are used in this module.
 | [App shell & navigation](app-shell-navigation-prd.md) | The sidebar Support desk card shows the Awaiting reply count (up to three avatars, newest first) and opens this page; the icon rail shows a "Support desk" item. Breadcrumb "Support desk". | Reply, close or reopen a ticket; click the card | Card switches between "<N> waiting" and "All caught up" immediately | BR-SUP-015, BR-SHELL-018 |
 | [Facilitators](facilitators-prd.md) | Facilitators raise tickets, shown as "Facilitator" | — | Tickets are not linked to the facilitator record; no navigation between them | OQ-SUP-011 |
 | [All Clients](clients-prd.md) / [Client detail](client-detail-prd.md) | Participants of client programs raise tickets; their client company is shown and filterable | — | Company is shown as text only; no link to the client or participant | OQ-SUP-011 |
-| [Profile](profile-prd.md) | The signed-in admin's name is used as reply author and "Closed by" | Reply / Close | Name shown in chat, details and Replied by filter | BR-SUP-004, BR-SUP-011 |
+| [Profile](profile-prd.md) | The signed-in user's name is used as reply author and "Closed by" | Reply / Close | Name shown in chat, details and Replied by filter | BR-SUP-004, BR-SUP-011 |
 | [Settings – Access masters](settings-access-masters-prd.md) | Roles & Access stores Support desk permissions (view, edit, export) and a "Support Executive" role; Menu Mapping lists "Support desk" | — | Not enforced (SH-002); there is no export on this page | OQ-SUP-012 |
 | Participant / facilitator portals (outside this application) | Where tickets are raised and requesters reply | Raise ticket, requester reply | Requires Confirmation | OQ-SUP-001, OQ-SUP-002, OQ-SUP-009 |
 
@@ -422,7 +422,7 @@ Demo data on a fresh load: 12 tickets — 9 Open (7 Awaiting reply, 2 Waiting on
 | TC-SUP-004 | 7.1, AC-SUP-003 | Search fields | — | Ticket number "P/14/531402"; "Infosys"; "Skill assessment"; an email | First three match; email matches nothing | P2 |
 | TC-SUP-005 | 7.1 | Search trimming and case | — | "  KARAN  " | Karan Malhotra's ticket | P3 |
 | TC-SUP-006 | AC-SUP-004, BR-SUP-017 | Facilitators clears company | Company Infosys chosen in draft | Choose Facilitators | Company section hidden and cleared; count "No matching tickets" if 0 | P2 |
-| TC-SUP-007 | 5.4 | Replied by "No reply yet" | — | Choose "No reply yet" | Only tickets with no admin reply; chip "No reply yet" | P2 |
+| TC-SUP-007 | 5.4 | Replied by "No reply yet" | — | Choose "No reply yet" | Only tickets with no Training Partner reply; chip "No reply yet" | P2 |
 | TC-SUP-008 | 5.4 | Raised within | — | 24 hours | Only tickets created in the last 24 h; chip "Last 24 hours" | P3 |
 | TC-SUP-009 | 5.4 | Reset keeps pill and search | Closed pill + search | Reset in drawer | Draft cleared; pill and search unchanged | P3 |
 | TC-SUP-010 | 5.1 | Clear all | Pill, search, 2 chips | Clear all | Everything reset; full list | P2 |
@@ -446,7 +446,7 @@ Demo data on a fresh load: 12 tickets — 9 Open (7 Awaiting reply, 2 Waiting on
 | TC-SUP-028 | BR-SUP-006 | No reply on closed | Closed ticket chat | — | "Closed by …" + Reopen ticket; no reply box | P1 |
 | TC-SUP-029 | AC-SUP-013 | Board lanes on load | Board view | — | Awaiting reply 7, Waiting on them 2, Closed 3 | P2 |
 | TC-SUP-030 | AC-SUP-014, BR-SUP-016 | Drag rules | Board view | Open→Closed; Awaiting→Waiting on them | Closes; second does nothing | P1 |
-| TC-SUP-031 | AC-SUP-015 | Reopen by drag lands by last message | Closed ticket last spoken by admin | Drop on Awaiting reply | Reopens into Waiting on them | P2 |
+| TC-SUP-031 | AC-SUP-015 | Reopen by drag lands by last message | Closed ticket last spoken by the Training Partner team | Drop on Awaiting reply | Reopens into Waiting on them | P2 |
 | TC-SUP-032 | 5.3 | Board with Closed pill | Board view | Closed pill | Open lanes "Nothing here" | P3 |
 | TC-SUP-033 | AC-SUP-016 | No match | — | "zzzz" | "No tickets match"; Clear search & filters resets | P3 |
 | TC-SUP-034 | AC-SUP-017 | Phone layout | 375 px width | — | Cards with who raised it, reply state and date; no view switch; tap opens details; chat icon opens the chat full-width | P2 |
@@ -458,7 +458,7 @@ Demo data on a fresh load: 12 tickets — 9 Open (7 Awaiting reply, 2 Waiting on
 
 | Question ID | Related Page/Feature | Missing or Unclear Requirement | Why It Matters | Recommended Clarification | Status |
 |---|---|---|---|---|---|
-| OQ-SUP-001 | Ticket creation and requester replies | Tickets and requester replies come from outside this application; the channel, required fields, categories and attachment rules on the requester side are not defined here | The admin view depends on them | Define the participant / facilitator ticket forms and how replies arrive | Open |
+| OQ-SUP-001 | Ticket creation and requester replies | Tickets and requester replies come from outside this application; the channel, required fields, categories and attachment rules on the requester side are not defined here | The Training Partner view depends on them | Define the participant / facilitator ticket forms and how replies arrive | Open |
 | OQ-SUP-002 | Reply / close / reopen | Whether the requester is notified (email, in-app) of a reply, close or reopen | Requesters may never see answers | Define notifications and their content | Open |
 | OQ-SUP-003 | Lifecycle | No priority, assignee/owner, internal notes or response-time targets exist | Workload sharing and escalation | Confirm whether priorities, assignment and SLAs are required | Open |
 | OQ-SUP-004 | Ticket number | Format "C/189/613613" is not explained (the letter appears to follow the category; the middle number is unknown) | Users quote it when following up | Define the number format | Open |
@@ -468,7 +468,7 @@ Demo data on a fresh load: 12 tickets — 9 Open (7 Awaiting reply, 2 Waiting on
 | OQ-SUP-008 | Close ticket | Closing has no confirmation and silently hides an unsent reply | Accidental closes; lost replies | Confirm whether to ask first or warn about unsent text | Open |
 | OQ-SUP-009 | Lifecycle | What happens when a requester writes on a Closed ticket (auto-reopen, new ticket, blocked) | Requests could be missed | Define the rule | Open |
 | OQ-SUP-010 | Filter options | Option counts say "1 tickets" for a single ticket, and count all tickets rather than the current list | Wording / clarity | *Proposed: "1 ticket"* | Open |
-| OQ-SUP-011 | Cross-module | Tickets are not linked to the facilitator, participant, client or program record | Admins cannot see context or navigate | Confirm whether links are needed | Open |
+| OQ-SUP-011 | Cross-module | Tickets are not linked to the facilitator, participant, client or program record | Training Partner users cannot see context or navigate | Confirm whether links are needed | Open |
 | OQ-SUP-012 | Roles | Roles & Access stores view / edit / export for Support desk and a Support Executive role, but nothing is enforced and there is no export | Segregation of duties; missing export | Confirm enforcement and whether export is needed | Open |
 | OQ-SUP-013 | Board | Drag and drop has no keyboard alternative on the board; the board has no pagination | Accessibility; scale with many tickets | Confirm keyboard support and paging/limits | Open |
 | OQ-SUP-014 | Summary pills | Pill counts follow search and filters (Facilitators' counts do not); clicking a selected pill does not return to All | Consistency across list pages | Confirm intended behaviour | Open |

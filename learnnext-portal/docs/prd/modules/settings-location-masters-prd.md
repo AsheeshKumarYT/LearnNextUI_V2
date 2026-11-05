@@ -7,20 +7,20 @@
 | PRD title | Settings – Location Masters PRD |
 | Module name | Settings – Location Masters (Country, State, City) |
 | Document ID | PRD-LOC |
-| Version | 1.1 |
+| Version | 1.2 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (the three lists are built and read-only; the values they hold are not yet used by any address form in the application) |
-| Last updated | 2026-11-03 (v1.1: phone layout) |
+| Last updated | 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | The CRM sync note becomes one short line on phones: "Read-only · synced from CRM · <date>". See SH-013. |
 | Related modules/pages | [settings-hub-prd.md](settings-hub-prd.md), [clients-prd.md](clients-prd.md), [client-detail-prd.md](client-detail-prd.md), [facilitators-prd.md](facilitators-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-The Location group in Settings holds the geography reference lists — "Countries, states and cities used in addresses." — as three masters: **Country**, **State** and **City**. They form a hierarchy: every state belongs to a country, and every city belongs to a state within a country. The lists are owned by the company's CRM portal. LearnNext Admin shows them so that Admin users can see which places exist, their codes (country code, mobile/dialling code, GST state code) and how many states and cities sit under each. Nothing can be added, edited, deactivated or deleted here.
+The Location group in Settings holds the geography reference lists — "Countries, states and cities used in addresses." — as three masters: **Country**, **State** and **City**. They form a hierarchy: every state belongs to a country, and every city belongs to a state within a country. The lists are owned by the company's CRM portal. LearnNext Portal shows them so that Training Partner users can see which places exist, their codes (country code, mobile/dialling code, GST state code) and how many states and cities sit under each. Nothing can be added, edited, deactivated or deleted here.
 
 Objectives:
 
-- Give Admin users one place to look up countries, states and cities and the codes attached to them.
+- Give Training Partner users one place to look up countries, states and cities and the codes attached to them.
 - Show the hierarchy: states per country, cities per state and per country.
 - Show which states carry a GST state code (Indian states) and which do not.
 - Make it clear that the data comes from the CRM and is read-only, and when it was last synced.
@@ -31,15 +31,15 @@ All three pages open from **Settings › Location** (see [settings-hub-prd.md](s
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Country | Lists countries synced from the CRM with country code, mobile code and the number of states and cities in each | Admin user | Search, sort, paginate | State, City, Settings hub |
-| State | Lists states synced from the CRM with their country, GST state code and number of cities | Admin user | Filter by GST pill, search, open Filters (country, GST code), sort, paginate | Country, City, Settings hub |
-| City | Lists cities synced from the CRM with their state and country | Admin user | Search, open Filters (country, state), sort, paginate | Country, State, Settings hub |
+| Country | Lists countries synced from the CRM with country code, mobile code and the number of states and cities in each | Training Partner user | Search, sort, paginate | State, City, Settings hub |
+| State | Lists states synced from the CRM with their country, GST state code and number of cities | Training Partner user | Filter by GST pill, search, open Filters (country, GST code), sort, paginate | Country, City, Settings hub |
+| City | Lists cities synced from the CRM with their state and country | Training Partner user | Search, open Filters (country, state), sort, paginate | Country, State, Settings hub |
 
 ## 4. User Roles and Access
 
 | User Role | Page Access | Allowed Actions | Restrictions |
 |---|---|---|---|
-| Admin user (any signed-in staff member) | All three pages (SH-002, SH-003) | View, search, filter, sort and paginate | Cannot add, edit, deactivate or delete any country, state or city; changes are made in the CRM portal. Role-based limits defined in Roles & Access are not enforced (SH-002). |
+| Training Partner user (signed in and continuing as Training Partner) | All three pages (SH-002, SH-003) | View, search, filter, sort and paginate | Cannot add, edit, deactivate or delete any country, state or city; changes are made in the CRM portal. Role-based limits defined in Roles & Access are not enforced (SH-002). |
 | Signed-out visitor | None | None | Redirected to Sign in (SH-003). |
 
 ## 5. Page Functionality and Behavior
@@ -232,7 +232,7 @@ Differences between the masters and the built-in form list (current demo data), 
 ## 13. Acceptance Criteria
 
 **AC-LOC-001: Read-only masters**
-- Given an Admin user opens Country, State or City
+- Given a Training Partner user opens Country, State or City
 - When the page loads
 - Then there is no Add button, no edit/delete/deactivate row actions and rows do not open anything
 - And the note "Synced from the CRM portal. Read-only here — \<noun> are added and edited in the CRM." is shown with "Last synced \<relative time>"

@@ -1,6 +1,6 @@
 # Module Inventory
 
-This inventory lists every module, page, tab and menu item found in the current build of LearnNext Admin, along with the PRD that covers it.
+This inventory lists every module, page, tab and menu item found in the current build of LearnNext Portal (the Training Partner portal and the Super Admin portal), along with the PRD that covers it.
 
 **Status** uses the labels from the [PRD template](prd-template.md): Implemented, Partially Implemented, Not Implemented, Proposed, Requires Confirmation.
 
@@ -26,6 +26,7 @@ This inventory lists every module, page, tab and menu item found in the current 
 | 14 | Settings: Program and Content masters | PRG | [settings-program-content-masters-prd.md](modules/settings-program-content-masters-prd.md) | Partially Implemented |
 | 15 | Settings: Menu and Role access masters | ACC | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) | Partially Implemented (permissions are stored but not enforced) |
 | 16 | System Pages | SYS | [system-pages-prd.md](modules/system-pages-prd.md) | Partially Implemented |
+| 17 | Super Admin (Manage Clients, Client details, Add / Edit client) | SA | [super-admin-prd.md](modules/super-admin-prd.md) | Partially Implemented (works on demo data; the CRM fetching, portal access, email update and inactive-status settings are stored only) |
 
 The status column gives a summary only. The **Module implementation status** in each PRD's section 1 is authoritative.
 
@@ -39,9 +40,13 @@ The status column gives a summary only. The **Module implementation status** in 
 | Authentication | Forgot password | Link on Sign in | Page | Implemented |
 | Authentication | Reset password | After the forgot-password step | Page | Implemented |
 | Authentication | Reset success | After a successful reset | Page | Implemented |
-| Authentication | Log out confirmation | Sidebar footer or user menu | Dialog | Implemented |
-| App Shell | Sidebar, header, breadcrumbs, user menu, theme toggle | Every admin page | Layout | Implemented |
-| App Shell | Global search (⌘K / Ctrl+K) | Header | Command palette | Partially Implemented (returns no records) |
+| Authentication | Role picker ("Continue as") | After sign-in, for a login with several roles and no role remembered on the device; any portal page while no role is chosen | Page | Implemented |
+| Authentication | Role coming soon ("The <role> space is on its way") | Choosing, or being signed in as, a role whose portal is not built (Facilitator, Participant, Client SPOC) | Page | Implemented (the portals themselves are Not Implemented) |
+| Authentication | Switch role | User menu (logins with several roles) or the coming-soon screen → back to "Continue as" | Menu action | Implemented |
+| Authentication | Log out confirmation | Header user menu | Dialog | Implemented |
+| App Shell | Sidebar, header, breadcrumbs, user menu, theme toggle | Every Training Partner page | Layout | Implemented |
+| App Shell | Super Admin shell (single menu item Manage Clients; no bell, Settings, Support card or Dev only section) | Every Super Admin page | Layout | Implemented |
+| App Shell | Global search (⌘K / Ctrl+K) | Header | Command palette | Implemented (finds pages and records: clients, programs, facilitators, support tickets and Settings masters; for Super Admin, its pages and training partners) |
 | App Shell | Notifications menu | Header bell | Popover | Implemented |
 | App Shell | Help & Support drawer | Nothing opens it (OQ-SHELL-007) | Drawer | Not Implemented |
 | App Shell | Support desk card | Sidebar footer | Card link | Implemented |
@@ -78,13 +83,26 @@ The status column gives a summary only. The **Module implementation status** in 
 | System Pages | Service unavailable (503) | `/maintenance` | Full-screen page | Implemented |
 | System Pages | Offline | Device goes offline | Full-screen page | Implemented |
 | System Pages | Session expired | `/session-expired` | Full-screen page | Implemented |
-| System Pages | System pages gallery (development only) | Sidebar "Dev only" → System pages (`/ui-preview`) | Page | Implemented |
+| System Pages | System pages gallery (development only; Training Partner portal only) | Sidebar "Dev only" → System pages (`/ui-preview`); each card opens a live preview of the page in a new tab, with no preview marker | Page | Implemented |
+| Super Admin | Manage Clients list of training partners (table / cards, status pills, search) | Choose Super Admin in "Continue as" (`/clients`); the Super Admin's only menu item and home | Page | Implemented |
+| Super Admin | Client details: hero header | Click a training partner (`/clients/:id`) | Page | Implemented |
+| Super Admin | Overview tab | Client details | Tab | Implemented |
+| Super Admin | Sub clients tab (view only) | Client details (`?tab=sub-clients`) | Tab | Implemented |
+| Super Admin | Tax & Billing tab (view only) | Client details (`?tab=billing`) | Tab | Implemented |
+| Super Admin | Settings & Configuration tab (status, CRM fetching, portal access, email updates) | Client details (`?tab=settings`) | Tab | Partially Implemented (settings are stored but have no effect) |
+| Super Admin | Activity History tab | Client details (`?tab=activity`) | Tab | Implemented |
+| Super Admin | Add client (3-step wizard: Details → Addresses → Billing; no CRM look-up) | Add client button (`/clients/new`) | Page | Implemented |
+| Super Admin | Edit client (same 3 steps, any step can be opened) | Edit action or Client details → Edit (`/clients/:id/edit`) | Page | Implemented |
+| Super Admin | Client not found | An unknown details or edit address under `/clients` | Page card | Implemented |
+| Super Admin | My Profile | User menu → My Profile (`/profile`) | Page | Implemented (as PRD-PROF) |
+
+The Super Admin portal uses the same addresses as the Training Partner's client pages (`/clients…`); which pages appear depends on the role chosen in "Continue as". For a Super Admin, any address outside `/clients…` and `/profile` opens Manage Clients (BR-SA-002).
 
 ---
 
 ## 3. Menu items not yet built
 
-These items appear in the sidebar but open the "Nothing here yet" placeholder. They are listed for completeness. No PRD is written for them, because no functional behaviour exists to document. Their requirements are recorded as open questions (`OQ-GEN-001` in [open-questions.md](open-questions.md)).
+These items appear in the Training Partner sidebar but open the "Nothing here yet" placeholder. They are listed for completeness. No PRD is written for them, because no functional behaviour exists to document. Their requirements are recorded as open questions (`OQ-GEN-001` in [open-questions.md](open-questions.md)).
 
 | Menu item | Location | Status |
 |---|---|---|
@@ -130,8 +148,12 @@ The Settings page lists 18 masters in 7 groups.
 
 ## 5. User roles
 
+LearnNext Portal is one application with a portal per role (SH-002). One login (email and password) can hold several roles: after sign-in it chooses one on "Continue as", or uses the role remembered on the device, and can change it with **Switch role** in the user menu ([authentication-prd.md](modules/authentication-prd.md)). The demo login holds Training Partner, Super Admin, Facilitator and Participant.
+
 | Role | Description | Source |
 |---|---|---|
-| Admin user (signed-in LearnNext staff) | Can open every page and perform every action in the current build. | Implemented (SH-002) |
-| Admin roles defined in Roles & Access (for example Admin) | Each role has a page × action permission matrix. The matrix is stored but not yet enforced. | Partially Implemented |
-| Facilitator, client SPOC, participant | Records managed in this application. They do not sign in to it. | Implemented |
+| Training Partner | Runs clients, programs, facilitators, support and settings. Can open every Training Partner page and perform every action; the portal does not hide or block anything by staff role. Most module PRDs describe this portal. | Implemented (SH-002) |
+| Super Admin | Manages LearnNext's own customers, the training partners, in a reduced portal: Manage Clients (list, details, add, edit) and My Profile only. Any other address opens Manage Clients. | Partially Implemented ([PRD-SA](modules/super-admin-prd.md)) |
+| Facilitator, Participant, Client SPOC | Portal roles that are defined but not built. In the role picker they show "Coming soon"; a login in one of these roles sees only the "on its way" screen. | Not Implemented (OQ-AUTH-018) |
+| Permission roles defined in Roles & Access (demo: Super Admin, Training Partner, Finance Manager, Program Manager, Support Executive) | Each role has a page × action permission matrix. The matrix is stored but not yet enforced, and no user is linked to these roles. They are separate from the portal roles above: continuing as Super Admin does not use the "Super Admin" row of this master. | Partially Implemented (OQ-GEN-002) |
+| Facilitators, client SPOCs and participants as records | In the Training Partner portal they are records that the Training Partner manages. They cannot sign in to their own portals yet. | Implemented |
