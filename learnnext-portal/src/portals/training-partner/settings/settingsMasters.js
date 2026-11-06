@@ -25,12 +25,39 @@ import {
   MessageSquareWarning,
   Network,
   ReceiptText,
-  Shapes,
   ShieldCheck,
   UserCog,
+  UserRoundCog,
+  UsersRound,
 } from 'lucide-react';
 
+// Group order: most-used first, related groups side by side (Finance → Banks), read-only CRM-synced groups after the
+// editable ones, and the rarely changed / not-yet-built Alert messages last.
 export const SETTINGS_GROUPS = [
+  {
+    // Who can sign in, what each role may do, and which pages exist (was "Others")
+    id: 'users-access',
+    title: 'Users & Access',
+    description: 'Logins, roles and what they can open.',
+    icon: UsersRound,
+    tone: 'warning',
+    items: [
+      { slug: 'manage-users', label: 'Manage Users', description: 'Logins, passwords and who reports to whom', icon: UserRoundCog },
+      { slug: 'roles-access', label: 'Roles & Access', description: 'What each role can see and do', icon: ShieldCheck },
+      { slug: 'menu-mapping-access', label: 'Menu Mapping & Access', description: 'Pages in the Training Partner menu and their order', icon: ListTree },
+    ],
+  },
+  {
+    id: 'programs',
+    title: 'Program & Content',
+    description: 'How programs are grouped and phased.',
+    icon: GraduationCap,
+    tone: 'success',
+    items: [
+      { slug: 'program-category', label: 'Program Category', description: 'Categories programs are grouped in', icon: FolderTree },
+      { slug: 'modules', label: 'Modules', description: 'Program phases — Pre, During, Post', icon: Blocks },
+    ],
+  },
   {
     id: 'finance',
     title: 'Finance',
@@ -45,15 +72,14 @@ export const SETTINGS_GROUPS = [
     ],
   },
   {
-    id: 'location',
-    title: 'Location',
-    description: 'Countries, states and cities used in addresses.',
-    icon: Globe,
+    id: 'banks',
+    title: 'Banks',
+    description: 'Bank accounts used for billing.',
+    icon: Landmark,
     tone: 'info',
     items: [
-      { slug: 'country', label: 'Country', description: 'Countries you work in', icon: Globe },
-      { slug: 'state', label: 'State', description: 'States within each country', icon: Map },
-      { slug: 'city', label: 'City', description: 'Cities within each state', icon: MapPin },
+      { slug: 'bank-master', label: 'Bank master', description: 'Banks and branches', icon: Banknote },
+      { slug: 'house-bank-master', label: 'House bank master', description: 'Your own receiving accounts', icon: CreditCard },
     ],
   },
   {
@@ -70,14 +96,15 @@ export const SETTINGS_GROUPS = [
     ],
   },
   {
-    id: 'banks',
-    title: 'Banks',
-    description: 'Bank accounts used for billing.',
-    icon: Landmark,
+    id: 'location',
+    title: 'Location',
+    description: 'Countries, states and cities used in addresses.',
+    icon: Globe,
     tone: 'info',
     items: [
-      { slug: 'bank-master', label: 'Bank master', description: 'Banks and branches', icon: Banknote },
-      { slug: 'house-bank-master', label: 'House bank master', description: 'Your own receiving accounts', icon: CreditCard },
+      { slug: 'country', label: 'Country', description: 'Countries you work in', icon: Globe },
+      { slug: 'state', label: 'State', description: 'States within each country', icon: Map },
+      { slug: 'city', label: 'City', description: 'Cities within each state', icon: MapPin },
     ],
   },
   {
@@ -87,28 +114,6 @@ export const SETTINGS_GROUPS = [
     icon: MessageSquareWarning,
     tone: 'danger',
     items: [{ slug: 'alert-message-templates', label: 'Alert message templates', description: 'Emails and alerts sent automatically', icon: AlarmClock }],
-  },
-  {
-    id: 'programs',
-    title: 'Program & Content',
-    description: 'How programs are grouped and phased.',
-    icon: GraduationCap,
-    tone: 'success',
-    items: [
-      { slug: 'program-category', label: 'Program Category', description: 'Categories programs are grouped in', icon: FolderTree },
-      { slug: 'modules', label: 'Modules', description: 'Program phases — Pre, During, Post', icon: Blocks },
-    ],
-  },
-  {
-    id: 'others',
-    title: 'Others',
-    description: 'Roles, menus and access.',
-    icon: Shapes,
-    tone: 'warning',
-    items: [
-      { slug: 'menu-mapping-access', label: 'Menu Mapping & Access', description: 'Pages in the Training Partner menu and their order', icon: ListTree },
-      { slug: 'roles-access', label: 'Roles & Access', description: 'What each role can see and do', icon: ShieldCheck },
-    ],
   },
 ];
 
@@ -142,5 +147,6 @@ export const SEARCH_KEYWORDS = {
   modules: 'module feature product platform',
   'menu-mapping-access': 'menu navigation sidebar mapping access module',
   'roles-access': 'role permission rights access admin user privilege',
+  'manage-users': 'user users login account password reset username staff people member admin',
   'program-category': 'program category course type group',
 };

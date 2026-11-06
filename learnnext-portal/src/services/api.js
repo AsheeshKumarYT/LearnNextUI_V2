@@ -18,6 +18,7 @@ export { entitiesApi, subEntitiesApi, expenseHeadsApi } from './financeMastersAp
 export { locationsApi, peopleMastersApi, sapBpApi } from './mastersApi';
 export { programCategoriesApi, modulesApi, programsApi } from './contentApi';
 export { menusApi, ACCESS_ACTIONS, menuActions, rolesAccessApi } from './accessApi';
+export { usersApi } from './usersApi';
 export { financialYearOf, facilitatorsApi } from './facilitatorsApi';
 export { clientsApi } from './clientsApi';
 export { scheduleApi, messagesApi, activityApi, analyticsApi, coachingApi, securityApi, dashboardApi, notificationsApi, lookupsApi } from './dashboardApi';

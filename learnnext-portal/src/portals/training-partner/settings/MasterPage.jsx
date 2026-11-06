@@ -20,9 +20,10 @@ import ProgramCategoryList from './program-category/ProgramCategoryList';
 import ModuleList from './modules/ModuleList';
 import MenuMappingList from './menu-mapping/MenuMappingList';
 import RolesAccess from './roles-access/RolesAccess';
+import UsersList from './users/UsersList';
 
 // Masters that have their own page so far (slug → component); the rest show the placeholder below
-const BUILT = { entity: EntityList, 'sub-entity': SubEntityList, 'sap-bp': SapBpList, 'expense-head': ExpenseHeadList, country: CountryList, state: StateList, city: CityList, department: DepartmentList, designation: DesignationList, role: RoleList, 'industry-type': IndustryList, 'program-category': ProgramCategoryList, modules: ModuleList, 'menu-mapping-access': MenuMappingList, 'roles-access': RolesAccess };
+const BUILT = { entity: EntityList, 'sub-entity': SubEntityList, 'sap-bp': SapBpList, 'expense-head': ExpenseHeadList, country: CountryList, state: StateList, city: CityList, department: DepartmentList, designation: DesignationList, role: RoleList, 'industry-type': IndustryList, 'program-category': ProgramCategoryList, modules: ModuleList, 'menu-mapping-access': MenuMappingList, 'roles-access': RolesAccess, 'manage-users': UsersList };
 
 /**
  * One master (/settings/:slug). Placeholder until each master's list/form is built. The header shows
