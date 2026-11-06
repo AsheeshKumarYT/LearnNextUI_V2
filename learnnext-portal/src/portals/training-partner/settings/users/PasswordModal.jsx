@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { KeyRound } from 'lucide-react';
 import { useToast } from '@/hooks/useToast';
 import { usersApi } from '@/services/api';
-import { Button, FormField, Input, Modal, PasswordStrength } from '@/components/ui';
+import { Button, FormField, Input, Modal } from '@/components/ui';
 import { passwordProblem } from './userRules';
+import { PasswordHint, PasswordMatch } from './PasswordHint';
 
 /**
- * "Change password" for one user (the old list's Manage Password → edit): new password twice, with the app's strength
- * checklist. Messages: missing values after Save; a weak / mismatched password once the field is left.
+ * "Change password" for one user (the old list's Manage Password → edit): new password twice. Guidance picked from
+ * previews ("One quiet hint line"): a thin strength bar + one rule line under New password, "✓ Passwords match" under
+ * Confirm. Messages: missing values after Save; a weak / mismatched password once the field is left.
  */
 export function PasswordModal({ user, onClose }) {
   const toast = useToast();
@@ -73,10 +75,11 @@ export function PasswordModal({ user, onClose }) {
       >
         <FormField label="New password" required error={show('pw', pwError, pw)}>
           <Input type="password" autoComplete="new-password" autoFocus placeholder="Set a new password" value={pw} onChange={(e) => setPw(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, pw: true }))} />
+          <PasswordHint password={pw} />
         </FormField>
-        <PasswordStrength password={pw} />
         <FormField label="Confirm password" required error={show('confirm', confirmError, confirm)}>
           <Input type="password" autoComplete="new-password" placeholder="Type it again" value={confirm} onChange={(e) => setConfirm(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, confirm: true }))} />
+          <PasswordMatch password={pw} confirm={confirm} />
         </FormField>
         <button type="submit" className="hidden" aria-hidden="true" tabIndex={-1} />
       </form>

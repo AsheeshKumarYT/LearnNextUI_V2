@@ -59,6 +59,10 @@ const PIN_ON =
   'pl-9 [--pin-bg:color-mix(in_srgb,var(--color-surface)_95%,transparent)] dark:[--pin-bg:color-mix(in_srgb,var(--color-surface-secondary)_97%,transparent)] bg-[linear-gradient(to_right,transparent,var(--pin-bg)_28px)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:backdrop-blur-[6px] before:[mask-image:linear-gradient(to_right,transparent,black_28px)] before:content-[""]';
 const PIN_TH_ON = `z-20 lg:z-20 ${PIN_ON} [--pin-bg:color-mix(in_srgb,var(--color-surface-sunken)_60%,var(--color-surface))]`;
 const PIN_TD_ON = `z-[5] ${PIN_ON}`;
+// The scroll-edge fade: a clean gradient from transparent (inner side) to the card's colour at the outer edge — no blur
+// (blurring the text read as smudged). Eased stops so it dissolves smoothly. --edge-dir points from inside to the edge.
+const EDGE_FADE =
+  'pointer-events-none absolute inset-y-0 z-[6] w-14 transition-opacity duration-200 [--edge-bg:var(--color-surface)] dark:[--edge-bg:var(--color-surface-secondary)] bg-[linear-gradient(var(--edge-dir),transparent,color-mix(in_srgb,var(--edge-bg)_55%,transparent)_45%,color-mix(in_srgb,var(--edge-bg)_90%,transparent)_80%,var(--edge-bg))]';
 const alignClass = { left: 'text-left', right: 'text-right', center: 'text-center' };
 
 export function DataTable({
@@ -459,25 +463,13 @@ export function DataTable({
           </div>
         )}
       </div>
-        {/* Edge shades: more columns that way (they fade in/out with the scroll position) */}
+        {/* Edge fades: more columns that way. Like the pinned actions column, what scrolls under the edge dissolves into
+            the card's colour (plus a light blur masked the same way) — no grey shadow strip. They fade in/out with the
+            scroll position. */}
         {wide && (
           <>
-            <span
-              className={cn(
-                'pointer-events-none absolute inset-y-0 left-0 z-[6] w-8 bg-gradient-to-r from-[rgb(var(--ln-shadow-color)/0.16)] to-transparent transition-opacity duration-200',
-                more.left ? 'opacity-100' : 'opacity-0',
-              )}
-              aria-hidden="true"
-            />
-            {!hasPinned && (
-              <span
-                className={cn(
-                  'pointer-events-none absolute inset-y-0 right-0 z-[6] w-8 bg-gradient-to-l from-[rgb(var(--ln-shadow-color)/0.16)] to-transparent transition-opacity duration-200',
-                  more.right ? 'opacity-100' : 'opacity-0',
-                )}
-                aria-hidden="true"
-              />
-            )}
+            <span className={cn(EDGE_FADE, 'left-0 [--edge-dir:to_left]', more.left ? 'opacity-100' : 'opacity-0')} aria-hidden="true" />
+            {!hasPinned && <span className={cn(EDGE_FADE, 'right-0 [--edge-dir:to_right]', more.right ? 'opacity-100' : 'opacity-0')} aria-hidden="true" />}
           </>
         )}
       </div>

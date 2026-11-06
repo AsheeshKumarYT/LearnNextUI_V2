@@ -47,8 +47,9 @@ export const NAV_ITEMS = [
   { label: 'Facilitators', to: '/facilitators', icon: Users },
   { label: 'Assessments', to: '/assessments', icon: ClipboardList },
   { label: 'Polls & Surveys', to: '/polls-surveys', icon: Vote },
-  { label: 'Settings', to: '/settings', icon: Settings },
   { label: 'Reports', to: '/reports', icon: ChartColumn },
+  // Last, apart from the day-to-day pages
+  { label: 'Settings', to: '/settings', icon: Settings },
   // Gallery of the full-screen system pages (404, crash, 500, 503, offline, session expired). `devOnly`: a development
   // aid for viewing those pages, not an admin feature — the sidebar shows it apart, under a quiet "Dev only" label
   { label: 'System pages', to: '/ui-preview', icon: LayoutTemplate, devOnly: true },

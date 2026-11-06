@@ -2,7 +2,7 @@
 
 This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phase 5).
 
-- **Date:** 2026-10-29 (Facilitators counts refreshed 2026-11-03; App Shell counts refreshed 2026-11-03 for the bottom tab bar, tablet sidebar, phone layout and the installable app; My Profile for the new cover picker; Authentication and App Shell refreshed 2026-11-04 for the phone sign-in, sheet taps and the on-screen keyboard; all counts recounted from the PRDs on 2026-11-05 for the multi-role sign-in, the "Training Partner" naming, the System Pages update and the new Super Admin PRD).
+- **Date:** 2026-10-29 (Facilitators counts refreshed 2026-11-03; App Shell counts refreshed 2026-11-03 for the bottom tab bar, tablet sidebar, phone layout and the installable app; My Profile for the new cover picker; Authentication and App Shell refreshed 2026-11-04 for the phone sign-in, sheet taps and the on-screen keyboard; all counts recounted from the PRDs on 2026-11-05 for the multi-role sign-in, the "Training Partner" naming, the System Pages update and the new Super Admin PRD; Settings Hub and Settings: Users & Access recounted 2026-11-06 for the "Users & Access" group that replaced "Others" and the new Manage Users master).
 - **Source of evidence:** the current build of the application. Every PRD was traced from the application's pages, forms, rules and messages. No application code was changed.
 
 ---
@@ -14,10 +14,10 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | Modules discovered with functional behaviour | 17 |
 | Module PRDs generated | 17 |
 | Menu items and masters discovered with no behaviour yet (placeholders) | 13 (10 menu items + 3 Settings masters), listed in the [module inventory](module-inventory.md), plus the three coming-soon portals (Facilitator, Participant, Client SPOC) |
-| Business rules documented | 382 |
-| Acceptance criteria written | 289 |
-| QA test scenarios written | 641 |
-| Module open questions | 235 (231 open, 4 resolved) |
+| Business rules documented | 401 |
+| Acceptance criteria written | 302 |
+| QA test scenarios written | 675 |
+| Module open questions | 245 (241 open, 4 resolved) |
 | Cross-cutting open questions | 14 |
 | PRDs with every checklist item complete | 0 (each PRD has 1–5 items that are incomplete because of open questions, not missing documentation) |
 
@@ -38,15 +38,15 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | [Manage Content](modules/manage-content-prd.md) | Partially Implemented (no program retirement; permissions unused) | 25 | 17 | 40 | 18 | 4 |
 | [Facilitators](modules/facilitators-prd.md) | Partially Implemented (the facilitator's payment setup approval and later steps are outside the app) | 34 | 27 | 54 | 20 | 3 |
 | [Support Desk](modules/support-desk-prd.md) | Partially Implemented (ticket intake and requester side are outside the app) | 20 | 17 | 37 | 17 | 3 |
-| [Settings Hub](modules/settings-hub-prd.md) | Partially Implemented (15 of 18 masters built) | 9 | 11 | 22 | 5 | 1 |
+| [Settings Hub](modules/settings-hub-prd.md) | Partially Implemented (16 of 19 masters built) | 9 | 11 | 23 | 5 | 1 |
 | [Finance masters](modules/settings-finance-masters-prd.md) | Implemented (links to other modules partial) | 25 | 16 | 36 | 15 | 5 |
 | [Location masters](modules/settings-location-masters-prd.md) | Partially Implemented (read-only; not used by any form) | 11 | 8 | 19 | 7 | 4 |
 | [Industry and job masters](modules/settings-industry-job-masters-prd.md) | Partially Implemented (read-only; not used by forms) | 9 | 7 | 15 | 6 | 3 |
 | [Program and Content masters](modules/settings-program-content-masters-prd.md) | Partially Implemented (Modules master not used elsewhere) | 12 | 10 | 19 | 6 | 2 |
-| [Menu and Role access](modules/settings-access-masters-prd.md) | Partially Implemented (sidebar unaffected; permissions not enforced) | 18 | 16 | 32 | 17 | 5 |
+| [Settings: Users & Access](modules/settings-access-masters-prd.md) | Partially Implemented (user accounts not used for sign-in; sidebar unaffected; permissions not enforced) | 37 | 29 | 65 | 27 | 6 |
 | [System Pages](modules/system-pages-prd.md) | Partially Implemented (500, 503 and session-expired pages are never triggered) | 20 | 13 | 29 | 12 | 3 |
 | [Super Admin](modules/super-admin-prd.md) | Partially Implemented (demo data; CRM fetching, portal access, email update and inactive-status settings are stored only) | 34 | 30 | 69 | 16 | 4 |
-| **Total** | | **382** | **289** | **641** | **235** | **54** |
+| **Total** | | **401** | **302** | **675** | **245** | **55** |
 
 Counts are the requirement rows in each PRD (My Profile includes the sub-numbered rows BR-PROF-014 ×2 and TC-PROF-019a / 019b). The open-question count includes four resolved questions (OQ-AUTH-013, OQ-CLI-018, OQ-SET-004, OQ-SA-015).
 
@@ -65,17 +65,17 @@ The review compared the shared workflows, fields, messages and rules across all 
 
 | # | Inconsistency | Where | Open question |
 |---|---|---|---|
-| X-01 | Settings masters exist, but the forms use separate fixed lists. This covers Country / State / City in Add client, SPOC, Entity and Facilitator; Department and Designation in Add client and SPOC; Industry in Add client. Program content modules are set per program, not from the Modules master. | Clients, Client Details, Facilitators, Finance masters, Manage Content vs. the Location, Industry & job and Program masters | OQ-GEN-003 |
+| X-01 | Settings masters exist, but the forms use separate fixed lists. This covers Country / State / City in Add client, SPOC, Entity and Facilitator; Department and Designation in Add client and SPOC; Industry in Add client. Program content modules are set per program, not from the Modules master. The Manage Users address uses the same fixed Country / State / City list (its Role and Designation lists, however, do come from the Industry & job masters). | Clients, Client Details, Facilitators, Finance masters, Manage Content vs. the Location, Industry & job and Program masters | OQ-GEN-003 |
 | X-02 | The same country has two names: the forms say "United States", the Country master says "United States of America". | Forms vs. Location masters | OQ-LOC-001 |
 | X-03 | "Required" errors appear on Save in some forms and on leaving the field in others. | Clients, SPOC, program, finance masters, Super Admin Add / Edit client vs. SH-004 | OQ-GEN-005, OQ-SA-004 |
 | X-04 | Some dialogs close on a backdrop click and others do not. | Many modals vs. SH-006 | OQ-GEN-007 |
 | X-05 | Only some pages warn about unsaved changes, and the warning is bypassed by Back, reload, Log out and the Support desk card. | App Shell, Clients, Manage Content, Facilitators, Roles & Access, Profile, Client Settings tab, Super Admin Settings & Configuration tab | OQ-GEN-006, OQ-SA-008 |
 | X-06 | Deleting an entity or sub-entity is not blocked by programs that use it, whereas a program category in use cannot be deleted. | Finance masters vs. Program Category | OQ-FIN-006, OQ-GEN-009 |
-| X-07 | Duplicate rules differ. Program categories and menu names reject duplicates, but entity name, PAN and GSTIN are not checked, sub-entity names are unique only within their entity, and the Super Admin checks only the training partner's company name. | Finance masters, Menu Mapping, Program Category, Super Admin | OQ-FIN-002, OQ-SA-006 |
+| X-07 | Duplicate rules differ. Program categories, menu names and user usernames and emails reject duplicates, but entity name, PAN and GSTIN are not checked, sub-entity names are unique only within their entity, user mobile numbers need not be unique, and the Super Admin checks only the training partner's company name. | Finance masters, Menu Mapping, Program Category, Manage Users, Super Admin | OQ-FIN-002, OQ-SA-006, OQ-ACC-026 |
 | X-08 | "New this month" counts the last 30 days. | All Clients, Manage Content | OQ-GEN-013 |
 | X-09 | Upload hints and accepted file types disagree. | Profile, Clients, Manage Content, Finance masters | OQ-GEN-008 |
 | X-10 | Support desk pill counts follow the current search, while other lists' pills show totals. Clicking a selected pill does not clear it there. | Support Desk vs. SH-008 | OQ-SUP-014 |
-| X-11 | The meaning of Active / Inactive status differs between clients, training partners and finance records; the Super Admin's "can't sign in" promise is not enforced. | Clients, Client Details, Finance masters, Super Admin | OQ-GEN-010, OQ-SA-002 |
+| X-11 | The meaning of Active / Inactive status differs between clients, training partners, finance records and user accounts; the "can't sign in" promises of the Super Admin and of Manage Users are not enforced. | Clients, Client Details, Finance masters, Super Admin, Manage Users | OQ-GEN-010, OQ-SA-002, OQ-ACC-022 |
 | X-12 | Roles & Access shows actions (Export, Approve) for pages that have no such action. | Roles & Access vs. Clients, Manage Content, Support Desk | OQ-ACC-007, OQ-CNT-018, OQ-SUP-012 |
 | X-13 | ~~My Profile shows the login's fixed access level even inside the Super Admin portal.~~ **Resolved 2026-11-05:** My Profile now shows the portal role in use. | My Profile vs. Super Admin | OQ-SA-015 (Resolved), OQ-PROF-011 |
 | X-14 | The Super Admin's status pills stay visible on phones, whereas other lists hide their summary pills on phones. | Super Admin (Manage Clients, Sub clients) vs. SH-013 | OQ-SA-014, OQ-SHELL-015 |

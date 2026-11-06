@@ -7,16 +7,16 @@
 | PRD title | Settings Hub PRD |
 | Module name | Settings Hub (Settings page and master pages) |
 | Document ID | PRD-SET |
-| Version | 1.2 |
+| Version | 1.3 |
 | Documentation status | Draft (derived from the current build) |
-| Module implementation status | Partially Implemented (15 of 18 masters have a page; 3 show a placeholder) |
-| Last updated | 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
+| Module implementation status | Partially Implemented (16 of 19 masters have a page; 3 show a placeholder) |
+| Last updated | 2026-11-06 (v1.3: the "Others" group is replaced by "Users & Access" (Manage Users, Roles & Access, Menu Mapping & Access), groups reordered with Users & Access first, new Manage Users master; 19 masters in 7 groups) · 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | Settings on phones: the outer two-pane card is flattened, the group tabs, the "All masters" title and the pin buttons are hidden; the filter box comes first and each group is its own card, 12 px apart, with master descriptions shown in full. Quick access (pinned / recent) is therefore not reachable on phones. See SH-013. |
 | Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md), [settings-access-masters-prd.md](settings-access-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
-Settings is the single place where Training Partner users find and open the **masters**: the reference lists (entities, locations, job titles, program categories, roles and so on) that the rest of LearnNext Portal relies on.
+Settings is the single place where Training Partner users find and open the **masters**: the reference lists (user logins, entities, locations, job titles, program categories, roles and so on) that the rest of LearnNext Portal relies on.
 
 The Settings page aims to:
 
@@ -32,7 +32,7 @@ This PRD covers the Settings page and the master page frame (address, breadcrumb
 
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
-| Settings (`/settings`) | Lists all 18 masters in 7 groups on one page, with a group jump list, a filter, pins and recent history | Training Partner user | Jump to a group, filter masters, open a master, pin/unpin, clear history | Sidebar "Settings" item and user menu "Settings" ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
+| Settings (`/settings`) | Lists all 19 masters in 7 groups on one page, with a group jump list, a filter, pins and recent history | Training Partner user | Jump to a group, filter masters, open a master, pin/unpin, clear history | Sidebar "Settings" item and user menu "Settings" ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
 | Group jump list (left pane) | Jumps to a group's section and highlights the group in view | Training Partner user | Click a group or Quick access | Settings |
 | Masters pane (right pane) | Shows all groups (default), Quick access, or filter results | Training Partner user | Open, pin, keyboard-navigate | Every master page |
 | Quick access | Pinned masters plus recently opened masters | Training Partner user | Open, unpin, Clear history | Settings |
@@ -40,30 +40,31 @@ This PRD covers the Settings page and the master page frame (address, breadcrumb
 | Placeholder master page | Shown for masters that are not built yet | Training Partner user | Return to the master's group | Settings |
 | "Master doesn't exist" page | Shown for an unknown master address | Training Partner user | Return to Settings | Settings |
 
-**Master inventory (all 18 masters)**
+**Master inventory (all 19 masters)**
 
 | # | Group | Master | Description shown | Page status | Covered in |
 |---|---|---|---|---|---|
-| 1 | Finance | Entity | Legal entities that bill programs | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
-| 2 | Finance | Sub-entity | Units under each entity | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
-| 3 | Finance | SAP BP | SAP business partner codes | Implemented (read-only) | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
-| 4 | Finance | Expense head | Cost categories for programs | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
-| 5 | Location | Country | Countries you work in | Implemented (read-only) | [settings-location-masters-prd.md](settings-location-masters-prd.md) |
-| 6 | Location | State | States within each country | Implemented (read-only) | [settings-location-masters-prd.md](settings-location-masters-prd.md) |
-| 7 | Location | City | Cities within each state | Implemented (read-only) | [settings-location-masters-prd.md](settings-location-masters-prd.md) |
-| 8 | Industry & job | Department | Teams a participant belongs to | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
-| 9 | Industry & job | Designation | Job titles and levels | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
-| 10 | Industry & job | Role | Roles people play in programs | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
-| 11 | Industry & job | Industry type | Industries clients operate in | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
-| 12 | Banks | Bank master | Banks and branches | Not Implemented (placeholder) | This PRD (section 5.5) |
-| 13 | Banks | House bank master | Your own receiving accounts | Not Implemented (placeholder) | This PRD (section 5.5) |
-| 14 | Alert messages | Alert message templates | Emails and alerts sent automatically | Not Implemented (placeholder) | This PRD (section 5.5) |
-| 15 | Program & Content | Program Category | Categories programs are grouped in | Implemented | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md) |
-| 16 | Program & Content | Modules | Program phases — Pre, During, Post | Implemented | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md) |
-| 17 | Others | Menu Mapping & Access | Pages in the Training Partner menu and their order | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
-| 18 | Others | Roles & Access | What each role can see and do | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
+| 1 | Users & Access | Manage Users | Logins, passwords and who reports to whom | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
+| 2 | Users & Access | Roles & Access | What each role can see and do | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
+| 3 | Users & Access | Menu Mapping & Access | Pages in the Training Partner menu and their order | Implemented | [settings-access-masters-prd.md](settings-access-masters-prd.md) |
+| 4 | Program & Content | Program Category | Categories programs are grouped in | Implemented | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md) |
+| 5 | Program & Content | Modules | Program phases — Pre, During, Post | Implemented | [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md) |
+| 6 | Finance | Entity | Legal entities that bill programs | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
+| 7 | Finance | Sub-entity | Units under each entity | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
+| 8 | Finance | SAP BP | SAP business partner codes | Implemented (read-only) | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
+| 9 | Finance | Expense head | Cost categories for programs | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
+| 10 | Banks | Bank master | Banks and branches | Not Implemented (placeholder) | This PRD (section 5.5) |
+| 11 | Banks | House bank master | Your own receiving accounts | Not Implemented (placeholder) | This PRD (section 5.5) |
+| 12 | Industry & job | Department | Teams a participant belongs to | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
+| 13 | Industry & job | Designation | Job titles and levels | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
+| 14 | Industry & job | Role | Roles people play in programs | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
+| 15 | Industry & job | Industry type | Industries clients operate in | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
+| 16 | Location | Country | Countries you work in | Implemented (read-only) | [settings-location-masters-prd.md](settings-location-masters-prd.md) |
+| 17 | Location | State | States within each country | Implemented (read-only) | [settings-location-masters-prd.md](settings-location-masters-prd.md) |
+| 18 | Location | City | Cities within each state | Implemented (read-only) | [settings-location-masters-prd.md](settings-location-masters-prd.md) |
+| 19 | Alert messages | Alert message templates | Emails and alerts sent automatically | Not Implemented (placeholder) | This PRD (section 5.5) |
 
-Group order and counts on the page: Finance (4), Location (3), Industry & job (4), Banks (2), Alert messages (1), Program & Content (2), Others (2).
+Group order and counts on the page: Users & Access (3), Program & Content (2), Finance (4), Banks (2), Industry & job (4), Location (3), Alert messages (1). Users & Access ("Logins, roles and what they can open.") replaced the former "Others" group on 2026-11-06; it is first, so it is the group shown and highlighted when Settings opens without a group in the address.
 
 ## 4. User Roles and Access
 
@@ -95,7 +96,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Filter box | Find a master by typing | Type in "Filter 18 masters…" | Results replace the group sections immediately (no debounce). Each result shows the group name above the master name. | See BR-SET-001 to BR-SET-004 for matching and ranking. Leading/trailing spaces are ignored. | Matching masters listed, best first |
+| Filter box | Find a master by typing | Type in "Filter 19 masters…" | Results replace the group sections immediately (no debounce). Each result shows the group name above the master name. | See BR-SET-001 to BR-SET-004 for matching and ranking. Leading/trailing spaces are ignored. | Matching masters listed, best first |
 | "/" shortcut | Reach the filter quickly | Press "/" anywhere on the page | Focus moves to the filter box. | Ignored while the user is typing in another input, text area, select or editable area. A "/" key hint shows inside the empty box (from small screens up). | Filter focused |
 | Clear filter (×) | Empty the filter | Click × inside the box ("Clear filter") | Filter is emptied and focus returns to the box; the previous view (all groups or Quick access) returns. | × replaces the "/" hint while text is present. | Filter cleared |
 | Esc in the filter | Empty the filter | Press Esc | Filter is emptied. | — | Filter cleared |
@@ -116,9 +117,9 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
-| Group link | Link straight to a group | Open `/settings#<group>` (finance, location, industry-job, banks, alerts, programs, others) | The page opens with that group scrolled into view (instantly on first load) and highlighted. | — | Group in view |
-| Quick access link | Link to Quick access | Open `/settings#mine` (older links `#quick`, `#pinned`, `#suggested` also work) | Opens Quick access if it has anything; otherwise all groups with the first group (Finance) in view. | — | Quick access or all groups |
-| Unknown hash | Fail safely | Open `/settings#anything-else` | Treated as no hash: all groups, Finance in view. | — | All groups |
+| Group link | Link straight to a group | Open `/settings#<group>` (users-access, programs, finance, banks, industry-job, location, alerts) | The page opens with that group scrolled into view (instantly on first load) and highlighted. | The former `#others` link no longer matches a group and is treated as an unknown hash | Group in view |
+| Quick access link | Link to Quick access | Open `/settings#mine` (older links `#quick`, `#pinned`, `#suggested` also work) | Opens Quick access if it has anything; otherwise all groups with the first group (Users & Access) in view. | — | Quick access or all groups |
+| Unknown hash | Fail safely | Open `/settings#anything-else` | Treated as no hash: all groups, Users & Access in view. | — | All groups |
 | Return from a master | Come back to where the user was | Use the back button on a placeholder / not-found page | Returns to `/settings#<that master's group>`. | — | Group in view |
 
 ### 5.5 Master page frame (`/settings/<master>`)
@@ -126,7 +127,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
 | Breadcrumb and tab title | Show where the user is | Open any master | Header breadcrumb "Settings › <Master name>" (Settings links back to `/settings`); browser tab uses the master's name. | For an unknown address the name is built from the address (first letter capitalised, dashes become spaces). | — |
-| Built master | Show the master's own page | Open one of the 15 built masters | The master's list page appears (see group PRDs). | — | Master page |
+| Built master | Show the master's own page | Open one of the 16 built masters | The master's list page appears (see group PRDs). | — | Master page |
 | Placeholder (not built) | Explain that a master is coming | Open Bank master, House bank master or Alert message templates | Centred message "<Master> is on the way" with "<Group> · <description>. Its list and form will be built here." and a back button labelled with the group name (e.g. "Banks"). **[Not Implemented]** for the master itself. | The visit is still added to Recently opened. | Back button returns to `/settings#<group>` |
 | Unknown master | Handle a wrong or renamed address | Open `/settings/<unknown>` | Message "This master doesn’t exist" / "It may have been renamed. Pick one from Settings." with a "Settings" button. | Not added to Recently opened. | Button returns to `/settings` |
 
@@ -136,7 +137,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
-| 1 | Click Settings in the sidebar | Settings opens with all groups; Finance in view and highlighted | No hash in address | All masters visible |
+| 1 | Click Settings in the sidebar | Settings opens with all groups; Users & Access in view and highlighted | No hash in address | All masters visible |
 | 2 | Click "Program & Content" in the left list | Pane scrolls to the group, section is outlined briefly, address becomes `#programs` | — | Group in view |
 | 3 | Click "Modules" | Modules page opens; breadcrumb "Settings › Modules" | — | Master opened and added to Recently opened |
 | 4 | Click "Settings" in the breadcrumb | Settings opens | — | Quick access entry now appears in the left list |
@@ -164,20 +165,20 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 
 | Field Name | Input Type | Purpose | Required/Optional | Min Length/Value | Max Length/Value | Accepted Format/Values | Default Value | Validation Rules | Conditional Behavior | Error Message |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Filter masters ("Filter 18 masters…") | Search box | Find masters across all groups | Optional | N/A (one character starts filtering) | None defined | Any text; split into words on spaces; case-insensitive | Empty | None (no error state). Spaces-only input counts as empty. | While it has text, results replace the group sections / Quick access; Esc or × clears it; picking a group clears it | N/A (no-match empty state, section 11) |
+| Filter masters ("Filter 19 masters…") | Search box | Find masters across all groups | Optional | N/A (one character starts filtering) | None defined | Any text; split into words on spaces; case-insensitive | Empty | None (no error state). Spaces-only input counts as empty. | While it has text, results replace the group sections / Quick access; Esc or × clears it; picking a group clears it | N/A (no-match empty state, section 11) |
 
 ### 7.2 Pin toggle
 
 | Field Name | Input Type | Purpose | Required/Optional | Min Length/Value | Max Length/Value | Accepted Format/Values | Default Value | Validation Rules | Conditional Behavior | Error Message |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Pin / Unpin (per master) | Toggle button | Add/remove the master from Pinned | Optional | N/A | None defined (all 18 can be pinned) | Pinned / not pinned | Not pinned | None | Visible on hover/focus when not pinned; always visible when pinned or on touch screens | N/A |
+| Pin / Unpin (per master) | Toggle button | Add/remove the master from Pinned | Optional | N/A | None defined (all 19 can be pinned) | Pinned / not pinned | Not pinned | None | Visible on hover/focus when not pinned; always visible when pinned or on touch screens | N/A |
 
 ## 8. Validation and Business Rules
 
 | Rule ID | Rule Name | Business Rule | When It Applies | Expected Behavior | Invalid Scenario | User Feedback |
 |---|---|---|---|---|---|---|
 | BR-SET-001 | All words must match | A master matches only if every word typed appears somewhere in its name, description, group name or its synonym list. | Filtering | Masters missing any word are left out | "bank city" | "No matches" |
-| BR-SET-002 | Synonyms | Each master has extra search words: Country "location nation place"; State "location region province place"; City "location town place"; Department "team function"; Designation "title job position level"; Role "job position"; Industry type "sector domain"; SAP BP "sap business partner bp vendor customer code finance"; Entity "company legal billing gst finance"; Sub-entity "branch unit division"; Expense head "cost expense budget finance"; Bank master "bank ifsc branch account"; House bank master "bank account receiving gst"; Alert message templates "email sms notification message reminder template"; Modules "module feature product platform"; Menu Mapping & Access "menu navigation sidebar mapping access module"; Roles & Access "role permission rights access admin user privilege"; Program Category "program category course type group". | Filtering | Synonym matches are listed | — | — |
+| BR-SET-002 | Synonyms | Each master has extra search words: Country "location nation place"; State "location region province place"; City "location town place"; Department "team function"; Designation "title job position level"; Role "job position"; Industry type "sector domain"; SAP BP "sap business partner bp vendor customer code finance"; Entity "company legal billing gst finance"; Sub-entity "branch unit division"; Expense head "cost expense budget finance"; Bank master "bank ifsc branch account"; House bank master "bank account receiving gst"; Alert message templates "email sms notification message reminder template"; Modules "module feature product platform"; Menu Mapping & Access "menu navigation sidebar mapping access module"; Roles & Access "role permission rights access admin user privilege"; Manage Users "user users login account password reset username staff people member admin"; Program Category "program category course type group". | Filtering | Synonym matches are listed | — | — |
 | BR-SET-003 | Ranking | Results are ordered: name starts with the full query; then name contains the full query; then name contains every word; then everything else. Ties keep the page order (group order, then master order). | Filtering | Best matches first; first result highlighted | — | — |
 | BR-SET-004 | Matching is partial and case-insensitive | Words match anywhere inside the text ("ent" matches Entity, Sub-entity, Department…). | Filtering | — | — | — |
 | BR-SET-005 | Recent history | Opening a valid master page puts it first in the recent list (no duplicates), keeping up to 12. Quick access shows the first 6 that are not pinned. | Visiting `/settings/<master>` | — | Unknown master address | Not recorded |
@@ -205,7 +206,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | All-groups listing | Show every master | Each group is a light card headed by its name; masters listed in two columns when the pane is wide enough (about 640 px of pane width), otherwise one | Page order fixed (section 3 inventory) | N/A (fixed list) |
 | Filter results listing | Show matches across groups | Group label above each name; one or two columns (more than 6 results and ≥640 px screen = two) | BR-SET-001 to BR-SET-004 | "No masters match “…”" empty state |
 | Quick access listing | Pinned + recent | Pinned in pin order; recent newest first (max 6) | Row description "<Group> · <description>" | Falls back to all groups when empty |
-| Pagination / sorting | — | Not applicable — the list is fixed at 18 masters | — | — |
+| Pagination / sorting | — | Not applicable — the list is fixed at 19 masters | — | — |
 
 ## 11. Empty States, Errors, and Edge Cases
 
@@ -228,7 +229,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | [Location masters](settings-location-masters-prd.md) | Country, State, City pages | Open master | Read-only lists | — |
 | [Industry & job masters](settings-industry-job-masters-prd.md) | Department, Designation, Role, Industry type pages | Open master | Master list page | — |
 | [Program & content masters](settings-program-content-masters-prd.md) | Program Category, Modules pages | Open master | Master list page | — |
-| [Access masters](settings-access-masters-prd.md) | Menu Mapping & Access, Roles & Access pages; Settings is itself a menu entry ("Settings", `/settings`) in Menu Mapping | Open master | Master list page | SH-002 |
+| [Users & Access masters](settings-access-masters-prd.md) | Manage Users, Roles & Access, Menu Mapping & Access pages; Settings is itself a menu entry ("Settings", `/settings`) in Menu Mapping | Open master | Master list page | SH-002 |
 | [System pages](system-pages-prd.md) | Not-built *menu pages* use the app-wide "Nothing here yet" placeholder; not-built *masters* use this module's own "is on the way" placeholder | — | Two different placeholder styles | SH-009 |
 
 ## 13. Acceptance Criteria
@@ -236,16 +237,17 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 **AC-SET-001: All masters on one page**
 - Given a signed-in Training Partner user
 - When they open `/settings`
-- Then 7 groups are shown in the order Finance, Location, Industry & job, Banks, Alert messages, Program & Content, Others
-- And the left list shows counts 4, 3, 4, 2, 1, 2, 2
-- And the filter placeholder reads "Filter 18 masters…"
+- Then 7 groups are shown in the order Users & Access, Program & Content, Finance, Banks, Industry & job, Location, Alert messages
+- And the left list shows counts 3, 2, 4, 2, 4, 3, 1
+- And Users & Access lists Manage Users, Roles & Access and Menu Mapping & Access, in that order
+- And the filter placeholder reads "Filter 19 masters…"
 
 **AC-SET-002: Jump to a group**
 - Given the Settings page is open
-- When the user clicks "Others" in the left list
-- Then the pane scrolls to the Others section, which is outlined briefly
-- And "Others" is highlighted in the left list
-- And the address ends with `#others`
+- When the user clicks "Alert messages" in the left list
+- Then the pane scrolls to the Alert messages section, which is outlined briefly
+- And "Alert messages" is highlighted in the left list
+- And the address ends with `#alerts`
 
 **AC-SET-003: Scroll-spy**
 - Given all groups are shown
@@ -302,14 +304,14 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 
 | Test Case ID | Related Requirement | Scenario | Preconditions | Test Data | Expected Result | Priority |
 |---|---|---|---|---|---|---|
-| TC-SET-001 | AC-SET-001 | Group order and counts | Signed in, clean browser storage | — | 7 groups, counts 4/3/4/2/1/2/2, 18 masters | P1 |
+| TC-SET-001 | AC-SET-001 | Group order and counts | Signed in, clean browser storage | — | 7 groups in the order Users & Access, Program & Content, Finance, Banks, Industry & job, Location, Alert messages; counts 3/2/4/2/4/3/1, 19 masters; no "Others" group | P1 |
 | TC-SET-002 | AC-SET-002 | Jump via left list | Settings open | Click "Location" | Scrolled to Location; outline flash; `#location` | P2 |
-| TC-SET-003 | 5.4 | Deep link to group | — | Open `/settings#others` | Others in view and highlighted on load | P2 |
-| TC-SET-004 | 5.4 | Legacy and unknown hash | Nothing pinned/recent | `#pinned`, then `#zzz` | Both show all groups with Finance highlighted | P3 |
-| TC-SET-005 | AC-SET-003 | Scroll-spy at bottom | Large screen | Scroll to the very bottom | "Others" highlighted; groups light up one by one on the way | P3 |
+| TC-SET-003 | 5.4 | Deep link to group | — | Open `/settings#location` | Location in view and highlighted on load | P2 |
+| TC-SET-004 | 5.4 | Legacy and unknown hash | Nothing pinned/recent | `#pinned`, then `#zzz`, then the old group link `#others` | Each shows all groups with Users & Access highlighted | P3 |
+| TC-SET-005 | AC-SET-003 | Scroll-spy at bottom | Large screen | Scroll to the very bottom | "Alert messages" highlighted; groups light up one by one on the way | P3 |
 | TC-SET-006 | BR-SET-002 | Synonym match | — | "town" | City only | P2 |
 | TC-SET-007 | BR-SET-001 | Multi-word all-match | — | "bank account" | Bank master and House bank master | P2 |
-| TC-SET-008 | BR-SET-003 | Ranking | — | "role" | "Role" first, "Roles & Access" next, then masters matching only through other text | P3 |
+| TC-SET-008 | BR-SET-003 | Ranking | — | "role" | "Roles & Access" first and "Role" next (both names start with "role", so page order decides: Users & Access comes before Industry & job), then masters matching only through other text | P3 |
 | TC-SET-009 | BR-SET-004 | Case/space handling | — | "  CITY  " | Same results as "city" | P3 |
 | TC-SET-010 | 5.2 | Arrow keys, one column | ≤6 results | "location" (3 results), press ↑ on first | Highlight wraps to last | P3 |
 | TC-SET-011 | 5.2 | Arrow keys, two columns | >6 results, width ≥640 px | "a" | ↓ moves by row and stops at the end; ← → move within a row | P3 |
@@ -322,8 +324,9 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | TC-SET-018 | 5.3 | Empty Quick access fallback | Viewing Quick access with one pin, no history | Unpin it | View returns to all groups; Quick access entry disappears | P3 |
 | TC-SET-019 | AC-SET-010 | Each placeholder | — | bank-master, house-bank-master, alert-message-templates | "<Master> is on the way" + group-named back button | P2 |
 | TC-SET-020 | AC-SET-011 | Unknown slug | — | `/settings/foo-bar` | Not-found card; breadcrumb "Settings › Foo bar" | P3 |
-| TC-SET-021 | 5.5 | Built master opens | — | Each of the 15 built masters | Correct page and breadcrumb "Settings › <Master>" | P1 |
+| TC-SET-021 | 5.5 | Built master opens | — | Each of the 16 built masters | Correct page and breadcrumb "Settings › <Master>" | P1 |
 | TC-SET-022 | 5.1 | Phone layout | 375 px width | — | Groups in a sideways row; chosen group scrolled into view; no sideways page scroll | P2 |
+| TC-SET-023 | BR-SET-002 | Manage Users synonyms | — | "password", then "admin" | "password": Manage Users only ("1 match"). "admin": Manage Users, then Roles & Access (page order) | P2 |
 
 ## 15. Open Questions and Gaps
 
@@ -338,7 +341,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 ## 16. PRD Completeness Checklist
 
 - [x] Page purpose and objective: Complete
-- [x] Page/feature inventory incl. all 18 masters and their status: Complete
+- [x] Page/feature inventory incl. all 19 masters and their status: Complete
 - [x] User roles and access: Complete (no role enforcement, SH-002)
 - [x] Page behaviour (layout, scroll-spy, filter, keyboard, pins, recent, hash links, placeholders): Complete
 - [x] Workflows: Complete

@@ -21,8 +21,8 @@ const MENU_SEED = [
   ['m-12', 'Facilitators', null, 'Facilitators', '/facilitators', 'Users', 6],
   ['m-13', 'Assessments', null, 'Assessments', '/assessments', 'ClipboardList', 7],
   ['m-14', 'Polls & Surveys', null, 'Polls & Surveys', '/polls-surveys', 'Vote', 8],
-  ['m-15', 'Settings', null, 'Settings', '/settings', 'Settings', 9],
-  ['m-16', 'Reports', null, 'Reports', '/reports', 'ChartColumn', 10],
+  ['m-16', 'Reports', null, 'Reports', '/reports', 'ChartColumn', 9],
+  ['m-15', 'Settings', null, 'Settings', '/settings', 'Settings', 10],
   ['m-17', 'Support desk', null, 'Support desk', '/support', 'Headset', 11],
 ];
 const menuStore = MENU_SEED.map(([id, name, parent, pageName, url, icon, priority], i) => ({

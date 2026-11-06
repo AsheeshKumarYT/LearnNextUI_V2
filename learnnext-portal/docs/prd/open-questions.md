@@ -7,7 +7,9 @@ This document collects every unresolved requirement found while writing the Lear
 
 Almost every question has the status **Open**; three module questions (OQ-AUTH-013, OQ-CLI-018, OQ-SET-004) are **Resolved** and keep their row with the decision. Once a question is answered, update the module PRD and change its status here to **Resolved**, recording the decision.
 
-**Totals:** 235 module questions across 17 PRDs (231 open, 4 resolved), plus 14 cross-cutting questions.
+**Totals:** 245 module questions across 17 PRDs (241 open, 4 resolved), plus 14 cross-cutting questions.
+
+**Last updated:** 2026-11-06 (Settings: Users & Access: OQ-ACC-018 to OQ-ACC-027 added for the new Manage Users master; section renamed).
 
 ---
 
@@ -322,9 +324,9 @@ Source: [settings-program-content-masters-prd.md](modules/settings-program-conte
 | OQ-PRG-005 | Program Category | Should categories have an active/inactive state instead of only delete? | Retiring a category without moving programs | Decide | Open |
 | OQ-PRG-006 | Search | Maximum search length is not defined | Minor | Confirm | Open |
 
-### Settings: Menu and Role access
+### Settings: Users & Access
 
-Source: [settings-access-masters-prd.md](modules/settings-access-masters-prd.md), section 15. 17 questions.
+Source: [settings-access-masters-prd.md](modules/settings-access-masters-prd.md), section 15. 27 questions.
 
 | Question ID | Related Page/Feature | Missing or Unclear Requirement | Why It Matters | Recommended Clarification | Status |
 |---|---|---|---|---|---|
@@ -345,6 +347,16 @@ Source: [settings-access-masters-prd.md](modules/settings-access-masters-prd.md)
 | OQ-ACC-015 | Searches | Maximum lengths of the menu, module, parent, icon, role and page searches are not defined | Minor | Confirm | Open |
 | OQ-ACC-016 | Menu modal | Edit Save is enabled by spaces-only changes (other masters ignore them); Enter-to-save is not defined | Consistency with other masters | Confirm both behaviours | Open |
 | OQ-ACC-017 | Menu list | Default 50 rows per page with options 20/50/All, and no column sorting, differ from SH-008; a parent and its sub-menus can split across pages | Consistency | Confirm the paging rule for the tree | Open |
+| OQ-ACC-018 | Manage Users – Application | The meaning of "Application" and its options are assumed: LearnNext and Prism (taken from the old system's field) | The field is required for every user and is a list filter | Confirm what Application means, the full list of options, and whether a user can have more than one | Open |
+| OQ-ACC-019 | Manage Users – Parent user | "Parent user" is assumed to mean the person the user reports to; it is optional and only prevents loops | Reporting lines may drive approvals, visibility or notifications | Confirm the meaning, whether it is required for some roles, and what it controls | Open |
+| OQ-ACC-020 | Manage Users – Admin rights | "Admin rights" ("can manage other users") is stored, shown and counted only; it grants nothing and nothing restricts Manage Users to admins | Anyone can manage every account | Define what Admin rights allow and who may grant them | Open |
+| OQ-ACC-021 | Manage Users – Role and Designation | Role comes from the Role master (Settings › Industry & job, enabled entries only), not from Roles & Access, so no user is linked to a permission role. The old system's "Client" role is not in that master. Designation likewise uses only enabled designations; a saved value that is no longer enabled shows as empty but is kept | Users cannot be given access through Roles & Access; client users cannot be created with a matching role | Confirm which role list users take, whether "Client" must be added, and how disabled roles and designations on existing users are handled | Open |
+| OQ-ACC-022 | Manage Users – Status | Inactive ("can’t sign in") is not enforced at sign-in in the demo; the accounts are not used for sign-in at all | The promise on the switch is not kept | Confirm that Inactive blocks sign-in (and ends open sessions), and whether a reason or date is recorded | Open |
+| OQ-ACC-023 | Manage Users – Passwords | Passwords entered in Add user and Change password are not stored in the demo (only the date of the last change is kept) and the user cannot sign in with them | Password management cannot be tested end to end | Confirm storage, sign-in with these credentials, password expiry and reuse rules, and whether the user must change a password set by an admin | Open |
+| OQ-ACC-024 | Manage Users – Links to other records | User accounts are not linked to SPOC, facilitator or participant records, nor to Training Partner staff; adding a SPOC, facilitator or participant creates no account | Duplicate data entry; people cannot sign in to their portals | Define which records get an account, when it is created, and which details are shared | Open |
+| OQ-ACC-025 | Manage Users – Notifications | No email or notification is sent to the user when an account is created or a password is changed | Users do not learn their username or new password | Define the welcome and password-change messages, and whether a set-your-own-password link replaces typing a password | Open |
+| OQ-ACC-026 | Manage Users – Field limits and formats | Full name 80, Username 4–60 and Pincode 10 (non-India) exist in the form only; address lines, emails and passwords have no maximum; Full name keeps surrounding spaces; mobile numbers always use "+91" and must be Indian even for non-Indian addresses; non-Indian pincodes have no format; usernames are compared only with usernames (another user's email is allowed), alternate emails are not checked against other users, and mobile numbers need not be unique | Data quality and sign-in clashes | Confirm limits, international phone and pincode formats, and the uniqueness scope | Open |
+| OQ-ACC-027 | Manage Users – Delete | Any user can be deleted, including the last user with admin rights, with no soft delete or undo; reports silently lose their parent user; Change password closes without asking even when text was typed | Accidental loss of access or reporting lines | Confirm delete rules (block, deactivate instead, reassign reports) and whether Change password should ask before discarding | Open |
 
 ### System Pages
 

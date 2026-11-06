@@ -1,12 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, AtSign, UserRoundCog } from 'lucide-react';
+import { useEffect, useId, useMemo, useState } from 'react';
+import { ArrowLeft, ArrowRight, AtSign, Camera, Plus, UserRoundCog, X } from 'lucide-react';
 import { useToast } from '@/hooks/useToast';
 import { usersApi } from '@/services/api';
-import { Button, ConfirmDialog, FormField, Input, Modal, PasswordStrength, SearchableSelect, Select, Stepper, Switch } from '@/components/ui';
-import { LogoPicker, PrefixInput } from '@/shared/clients/components/clientFormFields';
+import { Button, ConfirmDialog, DatePicker, FormField, Input, Modal, SearchableSelect, Select, Stepper, Switch } from '@/components/ui';
+import { PasswordHint } from './PasswordHint';
+import { PrefixInput } from '@/shared/clients/components/clientFormFields';
 import { EMPTY_USER, USER_STEPS, validateUser, yearsAgo } from './userRules';
 
 const digits = (v) => v.replace(/\D/g, '');
+// Date of birth is kept as yyyy-mm-dd; the picker works with local Date objects
+const toDate = (iso) => (iso ? new Date(`${iso}T00:00:00`) : null);
+const toIso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 /**
  * Add / edit a user in a modal, one part at a time: Personal → Address → Login & role (same pattern as the Entity
@@ -29,9 +33,12 @@ export function UserModal({ open, user, users, onClose, onSaved }) {
   const [tried, setTried] = useState({});
   const [saving, setSaving] = useState(false);
   const [confirmClose, setConfirmClose] = useState(false);
+  // Alternate email / number: shown once asked for (or when the user already has one)
+  const [alt, setAlt] = useState({ email: false, mobile: false });
 
   useEffect(() => {
     if (open) {
+      setAlt({ email: Boolean(initial.altEmail), mobile: Boolean(initial.altMobile) });
       setForm(initial);
       setStep(0);
       setReached(editing ? last : 0);
@@ -164,32 +171,55 @@ export function UserModal({ open, user, users, onClose, onSaved }) {
         <Stepper steps={USER_STEPS} current={step} reachable={reached} onStepClick={go} orientation="horizontal" className="mb-5 border-b border-border pb-5 [&_li]:min-w-0 [&_p]:truncate" />
 
         <div key={step} className="grid animate-fade-in grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+          {/* Personal (picked from previews: "Photo + name header"): a round photo beside the name, then gender / date of
+              birth, then email / mobile (no divider or section label — user's call), alternates behind a link until needed */}
           {step === 0 && (
             <>
-              <FormField label="Full name" required error={err('name')}>
-                <Input placeholder="e.g. Meera Iyer" maxLength={80} value={form.name} onChange={(e) => set({ name: e.target.value })} onBlur={blur('name')} />
-              </FormField>
+              <div className="flex items-start gap-4 sm:col-span-2">
+                <PhotoPicker value={form.photo} name={form.name} onChange={(photo) => set({ photo })} onError={(m) => toast.error(m)} />
+                <FormField label="Full name" required error={err('name')} className="min-w-0 flex-1">
+                  <Input placeholder="e.g. Meera Iyer" maxLength={80} value={form.name} onChange={(e) => set({ name: e.target.value })} onBlur={blur('name')} />
+                </FormField>
+              </div>
               <FormField label="Gender" required error={err('gender')}>
                 <Select placeholder="Select gender" options={opts(lookups.genders)} value={form.gender} onChange={(e) => set({ gender: e.target.value })} />
               </FormField>
               <FormField label="Date of birth" required error={err('dob')}>
-                <Input type="date" min={yearsAgo(100)} max={yearsAgo(16)} value={form.dob} onChange={(e) => set({ dob: e.target.value })} onBlur={blur('dob')} />
+                {/* The app's own date picker, with month / year dropdowns to reach a birth year quickly */}
+                <DatePicker
+                  pickMonthYear
+                  placeholder="Choose a date"
+                  minDate={toDate(yearsAgo(100))}
+                  maxDate={toDate(yearsAgo(16))}
+                  value={toDate(form.dob)}
+                  onChange={(d) => set({ dob: d ? toIso(d) : '' })}
+                />
               </FormField>
-              <FormField label="Profile photo" optional>
-                <LogoPicker value={form.photo} onChange={(photo) => set({ photo })} onError={(m) => toast.error(m)} label="Upload photo" hint="PNG or JPG · up to 2 MB" />
-              </FormField>
-              <FormField label="Email" required error={err('email')}>
-                <Input type="email" leftIcon={AtSign} placeholder="name@company.com" value={form.email} onChange={(e) => set({ email: e.target.value.trim() })} onBlur={blur('email')} />
-              </FormField>
-              <FormField label="Alternate email" optional error={err('altEmail')}>
-                <Input type="email" leftIcon={AtSign} placeholder="Another email" value={form.altEmail} onChange={(e) => set({ altEmail: e.target.value.trim() })} onBlur={blur('altEmail')} />
-              </FormField>
-              <FormField label="Mobile number" required error={err('mobile')}>
-                <PrefixInput prefix="+91" inputMode="numeric" maxLength={10} placeholder="98765 43210" value={form.mobile} onChange={(e) => set({ mobile: digits(e.target.value) })} onBlur={blur('mobile')} />
-              </FormField>
-              <FormField label="Alternate mobile number" optional error={err('altMobile')}>
-                <PrefixInput prefix="+91" inputMode="numeric" maxLength={10} placeholder="Another number" value={form.altMobile} onChange={(e) => set({ altMobile: digits(e.target.value) })} onBlur={blur('altMobile')} />
-              </FormField>
+
+              <div className="flex flex-col gap-4">
+                <FormField label="Email" required error={err('email')}>
+                  <Input type="email" leftIcon={AtSign} placeholder="name@company.com" value={form.email} onChange={(e) => set({ email: e.target.value.trim() })} onBlur={blur('email')} />
+                </FormField>
+                {alt.email ? (
+                  <FormField label="Alternate email" optional error={err('altEmail')}>
+                    <Input type="email" leftIcon={AtSign} placeholder="Another email" autoFocus={!form.altEmail} value={form.altEmail} onChange={(e) => set({ altEmail: e.target.value.trim() })} onBlur={blur('altEmail')} />
+                  </FormField>
+                ) : (
+                  <AddLink onClick={() => setAlt((s) => ({ ...s, email: true }))}>Alternate email</AddLink>
+                )}
+              </div>
+              <div className="flex flex-col gap-4">
+                <FormField label="Mobile number" required error={err('mobile')}>
+                  <PrefixInput prefix="+91" inputMode="numeric" maxLength={10} placeholder="98765 43210" value={form.mobile} onChange={(e) => set({ mobile: digits(e.target.value) })} onBlur={blur('mobile')} />
+                </FormField>
+                {alt.mobile ? (
+                  <FormField label="Alternate mobile number" optional error={err('altMobile')}>
+                    <PrefixInput prefix="+91" inputMode="numeric" maxLength={10} placeholder="Another number" autoFocus={!form.altMobile} value={form.altMobile} onChange={(e) => set({ altMobile: digits(e.target.value) })} onBlur={blur('altMobile')} />
+                  </FormField>
+                ) : (
+                  <AddLink onClick={() => setAlt((s) => ({ ...s, mobile: true }))}>Alternate number</AddLink>
+                )}
+              </div>
             </>
           )}
 
@@ -244,20 +274,21 @@ export function UserModal({ open, user, users, onClose, onSaved }) {
               <FormField label="Parent user" optional>
                 <SearchableSelect options={parentOptions} value={form.parent} onChange={(parent) => set({ parent: parent ?? '' })} placeholder="Select user" searchPlaceholder="Search users…" clearable />
               </FormField>
-              <FormField label="Username" required error={err('username')}>
-                <div className="flex items-center gap-2">
-                  <Input className="flex-1" placeholder="e.g. name@company.com" maxLength={60} value={form.username} onChange={(e) => set({ username: e.target.value.trim() })} onBlur={blur('username')} />
-                  {/* Most logins use the email — one click copies it */}
-                  {form.email && form.username !== form.email && (
-                    <Button variant="secondary" size="sm" onClick={() => set({ username: form.email })}>
-                      Use email
-                    </Button>
-                  )}
-                </div>
-              </FormField>
+              <div className="flex flex-col gap-4">
+                <FormField label="Username" required error={err('username')}>
+                  <Input placeholder="e.g. name@company.com" maxLength={60} value={form.username} onChange={(e) => set({ username: e.target.value.trim() })} onBlur={blur('username')} />
+                </FormField>
+                {/* Most logins use the email — a quiet link (like "+ Alternate email") copies it in */}
+                {form.email && form.username !== form.email && (
+                  <AddLink icon={AtSign} onClick={() => set({ username: form.email })}>
+                    Use email as username
+                  </AddLink>
+                )}
+              </div>
               {!editing ? (
                 <FormField label="Password" required error={err('password')}>
                   <Input type="password" autoComplete="new-password" placeholder="Set a password" value={form.password} onChange={(e) => set({ password: e.target.value })} onBlur={blur('password')} />
+                  <PasswordHint password={form.password} />
                 </FormField>
               ) : (
                 <FormField label="Status">
@@ -265,11 +296,6 @@ export function UserModal({ open, user, users, onClose, onSaved }) {
                     <Switch checked={form.status === 'active'} onChange={(on) => set({ status: on ? 'active' : 'inactive' })} label={form.status === 'active' ? 'Active — can sign in' : 'Inactive — can’t sign in'} />
                   </div>
                 </FormField>
-              )}
-              {!editing && form.password && (
-                <div className="sm:col-span-2">
-                  <PasswordStrength password={form.password} />
-                </div>
               )}
               {/* "IsAdmin" in the old form */}
               <FormField label="Admin rights">
@@ -295,5 +321,81 @@ export function UserModal({ open, user, users, onClose, onSaved }) {
         cancelLabel="Keep editing"
       />
     </>
+  );
+}
+
+/**
+ * Round profile photo (Add user): an empty dashed circle with a camera opens the file picker; with a photo, the circle
+ * shows it (camera on hover = change) and a small × removes it. PNG / JPG up to 2 MB, kept as a data URL.
+ */
+function PhotoPicker({ value, name, onChange, onError }) {
+  const id = useId();
+  const read = (file) => {
+    if (!file) return;
+    if (!['image/png', 'image/jpeg'].includes(file.type)) return onError?.('Use a PNG or JPG photo.');
+    if (file.size > 2 * 1024 * 1024) return onError?.('Photo must be under 2 MB.');
+    const r = new FileReader();
+    r.onload = () => onChange(r.result);
+    r.readAsDataURL(file);
+    return undefined;
+  };
+  return (
+    <div className="relative shrink-0 pt-1">
+      <label
+        htmlFor={id}
+        title={value ? 'Change photo' : 'Add a photo (PNG or JPG, up to 2 MB)'}
+        className={
+          'group relative flex size-16 cursor-pointer items-center justify-center overflow-hidden rounded-full transition-colors focus-within:ring-[3px] focus-within:ring-focus ' +
+          (value ? 'border border-border-strong' : 'border-[1.5px] border-dashed border-chart-1/45 bg-chart-1/10 text-primary-text hover:border-chart-1/70 hover:bg-chart-1/15')
+        }
+      >
+        {value ? (
+          <>
+            <img src={value} alt={name ? `${name}’s photo` : 'Profile photo'} className="size-full object-cover" />
+            <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-white opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true">
+              <Camera className="size-5" />
+            </span>
+          </>
+        ) : (
+          <Camera className="size-6" aria-hidden="true" />
+        )}
+        <input
+          id={id}
+          type="file"
+          accept="image/png,image/jpeg"
+          className="sr-only"
+          aria-label={value ? 'Change photo' : 'Add a photo'}
+          onChange={(e) => {
+            read(e.target.files?.[0]);
+            e.target.value = '';
+          }}
+        />
+      </label>
+      {value && (
+        <button
+          type="button"
+          onClick={() => onChange('')}
+          aria-label="Remove photo"
+          title="Remove photo"
+          className="absolute -right-0.5 top-0.5 inline-flex size-5 items-center justify-center rounded-full border border-border bg-elevated text-text-muted shadow-xs hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+        >
+          <X className="size-3" aria-hidden="true" />
+        </button>
+      )}
+    </div>
+  );
+}
+
+/** A quiet "+ Alternate …" link that reveals an optional field */
+function AddLink({ onClick, icon: Icon = Plus, children }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="-mt-2 inline-flex items-center gap-1 self-start rounded text-[13px] font-medium text-primary-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+    >
+      <Icon className="size-3.5" aria-hidden="true" />
+      {children}
+    </button>
   );
 }

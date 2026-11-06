@@ -4,6 +4,8 @@ This inventory lists every module, page, tab and menu item found in the current 
 
 **Status** uses the labels from the [PRD template](prd-template.md): Implemented, Partially Implemented, Not Implemented, Proposed, Requires Confirmation.
 
+**Last updated:** 2026-11-06 (module 15 renamed "Settings: Users & Access"; Manage Users pages added; Settings masters re-grouped in the new order with "Users & Access" replacing "Others", 19 masters).
+
 ---
 
 ## 1. Modules with PRDs
@@ -24,7 +26,7 @@ This inventory lists every module, page, tab and menu item found in the current 
 | 12 | Settings: Location masters | LOC | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) | Partially Implemented |
 | 13 | Settings: Industry and job masters | PPL | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) | Partially Implemented |
 | 14 | Settings: Program and Content masters | PRG | [settings-program-content-masters-prd.md](modules/settings-program-content-masters-prd.md) | Partially Implemented |
-| 15 | Settings: Menu and Role access masters | ACC | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) | Partially Implemented (permissions are stored but not enforced) |
+| 15 | Settings: Users & Access (Manage Users, Roles & Access, Menu Mapping & Access) | ACC | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) | Partially Implemented (user accounts are not used for sign-in; permissions are stored but not enforced) |
 | 16 | System Pages | SYS | [system-pages-prd.md](modules/system-pages-prd.md) | Partially Implemented |
 | 17 | Super Admin (Manage Clients, Client details, Add / Edit client) | SA | [super-admin-prd.md](modules/super-admin-prd.md) | Partially Implemented (works on demo data; the CRM fetching, portal access, email update and inactive-status settings are stored only) |
 
@@ -77,6 +79,10 @@ The status column gives a summary only. The **Module implementation status** in 
 | Support Desk | Ticket list, ticket chat, ticket details | Sidebar support card (`/support`) | Page, Drawer, Modal | Implemented |
 | Settings Hub | All masters (groups, filter, pins, recents) | Sidebar → Settings (`/settings`) | Page | Implemented |
 | Settings masters | Each master | `/settings/<master>` | Page | See section 4 |
+| Settings: Users & Access | Manage Users list (table / cards, status pills, search) | Settings → Users & Access → Manage Users (`/settings/manage-users`) | Page | Implemented (accounts are not used for sign-in) |
+| Settings: Users & Access | Filter users | Manage Users → Filters | Drawer | Implemented |
+| Settings: Users & Access | Add / Edit user (3 steps: Personal → Address → Login & role) | Manage Users → Add user, a row or its pencil | Modal | Implemented |
+| Settings: Users & Access | Change password | Manage Users → key icon on a row or card | Modal | Implemented (the password is not stored in the demo) |
 | System Pages | Not found (404) | Any unknown address | Full-screen page | Implemented |
 | System Pages | Page crash | An unexpected error while showing a page | Full-screen page | Implemented |
 | System Pages | Server error (500) | `/error` | Full-screen page | Implemented |
@@ -121,28 +127,29 @@ These items appear in the Training Partner sidebar but open the "Nothing here ye
 
 ## 4. Settings masters
 
-The Settings page lists 18 masters in 7 groups.
+The Settings page lists 19 masters in 7 groups, in this order.
 
 | Group | Master | Status | PRD |
 |---|---|---|---|
+| Users & Access | Manage Users | Partially Implemented (accounts are not used for sign-in; passwords are not stored) | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) |
+| Users & Access | Roles & Access | Partially Implemented | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) |
+| Users & Access | Menu Mapping & Access | Partially Implemented | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) |
+| Program & Content | Program Category | Implemented | [settings-program-content-masters-prd.md](modules/settings-program-content-masters-prd.md) |
+| Program & Content | Modules | Implemented | [settings-program-content-masters-prd.md](modules/settings-program-content-masters-prd.md) |
 | Finance | Entity | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
 | Finance | Sub-entity | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
 | Finance | SAP BP | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
 | Finance | Expense head | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
-| Location | Country | Implemented (read-only, CRM-synced) | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) |
-| Location | State | Implemented (read-only, CRM-synced) | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) |
-| Location | City | Implemented (read-only, CRM-synced) | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) |
+| Banks | Bank master | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
+| Banks | House bank master | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
 | Industry & job | Department | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |
 | Industry & job | Designation | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |
 | Industry & job | Role | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |
 | Industry & job | Industry type | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |
-| Banks | Bank master | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
-| Banks | House bank master | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
+| Location | Country | Implemented (read-only, CRM-synced) | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) |
+| Location | State | Implemented (read-only, CRM-synced) | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) |
+| Location | City | Implemented (read-only, CRM-synced) | [settings-location-masters-prd.md](modules/settings-location-masters-prd.md) |
 | Alert messages | Alert message templates | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
-| Program & Content | Program Category | Implemented | [settings-program-content-masters-prd.md](modules/settings-program-content-masters-prd.md) |
-| Program & Content | Modules | Implemented | [settings-program-content-masters-prd.md](modules/settings-program-content-masters-prd.md) |
-| Others | Menu Mapping & Access | Partially Implemented | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) |
-| Others | Roles & Access | Partially Implemented | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) |
 
 ---
 
@@ -156,4 +163,5 @@ LearnNext Portal is one application with a portal per role (SH-002). One login (
 | Super Admin | Manages LearnNext's own customers, the training partners, in a reduced portal: Manage Clients (list, details, add, edit) and My Profile only. Any other address opens Manage Clients. | Partially Implemented ([PRD-SA](modules/super-admin-prd.md)) |
 | Facilitator, Participant, Client SPOC | Portal roles that are defined but not built. In the role picker they show "Coming soon"; a login in one of these roles sees only the "on its way" screen. | Not Implemented (OQ-AUTH-018) |
 | Permission roles defined in Roles & Access (demo: Super Admin, Training Partner, Finance Manager, Program Manager, Support Executive) | Each role has a page × action permission matrix. The matrix is stored but not yet enforced, and no user is linked to these roles. They are separate from the portal roles above: continuing as Super Admin does not use the "Super Admin" row of this master. | Partially Implemented (OQ-GEN-002) |
+| User accounts in Manage Users (demo: 18) | Logins kept in Settings → Users & Access → Manage Users, each with a Role from the Industry & job Role master, an Application, an optional Parent user and Admin rights. They are records only: sign-in does not use them, Admin rights and Inactive have no effect, and they are not linked to SPOCs, facilitators or participants. | Partially Implemented (OQ-ACC-018 to OQ-ACC-025) |
 | Facilitators, client SPOCs and participants as records | In the Training Partner portal they are records that the Training Partner manages. They cannot sign in to their own portals yet. | Implemented |
