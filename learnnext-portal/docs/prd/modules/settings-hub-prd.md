@@ -7,12 +7,12 @@
 | PRD title | Settings Hub PRD |
 | Module name | Settings Hub (Settings page and master pages) |
 | Document ID | PRD-SET |
-| Version | 1.3 |
+| Version | 1.4 |
 | Documentation status | Draft (derived from the current build) |
-| Module implementation status | Partially Implemented (16 of 19 masters have a page; 3 show a placeholder) |
-| Last updated | 2026-11-06 (v1.3: the "Others" group is replaced by "Users & Access" (Manage Users, Roles & Access, Menu Mapping & Access), groups reordered with Users & Access first, new Manage Users master; 19 masters in 7 groups) · 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
+| Module implementation status | Partially Implemented (18 of 19 masters have a page; Alert message templates still shows a placeholder) |
+| Last updated | 2026-11-19 (v1.4: Bank master and House bank master are now built (see [settings-bank-masters-prd.md](settings-bank-masters-prd.md)); 18 of 19 masters built; Alert message templates is the only placeholder left) · 2026-11-06 (v1.3: the "Others" group is replaced by "Users & Access" (Manage Users, Roles & Access, Menu Mapping & Access), groups reordered with Users & Access first, new Manage Users master; 19 masters in 7 groups) · 2026-11-05 (v1.2: naming: LearnNext Portal; "Training Partner" replaces "Admin") · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | Settings on phones: the outer two-pane card is flattened, the group tabs, the "All masters" title and the pin buttons are hidden; the filter box comes first and each group is its own card, 12 px apart, with master descriptions shown in full. Quick access (pinned / recent) is therefore not reachable on phones. See SH-013. |
-| Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md), [settings-access-masters-prd.md](settings-access-masters-prd.md), [Shared requirements](../shared-requirements.md) |
+| Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [settings-bank-masters-prd.md](settings-bank-masters-prd.md), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-program-content-masters-prd.md](settings-program-content-masters-prd.md), [settings-access-masters-prd.md](settings-access-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
@@ -53,8 +53,8 @@ This PRD covers the Settings page and the master page frame (address, breadcrumb
 | 7 | Finance | Sub-entity | Units under each entity | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
 | 8 | Finance | SAP BP | SAP business partner codes | Implemented (read-only) | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
 | 9 | Finance | Expense head | Cost categories for programs | Implemented | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) |
-| 10 | Banks | Bank master | Banks and branches | Not Implemented (placeholder) | This PRD (section 5.5) |
-| 11 | Banks | House bank master | Your own receiving accounts | Not Implemented (placeholder) | This PRD (section 5.5) |
+| 10 | Banks | Bank master | Banks and branches | Implemented | [settings-bank-masters-prd.md](settings-bank-masters-prd.md) |
+| 11 | Banks | House bank master | Your own receiving accounts | Implemented | [settings-bank-masters-prd.md](settings-bank-masters-prd.md) |
 | 12 | Industry & job | Department | Teams a participant belongs to | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
 | 13 | Industry & job | Designation | Job titles and levels | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
 | 14 | Industry & job | Role | Roles people play in programs | Implemented | [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md) |
@@ -127,8 +127,8 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | Feature/Element | Purpose | User Action | Expected Behavior | Conditions/Rules | Result |
 |---|---|---|---|---|---|
 | Breadcrumb and tab title | Show where the user is | Open any master | Header breadcrumb "Settings › <Master name>" (Settings links back to `/settings`); browser tab uses the master's name. | For an unknown address the name is built from the address (first letter capitalised, dashes become spaces). | — |
-| Built master | Show the master's own page | Open one of the 16 built masters | The master's list page appears (see group PRDs). | — | Master page |
-| Placeholder (not built) | Explain that a master is coming | Open Bank master, House bank master or Alert message templates | Centred message "<Master> is on the way" with "<Group> · <description>. Its list and form will be built here." and a back button labelled with the group name (e.g. "Banks"). **[Not Implemented]** for the master itself. | The visit is still added to Recently opened. | Back button returns to `/settings#<group>` |
+| Built master | Show the master's own page | Open one of the 18 built masters | The master's list page appears (see group PRDs). | — | Master page |
+| Placeholder (not built) | Explain that a master is coming | Open Alert message templates | Centred message "<Master> is on the way" with "<Group> · <description>. Its list and form will be built here." and a back button labelled with the group name (e.g. "Alert messages"). **[Not Implemented]** for the master itself. | The visit is still added to Recently opened. | Back button returns to `/settings#<group>` |
 | Unknown master | Handle a wrong or renamed address | Open `/settings/<unknown>` | Message "This master doesn’t exist" / "It may have been renamed. Pick one from Settings." with a "Settings" button. | Not added to Recently opened. | Button returns to `/settings` |
 
 ## 6. User Workflow
@@ -183,7 +183,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | BR-SET-004 | Matching is partial and case-insensitive | Words match anywhere inside the text ("ent" matches Entity, Sub-entity, Department…). | Filtering | — | — | — |
 | BR-SET-005 | Recent history | Opening a valid master page puts it first in the recent list (no duplicates), keeping up to 12. Quick access shows the first 6 that are not pinned. | Visiting `/settings/<master>` | — | Unknown master address | Not recorded |
 | BR-SET-006 | Pins and history are per browser | Pins, recent history and the dismissed pin tip are remembered in this browser and survive reload (SH-001). | Always | — | Different browser / cleared storage | Pins and history are empty |
-| BR-SET-007 | Not-built masters | Bank master, House bank master and Alert message templates show a placeholder page. **[Not Implemented]** | Opening these masters | Placeholder with a way back | — | "<Master> is on the way" |
+| BR-SET-007 | Not-built masters | Alert message templates shows a placeholder page (Bank master and House bank master were built on 2026-11-19). **[Not Implemented]** | Opening these masters | Placeholder with a way back | — | "<Master> is on the way" |
 | BR-SET-008 | Unknown master | An address that does not match any master shows a not-found message. | `/settings/<unknown>` | Not-found message | — | "This master doesn’t exist" |
 | BR-SET-009 | Settings is not in global search | Masters are found through the Settings filter only; the header's global search (⌘K) does not list them. **[Requires Confirmation]** whether they should be. | Global search | — | — | — |
 
@@ -213,7 +213,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | Scenario | When It Occurs | Expected Page Behavior | User-Facing Message | Recovery/Next Step |
 |---|---|---|---|---|
 | No filter matches | Filter text matches no master | Empty state replaces results | Title: "No masters match “<query>”". Description: "Try a simpler word — e.g. “city”, “fee”, “trainer”, “assessment” or “bank”." Button: "Clear filter" | Clear filter. Note: "fee", "trainer" and "assessment" currently return no matches themselves (OQ-SET-001). |
-| Master not built | Bank master, House bank master, Alert message templates | Placeholder card | "<Master> is on the way" / "<Group> · <description>. Its list and form will be built here." | Back button named after the group |
+| Master not built | Alert message templates | Placeholder card | "<Master> is on the way" / "<Group> · <description>. Its list and form will be built here." | Back button named after the group |
 | Unknown master | Mistyped / old address | Not-found card | "This master doesn’t exist" / "It may have been renamed. Pick one from Settings." | "Settings" button |
 | Quick access emptied | Last pin removed and history cleared | All-groups view returns | None | — |
 | Stale pinned/recent entry | A stored master no longer exists | It is silently left out | None | — |
@@ -226,6 +226,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 |---|---|---|---|---|
 | [App shell & navigation](app-shell-navigation-prd.md) | Sidebar "Settings" and user menu "Settings" open this page; breadcrumb/tab title come from the master name | Navigation | "Settings › <Master>" breadcrumb | SH-009 |
 | [Finance masters](settings-finance-masters-prd.md) | Entity, Sub-entity, SAP BP, Expense head pages | Open master | Master list page | — |
+| [Bank masters](settings-bank-masters-prd.md) | Bank master, House bank master pages | Open master | Master list page | — |
 | [Location masters](settings-location-masters-prd.md) | Country, State, City pages | Open master | Read-only lists | — |
 | [Industry & job masters](settings-industry-job-masters-prd.md) | Department, Designation, Role, Industry type pages | Open master | Master list page | — |
 | [Program & content masters](settings-program-content-masters-prd.md) | Program Category, Modules pages | Open master | Master list page | — |
@@ -291,9 +292,9 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 - And clicking "Clear history" removes the section
 
 **AC-SET-010: Placeholder master**
-- Given the user opens "House bank master"
-- Then the page shows "House bank master is on the way"
-- And a "Banks" button returns to `/settings#banks`
+- Given the user opens "Alert message templates"
+- Then the page shows "Alert message templates is on the way"
+- And an "Alert messages" button returns to `/settings#alerts`
 
 **AC-SET-011: Unknown master (negative)**
 - Given the user opens `/settings/foo`
@@ -322,9 +323,9 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | TC-SET-016 | BR-SET-005 | Recent limit | Open 8 different masters | — | Quick access shows 6 newest (pinned excluded) | P3 |
 | TC-SET-017 | 5.3 | Pinned excluded from recent | City pinned and recently opened | — | City appears only under Pinned | P3 |
 | TC-SET-018 | 5.3 | Empty Quick access fallback | Viewing Quick access with one pin, no history | Unpin it | View returns to all groups; Quick access entry disappears | P3 |
-| TC-SET-019 | AC-SET-010 | Each placeholder | — | bank-master, house-bank-master, alert-message-templates | "<Master> is on the way" + group-named back button | P2 |
+| TC-SET-019 | AC-SET-010 | Remaining placeholder | — | alert-message-templates (bank-master and house-bank-master now open their own pages) | "Alert message templates is on the way" + "Alert messages" back button | P2 |
 | TC-SET-020 | AC-SET-011 | Unknown slug | — | `/settings/foo-bar` | Not-found card; breadcrumb "Settings › Foo bar" | P3 |
-| TC-SET-021 | 5.5 | Built master opens | — | Each of the 16 built masters | Correct page and breadcrumb "Settings › <Master>" | P1 |
+| TC-SET-021 | 5.5 | Built master opens | — | Each of the 18 built masters | Correct page and breadcrumb "Settings › <Master>" | P1 |
 | TC-SET-022 | 5.1 | Phone layout | 375 px width | — | Groups in a sideways row; chosen group scrolled into view; no sideways page scroll | P2 |
 | TC-SET-023 | BR-SET-002 | Manage Users synonyms | — | "password", then "admin" | "password": Manage Users only ("1 match"). "admin": Manage Users, then Roles & Access (page order) | P2 |
 
@@ -333,7 +334,7 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 | Question ID | Related Page/Feature | Missing or Unclear Requirement | Why It Matters | Recommended Clarification | Status |
 |---|---|---|---|---|---|
 | OQ-SET-001 | No-match empty state | The suggestion text names "fee", "trainer" and "assessment", but none of these words match any master today. | Users following the hint get another "No matches". | Update the suggested words or add matching synonyms/masters. | Open |
-| OQ-SET-002 | Banks / Alert messages | Bank master, House bank master and Alert message templates are placeholders; their fields and rules are undefined. | Billing and automatic messages depend on them. | Provide requirements for these three masters. | Open |
+| OQ-SET-002 | Alert messages | Alert message templates is a placeholder; its fields and rules are undefined. (Bank master and House bank master were built on 2026-11-19; see PRD-BNK.) | Automatic messages depend on it. | Provide requirements for this master. | Open |
 | OQ-SET-003 | Pins and history | Pins and recent history are stored per browser, not per user account. | Training Partner users switching devices lose them; shared computers mix users. | Confirm whether they should follow the user account. | Open |
 | OQ-SET-004 | Global search | Resolved 2026-11-02: masters are searchable (name, description, group and search keywords) and open the master | — | — | Resolved |
 | OQ-SET-005 | Access control | Roles & Access permissions (including for "/settings") are not enforced (SH-002). | Any Training Partner user can change finance masters. | Confirm who may view/edit each master. | Open |
@@ -352,4 +353,4 @@ Pins, recent history and the dismissed pin tip are stored in the browser, so the
 - [x] Empty states and edge cases: Complete
 - [x] Cross-module dependencies: Complete
 - [x] Acceptance criteria and QA scenarios: Complete
-- [ ] Requirements for not-built masters (Bank master, House bank master, Alert message templates): Incomplete (see OQ-SET-002)
+- [ ] Requirements for not-built masters (Alert message templates): Incomplete (see OQ-SET-002)

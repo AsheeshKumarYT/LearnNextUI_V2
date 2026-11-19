@@ -4,7 +4,7 @@ This inventory lists every module, page, tab and menu item found in the current 
 
 **Status** uses the labels from the [PRD template](prd-template.md): Implemented, Partially Implemented, Not Implemented, Proposed, Requires Confirmation.
 
-**Last updated:** 2026-11-06 (module 15 renamed "Settings: Users & Access"; Manage Users pages added; Settings masters re-grouped in the new order with "Users & Access" replacing "Others", 19 masters).
+**Last updated:** 2026-11-19 (modules 18 Settings: Bank masters (PRD-BNK) and 19 Projects (PRD-PRJ) added; Bank master and House bank master are Implemented; Projects removed from the not-built menu items; page inventory extended). 2026-11-06 (module 15 renamed "Settings: Users & Access"; Manage Users pages added; Settings masters re-grouped in the new order with "Users & Access" replacing "Others", 19 masters).
 
 ---
 
@@ -29,6 +29,8 @@ This inventory lists every module, page, tab and menu item found in the current 
 | 15 | Settings: Users & Access (Manage Users, Roles & Access, Menu Mapping & Access) | ACC | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) | Partially Implemented (user accounts are not used for sign-in; permissions are stored but not enforced) |
 | 16 | System Pages | SYS | [system-pages-prd.md](modules/system-pages-prd.md) | Partially Implemented |
 | 17 | Super Admin (Manage Clients, Client details, Add / Edit client) | SA | [super-admin-prd.md](modules/super-admin-prd.md) | Partially Implemented (works on demo data; the CRM fetching, portal access, email update and inactive-status settings are stored only) |
+| 18 | Settings: Bank masters (Bank master, House bank master) | BNK | [settings-bank-masters-prd.md](modules/settings-bank-masters-prd.md) | Implemented (not yet used by any other page) |
+| 19 | Projects (list, project drawer, Add project, Program workspace) | PRJ | [projects-prd.md](modules/projects-prd.md) | Partially Implemented ("Add a program" is coming soon; 10 of the 15 workspace setup steps are placeholders) |
 
 The status column gives a summary only. The **Module implementation status** in each PRD's section 1 is authoritative.
 
@@ -48,7 +50,7 @@ The status column gives a summary only. The **Module implementation status** in 
 | Authentication | Log out confirmation | Header user menu | Dialog | Implemented |
 | App Shell | Sidebar, header, breadcrumbs, user menu, theme toggle | Every Training Partner page | Layout | Implemented |
 | App Shell | Super Admin shell (single menu item Manage Clients; no bell, Settings, Support card or Dev only section) | Every Super Admin page | Layout | Implemented |
-| App Shell | Global search (⌘K / Ctrl+K) | Header | Command palette | Implemented (finds pages and records: clients, programs, facilitators, support tickets and Settings masters; for Super Admin, its pages and training partners) |
+| App Shell | Global search (⌘K / Ctrl+K) | Header | Command palette | Implemented (finds pages and records: clients, projects, programs, facilitators, support tickets and Settings masters; for Super Admin, its pages and training partners) |
 | App Shell | Notifications menu | Header bell | Popover | Implemented |
 | App Shell | Help & Support drawer | Nothing opens it (OQ-SHELL-007) | Drawer | Not Implemented |
 | App Shell | Support desk card | Sidebar footer | Card link | Implemented |
@@ -68,6 +70,16 @@ The status column gives a summary only. The **Module implementation status** in 
 | Client Details | Tax & Billing tab | Client details | Tab | Implemented |
 | Client Details | Settings tab | Client details | Tab | Implemented |
 | Client Details | Activity tab | Client details | Tab | Implemented |
+| Projects | Projects list (table / cards, All / Live / Need action pills, search, program dot timeline, row menu) | Sidebar → Projects (`/projects`); a project link `/projects?q=<PRJ code>` opens it with its drawer | Page | Implemented |
+| Projects | Filter projects | Projects → Filters | Drawer | Implemented |
+| Projects | Project drawer (status, dates, owner, programs timeline) | Click a project row | Drawer | Implemented ("Add program" is coming soon) |
+| Projects | Row menu: Add a program, Open client, Copy link, Archive (with confirmation) | "…" on a project row | Menu, Dialog | Partially Implemented ("Add a program" is coming soon) |
+| Projects | Add project (4 steps: Opportunity → Project → How to start → Dates and name; CRM opportunity fetch) | Add project button (`/projects/new`) | Page | Implemented (the CRM look-up is simulated; copying an earlier batch copies nothing) |
+| Projects | Program workspace: hero and section tabs | Click a program in the drawer (`/projects/<project>/programs/<program>`) | Page | Implemented |
+| Projects | Program workspace: Overview tab | Program workspace | Tab | Implemented |
+| Projects | Program workspace: Foundation tab (Program basics, Client contacts with Add / Edit contact, Agreement and approval) | Program workspace (`?tab=foundation`) | Tab, Modal | Implemented (Program basics saves on screen only) |
+| Projects | Program workspace: Learning journey tab (Sessions and schedule with Add / Edit step, Content and kits) | Program workspace (`?tab=journey`) | Tab, Modal | Partially Implemented (Assessments and check-ins is a placeholder) |
+| Projects | Program workspace: People, Logistics, Communication, Go live and After delivery tabs | Program workspace | Tab | Not Implemented (each step shows "<Step> is on its way") |
 | Manage Content | Program list (table / cards), program history | Sidebar → Manage Content (`/content`) | Page, Drawer | Implemented |
 | Manage Content | Add / Edit program | Manage Content | Modal | Implemented |
 | Manage Content | Program content: Upload content and Permissions tabs | `/content/:id` | Page | Implemented |
@@ -83,6 +95,10 @@ The status column gives a summary only. The **Module implementation status** in 
 | Settings: Users & Access | Filter users | Manage Users → Filters | Drawer | Implemented |
 | Settings: Users & Access | Add / Edit user (3 steps: Personal → Address → Login & role) | Manage Users → Add user, a row or its pencil | Modal | Implemented |
 | Settings: Users & Access | Change password | Manage Users → key icon on a row or card | Modal | Implemented (the password is not stored in the demo) |
+| Settings: Bank masters | Bank master list (table / cards, All / Enabled / Disabled pills, search, Filters) | Settings → Banks → Bank master (`/settings/bank-master`) | Page, Drawer | Implemented |
+| Settings: Bank masters | Add / Edit bank, Delete bank | Bank master → Add bank, a row, or its icons | Modal, Dialog | Implemented |
+| Settings: Bank masters | House bank master list (table / cards, All / Primary / Secondary pills, search, Filters, cheque View) | Settings → Banks → House bank master (`/settings/house-bank-master`) | Page, Drawer, Modal | Implemented |
+| Settings: Bank masters | Add / Edit house bank account, Delete account | House bank master → Add account, a row, or its icons | Modal, Dialog | Implemented |
 | System Pages | Not found (404) | Any unknown address | Full-screen page | Implemented |
 | System Pages | Page crash | An unexpected error while showing a page | Full-screen page | Implemented |
 | System Pages | Server error (500) | `/error` | Full-screen page | Implemented |
@@ -112,7 +128,6 @@ These items appear in the Training Partner sidebar but open the "Nothing here ye
 
 | Menu item | Location | Status |
 |---|---|---|
-| Projects | Sidebar | Not Implemented |
 | Finance → All Invoices | Sidebar submenu | Not Implemented |
 | Finance → Credit Note | Sidebar submenu | Not Implemented |
 | Finance → Debit Note | Sidebar submenu | Not Implemented |
@@ -140,8 +155,8 @@ The Settings page lists 19 masters in 7 groups, in this order.
 | Finance | Sub-entity | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
 | Finance | SAP BP | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
 | Finance | Expense head | Implemented | [settings-finance-masters-prd.md](modules/settings-finance-masters-prd.md) |
-| Banks | Bank master | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
-| Banks | House bank master | Not Implemented ("is on the way" placeholder) | [settings-hub-prd.md](modules/settings-hub-prd.md) |
+| Banks | Bank master | Implemented | [settings-bank-masters-prd.md](modules/settings-bank-masters-prd.md) |
+| Banks | House bank master | Implemented | [settings-bank-masters-prd.md](modules/settings-bank-masters-prd.md) |
 | Industry & job | Department | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |
 | Industry & job | Designation | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |
 | Industry & job | Role | Implemented | [settings-industry-job-masters-prd.md](modules/settings-industry-job-masters-prd.md) |

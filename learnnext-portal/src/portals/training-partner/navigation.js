@@ -81,6 +81,8 @@ export const ROUTE_META = NAV_ITEMS.reduce((acc, item) => {
   '/profile': { title: 'My Profile' },
   // Reached from the All Clients page
   '/clients/new': { title: 'Add client', section: 'All Clients', sectionTo: '/clients' },
+  // Reached from the Projects page
+  '/projects/new': { title: 'Add project', section: 'Projects', sectionTo: '/projects' },
   // Reached from the Support desk card in the sidebar footer
   '/support': { title: 'Support desk' },
 });
@@ -94,6 +96,8 @@ export function getRouteMeta(pathname) {
   if (/^\/facilitators\/[^/]+\/verify$/.test(pathname)) return { title: 'Verify KYC', section: 'Facilitators', sectionTo: '/facilitators' };
   // An active facilitator's profile, opened from the list
   if (/^\/facilitators\/[^/]+$/.test(pathname)) return { title: 'Facilitator details', section: 'Facilitators', sectionTo: '/facilitators' };
+  // A program's workspace, opened from a project
+  if (/^\/projects\/[^/]+\/programs\/[^/]+$/.test(pathname)) return { title: 'Program', section: 'Projects', sectionTo: '/projects' };
   // A program's content page, opened by Add content
   if (/^\/content\/[^/]+$/.test(pathname)) return { title: 'Program content', section: 'Manage Content', sectionTo: '/content' };
   // A master under Settings, e.g. /settings/sap-bp → "SAP BP" (its real name; the slug only as a fallback)

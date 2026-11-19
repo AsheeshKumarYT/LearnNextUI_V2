@@ -7,12 +7,12 @@
 | PRD title | Client Details PRD |
 | Module name | Client Details |
 | Document ID | PRD-CLD |
-| Version | 1.2 |
+| Version | 1.3 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (the Invoices section and the invoice figures on Overview are placeholders) |
-| Last updated | 2026-11-05 (v1.2: naming: "Training Partner" replaces "Admin"; Super Admin access row; SPOC card edit pencil top-right on phones) · 2026-11-03 (v1.1: phone layout) |
+| Last updated | 2026-11-19 (v1.3: projects are now managed in the built Projects module ([projects-prd.md](projects-prd.md)); this page's Projects section stays view only and does not show projects created or archived there (OQ-PRJ-002)) · 2026-11-05 (v1.2: naming: "Training Partner" replaces "Admin"; Super Admin access row; SPOC card edit pencil top-right on phones) · 2026-11-03 (v1.1: phone layout) |
 | Phone layout (v1.1) | Hero actions (All clients, Edit client) in a vertical ⋮ menu top-right; Overview stats as a 2×2 grid without icon tiles, labels in full; Projects / Participants / SPOCs tabs are list-like (outer frame removed, one card per item, search on Projects and SPOCs, views fixed to list/cards); repeated tab headings hidden; Tax & Billing: Billing addresses card flattened with its heading hidden, Lower TDS card kept; Activity summary unboxed, showing only the period, count and comparison (no "By type" list on phones). See SH-013. |
-| Related modules/pages | [clients-prd.md](clients-prd.md) (All Clients list, Add/Edit client form), [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [profile-prd.md](profile-prd.md) (shares the activity timeline), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [../shared-requirements.md](../shared-requirements.md) |
+| Related modules/pages | [clients-prd.md](clients-prd.md) (All Clients list, Add/Edit client form), [projects-prd.md](projects-prd.md) (project management), [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [profile-prd.md](profile-prd.md) (shares the activity timeline), [settings-location-masters-prd.md](settings-location-masters-prd.md), [settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [../shared-requirements.md](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
@@ -104,7 +104,7 @@ Most of the page is view only. The only places that change data are the **SPOCs 
 | Compact list (phones, timeline view) | Readable on small screens | Tap a project | Shows name, dates, project type, status and program count per project for the selected year | Below tablet width | Project details drawer opens |
 | List view | See all projects across all years | Click a row | Table (5.3.3 / section 10). Opens the project details drawer on click | Cards on phones | Project details drawer opens |
 | Project details drawer | See a project in full | Click a project | Shows status, project name, "<project type> · Created by <name>" (hover shows created date and time), the date range, time left ("N days left", "Last day", "Starts tomorrow", "Starts in N days", "Completed"), a progress line, and **Programs N**: each program's name and "dates · type · delivered by", with a status dot (hover: "<status> · <entity> · Opportunity #<number>"). Programs are listed earliest first | View only. Close with **Close** (×), Esc or the backdrop (SH-006) | — |
-| Editing projects [Not Implemented] | — | — | Projects cannot be created, edited, archived or deleted here | Project management is outside this page (OQ-CLD-004) | — |
+| Editing projects [Not Implemented] | — | — | Projects cannot be created, edited, archived or deleted here | Projects are created and archived in the Projects module ([projects-prd.md](projects-prd.md)); those changes do not reach this section (OQ-PRJ-002, OQ-CLD-004) | — |
 
 #### 5.3.1 Filter projects drawer
 
@@ -464,6 +464,7 @@ Validation timing for this form differs from SH-004: every error, including "req
 | Settings location masters ([settings-location-masters-prd.md](settings-location-masters-prd.md)) | SPOC address country/state/city choices [Requires Confirmation] | SPOC form | The SPOC form uses its own fixed country → state → city list, not the masters | OQ-CLD-003 |
 | Settings industry & job masters ([settings-industry-job-masters-prd.md](settings-industry-job-masters-prd.md)) | SPOC Department and Designation choices [Requires Confirmation] | SPOC form | Uses a fixed list, not the masters | OQ-CLD-003 |
 | Settings finance masters ([settings-finance-masters-prd.md](settings-finance-masters-prd.md)) | Delivering organisations on programs ("Delivered by") | Projects | Names shown come from demo project data, not the Entity master | — |
+| Projects module ([projects-prd.md](projects-prd.md)) | Shows the same starting projects (same names, dates and programs) and manages them; the row menu and project drawer there offer **Open client**, which opens this page | Create or archive a project in Projects | Not reflected here: a created project does not appear in this Projects section, the Overview count or the SPOC access matrix, and an archived one stays | OQ-PRJ-002, OQ-CLD-004 |
 | Signed-in user ([authentication-prd.md](authentication-prd.md)) | Name recorded on settings activity | Save Settings | Entry detail "by <user name>" ("You" when no name) | BR-CLD-021 |
 
 ## 13. Acceptance Criteria
@@ -675,7 +676,7 @@ Validation timing for this form differs from SH-004: every error, including "req
 | OQ-CLD-001 | SPOCs | There is no way to remove or deactivate a SPOC | Ex-employees keep project access | Decide whether SPOCs can be removed or deactivated, with confirmation and activity logging | Open |
 | OQ-CLD-002 | SPOCs | Designation and address lines are captured but never displayed | Data entered cannot be checked | Decide where designation and full address appear (list, drawer, matrix tooltip) | Open |
 | OQ-CLD-003 | SPOC form | Department, Designation and Country/State/City use fixed lists, not the Settings masters | Lists can drift from master data | Confirm the source of these options | Open |
-| OQ-CLD-004 | Projects / Participants | No create, edit or archive of projects or participants on this page | Training Partner users may expect to manage them here | Confirm where project and participant management lives | Open |
+| OQ-CLD-004 | Projects / Participants | No create, edit or archive of projects or participants on this page. Since 2026-11-19 projects are created and archived in the Projects module, but those changes do not reach this page (OQ-PRJ-002); participant management has no home yet | Training Partner users may expect to manage them here, and the two project views disagree | Confirm that Projects is the single place for project management and that this page should reflect it; confirm where participant management lives | Open |
 | OQ-CLD-005 | Settings | "Inactive clients … don’t appear in new schedules" is not enforced | Misleading promise | Define what inactive status blocks | Open |
 | OQ-CLD-006 | Settings | Portal access, SPOC emails, session reminders and product access are stored but have no effect | Expectations of SPOCs/participants | Confirm downstream behaviour of each switch | Open |
 | OQ-CLD-007 | Activity History | Adding or editing a SPOC is not logged; SPOC access entries are sample data | Audit trail incomplete | Decide which actions must be logged | Open |

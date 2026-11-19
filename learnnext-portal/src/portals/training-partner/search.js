@@ -7,6 +7,7 @@
 import { clientStore } from '@/services/clientsApi';
 import { entityName, programStore } from '@/services/contentApi';
 import { facilitatorStore } from '@/services/facilitatorsApi';
+import { allProjects } from '@/services/projectsApi';
 import { NAV_LINKS } from './navigation';
 import { getTickets } from './support/supportStore';
 import { MASTERS, SEARCH_KEYWORDS } from './settings/settingsMasters';
@@ -17,7 +18,9 @@ const SEARCH_PAGES = [
   { id: '/profile', label: 'My Profile', to: '/profile', section: 'Account' },
   { id: '/support', label: 'Support desk', to: '/support', section: null },
   { id: '/clients/new', label: 'Add client', to: '/clients/new', section: 'All Clients' },
+  { id: '/projects/new', label: 'Add project', to: '/projects/new', section: 'Projects' },
 ];
+const STAGE_LABEL = { 'in-setup': 'In setup', live: 'Live', completed: 'Completed' };
 const facilitatorStage = (f) => (f.status === 'kyc' && f.kycSubmittedAt ? 'review' : f.status);
 const FAC_STAGE_LABEL = { kyc: 'KYC pending', review: 'Approval pending', payment: 'Payment setup pending', active: 'Active', expired: 'Agreement expired' };
 
@@ -37,6 +40,15 @@ export const searchSources = [
     fields: ['name', 'code', 'mobile', 'email', 'city', 'industry'],
     items: () => clientStore,
     toResult: (c) => ({ id: c.id, title: c.name, subtitle: [c.code, c.industry, c.city].filter(Boolean).join(' · '), to: `/clients/${c.id}` }),
+  },
+  {
+    key: 'projects',
+    label: 'Projects',
+    icon: 'projects',
+    fields: ['name', 'code', 'clientName', 'programNames'],
+    items: () => allProjects().map((p) => ({ ...p, clientName: p.client.name, programNames: p.programs.map((g) => g.program).join(' · ') })),
+    // Opens the list searched to the project, with its drawer open
+    toResult: (p) => ({ id: p.id, title: p.name, subtitle: `${p.code} · ${p.client.name} · ${STAGE_LABEL[p.stage]}`, to: `/projects?q=${encodeURIComponent(p.code)}` }),
   },
   {
     key: 'programs',

@@ -5,7 +5,7 @@ These are the functional PRDs for **LearnNext Portal**, the single application f
 The documents describe **behaviour, not implementation**: there is no code, API, database or architecture detail. Every PRD was derived from the current build. Unknown rules are marked `Requires Confirmation` rather than assumed.
 
 - **Version:** 1.0 (Draft)
-- **Last updated:** 2026-11-06 (Settings group "Others" replaced by "Users & Access" and groups reordered; new Manage Users master in module 15, renamed "Settings: Users & Access"; Settings moved after Reports in the menu). 2026-11-05 (product renamed LearnNext Portal; the former "Admin" portal and role is now **Training Partner**; multi-role sign-in with the "Continue as" role picker; new Super Admin PRD)
+- **Last updated:** 2026-11-19 (new module PRDs 18 Settings: Bank masters (PRD-BNK) and 19 Projects (PRD-PRJ); Bank master, House bank master and Projects are no longer placeholders). 2026-11-06 (Settings group "Others" replaced by "Users & Access" and groups reordered; new Manage Users master in module 15, renamed "Settings: Users & Access"; Settings moved after Reports in the menu). 2026-11-05 (product renamed LearnNext Portal; the former "Admin" portal and role is now **Training Partner**; multi-role sign-in with the "Continue as" role picker; new Super Admin PRD)
 
 ## Start here
 
@@ -15,7 +15,7 @@ The documents describe **behaviour, not implementation**: there is no code, API,
 | [Module inventory](module-inventory.md) | Every module, page, tab, Settings master and placeholder menu item, with its status and PRD, plus the user roles |
 | [Shared requirements](shared-requirements.md) | Behaviour common to all modules (SH-001 to SH-013): roles, validation timing, toasts, dialogs, lists, states, formats, phone layout |
 | [PRD template and conventions](prd-template.md) | The 16-section structure, ID formats, status labels and priority levels used by every PRD |
-| [Open questions](open-questions.md) | 14 cross-cutting business decisions and all 245 module-level open questions (241 open, 4 resolved) |
+| [Open questions](open-questions.md) | 14 cross-cutting business decisions and all 267 module-level open questions (263 open, 4 resolved) |
 | [Coverage report](coverage-report.md) | Final audit: counts, per-module coverage, cross-module inconsistencies, missing rules and messages |
 
 ## Module PRDs
@@ -39,8 +39,10 @@ The documents describe **behaviour, not implementation**: there is no code, API,
 | 15 | Settings: Users & Access | PRD-ACC | [settings-access-masters-prd.md](modules/settings-access-masters-prd.md) |
 | 16 | System Pages | PRD-SYS | [system-pages-prd.md](modules/system-pages-prd.md) |
 | 17 | Super Admin (Manage Clients, Client details, Add / Edit client) | PRD-SA | [super-admin-prd.md](modules/super-admin-prd.md) |
+| 18 | Settings: Bank masters (Bank master, House bank master) | PRD-BNK | [settings-bank-masters-prd.md](modules/settings-bank-masters-prd.md) |
+| 19 | Projects (list, project drawer, Add project, Program workspace) | PRD-PRJ | [projects-prd.md](modules/projects-prd.md) |
 
-Modules 1–16 describe the Training Partner portal (Authentication, App Shell, My Profile and System Pages also cover the Super Admin where its behaviour differs). Module 17 describes the Super Admin portal.
+Modules 1–16, 18 and 19 describe the Training Partner portal (Authentication, App Shell, My Profile and System Pages also cover the Super Admin where its behaviour differs). Module 17 describes the Super Admin portal.
 
 ## How to read a PRD
 

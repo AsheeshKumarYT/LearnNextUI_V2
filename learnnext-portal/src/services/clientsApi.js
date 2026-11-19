@@ -159,8 +159,9 @@ export const clientsApi = {
  * Mock projects for a client: a stable set built from its code — 0–8 projects, each with 1–3 programs, dated around
  * today so every status shows up, older ones reaching back a few years. Status always comes from the dates (upcoming → in progress → completed), for each
  * program and for the project as a whole (first start → last end).
+ * Exported for projectsApi, which builds the Projects module on the same projects (same ids, names and dates).
  */
-function projectsFor(client) {
+export function projectsFor(client) {
   const { names, programs, entities, projectTypes } = demo.projectCatalog;
   let s = [...client.code].reduce((n, ch) => (n * 31 + ch.charCodeAt(0)) % 2147483647, 11);
   const rnd = (n) => {

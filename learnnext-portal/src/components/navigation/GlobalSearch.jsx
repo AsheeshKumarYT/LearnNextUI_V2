@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Building2, CornerDownLeft, LayoutGrid, Library, LifeBuoy, Search, SearchX, Settings2, Users, X } from 'lucide-react';
+import { ArrowRight, Building2, CornerDownLeft, FolderKanban, LayoutGrid, Library, LifeBuoy, Search, SearchX, Settings2, Users, X } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { interceptLeave } from '@/utils/leaveGuard';
 import { searchAll } from '@/services/api';
@@ -11,7 +11,7 @@ import { Kbd } from '@/components/ui/Kbd';
 import { Spinner } from '@/components/ui/Spinner';
 
 // One icon per search source (the `icon` key each source in services/api.js names)
-const GROUP_ICONS = { pages: LayoutGrid, clients: Building2, programs: Library, facilitators: Users, tickets: LifeBuoy, masters: Settings2 };
+const GROUP_ICONS = { pages: LayoutGrid, clients: Building2, projects: FolderKanban, programs: Library, facilitators: Users, tickets: LifeBuoy, masters: Settings2 };
 
 /**
  * ⌘K / Ctrl+K command palette. What it searches comes from the signed-in portal (its `searchSources` and `links`,

@@ -17,6 +17,9 @@ export const STATUS_MAP = {
   rejected: { tone: 'danger', label: 'Rejected' },
   draft: { tone: 'neutral', label: 'Draft' },
   inactive: { tone: 'neutral', label: 'Inactive' },
+  // Masters that are switched on / off (e.g. Bank master)
+  enabled: { tone: 'success', label: 'Enabled' },
+  disabled: { tone: 'neutral', label: 'Disabled' },
   archived: { tone: 'neutral', label: 'Archived' },
   review: { tone: 'warning', label: 'In review' },
   pending: { tone: 'warning', label: 'Pending' },
@@ -32,6 +35,11 @@ export const STATUS_MAP = {
   'approval-pending': { tone: 'violet', label: 'Approval pending' },
   'payment-pending': { tone: 'info', label: 'Payment setup pending' },
   'agreement-expired': { tone: 'danger', label: 'Agreement expired' },
+  // Projects (a project's stage) and their programs
+  'in-setup': { tone: 'info', label: 'In setup' },
+  live: { tone: 'primary', label: 'Live' },
+  running: { tone: 'primary', label: 'Running' },
+  delivered: { tone: 'success', label: 'Delivered' },
 };
 
 // The dot and its soft halo per tone (static class names so Tailwind can see them)

@@ -7,12 +7,12 @@
 | PRD title | Dashboard PRD |
 | Module name | Dashboard |
 | Document ID | PRD-DASH |
-| Version | 1.3 |
+| Version | 1.4 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Implemented (all figures are demo data; see SH-001) |
-| Last updated | 2026-11-05 (v1.3: naming: LearnNext Portal; "Training Partner" replaces "Admin"; Training Partner portal home) · 2026-11-03 (v1.1: phone layout; v1.2: swipeable key-number row, no greeting on phones) |
+| Last updated | 2026-11-19 (v1.4: the **Review queue** link now opens the built Projects list ([projects-prd.md](projects-prd.md)) instead of a placeholder; the list has no approval filter, so OQ-DASH-004 stays open) · 2026-11-05 (v1.3: naming: LearnNext Portal; "Training Partner" replaces "Admin"; Training Partner portal home) · 2026-11-03 (v1.1: phone layout; v1.2: swipeable key-number row, no greeting on phones) |
 | Phone layout (v1.2) | Cards 12 px apart on phones; the **Home** tab of the bottom tab bar opens the Dashboard. No date / "Good afternoon, <name>" greeting on phones — the page opens on the period dropdown and refresh. The four key-number cards (Programs, Next 10 days, Billing, To approve) are one **swipeable row**: each card ~80% wide so the next one peeks in, snapping card by card, a soft fade on the right edge until the last card, no drop shadow (the thin card edge stays), and four dots underneath (current = wider blue dot; tap a dot to jump to that card). Desktop keeps the greeting and the 2 / 4-column grid. See SH-013, PRD-SHELL 5.14. |
-| Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [authentication-prd.md](authentication-prd.md), [profile-prd.md](profile-prd.md), [clients-prd.md](clients-prd.md), [manage-content-prd.md](manage-content-prd.md), [facilitators-prd.md](facilitators-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [Shared requirements](../shared-requirements.md) |
+| Related modules/pages | [app-shell-navigation-prd.md](app-shell-navigation-prd.md), [authentication-prd.md](authentication-prd.md), [profile-prd.md](profile-prd.md), [clients-prd.md](clients-prd.md), [projects-prd.md](projects-prd.md), [manage-content-prd.md](manage-content-prd.md), [facilitators-prd.md](facilitators-prd.md), [settings-finance-masters-prd.md](settings-finance-masters-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
 
@@ -32,7 +32,7 @@ The page is read-only. It has no forms and does not change any record. It offers
 | Page/Feature Name | Purpose | Primary User | Key Actions | Related Pages |
 |---|---|---|---|---|
 | Dashboard header | Greets the user, shows today's date and holds the reporting-period switch and Refresh. | Training Partner user | Change reporting period; Refresh | [profile-prd.md](profile-prd.md) (first name shown in the greeting) |
-| KPI strip (4 cards) | The four headline numbers: Programs, Next 10 days, Billing, To approve. | Training Partner user | Read; follow **Review queue** link | Projects (placeholder, see [app-shell-navigation-prd.md](app-shell-navigation-prd.md)) |
+| KPI strip (4 cards) | The four headline numbers: Programs, Next 10 days, Billing, To approve. | Training Partner user | Read; follow **Review queue** link | Projects list (see [projects-prd.md](projects-prd.md)) |
 | Program schedule card | Timeline of program sessions in the next 10 days plus a "live today" line. | Training Partner user | Show all / Show less | — |
 | Program status card | Completion ring and the split of programs by status, plus the approval queue summary. | Training Partner user | Read | — |
 | Billing by entity card | Donut of invoiced amount per billing entity, plus collection status. | Training Partner user | Hover for full amounts | [settings-finance-masters-prd.md](settings-finance-masters-prd.md) (entities) |
@@ -83,7 +83,7 @@ Each card shows an icon, a label, a large number and a one-line note. Three card
 | **Next 10 days** card | How many sessions are coming up. | — | Number = count of program sessions dated from tomorrow up to 10 days ahead (each session counts once, even when two sessions of the same program fall on the same day). Note: "‹n› live today" when at least one program is live today, otherwise "None live today". | Fixed window; not affected by the period. | e.g. 9, "None live today". |
 | Next 10 days dot calendar | Show how sessions spread over the 10 days. | — | Ten narrow columns, tomorrow first, each labelled with the weekday's initial. Each column shows one dot per session that day, up to 3 dots. A day with no sessions shows one faint dot. | More than 3 sessions on a day still show 3 dots. Screen readers hear "‹total› sessions over the next 10 days" and each day's count. | — |
 | **Billing** card | Amount invoiced in the period and how much is collected. | — | Number = invoiced amount in compact rupees (SH-012, e.g. "₹1.67 Cr"). Note: "‹collected amount› collected". Bottom line filled to collected ÷ invoiced; % shown. | Follows the period. | e.g. Last month: ₹1.67 Cr, "₹70.1 L collected", 42%. |
-| **To approve** card | Programs waiting for approval. | Click **Review queue**. | Number = programs pending approval in the period. When the number is above 0 the note is a link "Review queue →" that opens the Projects page. When it is 0 the note reads "Nothing waiting". Bottom line filled to pending ÷ total programs; % shown. | Follows the period. The Projects page is a placeholder ("Nothing here yet") in the current build. **[Partially Implemented]** — the link works but its destination is not built (OQ-DASH-004). | e.g. Last month: 14, 21%. |
+| **To approve** card | Programs waiting for approval. | Click **Review queue**. | Number = programs pending approval in the period. When the number is above 0 the note is a link "Review queue →" that opens the Projects page. When it is 0 the note reads "Nothing waiting". Bottom line filled to pending ÷ total programs; % shown. | Follows the period. The link opens the Projects list ([projects-prd.md](projects-prd.md)) with no filter applied; the list has no "waiting for approval" view, so the pending programs are not singled out. **[Partially Implemented]** — the link works but there is no approval queue (OQ-DASH-004). | e.g. Last month: 14, 21%. |
 
 ### 5.4 Program schedule card
 
@@ -177,7 +177,7 @@ Each card shows an icon, a label, a large number and a one-line note. Three card
 
 | Step | User Action | System Behavior | Validation/Condition | Expected Outcome |
 |---|---|---|---|---|
-| 1 | Click **Review queue** on the To approve card. | Opens the Projects page. | Shown only when pending > 0. | Projects page opens; in the current build it is the "Nothing here yet" placeholder (OQ-DASH-004). |
+| 1 | Click **Review queue** on the To approve card. | Opens the Projects page. | Shown only when pending > 0. | The Projects list opens with all projects (no approval filter, OQ-DASH-004). |
 
 ### 6.4 Explore the schedule, leaderboard and usage
 
@@ -277,7 +277,8 @@ The Dashboard has no data-entry forms. Its controls are view selectors.
 | Related Module/Page | Relationship | Triggering Action | Expected Impact | Relevant Rules |
 |---|---|---|---|---|
 | [authentication-prd.md](authentication-prd.md) | Dashboard is the default destination after sign-in and for the site root. | Sign in | User lands on the Dashboard. | SH-003 |
-| [app-shell-navigation-prd.md](app-shell-navigation-prd.md) | Sidebar item **Dashboard**; breadcrumb; Projects placeholder target of Review queue. | Click sidebar item / Review queue | Opens Dashboard / Projects placeholder. | SH-009, BR-DASH-010 |
+| [app-shell-navigation-prd.md](app-shell-navigation-prd.md) | Sidebar item **Dashboard**; breadcrumb. | Click sidebar item | Opens Dashboard. | SH-009 |
+| [projects-prd.md](projects-prd.md) | Target of **Review queue**. | Click Review queue | Opens the Projects list, unfiltered. | BR-DASH-010, OQ-DASH-004 |
 | [profile-prd.md](profile-prd.md) | Greeting uses the first word of the profile name. | Save a new name on My Profile | Greeting shows the new first name. | BR-DASH-016 |
 | [clients-prd.md](clients-prd.md) | Top clients and schedule show client names that also exist in All Clients. | — | No live link: figures are not computed from client records. | BR-DASH-015 |
 | [manage-content-prd.md](manage-content-prd.md) | Usage ranking and schedule show program and brand names. | — | No live link to program records. | BR-DASH-015 |
@@ -375,7 +376,7 @@ The Dashboard has no data-entry forms. Its controls are view selectors.
 | TC-DASH-005 | BR-DASH-002 | Fixed cards do not change | Dashboard open | Switch through all 4 periods | Schedule, Top clients (₹9.07 Cr), Partner network (154), Agreements (13 on file), Leaderboard unchanged | P2 |
 | TC-DASH-006 | BR-DASH-006, AC-DASH-004 | Collection band boundaries | Dashboard open | This month 24%, Last month 42%, Year 71% | Red, amber, green pill respectively (boundary just below 25% → red) | P2 |
 | TC-DASH-007 | BR-DASH-016 | Greeting bands | Set device clock | 11:59, 12:00, 16:59, 17:00 | Morning, Afternoon, Afternoon, Evening | P3 |
-| TC-DASH-008 | AC-DASH-005 | Review queue link | Pending > 0 | Click Review queue | Projects placeholder page opens | P2 |
+| TC-DASH-008 | AC-DASH-005 | Review queue link | Pending > 0 | Click Review queue | Projects list opens (all projects, no approval filter) | P2 |
 | TC-DASH-009 | AC-DASH-006, BR-DASH-008/009 | Schedule merge and Show all | Default demo data | — | 8 rows, 4 visible, "Show all 8"; XSEED Phase I row shows 9:30 AM and 2:00 PM; Show less collapses | P2 |
 | TC-DASH-010 | 5.3 Dot calendar | Dot calendar | Default demo data | — | 10 columns; tomorrow 2 dots; days 4 and 8 one faint dot each | P3 |
 | TC-DASH-011 | 5.6 | Entity legend | Last month | — | B ₹62.9 L 38%, L ₹59.9 L 36%, D ₹43.1 L 26%, BYLDC ₹83,500 1%; hover shows full amounts | P2 |
@@ -398,7 +399,7 @@ The Dashboard has no data-entry forms. Its controls are view selectors.
 | OQ-DASH-001 | All cards | Every figure is demo data; the real definition and source of each metric (which programs count, when a program is "completed", which invoices count as "invoiced" and "collected") is not defined. | The dashboard must match finance and project records once a back end is connected. | Define each metric's source and calculation. | Open |
 | OQ-DASH-002 | Period switch | "This month" (month to date?), "Quarter" (calendar quarter or last 13 weeks?) and "Year" (calendar, financial year April–March, or last 12 months?) are not defined. | Indian finance teams usually report by financial year. | Confirm each period's exact date range. | Open |
 | OQ-DASH-003 | Program status | In progress and Upcoming counts do not change with the period while Completed and Pending approval do. | Totals and percentages may be misleading. | Confirm whether all statuses should be period-based. | Open |
-| OQ-DASH-004 | To approve → Review queue | The link opens Projects, which is a placeholder page; there is no approval queue page. | The main call to action leads nowhere useful. | Define the approval queue destination (and filter). | Open |
+| OQ-DASH-004 | To approve → Review queue | The link opens the Projects list (built 2026-11-19), but unfiltered: the list has no approval status or filter, and there is no approval queue page. | The main call to action leads nowhere useful. | Define the approval queue destination (and filter). | Open |
 | OQ-DASH-005 | Period switch | The chosen period is not remembered between visits. | Users who always look at a different period must re-select it. | Confirm whether to remember the choice. | Open |
 | OQ-DASH-006 | Collection status | The 60% / 25% thresholds for green / amber / red are not business-approved. | Colour drives attention. | Confirm thresholds. | Open |
 | OQ-DASH-007 | Leaderboard | How points are earned, the ranking window ("Current") and tie-breaking (two trainers with 75 pts) are not defined. | Rankings must be fair and explainable. | Define the points model and tie rule. | Open |

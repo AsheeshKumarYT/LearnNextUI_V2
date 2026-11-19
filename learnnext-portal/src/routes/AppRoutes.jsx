@@ -32,6 +32,9 @@ const Profile = lazy(() => import('@/pages/profile/Profile'));
 const Clients = lazy(() => import('@/portals/training-partner/clients/Clients'));
 const AddClient = lazy(() => import('@/portals/training-partner/clients/AddClient'));
 const ClientDetail = lazy(() => import('@/portals/training-partner/clients/ClientDetail'));
+const Projects = lazy(() => import('@/portals/training-partner/projects/Projects'));
+const AddProject = lazy(() => import('@/portals/training-partner/projects/AddProject'));
+const ProgramWorkspace = lazy(() => import('@/portals/training-partner/projects/ProgramWorkspace'));
 const ManageContent = lazy(() => import('@/portals/training-partner/content/ManageContent'));
 const ProgramContent = lazy(() => import('@/portals/training-partner/content/ProgramContent'));
 const Facilitators = lazy(() => import('@/portals/training-partner/facilitators/Facilitators'));
@@ -56,7 +59,7 @@ const ServiceUnavailable = lazy(() => import('@/pages/errors/ServiceUnavailable'
 const SessionExpired = lazy(() => import('@/pages/errors/SessionExpired'));
 
 // Every nav item without a real page yet (generated from src/config/navigation.js)
-const BUILT_PAGES = ['/dashboard', '/clients', '/content', '/facilitators', '/settings', '/ui-preview'];
+const BUILT_PAGES = ['/dashboard', '/clients', '/projects', '/content', '/facilitators', '/settings', '/ui-preview'];
 const PLACEHOLDER_PATHS = NAV_PATHS.filter((p) => !BUILT_PAGES.includes(p));
 
 // UI Preview gallery: each system page opened in preview mode (safe actions)
@@ -102,6 +105,9 @@ export function AppRoutes() {
                 <Route path="/clients/new" element={<ByRole byRole={{ 'super-admin': <SuperClientForm /> }}><AddClient /></ByRole>} />
                 <Route path="/clients/:id" element={<ByRole byRole={{ 'super-admin': <SuperClientDetail /> }}><ClientDetail /></ByRole>} />
                 <Route path="/clients/:id/edit" element={<ByRole byRole={{ 'super-admin': <SuperClientForm /> }}><AddClient /></ByRole>} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/new" element={<AddProject />} />
+                <Route path="/projects/:projectId/programs/:programId" element={<ProgramWorkspace />} />
                 <Route path="/content" element={<ManageContent />} />
                 <Route path="/content/:id" element={<ProgramContent />} />
                 <Route path="/facilitators" element={<Facilitators />} />

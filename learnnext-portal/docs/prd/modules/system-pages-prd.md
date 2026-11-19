@@ -7,10 +7,10 @@
 | PRD title | System Pages PRD |
 | Module name | System Pages (full-screen error and status pages, and the "System pages" preview gallery) |
 | Document ID | PRD-SYS |
-| Version | 1.1 |
+| Version | 1.2 |
 | Documentation status | Draft (derived from the current build) |
 | Module implementation status | Partially Implemented (Not found, Page crash and Offline appear automatically; Server error, Service unavailable and Session expired exist and can be opened by address, but nothing in the application sends the user to them; the gallery and preview mode work) |
-| Last updated | 2026-11-05 (v1.1: every system page fits the screen and never scrolls — the illustration shrinks, or steps aside on very short screens; the main button is solid white on the dark background; the "Preview mode" pill and **Back to gallery** link were removed from previews; the account chip shows the avatar in a round chip; logo reads "LearnNext"; behaviour per role (Super Admin) added; "Admin" renamed "Training Partner") |
+| Last updated | 2026-11-19 (v1.2: the Not found page's **Projects** link now opens the built Projects list ([projects-prd.md](projects-prd.md)) instead of the "Nothing here yet" placeholder) · 2026-11-05 (v1.1: every system page fits the screen and never scrolls — the illustration shrinks, or steps aside on very short screens; the main button is solid white on the dark background; the "Preview mode" pill and **Back to gallery** link were removed from previews; the account chip shows the avatar in a round chip; logo reads "LearnNext"; behaviour per role (Super Admin) added; "Admin" renamed "Training Partner") |
 | Related modules/pages | [Authentication](authentication-prd.md), [App shell and navigation](app-shell-navigation-prd.md), [Dashboard](dashboard-prd.md), [Profile](profile-prd.md), [All Clients](clients-prd.md), [Super Admin portal (PRD-SA)](super-admin-prd.md), [Shared requirements](../shared-requirements.md) |
 
 ## 2. Purpose and Objective
@@ -83,7 +83,7 @@ Every system page in 5.2 to 5.7 uses this frame. It is shown full screen, outsid
 | **Go to sign in** | Lead a visitor to sign in | Click | Opens Sign in | Signed out only (replaces **Back to dashboard**) | Sign in |
 | **Go back** | Return to the previous page | Click | Goes back one step in the browser history | Shown only when the browser tab has a previous page in its history (BR-SYS-007). Hidden in a freshly opened tab | Previous page |
 | Requested address | Show what was mistyped | View | The address that was opened (path only) in a small rounded chip; very long addresses are cut off with "…" | Always | — |
-| Popular destinations | Quick ways back in | Click a link | Links **Dashboard**, **All Clients**, **Projects** and **My Profile**, each with its icon; an arrow appears on hover | Signed in only. **Projects** opens the "Nothing here yet" placeholder ([app-shell-navigation-prd.md](app-shell-navigation-prd.md)). The same four links show for every role; for a Super Admin, Dashboard, All Clients and Projects all open Manage Clients (OQ-SYS-011) | Chosen page opens |
+| Popular destinations | Quick ways back in | Click a link | Links **Dashboard**, **All Clients**, **Projects** and **My Profile**, each with its icon; an arrow appears on hover | Signed in only. **Projects** opens the Projects list ([projects-prd.md](projects-prd.md)). The same four links show for every role; for a Super Admin, Dashboard, All Clients and Projects all open Manage Clients (OQ-SYS-011) | Chosen page opens |
 | Tab title | — | — | "Page not found · LearnNext" | — | — |
 
 ### 5.3 Page crash
@@ -308,7 +308,7 @@ Not applicable — system pages and the gallery contain no form fields or data e
 | [Dashboard](dashboard-prd.md) | Default destination of **Back to dashboard** and the logo when signed in | Click | Dashboard opens | BR-SYS-003 |
 | [Profile](profile-prd.md) | Account chip and the "My Profile" destination; name and photo shown come from the profile | Click chip | My Profile opens | BR-SYS-004 |
 | [All Clients](clients-prd.md) | Popular destination on Not found | Click **All Clients** | All Clients opens | — |
-| Projects (placeholder) | Popular destination on Not found leads to a page that is not built | Click **Projects** | "Nothing here yet" | BR-SHELL-002 |
+| Projects ([projects-prd.md](projects-prd.md)) | Popular destination on Not found | Click **Projects** | Projects list opens | — |
 | Every module | Any page can be replaced by Page crash or covered by Offline | Display failure; connection loss | Crash page / overlay | BR-SYS-008, BR-SYS-011 |
 | [Shared requirements](../shared-requirements.md) | Toast for the Session expired preview; sign-in rule; theme exception | — | — | SH-003, SH-005, SH-009, SH-010 |
 

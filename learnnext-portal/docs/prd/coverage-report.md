@@ -2,7 +2,7 @@
 
 This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phase 5).
 
-- **Date:** 2026-10-29 (Facilitators counts refreshed 2026-11-03; App Shell counts refreshed 2026-11-03 for the bottom tab bar, tablet sidebar, phone layout and the installable app; My Profile for the new cover picker; Authentication and App Shell refreshed 2026-11-04 for the phone sign-in, sheet taps and the on-screen keyboard; all counts recounted from the PRDs on 2026-11-05 for the multi-role sign-in, the "Training Partner" naming, the System Pages update and the new Super Admin PRD; Settings Hub and Settings: Users & Access recounted 2026-11-06 for the "Users & Access" group that replaced "Others" and the new Manage Users master).
+- **Date:** 2026-10-29 (Facilitators counts refreshed 2026-11-03; App Shell counts refreshed 2026-11-03 for the bottom tab bar, tablet sidebar, phone layout and the installable app; My Profile for the new cover picker; Authentication and App Shell refreshed 2026-11-04 for the phone sign-in, sheet taps and the on-screen keyboard; all counts recounted from the PRDs on 2026-11-05 for the multi-role sign-in, the "Training Partner" naming, the System Pages update and the new Super Admin PRD; Settings Hub and Settings: Users & Access recounted 2026-11-06 for the "Users & Access" group that replaced "Others" and the new Manage Users master; all counts recounted from the PRDs on 2026-11-19 for the new Settings: Bank masters (PRD-BNK) and Projects (PRD-PRJ) PRDs, with Projects, Bank master and House bank master no longer placeholders).
 - **Source of evidence:** the current build of the application. Every PRD was traced from the application's pages, forms, rules and messages. No application code was changed.
 
 ---
@@ -11,13 +11,13 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 
 | Measure | Count |
 |---|---|
-| Modules discovered with functional behaviour | 17 |
-| Module PRDs generated | 17 |
-| Menu items and masters discovered with no behaviour yet (placeholders) | 13 (10 menu items + 3 Settings masters), listed in the [module inventory](module-inventory.md), plus the three coming-soon portals (Facilitator, Participant, Client SPOC) |
-| Business rules documented | 401 |
-| Acceptance criteria written | 302 |
-| QA test scenarios written | 675 |
-| Module open questions | 245 (241 open, 4 resolved) |
+| Modules discovered with functional behaviour | 19 |
+| Module PRDs generated | 19 |
+| Menu items and masters discovered with no behaviour yet (placeholders) | 10 (9 menu items + 1 Settings master), listed in the [module inventory](module-inventory.md), plus the three coming-soon portals (Facilitator, Participant, Client SPOC) and the placeholder steps inside the Projects workspace (OQ-PRJ-005) |
+| Business rules documented | 444 |
+| Acceptance criteria written | 337 |
+| QA test scenarios written | 769 |
+| Module open questions | 267 (263 open, 4 resolved) |
 | Cross-cutting open questions | 14 |
 | PRDs with every checklist item complete | 0 (each PRD has 1–5 items that are incomplete because of open questions, not missing documentation) |
 
@@ -30,7 +30,7 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | Module PRD | Implementation status | Business rules | Acceptance criteria | Test cases | Open questions | Checklist items incomplete |
 |---|---|---|---|---|---|---|
 | [Authentication](modules/authentication-prd.md) | Partially Implemented (one demo account holding four roles; password reset is simulated; Facilitator and Participant portals are "coming soon") | 23 | 20 | 37 | 18 | 2 |
-| [App Shell and Navigation](modules/app-shell-navigation-prd.md) | Partially Implemented (notifications are demo items, Help drawer unreachable, 10 placeholder menu items) | 31 | 18 | 52 | 16 | 4 |
+| [App Shell and Navigation](modules/app-shell-navigation-prd.md) | Partially Implemented (notifications are demo items, Help drawer unreachable, 9 placeholder menu items) | 31 | 18 | 52 | 16 | 4 |
 | [Dashboard](modules/dashboard-prd.md) | Implemented (all figures are demo data) | 16 | 12 | 22 | 13 | 2 |
 | [My Profile](modules/profile-prd.md) | Partially Implemented (password change is simulated) | 29 | 15 | 35 | 16 | 3 |
 | [All Clients](modules/clients-prd.md) | Implemented (CRM portal simulated) | 35 | 27 | 68 | 19 | 3 |
@@ -38,7 +38,7 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | [Manage Content](modules/manage-content-prd.md) | Partially Implemented (no program retirement; permissions unused) | 25 | 17 | 40 | 18 | 4 |
 | [Facilitators](modules/facilitators-prd.md) | Partially Implemented (the facilitator's payment setup approval and later steps are outside the app) | 34 | 27 | 54 | 20 | 3 |
 | [Support Desk](modules/support-desk-prd.md) | Partially Implemented (ticket intake and requester side are outside the app) | 20 | 17 | 37 | 17 | 3 |
-| [Settings Hub](modules/settings-hub-prd.md) | Partially Implemented (16 of 19 masters built) | 9 | 11 | 23 | 5 | 1 |
+| [Settings Hub](modules/settings-hub-prd.md) | Partially Implemented (18 of 19 masters built) | 9 | 11 | 23 | 5 | 1 |
 | [Finance masters](modules/settings-finance-masters-prd.md) | Implemented (links to other modules partial) | 25 | 16 | 36 | 15 | 5 |
 | [Location masters](modules/settings-location-masters-prd.md) | Partially Implemented (read-only; not used by any form) | 11 | 8 | 19 | 7 | 4 |
 | [Industry and job masters](modules/settings-industry-job-masters-prd.md) | Partially Implemented (read-only; not used by forms) | 9 | 7 | 15 | 6 | 3 |
@@ -46,20 +46,22 @@ This report is the final audit of the LearnNext Portal PRD set (Phase 4 and Phas
 | [Settings: Users & Access](modules/settings-access-masters-prd.md) | Partially Implemented (user accounts not used for sign-in; sidebar unaffected; permissions not enforced) | 37 | 29 | 65 | 27 | 6 |
 | [System Pages](modules/system-pages-prd.md) | Partially Implemented (500, 503 and session-expired pages are never triggered) | 20 | 13 | 29 | 12 | 3 |
 | [Super Admin](modules/super-admin-prd.md) | Partially Implemented (demo data; CRM fetching, portal access, email update and inactive-status settings are stored only) | 34 | 30 | 69 | 16 | 4 |
-| **Total** | | **401** | **302** | **675** | **245** | **55** |
+| [Settings: Bank masters](modules/settings-bank-masters-prd.md) | Implemented (not yet used by any other page) | 15 | 12 | 30 | 7 | 3 |
+| [Projects](modules/projects-prd.md) | Partially Implemented ("Add a program" coming soon; 10 of 15 workspace steps are placeholders; several workspace values are demo assumptions) | 28 | 23 | 64 | 15 | 4 |
+| **Total** | | **444** | **337** | **769** | **267** | **62** |
 
 Counts are the requirement rows in each PRD (My Profile includes the sub-numbered rows BR-PROF-014 ×2 and TC-PROF-019a / 019b). The open-question count includes four resolved questions (OQ-AUTH-013, OQ-CLI-018, OQ-SET-004, OQ-SA-015).
 
 ### Fully implemented vs. partially implemented
 
-- **Fully implemented functionality (within the demo-data build):** Dashboard, All Clients and Finance masters.
-- **Partially implemented:** the other 14 modules. The reason for each is given in the table above and in section 1 of each PRD.
+- **Fully implemented functionality (within the demo-data build):** Dashboard, All Clients, Finance masters and Bank masters.
+- **Partially implemented:** the other 15 modules. The reason for each is given in the table above and in section 1 of each PRD.
 
 ---
 
 ## 3. Cross-module review
 
-The review compared the shared workflows, fields, messages and rules across all 17 PRDs. The findings below are inconsistencies in the **application**. The PRDs document actual behaviour and do not resolve these. Each has an open question.
+The review compared the shared workflows, fields, messages and rules across all 17 PRDs (the two PRDs added on 2026-11-19, PRD-BNK and PRD-PRJ, record their own cross-module gaps in their section 15, for example OQ-PRJ-002 and OQ-PRJ-015). The findings below are inconsistencies in the **application**. The PRDs document actual behaviour and do not resolve these. Each has an open question.
 
 ### 3.1 Inconsistent rules for the same concept
 
@@ -127,7 +129,7 @@ The review compared the shared workflows, fields, messages and rules across all 
 
 These are the 14 cross-cutting questions OQ-GEN-001 to OQ-GEN-014 in [open-questions.md](open-questions.md). The most important are:
 
-1. **Unbuilt modules:** the scope of the 13 placeholder modules and masters.
+1. **Unbuilt modules:** the scope of the 10 placeholder menu items and masters.
 2. **Role-based access:** portal roles (Training Partner, Super Admin) now decide which portal a login opens, but permissions inside the Training Partner portal are not enforced, users are not linked to permission roles, and who grants a login its portal roles is undefined.
 3. **Settings masters:** whether the forms must use the masters.
 4. **Record lifecycle:** delete, retire and archive rules for clients, programs, SPOCs and tickets.
@@ -137,7 +139,7 @@ These are the 14 cross-cutting questions OQ-GEN-001 to OQ-GEN-014 in [open-quest
 
 ## 4. Page coverage check
 
-Every route and view in the [module inventory](module-inventory.md) is covered by a module PRD, apart from the 13 placeholders, which have no behaviour to document. This includes the "Continue as" role picker, the role coming-soon screen and Switch role (PRD-AUTH), and every Super Admin page (PRD-SA). The coming-soon portals (Facilitator, Participant, Client SPOC) have no pages beyond the coming-soon screen (OQ-AUTH-018).
+Every route and view in the [module inventory](module-inventory.md) is covered by a module PRD, apart from the 10 placeholders, which have no behaviour to document. This includes the "Continue as" role picker, the role coming-soon screen and Switch role (PRD-AUTH), every Super Admin page (PRD-SA), the Bank master and House bank master pages with their modals (PRD-BNK, added 2026-11-19), and the Projects list, project drawer, Add project and the Program workspace with its tabs (PRD-PRJ, added 2026-11-19; the workspace's placeholder steps are listed there as Not Implemented, OQ-PRJ-005). The coming-soon portals (Facilitator, Participant, Client SPOC) have no pages beyond the coming-soon screen (OQ-AUTH-018).
 
 **Corrections to earlier assumptions**, now reflected in the inventory:
 - **Help & Support drawer:** it exists, but nothing opens it.

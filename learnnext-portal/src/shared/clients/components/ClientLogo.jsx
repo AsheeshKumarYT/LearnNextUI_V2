@@ -29,8 +29,11 @@ export function monogram(name = '') {
   return (words.length > 1 ? words[0][0] + words[1][0] : (words[0] ?? '?').slice(0, 2)).toUpperCase();
 }
 
-/** Company logo: the uploaded image on a white tile, or a tinted monogram when there's no logo yet. */
-export function ClientLogo({ client, size = 'md', className }) {
+/**
+ * Company logo: the uploaded image on a white tile, or a tinted monogram when there's no logo yet.
+ * `initials` overrides the monogram letters (e.g. banks: "Deutsche Bank" → "D").
+ */
+export function ClientLogo({ client, size = 'md', initials, className }) {
   const box = cn('inline-flex shrink-0 items-center justify-center overflow-hidden ring-1 ring-inset', SIZES[size], className);
   if (client.logo) {
     return (
@@ -41,7 +44,7 @@ export function ClientLogo({ client, size = 'md', className }) {
   }
   return (
     <span className={cn(box, 'font-bold tracking-tight', toneFor(client.code))} role="img" aria-label={`${client.name} (no logo)`}>
-      {monogram(client.name)}
+      {initials ?? monogram(client.name)}
     </span>
   );
 }
